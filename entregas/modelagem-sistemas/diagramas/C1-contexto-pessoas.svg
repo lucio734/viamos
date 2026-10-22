@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" role="img" aria-labelledby="title"><title id="title">Contexto | pessoas e operação</title><rect width="100%" height="100%" fill="white"/>
+<rect x="0" y="0" width="1440" height="12" rx="0" fill="#1a2e44" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="48" y="47.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="700" fill="#087e8b" text-anchor="start">VÍAMOS / MODELAGEM DE SISTEMAS</text>
+<text x="48" y="92.0" font-family="DejaVu Sans, sans-serif" font-size="30" font-weight="700" fill="#1a2e44" text-anchor="start">Contexto | pessoas e operação</text>
+<text x="48" y="125.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">Vista 1/2 do processo 0. Os serviços externos da vista C2 integram a mesma fronteira.</text>
+<polyline points="48,145 1392,145" fill="none" stroke="#cbd5df" stroke-width="1"/>
+<text x="48" y="847.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#087e8b" text-anchor="start">JUSTIFICATIVA E REGRAS</text>
+<text x="48" y="874.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="400" fill="#213547" text-anchor="start">Cliente e intérprete aparecem repetidos apenas para organizar as trocas: cada perfil continua sendo uma única entidade externa. QR é exibido ao cliente e lido pelo intérprete.</text>
+<text x="48" y="893.5" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="400" fill="#213547" text-anchor="start">LGPD abrange consentimento, consulta, exportação e exclusão. Suporte recebe chamados; Backoffice analisa certificações.</text>
+<text x="48" y="950.0" font-family="DejaVu Sans, sans-serif" font-size="12" font-weight="400" fill="#526578" text-anchor="start">Fontes: RF01–RF45; RNF28; contexto; UML anterior DU1–DU9. Os atores humanos são externos ao software.</text>
+<rect x="630" y="172" width="180" height="610" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="720.0" y="419.0" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#213547" text-anchor="middle">0</text>
+<text x="720.0" y="445.0" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#213547" text-anchor="middle">Sistema</text>
+<text x="720.0" y="471.0" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#213547" text-anchor="middle">Víamos</text>
+<text x="720.0" y="497.0" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#213547" text-anchor="middle"></text>
+<text x="720.0" y="523.0" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#213547" text-anchor="middle">Atendimento</text>
+<text x="720.0" y="549.0" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#213547" text-anchor="middle">presencial</text>
+<rect x="48" y="185" width="250" height="104" rx="0" fill="white" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="173.0" y="242.6" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">Cliente surdo | contratação</text>
+<polyline points="298,217 630,217" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="620.9103425032512,221.1687080242921 630,217 620.9103425032512,212.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="307" y="172" width="314" height="24.2" fill="white"/>
+<text x="464.0" y="189.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Cadastro/acesso; solicitação; cancelamento</text>
+<polyline points="630,265 298,265" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="307.0896574967488,260.83129197570787 298,265 307.0896574967488,269.16870802429213" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="307" y="220" width="314" height="42.4" fill="white"/>
+<text x="464.0" y="237.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Sessão/perfil; estimativa; status e</text>
+<text x="464.0" y="255.2" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">intérprete</text>
+<rect x="48" y="335" width="250" height="104" rx="0" fill="white" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="173.0" y="392.6" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">Cliente surdo | atendimento</text>
+<polyline points="298,367 630,367" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="620.9103425032512,371.16870802429213 630,367 620.9103425032512,362.83129197570787" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="307" y="322" width="314" height="24.2" fill="white"/>
+<text x="464.0" y="339.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Mensagens/fotos; QR; avaliação; suporte</text>
+<polyline points="630,415 298,415" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="307.0896574967488,410.83129197570787 298,415 307.0896574967488,419.16870802429213" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="307" y="370" width="314" height="24.2" fill="white"/>
+<text x="464.0" y="387.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Conversa/localização; QR; histórico; PDF</text>
+<rect x="48" y="485" width="250" height="104" rx="0" fill="white" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="173.0" y="542.6" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">Intérprete | contratação</text>
+<polyline points="298,517 630,517" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="620.9103425032512,521.1687080242921 630,517 620.9103425032512,512.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="307" y="472" width="314" height="24.2" fill="white"/>
+<text x="464.0" y="489.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Cadastro/certificado; agenda; aceite/recusa</text>
+<polyline points="630,565 298,565" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="307.0896574967488,560.8312919757079 298,565 307.0896574967488,569.1687080242921" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="307" y="520" width="314" height="24.2" fill="white"/>
+<text x="464.0" y="537.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Conta/sessão; análise; demandas e agenda</text>
+<rect x="48" y="635" width="250" height="104" rx="0" fill="white" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="173.0" y="692.6" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">Intérprete | atendimento</text>
+<polyline points="298,667 630,667" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="620.9103425032512,671.1687080242921 630,667 620.9103425032512,662.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="307" y="622" width="314" height="42.4" fill="white"/>
+<text x="464.0" y="639.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Mensagens/fotos; QR; fim; avaliação;</text>
+<text x="464.0" y="657.2" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">suporte</text>
+<polyline points="630,715 298,715" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="307.0896574967488,710.8312919757079 298,715 307.0896574967488,719.1687080242921" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="307" y="670" width="314" height="42.4" fill="white"/>
+<text x="464.0" y="687.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Conversa/localização; check-in;</text>
+<text x="464.0" y="705.2" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">histórico/PDF</text>
+<rect x="1142" y="185" width="250" height="104" rx="0" fill="white" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1267.0" y="242.6" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">Backoffice</text>
+<polyline points="810,217 1142,217" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1132.910342503251,221.1687080242921 1142,217 1132.910342503251,212.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="819" y="172" width="314" height="42.4" fill="white"/>
+<text x="976.0" y="189.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Documentação para análise; resultado</text>
+<text x="976.0" y="207.2" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">registrado</text>
+<polyline points="1142,265 810,265" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="819.0896574967488,260.83129197570787 810,265 819.0896574967488,269.16870802429213" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="819" y="220" width="314" height="24.2" fill="white"/>
+<text x="976.0" y="237.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Parecer: aprovar, reprovar ou corrigir</text>
+<rect x="1142" y="335" width="250" height="104" rx="0" fill="white" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1267.0" y="392.6" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">Cliente | financeiro e dados</text>
+<polyline points="810,367 1142,367" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1132.910342503251,371.16870802429213 1142,367 1132.910342503251,362.83129197570787" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="819" y="322" width="314" height="24.2" fill="white"/>
+<text x="976.0" y="339.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Resultado financeiro; dados/status; avisos</text>
+<polyline points="1142,415 810,415" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="819.0896574967488,410.83129197570787 810,415 819.0896574967488,419.16870802429213" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="819" y="370" width="314" height="42.4" fill="white"/>
+<text x="976.0" y="387.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Pagamento; perfil; consentimento; pedido</text>
+<text x="976.0" y="405.2" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">LGPD</text>
+<rect x="1142" y="635" width="250" height="104" rx="0" fill="white" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1267.0" y="682.2" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">Intérprete | financeiro e</text>
+<text x="1267.0" y="703.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">dados</text>
+<polyline points="810,667 1142,667" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1132.910342503251,671.1687080242921 1142,667 1132.910342503251,662.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="819" y="622" width="314" height="24.2" fill="white"/>
+<text x="976.0" y="639.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Extrato/repasse; dados/status; avisos</text>
+<polyline points="1142,715 810,715" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="819.0896574967488,710.8312919757079 810,715 819.0896574967488,719.1687080242921" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="819" y="670" width="314" height="42.4" fill="white"/>
+<text x="976.0" y="687.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Ganhos/repasse; perfil; consentimento;</text>
+<text x="976.0" y="705.2" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">pedido LGPD</text>
+<rect x="1142" y="485" width="250" height="104" rx="0" fill="white" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1267.0" y="542.6" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">Suporte</text>
+<polyline points="810,517 1142,517" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1132.910342503251,521.1687080242921 1142,517 1132.910342503251,512.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="819" y="472" width="314" height="42.4" fill="white"/>
+<text x="976.0" y="489.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Chamado; data, hora e localização</text>
+<text x="976.0" y="507.2" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">permitida</text>
+<polyline points="1142,565 810,565" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="819.0896574967488,560.8312919757079 810,565 819.0896574967488,569.1687080242921" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="819" y="520" width="314" height="24.2" fill="white"/>
+<text x="976.0" y="537.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Resposta e andamento do chamado</text>
+<polyline points="48,970 1392,970" fill="none" stroke="#cbd5df" stroke-width="1"/>
+<text x="48" y="989.0" font-family="DejaVu Sans, sans-serif" font-size="11" font-weight="400" fill="#526578" text-anchor="start">FECAP • Ciência da Computação • 4º semestre | C1-contexto-pessoas</text>
+<text x="1390" y="989.0" font-family="DejaVu Sans, sans-serif" font-size="11" font-weight="400" fill="#526578" text-anchor="end">03 / 20</text>
+</svg>

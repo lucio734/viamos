@@ -1,0 +1,202 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Cadastro de Intérprete Profissional</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#5d5f5f",
+                        "on-primary-fixed": "#061d32",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#f5f3f5",
+                        "inverse-primary": "#b4c8e4",
+                        "on-tertiary-fixed-variant": "#5a431f",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "background-alt": "#F8FAFC",
+                        "on-surface-variant": "#43474d",
+                        "surface-variant": "#e4e2e4",
+                        "inverse-on-surface": "#f2f0f2",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#ffddb0",
+                        "outline-variant": "#c4c6cd",
+                        "on-background": "#1b1c1d",
+                        "surface": "#fbf9fb",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "secondary-container": "#dfe0e0",
+                        "primary-fixed": "#d1e4ff",
+                        "on-tertiary-container": "#ae8f64",
+                        "on-primary-fixed-variant": "#35485f",
+                        "inverse-surface": "#303032",
+                        "outline": "#74777d",
+                        "on-secondary-container": "#616363",
+                        "on-surface": "#1b1c1d",
+                        "tertiary": "#241500",
+                        "surface-tint": "#4c6078",
+                        "status-online": "#2D6A4F",
+                        "surface-container-high": "#e9e7ea",
+                        "on-secondary-fixed-variant": "#454747",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#e3c193",
+                        "primary-fixed-dim": "#b4c8e4",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#fbf9fb",
+                        "error": "#ba1a1a",
+                        "surface-container": "#efedef",
+                        "status-alert": "#D90429",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e4e2e4",
+                        "primary-container": "#1a2e44",
+                        "on-tertiary-fixed": "#281800",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#fbf9fb",
+                        "on-tertiary": "#ffffff",
+                        "primary": "#03192e",
+                        "on-primary-container": "#8296b0",
+                        "pro-verification": "#FFB703",
+                        "secondary-fixed": "#e2e2e2",
+                        "surface-dim": "#dbd9db",
+                        "tertiary-container": "#3d2907"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "touch-target": "44px",
+                        "unit": "8px",
+                        "margin-mobile": "20px",
+                        "margin-desktop": "48px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-base": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "mobile-headline": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-base": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "mobile-headline": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .icon-fill {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-alt text-on-surface antialiased">
+<!-- Top Navigation (Transactional Layout - No global nav clusters) -->
+<header class="bg-surface docked full-width top-0 shadow-sm border-b border-surface-variant flex justify-between items-center px-margin-mobile md:px-margin-desktop h-16 w-full z-40">
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-primary hover:bg-surface-container-highest transition-colors active:opacity-70">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-mobile-headline text-mobile-headline font-bold text-primary">Víamos</h1>
+</div>
+<div>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Cadastro Profissional</span>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="max-w-3xl mx-auto px-margin-mobile md:px-0 py-8 pb-32">
+<div class="mb-8">
+<h2 class="font-headline-md text-headline-md text-primary mb-2">Novo Cadastro</h2>
+<p class="font-body-base text-body-base text-on-surface-variant">Preencha os dados abaixo para se registrar como intérprete profissional na plataforma.</p>
+</div>
+<form class="bg-surface-container-lowest rounded-xl shadow-sm p-6 md:p-8 border border-surface-variant space-y-6">
+<!-- Section: Personal Info -->
+<div class="space-y-4">
+<h3 class="font-body-base text-body-base font-semibold text-primary border-b border-surface-variant pb-2">Informações Pessoais</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="fullName">Nome Completo</label>
+<input class="h-touch-target rounded-lg border-outline-variant bg-surface-container-lowest px-4 focus:border-primary focus:ring-1 focus:ring-primary font-body-base text-body-base outline-none transition-shadow" id="fullName" placeholder="Seu nome completo" required="" type="text">
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="docNumber">CPF / CNPJ</label>
+<input class="h-touch-target rounded-lg border-outline-variant bg-surface-container-lowest px-4 focus:border-primary focus:ring-1 focus:ring-primary font-body-base text-body-base outline-none transition-shadow" id="docNumber" placeholder="000.000.000-00" required="" type="text">
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="email">E-mail</label>
+<input class="h-touch-target rounded-lg border-outline-variant bg-surface-container-lowest px-4 focus:border-primary focus:ring-1 focus:ring-primary font-body-base text-body-base outline-none transition-shadow" id="email" placeholder="seu.email@exemplo.com" required="" type="email">
+</div>
+</div>
+<!-- Section: Professional Info -->
+<div class="space-y-4 pt-4">
+<h3 class="font-body-base text-body-base font-semibold text-primary border-b border-surface-variant pb-2">Perfil Profissional</h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="specialty">Especialidade Principal</label>
+<select class="h-touch-target rounded-lg border-outline-variant bg-surface-container-lowest px-4 focus:border-primary focus:ring-1 focus:ring-primary font-body-base text-body-base outline-none transition-shadow text-on-surface" id="specialty" required="">
+<option disabled="" selected="" value="">Selecione uma especialidade</option>
+<option value="juridico">Jurídico</option>
+<option value="saude">Saúde / Médico</option>
+<option value="educacao">Educação (Ensino Superior/Básico)</option>
+<option value="conferencias">Conferências / Eventos</option>
+<option value="geral">Atendimento Geral</option>
+</select>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-caps text-label-caps text-on-surface-variant" for="baseRate">Preço Base por Hora (R$)</label>
+<div class="relative">
+<span class="absolute left-4 top-1/2 -translate-y-1/2 font-body-base text-on-surface-variant">R$</span>
+<input class="w-full h-touch-target rounded-lg border-outline-variant bg-surface-container-lowest pl-12 pr-4 focus:border-primary focus:ring-1 focus:ring-primary font-body-base text-body-base outline-none transition-shadow" id="baseRate" min="0" placeholder="0,00" required="" step="0.01" type="number">
+</div>
+</div>
+</div>
+</div>
+<!-- Section: Certifications Upload -->
+<div class="space-y-4 pt-4">
+<h3 class="font-body-base text-body-base font-semibold text-primary border-b border-surface-variant pb-2">Certificações (Prolibras, etc.)</h3>
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-8 flex flex-col items-center justify-center bg-surface hover:bg-surface-container-low transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant mb-2 group-hover:text-primary transition-colors">cloud_upload</span>
+<p class="font-body-base text-body-base text-on-surface font-medium text-center">Clique para fazer upload ou arraste os arquivos aqui</p>
+<p class="font-label-caps text-label-caps text-on-surface-variant mt-2">PDF, JPG ou PNG (Máx 5MB)</p>
+<input accept=".pdf,.jpg,.jpeg,.png" class="hidden" id="certUpload" multiple="" type="file">
+</div>
+</div>
+<!-- Action Area -->
+<div class="pt-8 flex flex-col-reverse md:flex-row justify-end gap-4 border-t border-surface-variant">
+<button class="h-touch-target px-6 rounded-full font-label-caps text-label-caps text-primary border border-primary hover:bg-surface-container-low transition-colors w-full md:w-auto flex items-center justify-center gap-2" type="button">
+                    Voltar
+                </button>
+<button class="h-touch-target px-8 rounded-full font-label-caps text-label-caps text-on-primary bg-primary-container hover:opacity-90 transition-opacity w-full md:w-auto flex items-center justify-center gap-2 shadow-sm" type="submit">
+<span>Cadastrar</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</form>
+</main>
+<script>
+        // Simple script to handle file upload trigger visually
+        document.querySelector('.border-dashed').addEventListener('click', () => {
+            document.getElementById('certUpload').click();
+        });
+    </script>
+</body></html>

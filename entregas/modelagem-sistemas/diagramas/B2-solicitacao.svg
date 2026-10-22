@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" role="img" aria-labelledby="title"><title id="title">BPMN | criar e confirmar solicitação</title><rect width="100%" height="100%" fill="white"/>
+<rect x="0" y="0" width="1440" height="12" rx="0" fill="#1a2e44" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="48" y="47.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="700" fill="#087e8b" text-anchor="start">VÍAMOS / MODELAGEM DE SISTEMAS</text>
+<text x="48" y="92.0" font-family="DejaVu Sans, sans-serif" font-size="30" font-weight="700" fill="#1a2e44" text-anchor="start">BPMN | criar e confirmar solicitação</text>
+<text x="48" y="125.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">Pré-condição: cliente autenticado. Saída: solicitação no estado “Buscando intérprete”.</text>
+<polyline points="48,145 1392,145" fill="none" stroke="#cbd5df" stroke-width="1"/>
+<text x="48" y="847.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#087e8b" text-anchor="start">JUSTIFICATIVA E REGRAS</text>
+<text x="48" y="874.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="400" fill="#213547" text-anchor="start">A estimativa antecede a confirmação. Data/hora passada, duração inferior a 60 min ou endereço inválido retornam ao preenchimento. O registro só ocorre com confirmação do</text>
+<text x="48" y="893.5" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="400" fill="#213547" text-anchor="start">cliente; a desistência antes disso não cria solicitação cancelada. Fórmula de preço permanece parametrizável, pois não está definida nas fontes.</text>
+<text x="48" y="950.0" font-family="DejaVu Sans, sans-serif" font-size="12" font-weight="400" fill="#526578" text-anchor="start">RF10–RF16; RNF24, RNF28; US05–US07. A distribuição continua na vista B3.</text>
+<rect x="48" y="165.0" width="1344" height="320.0" rx="0" fill="#f5f8fa" stroke="#b7c7d3" stroke-width="1.8"/>
+<rect x="48" y="165.0" width="80" height="320.0" rx="0" fill="#edf4f8" stroke="#b7c7d3" stroke-width="1.8"/>
+<text x="88.0" y="314.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#1a2e44" text-anchor="middle">Cliente</text>
+<rect x="48" y="485.0" width="1344" height="320.0" rx="0" fill="white" stroke="#b7c7d3" stroke-width="1.8"/>
+<rect x="48" y="485.0" width="80" height="320.0" rx="0" fill="#edf4f8" stroke="#b7c7d3" stroke-width="1.8"/>
+<text x="88.0" y="634.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#1a2e44" text-anchor="middle">Víamos</text>
+<ellipse cx="171.0" cy="286.0" rx="16.0" ry="16.0" fill="white" stroke="#1a2e44" stroke-width="1.8"/>
+<rect x="240" y="250" width="164" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="322.0" y="271.7" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Informar serviço,</text>
+<text x="322.0" y="289.9" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">data, duração e</text>
+<text x="322.0" y="308.09999999999997" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">local</text>
+<rect x="445" y="530" width="164" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="527.0" y="560.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Validar dados e</text>
+<text x="527.0" y="579.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">geocodificar local</text>
+<polygon points="715.0,540 740,565.0 715.0,590 690,565.0" fill="#fff2ce" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="715.0" y="574.45" font-family="DejaVu Sans, sans-serif" font-size="27" font-weight="400" fill="#213547" text-anchor="middle">×</text>
+<text x="715.0" y="514.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Dados válidos?</text>
+<rect x="820" y="530" width="164" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="902.0" y="551.7" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Calcular e</text>
+<text x="902.0" y="569.9000000000001" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">apresentar</text>
+<text x="902.0" y="588.1" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">estimativa</text>
+<polygon points="1125.0,270 1150,295.0 1125.0,320 1100,295.0" fill="#fff2ce" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1125.0" y="304.45" font-family="DejaVu Sans, sans-serif" font-size="27" font-weight="400" fill="#213547" text-anchor="middle">×</text>
+<text x="1125.0" y="244.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Confirmar resumo?</text>
+<ellipse cx="1326.0" cy="296.0" rx="16.0" ry="16.0" fill="white" stroke="#1a2e44" stroke-width="4"/>
+<text x="1326.0" y="333.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="400" fill="#213547" text-anchor="middle">Desistência</text>
+<rect x="1090" y="650" width="164" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1172.0" y="680.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Registrar solicitação</text>
+<text x="1172.0" y="699.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">e iniciar busca</text>
+<ellipse cx="1336.0" cy="686.0" rx="16.0" ry="16.0" fill="white" stroke="#1a2e44" stroke-width="4"/>
+<text x="1336.0" y="723.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="400" fill="#213547" text-anchor="middle">Busca iniciada (B3)</text>
+<polyline points="187,286 240,286" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="230.91034250325114,290.16870802429213 240,286 230.91034250325114,281.83129197570787" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="404,285 425,285 425,565 445,565" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="435.9103425032512,569.1687080242921 445,565 435.9103425032512,560.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="609,565 690,565" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="680.9103425032512,569.1687080242921 690,565 680.9103425032512,560.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="715,590 715,755 210,755 210,285 240,285" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="230.91034250325114,289.16870802429213 240,285 230.91034250325114,280.83129197570787" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="327" y="719" width="256" height="24.2" fill="white"/>
+<text x="455.0" y="736.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Não: corrigir dados</text>
+<polyline points="740,565 820,565" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="810.9103425032512,569.1687080242921 820,565 810.9103425032512,560.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="744" y="532" width="71" height="24.2" fill="white"/>
+<text x="779.5" y="549.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Sim</text>
+<polyline points="984,565 1040,565 1040,295 1100,295" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1090.910342503251,299.16870802429213 1100,295 1090.910342503251,290.83129197570787" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="1150,295 1310,296" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1300.884466114132,300.11181735678895 1310,296 1300.9365739467144,291.77456414359136" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="1187" y="259" width="81" height="24.2" fill="white"/>
+<text x="1227.5" y="276.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Não</text>
+<polyline points="1125,320 1172,320 1172,650" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1167.831291975708,640.9103425032512 1172,650 1176.168708024292,640.9103425032512" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="1177" y="487" width="71" height="24.2" fill="white"/>
+<text x="1212.5" y="504.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Sim</text>
+<polyline points="1254,685 1320,686" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1310.848230678749,690.0305233271382 1320,686 1310.9745406667737,681.6940641174908" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="48,970 1392,970" fill="none" stroke="#cbd5df" stroke-width="1"/>
+<text x="48" y="989.0" font-family="DejaVu Sans, sans-serif" font-size="11" font-weight="400" fill="#526578" text-anchor="start">FECAP • Ciência da Computação • 4º semestre | B2-solicitacao</text>
+<text x="1390" y="989.0" font-family="DejaVu Sans, sans-serif" font-size="11" font-weight="400" fill="#526578" text-anchor="end">06 / 20</text>
+</svg>

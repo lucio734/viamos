@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" role="img" aria-labelledby="title"><title id="title">BPMN | cobrança e tratamento de falha</title><rect width="100%" height="100%" fill="white"/>
+<rect x="0" y="0" width="1440" height="12" rx="0" fill="#1a2e44" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="48" y="47.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="700" fill="#087e8b" text-anchor="start">VÍAMOS / MODELAGEM DE SISTEMAS</text>
+<text x="48" y="92.0" font-family="DejaVu Sans, sans-serif" font-size="30" font-weight="700" fill="#1a2e44" text-anchor="start">BPMN | cobrança e tratamento de falha</text>
+<text x="48" y="125.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">Pré-condição: atendimento concluído. O gateway é um participante externo, em pool separado.</text>
+<polyline points="48,145 1392,145" fill="none" stroke="#cbd5df" stroke-width="1"/>
+<text x="48" y="847.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#087e8b" text-anchor="start">JUSTIFICATIVA E REGRAS</text>
+<text x="48" y="874.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="400" fill="#213547" text-anchor="start">A requisição e o retorno do gateway são fluxos de mensagem (tracejados), nunca sequência entre pools. Pagamento aprovado gera crédito uma única vez; falha permite nova</text>
+<text x="48" y="893.5" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="400" fill="#213547" text-anchor="start">tentativa. A conclusão do atendimento e a emissão do comprovante não são desfeitas por falha financeira. Repasses e saldo são detalhados em P4.</text>
+<text x="48" y="950.0" font-family="DejaVu Sans, sans-serif" font-size="12" font-weight="400" fill="#526578" text-anchor="start">RF26–RF27, RF35–RF38; RNF23, RNF37; US11, US22–US23; UML DC7–DC8. Gateway externo mostrado como pool caixa-preta.</text>
+<rect x="48" y="165" width="1344" height="510" rx="0" fill="white" stroke="#b7c7d3" stroke-width="1.8"/>
+<rect x="48" y="165" width="1344" height="220" rx="0" fill="#f5f8fa" stroke="#b7c7d3" stroke-width="1.8"/>
+<rect x="48" y="385" width="1344" height="290" rx="0" fill="white" stroke="#b7c7d3" stroke-width="1.8"/>
+<text x="55" y="268.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#213547" text-anchor="start">Cliente</text>
+<text x="55" y="518.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#213547" text-anchor="start">Víamos</text>
+<rect x="220" y="720" width="710" height="80" rx="0" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="575.0" y="765.95" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="400" fill="#213547" text-anchor="middle">Gateway financeiro — pool externo (processamento não detalhado)</text>
+<ellipse cx="166.0" cy="261.0" rx="16.0" ry="16.0" fill="white" stroke="#1a2e44" stroke-width="1.8"/>
+<rect x="220" y="225" width="180" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="310.0" y="255.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Selecionar Pix ou</text>
+<text x="310.0" y="274.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">cartão tokenizado</text>
+<rect x="450" y="430" width="190" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="545.0" y="460.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Solicitar cobrança e</text>
+<text x="545.0" y="479.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">aguardar resultado</text>
+<rect x="720" y="430" width="180" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="810.0" y="460.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Registrar resultado da</text>
+<text x="810.0" y="479.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">transação</text>
+<polygon points="1005.0,440 1030,465.0 1005.0,490 980,465.0" fill="#fff2ce" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1005.0" y="474.45" font-family="DejaVu Sans, sans-serif" font-size="27" font-weight="400" fill="#213547" text-anchor="middle">×</text>
+<text x="1005.0" y="414.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Pagamento aprovado?</text>
+<rect x="1120" y="420" width="165" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1202.5" y="450.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Registrar crédito e</text>
+<text x="1202.5" y="469.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">notificar</text>
+<ellipse cx="1356.0" cy="456.0" rx="16.0" ry="16.0" fill="white" stroke="#1a2e44" stroke-width="4"/>
+<text x="1356.0" y="493.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="400" fill="#213547" text-anchor="middle">Pago</text>
+<rect x="960" y="565" width="190" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1055.0" y="595.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Registrar falha;</text>
+<text x="1055.0" y="614.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">informar motivo</text>
+<polygon points="1095.0,245 1120,270.0 1095.0,295 1070,270.0" fill="#fff2ce" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1095.0" y="279.45" font-family="DejaVu Sans, sans-serif" font-size="27" font-weight="400" fill="#213547" text-anchor="middle">×</text>
+<text x="1095.0" y="219.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Tentar novamente?</text>
+<ellipse cx="1326.0" cy="271.0" rx="16.0" ry="16.0" fill="white" stroke="#1a2e44" stroke-width="4"/>
+<text x="1326.0" y="308.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="400" fill="#213547" text-anchor="middle">Pagamento pendente</text>
+<polyline points="182,261 220,260" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="211.02315313451373,264.40638404517915 220,260 210.80382338108632,256.07185341493664" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="400,260 420,260 420,465 450,465" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="440.9103425032512,469.16870802429213 450,465 440.9103425032512,460.83129197570787" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="640,465 720,465" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="710.9103425032512,469.16870802429213 720,465 710.9103425032512,460.83129197570787" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="500,500 500,720" fill="none" stroke="#213547" stroke-width="1.7" stroke-dasharray="7 5"/>
+<polyline points="495.83129197570787,710.9103425032512 500,720 504.16870802429213,710.9103425032512" fill="none" stroke="#213547" stroke-width="1.4"/>
+<circle cx="500" cy="500" r="3" fill="white" stroke="#213547"/>
+<rect x="277" y="622" width="206" height="24.2" fill="white"/>
+<text x="380.0" y="639.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Cobrança Pix/cartão</text>
+<polyline points="600,720 600,500" fill="none" stroke="#213547" stroke-width="1.7" stroke-dasharray="7 5"/>
+<polyline points="604.1687080242921,509.0896574967488 600,500 595.8312919757079,509.0896574967488" fill="none" stroke="#213547" stroke-width="1.4"/>
+<circle cx="600" cy="720" r="3" fill="white" stroke="#213547"/>
+<rect x="617" y="622" width="126" height="24.2" fill="white"/>
+<text x="680.0" y="639.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Resultado</text>
+<polyline points="900,465 980,465" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="970.9103425032512,469.16870802429213 980,465 970.9103425032512,460.83129197570787" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="1030,465 1120,455" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1111.4262940491103,460.14699584881095 1120,455 1110.505580471344,451.86057364891633" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="1042" y="421" width="71" height="24.2" fill="white"/>
+<text x="1077.5" y="438.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Sim</text>
+<polyline points="1285,455 1340,456" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1330.836062387171,460.0027799624985 1340,456 1330.9876267199868,451.66674165763163" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="1005,490 1005,565" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1000.8312919757079,555.9103425032512 1005,565 1009.1687080242921,555.9103425032512" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="1017" y="515" width="71" height="24.2" fill="white"/>
+<text x="1052.5" y="532.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Não</text>
+<polyline points="1150,600 1300,600 1300,340 1095,340 1095,295" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1099.168708024292,304.0896574967488 1095,295 1090.831291975708,304.0896574967488" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="1070,270 870,270 870,195 310,195 310,225" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="305.83129197570787,215.91034250325114 310,225 314.16870802429213,215.91034250325114" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="597" y="167" width="76" height="24.2" fill="white"/>
+<text x="635.0" y="184.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Sim</text>
+<polyline points="1120,270 1310,271" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1300.8885281314997,275.12081064713317 1310,271 1300.932408660838,266.7835100728265" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="1187" y="232" width="71" height="24.2" fill="white"/>
+<text x="1222.5" y="249.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Não</text>
+<polyline points="48,970 1392,970" fill="none" stroke="#cbd5df" stroke-width="1"/>
+<text x="48" y="989.0" font-family="DejaVu Sans, sans-serif" font-size="11" font-weight="400" fill="#526578" text-anchor="start">FECAP • Ciência da Computação • 4º semestre | B5-pagamento</text>
+<text x="1390" y="989.0" font-family="DejaVu Sans, sans-serif" font-size="11" font-weight="400" fill="#526578" text-anchor="end">09 / 20</text>
+</svg>

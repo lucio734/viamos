@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" role="img" aria-labelledby="title"><title id="title">DFD | P3 — execução presencial e suporte</title><rect width="100%" height="100%" fill="white"/>
+<rect x="0" y="0" width="1440" height="12" rx="0" fill="#1a2e44" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="48" y="47.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="700" fill="#087e8b" text-anchor="start">VÍAMOS / MODELAGEM DE SISTEMAS</text>
+<text x="48" y="92.0" font-family="DejaVu Sans, sans-serif" font-size="30" font-weight="700" fill="#1a2e44" text-anchor="start">DFD | P3 — execução presencial e suporte</text>
+<text x="48" y="125.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">DFD lógico de nível 1 • vista 3/6 • localização é temporária, autorizada e vinculada ao atendimento.</text>
+<polyline points="48,145 1392,145" fill="none" stroke="#cbd5df" stroke-width="1"/>
+<text x="48" y="847.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#087e8b" text-anchor="start">JUSTIFICATIVA E REGRAS</text>
+<text x="48" y="874.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="400" fill="#213547" text-anchor="start">Check-in transforma QR e posição em início validado; encerramento transforma horários em duração real. Só participantes acessam a conversa. Precisão insuficiente, QR</text>
+<text x="48" y="893.5" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="400" fill="#213547" text-anchor="start">inválido ou distância excessiva produzem falha sem iniciar o atendimento. O chamado de suporte não modifica automaticamente seu ciclo de vida.</text>
+<text x="48" y="950.0" font-family="DejaVu Sans, sans-serif" font-size="12" font-weight="400" fill="#526578" text-anchor="start">RF28–RF34; RNF21, RNF26, RNF44. Limites: distância ≤ 200 m; erro de posição ≤ 50 m. BPMN B4.</text>
+<rect x="630" y="172" width="180" height="610" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="720.0" y="432.0" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#213547" text-anchor="middle">P3</text>
+<text x="720.0" y="458.0" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#213547" text-anchor="middle">Coordenar</text>
+<text x="720.0" y="484.0" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#213547" text-anchor="middle">encontro e</text>
+<text x="720.0" y="510.0" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#213547" text-anchor="middle">registrar</text>
+<text x="720.0" y="536.0" font-family="DejaVu Sans, sans-serif" font-size="20" font-weight="400" fill="#213547" text-anchor="middle">atendimento</text>
+<rect x="48" y="185" width="250" height="104" rx="0" fill="white" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="173.0" y="242.6" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">Cliente surdo</text>
+<polyline points="298,217 630,217" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="620.9103425032512,221.1687080242921 630,217 620.9103425032512,212.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="307" y="172" width="314" height="42.4" fill="white"/>
+<text x="464.0" y="189.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Mensagens/fotos; solicitação de QR e</text>
+<text x="464.0" y="207.2" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">suporte</text>
+<polyline points="630,265 298,265" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="307.0896574967488,260.83129197570787 298,265 307.0896574967488,269.16870802429213" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="307" y="220" width="314" height="24.2" fill="white"/>
+<text x="464.0" y="237.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Conversa/localização; QR; status e suporte</text>
+<rect x="48" y="335" width="250" height="104" rx="0" fill="white" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="173.0" y="392.6" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">Intérprete de Libras</text>
+<polyline points="298,367 630,367" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="620.9103425032512,371.16870802429213 630,367 620.9103425032512,362.83129197570787" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="307" y="322" width="314" height="42.4" fill="white"/>
+<text x="464.0" y="339.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Mensagens/fotos; leitura QR;</text>
+<text x="464.0" y="357.2" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">encerramento; suporte</text>
+<polyline points="630,415 298,415" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="307.0896574967488,410.83129197570787 298,415 307.0896574967488,419.16870802429213" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="307" y="370" width="314" height="42.4" fill="white"/>
+<text x="464.0" y="387.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Conversa/localização; validação; duração</text>
+<text x="464.0" y="405.2" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">real</text>
+<rect x="48" y="485" width="250" height="104" rx="0" fill="white" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="173.0" y="542.6" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">Localização do dispositivo</text>
+<polyline points="298,517 630,517" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="620.9103425032512,521.1687080242921 630,517 620.9103425032512,512.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="307" y="472" width="314" height="24.2" fill="white"/>
+<text x="464.0" y="489.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Posição, precisão e instante da leitura</text>
+<polyline points="630,565 298,565" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="307.0896574967488,560.8312919757079 298,565 307.0896574967488,569.1687080242921" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="307" y="520" width="314" height="24.2" fill="white"/>
+<text x="464.0" y="537.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Pedido autorizado de posição; parada</text>
+<rect x="48" y="635" width="250" height="104" rx="0" fill="white" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="173.0" y="692.6" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">Suporte</text>
+<polyline points="298,667 630,667" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="620.9103425032512,671.1687080242921 630,667 620.9103425032512,662.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="307" y="622" width="314" height="24.2" fill="white"/>
+<text x="464.0" y="639.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Resposta e situação do chamado</text>
+<polyline points="630,715 298,715" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="307.0896574967488,710.8312919757079 298,715 307.0896574967488,719.1687080242921" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="307" y="670" width="314" height="42.4" fill="white"/>
+<text x="464.0" y="687.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Chamado; data, hora e localização</text>
+<text x="464.0" y="705.2" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">permitida</text>
+<rect x="1142" y="185" width="250" height="104" fill="#fffaf0"/><path d="M 1142 185 H 1392 M 1142 289 H 1392" stroke="#1a2e44" fill="none" stroke-width="1.8"/>
+<text x="1267.0" y="232.2" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">D1 | Pessoas, acesso e</text>
+<text x="1267.0" y="253.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">certificações</text>
+<polyline points="1142,265 810,265" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="819.0896574967488,260.83129197570787 810,265 819.0896574967488,269.16870802429213" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="819" y="220" width="314" height="42.4" fill="white"/>
+<text x="976.0" y="237.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Participantes e consentimento de</text>
+<text x="976.0" y="255.2" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">localização</text>
+<rect x="1142" y="335" width="250" height="104" fill="#fffaf0"/><path d="M 1142 335 H 1392 M 1142 439 H 1392" stroke="#1a2e44" fill="none" stroke-width="1.8"/>
+<text x="1267.0" y="392.6" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">D2 | Solicitações e agenda</text>
+<polyline points="810,367 1142,367" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1132.910342503251,371.16870802429213 1142,367 1132.910342503251,362.83129197570787" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="819" y="322" width="314" height="24.2" fill="white"/>
+<text x="976.0" y="339.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Estado em andamento ou concluída</text>
+<polyline points="1142,415 810,415" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="819.0896574967488,410.83129197570787 810,415 819.0896574967488,419.16870802429213" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="819" y="370" width="314" height="24.2" fill="white"/>
+<text x="976.0" y="387.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Vínculo, estado, local e horário previsto</text>
+<rect x="1142" y="485" width="250" height="104" fill="#fffaf0"/><path d="M 1142 485 H 1392 M 1142 589 H 1392" stroke="#1a2e44" fill="none" stroke-width="1.8"/>
+<text x="1267.0" y="532.2" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">D3 | Atendimento e</text>
+<text x="1267.0" y="553.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">comunicação</text>
+<polyline points="810,517 1142,517" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1132.910342503251,521.1687080242921 1142,517 1132.910342503251,512.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="819" y="472" width="314" height="42.4" fill="white"/>
+<text x="976.0" y="489.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Mensagens/fotos; QR; início/fim; duração;</text>
+<text x="976.0" y="507.2" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">chamado</text>
+<polyline points="1142,565 810,565" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="819.0896574967488,560.8312919757079 810,565 819.0896574967488,569.1687080242921" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="819" y="520" width="314" height="24.2" fill="white"/>
+<text x="976.0" y="537.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Conversa; check-in; início e chamados</text>
+<rect x="1142" y="635" width="250" height="104" rx="15" fill="white" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1267.0" y="682.2" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">P6 | Governança e</text>
+<text x="1267.0" y="703.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">notificações</text>
+<polyline points="810,667 1142,667" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1132.910342503251,671.1687080242921 1142,667 1132.910342503251,662.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="819" y="622" width="314" height="42.4" fill="white"/>
+<text x="976.0" y="639.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Eventos de check-in/fim; avisos de</text>
+<text x="976.0" y="657.2" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">mensagens; dados exportáveis</text>
+<polyline points="1142,715 810,715" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="819.0896574967488,710.8312919757079 810,715 819.0896574967488,719.1687080242921" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="819" y="670" width="314" height="42.4" fill="white"/>
+<text x="976.0" y="687.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Pedido autorizado de dados/tratamento</text>
+<text x="976.0" y="705.2" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">LGPD</text>
+<polyline points="48,970 1392,970" fill="none" stroke="#cbd5df" stroke-width="1"/>
+<text x="48" y="989.0" font-family="DejaVu Sans, sans-serif" font-size="11" font-weight="400" fill="#526578" text-anchor="start">FECAP • Ciência da Computação • 4º semestre | D3-atendimento</text>
+<text x="1390" y="989.0" font-family="DejaVu Sans, sans-serif" font-size="11" font-weight="400" fill="#526578" text-anchor="end">13 / 20</text>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" role="img" aria-labelledby="title"><title id="title">BPMN | cancelamento solicitado pelo cliente</title><rect width="100%" height="100%" fill="white"/>
+<rect x="0" y="0" width="1440" height="12" rx="0" fill="#1a2e44" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="48" y="47.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="700" fill="#087e8b" text-anchor="start">VÍAMOS / MODELAGEM DE SISTEMAS</text>
+<text x="48" y="92.0" font-family="DejaVu Sans, sans-serif" font-size="30" font-weight="700" fill="#1a2e44" text-anchor="start">BPMN | cancelamento solicitado pelo cliente</text>
+<text x="48" y="125.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">Processo acionado em “Buscando intérprete” ou “Aceita”; em andamento, o fluxo documentado é encerramento.</text>
+<polyline points="48,145 1392,145" fill="none" stroke="#cbd5df" stroke-width="1"/>
+<text x="48" y="847.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#087e8b" text-anchor="start">JUSTIFICATIVA E REGRAS</text>
+<text x="48" y="874.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="400" fill="#213547" text-anchor="start">RF19 e US09 preveem cancelamento antes do início e eventual taxa. A política deve ser apresentada ao cliente; prazo, valor e fórmula não foram fornecidos. O sistema</text>
+<text x="48" y="893.5" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="400" fill="#213547" text-anchor="start">revalida estado e autorização de forma atômica para evitar corrida com o check-in. Cancelar não é o mesmo que recusar uma oferta individual.</text>
+<text x="48" y="950.0" font-family="DejaVu Sans, sans-serif" font-size="12" font-weight="400" fill="#526578" text-anchor="start">RF18–RF19, RF42, RF44; US09. A máquina E1 usa a mesma guarda: não iniciado e política autoriza.</text>
+<rect x="48" y="165.0" width="1344" height="320.0" rx="0" fill="#f5f8fa" stroke="#b7c7d3" stroke-width="1.8"/>
+<rect x="48" y="165.0" width="80" height="320.0" rx="0" fill="#edf4f8" stroke="#b7c7d3" stroke-width="1.8"/>
+<text x="88.0" y="314.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#1a2e44" text-anchor="middle">Cliente</text>
+<rect x="48" y="485.0" width="1344" height="320.0" rx="0" fill="white" stroke="#b7c7d3" stroke-width="1.8"/>
+<rect x="48" y="485.0" width="80" height="320.0" rx="0" fill="#edf4f8" stroke="#b7c7d3" stroke-width="1.8"/>
+<text x="88.0" y="634.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#1a2e44" text-anchor="middle">Víamos</text>
+<ellipse cx="176.0" cy="276.0" rx="16.0" ry="16.0" fill="white" stroke="#1a2e44" stroke-width="1.8"/>
+<rect x="250" y="240" width="195" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="347.5" y="270.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Consultar política e</text>
+<text x="347.5" y="289.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">confirmar cancelamento</text>
+<rect x="515" y="540" width="190" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="610.0" y="570.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Revalidar estado, prazo</text>
+<text x="610.0" y="589.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">e autorização</text>
+<polygon points="830.0,550 855,575.0 830.0,600 805,575.0" fill="#fff2ce" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="830.0" y="584.45" font-family="DejaVu Sans, sans-serif" font-size="27" font-weight="400" fill="#213547" text-anchor="middle">×</text>
+<text x="830.0" y="524.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Cancelamento permitido?</text>
+<rect x="1060" y="520" width="185" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1152.5" y="550.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Informar motivo e</text>
+<text x="1152.5" y="569.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">preservar estado</text>
+<ellipse cx="1336.0" cy="556.0" rx="16.0" ry="16.0" fill="white" stroke="#1a2e44" stroke-width="4"/>
+<text x="1336.0" y="593.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="400" fill="#213547" text-anchor="middle">Não cancelada</text>
+<rect x="805" y="690" width="245" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="927.5" y="720.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Cancelar; liberar agenda;</text>
+<text x="927.5" y="739.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">registrar taxa se aplicável</text>
+<ellipse cx="1276.0" cy="726.0" rx="16.0" ry="16.0" fill="white" stroke="#1a2e44" stroke-width="4"/>
+<text x="1276.0" y="763.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="400" fill="#213547" text-anchor="middle">Cancelada; notificar</text>
+<polyline points="192,276 250,275" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="240.98355681716788,279.3247835010275 250,275 240.83982962556206,270.9886063878909" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="445,275 480,275 480,575 515,575" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="505.9103425032512,579.1687080242921 515,575 505.9103425032512,570.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="705,575 805,575" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="795.9103425032512,579.1687080242921 805,575 795.9103425032512,570.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="855,575 1060,555" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1051.3580758626892,560.0316147711212 1060,555 1050.548513062139,551.7335960654809" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="917" y="532" width="76" height="24.2" fill="white"/>
+<text x="955.0" y="549.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Não</text>
+<polyline points="1245,555 1320,556" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1310.8555725314682,560.0471528600685 1320,556 1310.966728198718,551.7104778163339" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="830,600 830,690" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="825.8312919757079,680.9103425032512 830,690 834.1687080242921,680.9103425032512" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="842" y="627" width="76" height="24.2" fill="white"/>
+<text x="880.0" y="644.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Sim</text>
+<polyline points="1050,725 1260,726" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1250.890594793312,730.1253771682557 1260,726 1250.9302963243674,721.7880556465905" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="1057" y="685" width="196" height="24.2" fill="white"/>
+<text x="1155.0" y="702.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Registrar e auditar</text>
+<polyline points="48,970 1392,970" fill="none" stroke="#cbd5df" stroke-width="1"/>
+<text x="48" y="989.0" font-family="DejaVu Sans, sans-serif" font-size="11" font-weight="400" fill="#526578" text-anchor="start">FECAP • Ciência da Computação • 4º semestre | B6-cancelamento</text>
+<text x="1390" y="989.0" font-family="DejaVu Sans, sans-serif" font-size="11" font-weight="400" fill="#526578" text-anchor="end">10 / 20</text>
+</svg>

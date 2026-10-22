@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" role="img" aria-labelledby="title"><title id="title">Máquina de estados | solicitação e atendimento associado</title><rect width="100%" height="100%" fill="white"/>
+<rect x="0" y="0" width="1440" height="12" rx="0" fill="#1a2e44" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="48" y="47.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="700" fill="#087e8b" text-anchor="start">VÍAMOS / MODELAGEM DE SISTEMAS</text>
+<text x="48" y="92.0" font-family="DejaVu Sans, sans-serif" font-size="30" font-weight="700" fill="#1a2e44" text-anchor="start">Máquina de estados | solicitação e atendimento associado</text>
+<text x="48" y="125.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">UML • evento [guarda] / ação • estados de RF18; pagamento possui ciclo próprio.</text>
+<polyline points="48,145 1392,145" fill="none" stroke="#cbd5df" stroke-width="1"/>
+<text x="48" y="847.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#087e8b" text-anchor="start">JUSTIFICATIVA E REGRAS</text>
+<text x="48" y="874.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="400" fill="#213547" text-anchor="start">A criação acontece somente após confirmar o resumo. Recusa e ausência de elegíveis mantêm a busca. O aceite exclusivo cria o vínculo; só check-in válido inicia. O</text>
+<text x="48" y="893.5" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="400" fill="#213547" text-anchor="start">encerramento conclui o serviço mesmo se a cobrança falhar. Cancelamento antes do início é sujeito à política; nenhum prazo de expiração ou estado de falta foi inventado.</text>
+<text x="48" y="950.0" font-family="DejaVu Sans, sans-serif" font-size="12" font-weight="400" fill="#526578" text-anchor="start">RF16–RF19, RF22–RF23, RF31–RF33; RNF26, RNF27, RNF36; US09. Setas rotuladas são transições; pontos pretos = início/fim.</text>
+<text x="560" y="201.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">Eventos descritos dentro do estado são internos: não saem do estado nem repetem ações entry.</text>
+<text x="560" y="221.8" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">Assim, suporte não reinicia o relógio e QR inválido não refaz o aceite.</text>
+<ellipse cx="87.0" cy="342.0" rx="12.0" ry="12.0" fill="#1a2e44" stroke="#1a2e44" stroke-width="1.8"/>
+<rect x="185" y="290" width="245" height="120" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="307.5" y="327.6" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Buscando intérprete</text>
+<text x="307.5" y="345.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">entry / distribuir demanda</text>
+<text x="307.5" y="364.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">recusa / manter oferta</text>
+<text x="307.5" y="382.20000000000005" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">sem elegíveis / aguardar</text>
+<rect x="625" y="290" width="245" height="120" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="747.5" y="318.5" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Aceita</text>
+<text x="747.5" y="336.7" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">entry / vincular agenda e</text>
+<text x="747.5" y="354.9" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">notificar</text>
+<text x="747.5" y="373.1" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">check-in inválido / informar</text>
+<text x="747.5" y="391.3" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">falha</text>
+<rect x="1080" y="290" width="275" height="120" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1217.5" y="336.7" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Em andamento</text>
+<text x="1217.5" y="354.9" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">entry / registrar início</text>
+<text x="1217.5" y="373.09999999999997" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">suporte / registrar chamado</text>
+<rect x="1080" y="645" width="275" height="120" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1217.5" y="679.4" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">Concluída</text>
+<text x="1217.5" y="700.1999999999999" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle"></text>
+<text x="1217.5" y="721.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">entry / parar localização;</text>
+<text x="1217.5" y="741.8" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">liberar pós-atendimento</text>
+<rect x="625" y="645" width="260" height="120" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="755.0" y="679.4" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">Cancelada</text>
+<text x="755.0" y="700.1999999999999" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle"></text>
+<text x="755.0" y="721.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">entry / liberar agenda;</text>
+<text x="755.0" y="741.8" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="middle">notificar e auditar</text>
+<ellipse cx="984.0" cy="719.0" rx="14.0" ry="14.0" fill="white" stroke="#1a2e44" stroke-width="1.8"/>
+<ellipse cx="984.0" cy="719.0" rx="9.0" ry="9.0" fill="#1a2e44" stroke="#1a2e44"/>
+<polyline points="99,342 185,342" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="175.91034250325114,346.16870802429213 185,342 175.91034250325114,337.83129197570787" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="57" y="228" width="221" height="24.2" fill="white"/>
+<text x="167.5" y="245.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">/ registrar confirmação</text>
+<polyline points="430,350 625,350" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="615.9103425032512,354.16870802429213 625,350 615.9103425032512,345.83129197570787" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="432" y="266" width="191" height="60.599999999999994" fill="white"/>
+<text x="527.5" y="283.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">aceitar demanda</text>
+<text x="527.5" y="301.2" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">[elegível e aberta]</text>
+<text x="527.5" y="319.4" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">/ reservar exclusivamente</text>
+<polyline points="870,350 1080,350" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1070.910342503251,354.16870802429213 1080,350 1070.910342503251,345.83129197570787" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="875" y="266" width="201" height="60.599999999999994" fill="white"/>
+<text x="975.5" y="283.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">ler QR [QR/vínculo válidos;</text>
+<text x="975.5" y="301.2" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">distância ≤ 200 m;</text>
+<text x="975.5" y="319.4" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">precisão ≤ 50 m]</text>
+<polyline points="1217,410 1217,645" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1212.831291975708,635.9103425032512 1217,645 1221.168708024292,635.9103425032512" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="1077" y="497" width="281" height="42.4" fill="white"/>
+<text x="1217.5" y="514.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">encerrar [intérprete vinculado]</text>
+<text x="1217.5" y="532.2" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">/ registrar fim e duração real</text>
+<polyline points="305,410 305,705 625,705" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="615.9103425032512,709.1687080242921 625,705 615.9103425032512,700.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="317" y="619" width="281" height="42.4" fill="white"/>
+<text x="457.5" y="636.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">cancelar [não iniciado;</text>
+<text x="457.5" y="654.2" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">política autoriza]</text>
+<polyline points="747,410 747,645" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="742.8312919757079,635.9103425032512 747,645 751.1687080242921,635.9103425032512" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="756" y="505" width="281" height="42.4" fill="white"/>
+<text x="896.5" y="522.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">cancelar [não iniciado;</text>
+<text x="896.5" y="540.2" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">política autoriza]</text>
+<polyline points="885,719 970,719" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="960.9103425032512,723.1687080242921 970,719 960.9103425032512,714.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="1080,719 998,719" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1007.0896574967488,714.8312919757079 998,719 1007.0896574967488,723.1687080242921" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="48,970 1392,970" fill="none" stroke="#cbd5df" stroke-width="1"/>
+<text x="48" y="989.0" font-family="DejaVu Sans, sans-serif" font-size="11" font-weight="400" fill="#526578" text-anchor="start">FECAP • Ciência da Computação • 4º semestre | E1-estados</text>
+<text x="1390" y="989.0" font-family="DejaVu Sans, sans-serif" font-size="11" font-weight="400" fill="#526578" text-anchor="end">17 / 20</text>
+</svg>

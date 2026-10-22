@@ -1,0 +1,5772 @@
+[
+  {
+    "id": "00-capa",
+    "titulo": "Especificação e Modelagem Integral de Sistemas",
+    "nodes": {
+      "banner": {
+        "kind": "rect",
+        "id": "banner",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 12,
+        "text": "",
+        "fill": "#1a2e44",
+        "stroke": "#1a2e44",
+        "size": 17
+      }
+    },
+    "edges": []
+  },
+  {
+    "id": "01-leitura",
+    "titulo": "Escopo, fontes e critérios de leitura",
+    "nodes": {
+      "banner": {
+        "kind": "rect",
+        "id": "banner",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 12,
+        "text": "",
+        "fill": "#1a2e44",
+        "stroke": "#1a2e44",
+        "size": 17
+      }
+    },
+    "edges": []
+  },
+  {
+    "id": "C1-contexto-pessoas",
+    "titulo": "Contexto | pessoas e operação",
+    "nodes": {
+      "banner": {
+        "kind": "rect",
+        "id": "banner",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 12,
+        "text": "",
+        "fill": "#1a2e44",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "core": {
+        "kind": "round",
+        "id": "core",
+        "x": 630,
+        "y": 172,
+        "w": 180,
+        "h": 610,
+        "text": "0\nSistema\nVíamos\n\nAtendimento\npresencial",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 20
+      },
+      "cliente": {
+        "kind": "rect",
+        "id": "cliente",
+        "x": 48,
+        "y": 185,
+        "w": 250,
+        "h": 104,
+        "text": "Cliente surdo | contratação",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "cliente_com": {
+        "kind": "rect",
+        "id": "cliente_com",
+        "x": 48,
+        "y": 335,
+        "w": 250,
+        "h": 104,
+        "text": "Cliente surdo | atendimento",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "interprete": {
+        "kind": "rect",
+        "id": "interprete",
+        "x": 48,
+        "y": 485,
+        "w": 250,
+        "h": 104,
+        "text": "Intérprete | contratação",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "interprete_com": {
+        "kind": "rect",
+        "id": "interprete_com",
+        "x": 48,
+        "y": 635,
+        "w": 250,
+        "h": 104,
+        "text": "Intérprete | atendimento",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "backoffice": {
+        "kind": "rect",
+        "id": "backoffice",
+        "x": 1142,
+        "y": 185,
+        "w": 250,
+        "h": 104,
+        "text": "Backoffice",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "cliente_fin": {
+        "kind": "rect",
+        "id": "cliente_fin",
+        "x": 1142,
+        "y": 335,
+        "w": 250,
+        "h": 104,
+        "text": "Cliente | financeiro e dados",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "interprete_fin": {
+        "kind": "rect",
+        "id": "interprete_fin",
+        "x": 1142,
+        "y": 635,
+        "w": 250,
+        "h": 104,
+        "text": "Intérprete | financeiro e dados",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "suporte": {
+        "kind": "rect",
+        "id": "suporte",
+        "x": 1142,
+        "y": 485,
+        "w": 250,
+        "h": 104,
+        "text": "Suporte",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      }
+    },
+    "edges": [
+      {
+        "kind": "edge",
+        "a": "cliente",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            217
+          ],
+          [
+            630,
+            217
+          ]
+        ],
+        "label": "Cadastro/acesso; solicitação; cancelamento",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "cliente",
+        "pts": [
+          [
+            630,
+            265
+          ],
+          [
+            298,
+            265
+          ]
+        ],
+        "label": "Sessão/perfil; estimativa; status e intérprete",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "cliente_com",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            367
+          ],
+          [
+            630,
+            367
+          ]
+        ],
+        "label": "Mensagens/fotos; QR; avaliação; suporte",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "cliente_com",
+        "pts": [
+          [
+            630,
+            415
+          ],
+          [
+            298,
+            415
+          ]
+        ],
+        "label": "Conversa/localização; QR; histórico; PDF",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "interprete",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            517
+          ],
+          [
+            630,
+            517
+          ]
+        ],
+        "label": "Cadastro/certificado; agenda; aceite/recusa",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "interprete",
+        "pts": [
+          [
+            630,
+            565
+          ],
+          [
+            298,
+            565
+          ]
+        ],
+        "label": "Conta/sessão; análise; demandas e agenda",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "interprete_com",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            667
+          ],
+          [
+            630,
+            667
+          ]
+        ],
+        "label": "Mensagens/fotos; QR; fim; avaliação; suporte",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "interprete_com",
+        "pts": [
+          [
+            630,
+            715
+          ],
+          [
+            298,
+            715
+          ]
+        ],
+        "label": "Conversa/localização; check-in; histórico/PDF",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "backoffice",
+        "pts": [
+          [
+            810,
+            217
+          ],
+          [
+            1142,
+            217
+          ]
+        ],
+        "label": "Documentação para análise; resultado registrado",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "backoffice",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            265
+          ],
+          [
+            810,
+            265
+          ]
+        ],
+        "label": "Parecer: aprovar, reprovar ou corrigir",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "cliente_fin",
+        "pts": [
+          [
+            810,
+            367
+          ],
+          [
+            1142,
+            367
+          ]
+        ],
+        "label": "Resultado financeiro; dados/status; avisos",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "cliente_fin",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            415
+          ],
+          [
+            810,
+            415
+          ]
+        ],
+        "label": "Pagamento; perfil; consentimento; pedido LGPD",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "interprete_fin",
+        "pts": [
+          [
+            810,
+            667
+          ],
+          [
+            1142,
+            667
+          ]
+        ],
+        "label": "Extrato/repasse; dados/status; avisos",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "interprete_fin",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            715
+          ],
+          [
+            810,
+            715
+          ]
+        ],
+        "label": "Ganhos/repasse; perfil; consentimento; pedido LGPD",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "suporte",
+        "pts": [
+          [
+            810,
+            517
+          ],
+          [
+            1142,
+            517
+          ]
+        ],
+        "label": "Chamado; data, hora e localização permitida",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "suporte",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            565
+          ],
+          [
+            810,
+            565
+          ]
+        ],
+        "label": "Resposta e andamento do chamado",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      }
+    ]
+  },
+  {
+    "id": "C2-contexto-integracoes",
+    "titulo": "Contexto | integrações externas",
+    "nodes": {
+      "banner": {
+        "kind": "rect",
+        "id": "banner",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 12,
+        "text": "",
+        "fill": "#1a2e44",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "core": {
+        "kind": "round",
+        "id": "core",
+        "x": 630,
+        "y": 172,
+        "w": 180,
+        "h": 610,
+        "text": "0\nSistema\nVíamos\n\nMesma fronteira\nda vista C1",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 20
+      },
+      "mapas": {
+        "kind": "rect",
+        "id": "mapas",
+        "x": 48,
+        "y": 185,
+        "w": 250,
+        "h": 104,
+        "text": "Serviço de mapas",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "gateway": {
+        "kind": "rect",
+        "id": "gateway",
+        "x": 48,
+        "y": 485,
+        "w": 250,
+        "h": 104,
+        "text": "Gateway financeiro",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "push": {
+        "kind": "rect",
+        "id": "push",
+        "x": 1142,
+        "y": 185,
+        "w": 250,
+        "h": 104,
+        "text": "Serviço de notificações",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "email": {
+        "kind": "rect",
+        "id": "email",
+        "x": 1142,
+        "y": 335,
+        "w": 250,
+        "h": 104,
+        "text": "Serviço de e-mail",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "gps": {
+        "kind": "rect",
+        "id": "gps",
+        "x": 1142,
+        "y": 635,
+        "w": 250,
+        "h": 104,
+        "text": "Localização do dispositivo",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      }
+    },
+    "edges": [
+      {
+        "kind": "edge",
+        "a": "mapas",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            217
+          ],
+          [
+            630,
+            217
+          ]
+        ],
+        "label": "Endereço normalizado, coordenadas e distância",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "mapas",
+        "pts": [
+          [
+            630,
+            265
+          ],
+          [
+            298,
+            265
+          ]
+        ],
+        "label": "Endereço, rota e consulta de distância",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "gateway",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            517
+          ],
+          [
+            630,
+            517
+          ]
+        ],
+        "label": "Token; resultado da cobrança e do repasse",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "gateway",
+        "pts": [
+          [
+            630,
+            565
+          ],
+          [
+            298,
+            565
+          ]
+        ],
+        "label": "Tokenização; cobrança Pix/cartão; repasse",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "push",
+        "pts": [
+          [
+            810,
+            217
+          ],
+          [
+            1142,
+            217
+          ]
+        ],
+        "label": "Destinatário e conteúdo da notificação",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "push",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            265
+          ],
+          [
+            810,
+            265
+          ]
+        ],
+        "label": "Confirmação de entrega ou falha",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "email",
+        "pts": [
+          [
+            810,
+            367
+          ],
+          [
+            1142,
+            367
+          ]
+        ],
+        "label": "E-mail e link temporário de recuperação",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "email",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            415
+          ],
+          [
+            810,
+            415
+          ]
+        ],
+        "label": "Resultado do envio",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "gps",
+        "pts": [
+          [
+            810,
+            667
+          ],
+          [
+            1142,
+            667
+          ]
+        ],
+        "label": "Pedido autorizado de posição; parada",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "gps",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            715
+          ],
+          [
+            810,
+            715
+          ]
+        ],
+        "label": "Posição, precisão e instante da leitura",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      }
+    ]
+  },
+  {
+    "id": "B1-habilitacao",
+    "titulo": "BPMN | habilitação profissional",
+    "nodes": {
+      "banner": {
+        "kind": "rect",
+        "id": "banner",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 12,
+        "text": "",
+        "fill": "#1a2e44",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "lane0": {
+        "kind": "rect",
+        "id": "lane0",
+        "x": 48,
+        "y": 165.0,
+        "w": 1344,
+        "h": 213.33333333333334,
+        "text": "",
+        "fill": "#f5f8fa",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "lanehead0": {
+        "kind": "rect",
+        "id": "lanehead0",
+        "x": 48,
+        "y": 165.0,
+        "w": 80,
+        "h": 213.33333333333334,
+        "text": "",
+        "fill": "#edf4f8",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "lane1": {
+        "kind": "rect",
+        "id": "lane1",
+        "x": 48,
+        "y": 378.33333333333337,
+        "w": 1344,
+        "h": 213.33333333333334,
+        "text": "",
+        "fill": "white",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "lanehead1": {
+        "kind": "rect",
+        "id": "lanehead1",
+        "x": 48,
+        "y": 378.33333333333337,
+        "w": 80,
+        "h": 213.33333333333334,
+        "text": "",
+        "fill": "#edf4f8",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "lane2": {
+        "kind": "rect",
+        "id": "lane2",
+        "x": 48,
+        "y": 591.6666666666667,
+        "w": 1344,
+        "h": 213.33333333333334,
+        "text": "",
+        "fill": "#f5f8fa",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "lanehead2": {
+        "kind": "rect",
+        "id": "lanehead2",
+        "x": 48,
+        "y": 591.6666666666667,
+        "w": 80,
+        "h": 213.33333333333334,
+        "text": "",
+        "fill": "#edf4f8",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "s": {
+        "kind": "start",
+        "id": "s",
+        "x": 150,
+        "y": 245,
+        "w": 32,
+        "h": 32,
+        "text": "",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "upload": {
+        "kind": "round",
+        "id": "upload",
+        "x": 230,
+        "y": 225,
+        "w": 164,
+        "h": 70,
+        "text": "Enviar cadastro e certificação",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "save": {
+        "kind": "round",
+        "id": "save",
+        "x": 460,
+        "y": 435,
+        "w": 164,
+        "h": 70,
+        "text": "Registrar perfil em análise",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "review": {
+        "kind": "round",
+        "id": "review",
+        "x": 690,
+        "y": 650,
+        "w": 164,
+        "h": 70,
+        "text": "Analisar documentação",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "decision": {
+        "kind": "diamond",
+        "id": "decision",
+        "x": 940,
+        "y": 660,
+        "w": 50,
+        "h": 50,
+        "text": "×",
+        "fill": "#fff2ce",
+        "stroke": "#1a2e44",
+        "size": 27
+      },
+      "fix": {
+        "kind": "round",
+        "id": "fix",
+        "x": 930,
+        "y": 235,
+        "w": 164,
+        "h": 70,
+        "text": "Corrigir documentos e reenviar",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "approved": {
+        "kind": "round",
+        "id": "approved",
+        "x": 1110,
+        "y": 405,
+        "w": 164,
+        "h": 70,
+        "text": "Registrar aprovação; habilitar demandas",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "rejected": {
+        "kind": "round",
+        "id": "rejected",
+        "x": 1110,
+        "y": 510,
+        "w": 164,
+        "h": 70,
+        "text": "Registrar reprovação; manter bloqueio",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "ea": {
+        "kind": "end",
+        "id": "ea",
+        "x": 1330,
+        "y": 425,
+        "w": 32,
+        "h": 32,
+        "text": "",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "er": {
+        "kind": "end",
+        "id": "er",
+        "x": 1330,
+        "y": 530,
+        "w": 32,
+        "h": 32,
+        "text": "",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 17
+      }
+    },
+    "edges": [
+      {
+        "kind": "edge",
+        "a": "s",
+        "b": "upload",
+        "pts": [
+          [
+            182,
+            261
+          ],
+          [
+            230,
+            261
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "upload",
+        "b": "save",
+        "pts": [
+          [
+            394,
+            260
+          ],
+          [
+            430,
+            260
+          ],
+          [
+            430,
+            470
+          ],
+          [
+            460,
+            470
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "save",
+        "b": "review",
+        "pts": [
+          [
+            624,
+            470
+          ],
+          [
+            655,
+            470
+          ],
+          [
+            655,
+            685
+          ],
+          [
+            690,
+            685
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "review",
+        "b": "decision",
+        "pts": [
+          [
+            854,
+            685
+          ],
+          [
+            940,
+            685
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "decision",
+        "b": "fix",
+        "pts": [
+          [
+            965,
+            660
+          ],
+          [
+            965,
+            305
+          ]
+        ],
+        "label": "Corrigir",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "fix",
+        "b": "upload",
+        "pts": [
+          [
+            930,
+            270
+          ],
+          [
+            820,
+            270
+          ],
+          [
+            820,
+            192
+          ],
+          [
+            312,
+            192
+          ],
+          [
+            312,
+            225
+          ]
+        ],
+        "label": "Nova versão",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "decision",
+        "b": "approved",
+        "pts": [
+          [
+            990,
+            680
+          ],
+          [
+            1060,
+            680
+          ],
+          [
+            1060,
+            440
+          ],
+          [
+            1110,
+            440
+          ]
+        ],
+        "label": "Aprovar",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "decision",
+        "b": "rejected",
+        "pts": [
+          [
+            965,
+            710
+          ],
+          [
+            965,
+            764
+          ],
+          [
+            1090,
+            764
+          ],
+          [
+            1090,
+            545
+          ],
+          [
+            1110,
+            545
+          ]
+        ],
+        "label": "Reprovar",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "approved",
+        "b": "ea",
+        "pts": [
+          [
+            1274,
+            440
+          ],
+          [
+            1330,
+            441
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "rejected",
+        "b": "er",
+        "pts": [
+          [
+            1274,
+            545
+          ],
+          [
+            1330,
+            546
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      }
+    ]
+  },
+  {
+    "id": "B2-solicitacao",
+    "titulo": "BPMN | criar e confirmar solicitação",
+    "nodes": {
+      "banner": {
+        "kind": "rect",
+        "id": "banner",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 12,
+        "text": "",
+        "fill": "#1a2e44",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "lane0": {
+        "kind": "rect",
+        "id": "lane0",
+        "x": 48,
+        "y": 165.0,
+        "w": 1344,
+        "h": 320.0,
+        "text": "",
+        "fill": "#f5f8fa",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "lanehead0": {
+        "kind": "rect",
+        "id": "lanehead0",
+        "x": 48,
+        "y": 165.0,
+        "w": 80,
+        "h": 320.0,
+        "text": "",
+        "fill": "#edf4f8",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "lane1": {
+        "kind": "rect",
+        "id": "lane1",
+        "x": 48,
+        "y": 485.0,
+        "w": 1344,
+        "h": 320.0,
+        "text": "",
+        "fill": "white",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "lanehead1": {
+        "kind": "rect",
+        "id": "lanehead1",
+        "x": 48,
+        "y": 485.0,
+        "w": 80,
+        "h": 320.0,
+        "text": "",
+        "fill": "#edf4f8",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "s": {
+        "kind": "start",
+        "id": "s",
+        "x": 155,
+        "y": 270,
+        "w": 32,
+        "h": 32,
+        "text": "",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "fill": {
+        "kind": "round",
+        "id": "fill",
+        "x": 240,
+        "y": 250,
+        "w": 164,
+        "h": 70,
+        "text": "Informar serviço, data, duração e local",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "validate": {
+        "kind": "round",
+        "id": "validate",
+        "x": 445,
+        "y": 530,
+        "w": 164,
+        "h": 70,
+        "text": "Validar dados e geocodificar local",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "valid": {
+        "kind": "diamond",
+        "id": "valid",
+        "x": 690,
+        "y": 540,
+        "w": 50,
+        "h": 50,
+        "text": "×",
+        "fill": "#fff2ce",
+        "stroke": "#1a2e44",
+        "size": 27
+      },
+      "quote": {
+        "kind": "round",
+        "id": "quote",
+        "x": 820,
+        "y": 530,
+        "w": 164,
+        "h": 70,
+        "text": "Calcular e apresentar estimativa",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "confirm": {
+        "kind": "diamond",
+        "id": "confirm",
+        "x": 1100,
+        "y": 270,
+        "w": 50,
+        "h": 50,
+        "text": "×",
+        "fill": "#fff2ce",
+        "stroke": "#1a2e44",
+        "size": 27
+      },
+      "abort": {
+        "kind": "end",
+        "id": "abort",
+        "x": 1310,
+        "y": 280,
+        "w": 32,
+        "h": 32,
+        "text": "",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "register": {
+        "kind": "round",
+        "id": "register",
+        "x": 1090,
+        "y": 650,
+        "w": 164,
+        "h": 70,
+        "text": "Registrar solicitação e iniciar busca",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "end": {
+        "kind": "end",
+        "id": "end",
+        "x": 1320,
+        "y": 670,
+        "w": 32,
+        "h": 32,
+        "text": "",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 17
+      }
+    },
+    "edges": [
+      {
+        "kind": "edge",
+        "a": "s",
+        "b": "fill",
+        "pts": [
+          [
+            187,
+            286
+          ],
+          [
+            240,
+            286
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "fill",
+        "b": "validate",
+        "pts": [
+          [
+            404,
+            285
+          ],
+          [
+            425,
+            285
+          ],
+          [
+            425,
+            565
+          ],
+          [
+            445,
+            565
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "validate",
+        "b": "valid",
+        "pts": [
+          [
+            609,
+            565
+          ],
+          [
+            690,
+            565
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "valid",
+        "b": "fill",
+        "pts": [
+          [
+            715,
+            590
+          ],
+          [
+            715,
+            755
+          ],
+          [
+            210,
+            755
+          ],
+          [
+            210,
+            285
+          ],
+          [
+            240,
+            285
+          ]
+        ],
+        "label": "Não: corrigir dados",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "valid",
+        "b": "quote",
+        "pts": [
+          [
+            740,
+            565
+          ],
+          [
+            820,
+            565
+          ]
+        ],
+        "label": "Sim",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "quote",
+        "b": "confirm",
+        "pts": [
+          [
+            984,
+            565
+          ],
+          [
+            1040,
+            565
+          ],
+          [
+            1040,
+            295
+          ],
+          [
+            1100,
+            295
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "confirm",
+        "b": "abort",
+        "pts": [
+          [
+            1150,
+            295
+          ],
+          [
+            1310,
+            296
+          ]
+        ],
+        "label": "Não",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "confirm",
+        "b": "register",
+        "pts": [
+          [
+            1125,
+            320
+          ],
+          [
+            1172,
+            320
+          ],
+          [
+            1172,
+            650
+          ]
+        ],
+        "label": "Sim",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "register",
+        "b": "end",
+        "pts": [
+          [
+            1254,
+            685
+          ],
+          [
+            1320,
+            686
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      }
+    ]
+  },
+  {
+    "id": "B3-distribuicao",
+    "titulo": "BPMN | distribuir e obter aceite exclusivo",
+    "nodes": {
+      "banner": {
+        "kind": "rect",
+        "id": "banner",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 12,
+        "text": "",
+        "fill": "#1a2e44",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "lane0": {
+        "kind": "rect",
+        "id": "lane0",
+        "x": 48,
+        "y": 165.0,
+        "w": 1344,
+        "h": 320.0,
+        "text": "",
+        "fill": "#f5f8fa",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "lanehead0": {
+        "kind": "rect",
+        "id": "lanehead0",
+        "x": 48,
+        "y": 165.0,
+        "w": 80,
+        "h": 320.0,
+        "text": "",
+        "fill": "#edf4f8",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "lane1": {
+        "kind": "rect",
+        "id": "lane1",
+        "x": 48,
+        "y": 485.0,
+        "w": 1344,
+        "h": 320.0,
+        "text": "",
+        "fill": "white",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "lanehead1": {
+        "kind": "rect",
+        "id": "lanehead1",
+        "x": 48,
+        "y": 485.0,
+        "w": 80,
+        "h": 320.0,
+        "text": "",
+        "fill": "#edf4f8",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "s": {
+        "kind": "start",
+        "id": "s",
+        "x": 145,
+        "y": 245,
+        "w": 32,
+        "h": 32,
+        "text": "",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "filter": {
+        "kind": "round",
+        "id": "filter",
+        "x": 205,
+        "y": 225,
+        "w": 164,
+        "h": 70,
+        "text": "Selecionar intérpretes elegíveis",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "found": {
+        "kind": "diamond",
+        "id": "found",
+        "x": 440,
+        "y": 235,
+        "w": 50,
+        "h": 50,
+        "text": "×",
+        "fill": "#fff2ce",
+        "stroke": "#1a2e44",
+        "size": 27
+      },
+      "wait": {
+        "kind": "wait",
+        "id": "wait",
+        "x": 450,
+        "y": 370,
+        "w": 32,
+        "h": 32,
+        "text": "",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "send": {
+        "kind": "round",
+        "id": "send",
+        "x": 610,
+        "y": 225,
+        "w": 164,
+        "h": 70,
+        "text": "Distribuir oferta e exibir demanda",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "choose": {
+        "kind": "round",
+        "id": "choose",
+        "x": 815,
+        "y": 555,
+        "w": 164,
+        "h": 70,
+        "text": "Analisar demanda e responder",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "yes": {
+        "kind": "diamond",
+        "id": "yes",
+        "x": 1050,
+        "y": 565,
+        "w": 50,
+        "h": 50,
+        "text": "×",
+        "fill": "#fff2ce",
+        "stroke": "#1a2e44",
+        "size": 27
+      },
+      "decline": {
+        "kind": "round",
+        "id": "decline",
+        "x": 560,
+        "y": 675,
+        "w": 164,
+        "h": 70,
+        "text": "Recusar oferta (motivo opcional)",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "atomic": {
+        "kind": "round",
+        "id": "atomic",
+        "x": 1010,
+        "y": 225,
+        "w": 175,
+        "h": 70,
+        "text": "Tentar aceite exclusivo; revalidar",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "won": {
+        "kind": "diamond",
+        "id": "won",
+        "x": 1230,
+        "y": 235,
+        "w": 50,
+        "h": 50,
+        "text": "×",
+        "fill": "#fff2ce",
+        "stroke": "#1a2e44",
+        "size": 27
+      },
+      "ok": {
+        "kind": "end",
+        "id": "ok",
+        "x": 1340,
+        "y": 245,
+        "w": 32,
+        "h": 32,
+        "text": "",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "lost": {
+        "kind": "end",
+        "id": "lost",
+        "x": 1260,
+        "y": 385,
+        "w": 32,
+        "h": 32,
+        "text": "",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 17
+      }
+    },
+    "edges": [
+      {
+        "kind": "edge",
+        "a": "s",
+        "b": "filter",
+        "pts": [
+          [
+            177,
+            261
+          ],
+          [
+            205,
+            261
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "filter",
+        "b": "found",
+        "pts": [
+          [
+            369,
+            260
+          ],
+          [
+            440,
+            260
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "found",
+        "b": "send",
+        "pts": [
+          [
+            490,
+            260
+          ],
+          [
+            610,
+            260
+          ]
+        ],
+        "label": "Sim",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "found",
+        "b": "wait",
+        "pts": [
+          [
+            465,
+            285
+          ],
+          [
+            466,
+            370
+          ]
+        ],
+        "label": "Não",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "wait",
+        "b": "filter",
+        "pts": [
+          [
+            450,
+            386
+          ],
+          [
+            287,
+            386
+          ],
+          [
+            287,
+            295
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "send",
+        "b": "choose",
+        "pts": [
+          [
+            774,
+            260
+          ],
+          [
+            790,
+            260
+          ],
+          [
+            790,
+            590
+          ],
+          [
+            815,
+            590
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "choose",
+        "b": "yes",
+        "pts": [
+          [
+            979,
+            590
+          ],
+          [
+            1050,
+            590
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "yes",
+        "b": "atomic",
+        "pts": [
+          [
+            1075,
+            565
+          ],
+          [
+            1092,
+            565
+          ],
+          [
+            1092,
+            295
+          ]
+        ],
+        "label": "Sim",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "yes",
+        "b": "decline",
+        "pts": [
+          [
+            1075,
+            615
+          ],
+          [
+            1075,
+            710
+          ],
+          [
+            724,
+            710
+          ]
+        ],
+        "label": "Não",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "decline",
+        "b": "filter",
+        "pts": [
+          [
+            560,
+            710
+          ],
+          [
+            175,
+            710
+          ],
+          [
+            175,
+            330
+          ],
+          [
+            287,
+            330
+          ],
+          [
+            287,
+            295
+          ]
+        ],
+        "label": "Demanda permanece aberta",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "atomic",
+        "b": "won",
+        "pts": [
+          [
+            1185,
+            260
+          ],
+          [
+            1230,
+            260
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "won",
+        "b": "ok",
+        "pts": [
+          [
+            1280,
+            260
+          ],
+          [
+            1340,
+            261
+          ]
+        ],
+        "label": "Sim",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "won",
+        "b": "lost",
+        "pts": [
+          [
+            1255,
+            285
+          ],
+          [
+            1276,
+            285
+          ],
+          [
+            1276,
+            385
+          ]
+        ],
+        "label": "Não",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      }
+    ]
+  },
+  {
+    "id": "B4-execucao",
+    "titulo": "BPMN | encontro, check-in e encerramento",
+    "nodes": {
+      "banner": {
+        "kind": "rect",
+        "id": "banner",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 12,
+        "text": "",
+        "fill": "#1a2e44",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "lane0": {
+        "kind": "rect",
+        "id": "lane0",
+        "x": 48,
+        "y": 165.0,
+        "w": 1344,
+        "h": 213.33333333333334,
+        "text": "",
+        "fill": "#f5f8fa",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "lanehead0": {
+        "kind": "rect",
+        "id": "lanehead0",
+        "x": 48,
+        "y": 165.0,
+        "w": 80,
+        "h": 213.33333333333334,
+        "text": "",
+        "fill": "#edf4f8",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "lane1": {
+        "kind": "rect",
+        "id": "lane1",
+        "x": 48,
+        "y": 378.33333333333337,
+        "w": 1344,
+        "h": 213.33333333333334,
+        "text": "",
+        "fill": "white",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "lanehead1": {
+        "kind": "rect",
+        "id": "lanehead1",
+        "x": 48,
+        "y": 378.33333333333337,
+        "w": 80,
+        "h": 213.33333333333334,
+        "text": "",
+        "fill": "#edf4f8",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "lane2": {
+        "kind": "rect",
+        "id": "lane2",
+        "x": 48,
+        "y": 591.6666666666667,
+        "w": 1344,
+        "h": 213.33333333333334,
+        "text": "",
+        "fill": "#f5f8fa",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "lanehead2": {
+        "kind": "rect",
+        "id": "lanehead2",
+        "x": 48,
+        "y": 591.6666666666667,
+        "w": 80,
+        "h": 213.33333333333334,
+        "text": "",
+        "fill": "#edf4f8",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "s": {
+        "kind": "start",
+        "id": "s",
+        "x": 155,
+        "y": 240,
+        "w": 32,
+        "h": 32,
+        "text": "",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "qr": {
+        "kind": "round",
+        "id": "qr",
+        "x": 230,
+        "y": 220,
+        "w": 180,
+        "h": 70,
+        "text": "Alinhar encontro; exibir QR ao intérprete",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "read": {
+        "kind": "round",
+        "id": "read",
+        "x": 455,
+        "y": 440,
+        "w": 164,
+        "h": 70,
+        "text": "Ler QR no local e enviar posição",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "check": {
+        "kind": "round",
+        "id": "check",
+        "x": 680,
+        "y": 650,
+        "w": 164,
+        "h": 70,
+        "text": "Validar QR e posição; registrar início se válido",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "valid": {
+        "kind": "diamond",
+        "id": "valid",
+        "x": 915,
+        "y": 660,
+        "w": 50,
+        "h": 50,
+        "text": "×",
+        "fill": "#fff2ce",
+        "stroke": "#1a2e44",
+        "size": 27
+      },
+      "serve": {
+        "kind": "round",
+        "id": "serve",
+        "x": 980,
+        "y": 430,
+        "w": 170,
+        "h": 70,
+        "text": "Realizar atendimento presencial",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "finish": {
+        "kind": "round",
+        "id": "finish",
+        "x": 1200,
+        "y": 430,
+        "w": 170,
+        "h": 70,
+        "text": "Confirmar encerramento",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "close": {
+        "kind": "round",
+        "id": "close",
+        "x": 1200,
+        "y": 650,
+        "w": 170,
+        "h": 70,
+        "text": "Registrar fim e duração; liberar pós",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "end": {
+        "kind": "end",
+        "id": "end",
+        "x": 1340,
+        "y": 755,
+        "w": 32,
+        "h": 32,
+        "text": "",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 17
+      }
+    },
+    "edges": [
+      {
+        "kind": "edge",
+        "a": "s",
+        "b": "qr",
+        "pts": [
+          [
+            187,
+            256
+          ],
+          [
+            230,
+            255
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "qr",
+        "b": "read",
+        "pts": [
+          [
+            410,
+            255
+          ],
+          [
+            430,
+            255
+          ],
+          [
+            430,
+            475
+          ],
+          [
+            455,
+            475
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "read",
+        "b": "check",
+        "pts": [
+          [
+            619,
+            475
+          ],
+          [
+            650,
+            475
+          ],
+          [
+            650,
+            685
+          ],
+          [
+            680,
+            685
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "check",
+        "b": "valid",
+        "pts": [
+          [
+            844,
+            685
+          ],
+          [
+            915,
+            685
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "valid",
+        "b": "read",
+        "pts": [
+          [
+            940,
+            710
+          ],
+          [
+            940,
+            765
+          ],
+          [
+            430,
+            765
+          ],
+          [
+            430,
+            475
+          ],
+          [
+            455,
+            475
+          ]
+        ],
+        "label": "Não: informar falha e repetir leitura",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "valid",
+        "b": "serve",
+        "pts": [
+          [
+            940,
+            660
+          ],
+          [
+            940,
+            465
+          ],
+          [
+            980,
+            465
+          ]
+        ],
+        "label": "Sim: registrar início",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "serve",
+        "b": "finish",
+        "pts": [
+          [
+            1150,
+            465
+          ],
+          [
+            1200,
+            465
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "finish",
+        "b": "close",
+        "pts": [
+          [
+            1285,
+            500
+          ],
+          [
+            1285,
+            650
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "close",
+        "b": "end",
+        "pts": [
+          [
+            1285,
+            720
+          ],
+          [
+            1285,
+            771
+          ],
+          [
+            1340,
+            771
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      }
+    ]
+  },
+  {
+    "id": "B5-pagamento",
+    "titulo": "BPMN | cobrança e tratamento de falha",
+    "nodes": {
+      "banner": {
+        "kind": "rect",
+        "id": "banner",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 12,
+        "text": "",
+        "fill": "#1a2e44",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "pool": {
+        "kind": "rect",
+        "id": "pool",
+        "x": 48,
+        "y": 165,
+        "w": 1344,
+        "h": 510,
+        "text": "",
+        "fill": "white",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "clientlane": {
+        "kind": "rect",
+        "id": "clientlane",
+        "x": 48,
+        "y": 165,
+        "w": 1344,
+        "h": 220,
+        "text": "",
+        "fill": "#f5f8fa",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "systemlane": {
+        "kind": "rect",
+        "id": "systemlane",
+        "x": 48,
+        "y": 385,
+        "w": 1344,
+        "h": 290,
+        "text": "",
+        "fill": "white",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "gateway": {
+        "kind": "rect",
+        "id": "gateway",
+        "x": 220,
+        "y": 720,
+        "w": 710,
+        "h": 80,
+        "text": "Gateway financeiro — pool externo (processamento não detalhado)",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "s": {
+        "kind": "start",
+        "id": "s",
+        "x": 150,
+        "y": 245,
+        "w": 32,
+        "h": 32,
+        "text": "",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "method": {
+        "kind": "round",
+        "id": "method",
+        "x": 220,
+        "y": 225,
+        "w": 180,
+        "h": 70,
+        "text": "Selecionar Pix ou cartão tokenizado",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "request": {
+        "kind": "round",
+        "id": "request",
+        "x": 450,
+        "y": 430,
+        "w": 190,
+        "h": 70,
+        "text": "Solicitar cobrança e aguardar resultado",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "record": {
+        "kind": "round",
+        "id": "record",
+        "x": 720,
+        "y": 430,
+        "w": 180,
+        "h": 70,
+        "text": "Registrar resultado da transação",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "ok": {
+        "kind": "diamond",
+        "id": "ok",
+        "x": 980,
+        "y": 440,
+        "w": 50,
+        "h": 50,
+        "text": "×",
+        "fill": "#fff2ce",
+        "stroke": "#1a2e44",
+        "size": 27
+      },
+      "credit": {
+        "kind": "round",
+        "id": "credit",
+        "x": 1120,
+        "y": 420,
+        "w": 165,
+        "h": 70,
+        "text": "Registrar crédito e notificar",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "end": {
+        "kind": "end",
+        "id": "end",
+        "x": 1340,
+        "y": 440,
+        "w": 32,
+        "h": 32,
+        "text": "",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "fail": {
+        "kind": "round",
+        "id": "fail",
+        "x": 960,
+        "y": 565,
+        "w": 190,
+        "h": 70,
+        "text": "Registrar falha; informar motivo",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "retry": {
+        "kind": "diamond",
+        "id": "retry",
+        "x": 1070,
+        "y": 245,
+        "w": 50,
+        "h": 50,
+        "text": "×",
+        "fill": "#fff2ce",
+        "stroke": "#1a2e44",
+        "size": 27
+      },
+      "pending": {
+        "kind": "end",
+        "id": "pending",
+        "x": 1310,
+        "y": 255,
+        "w": 32,
+        "h": 32,
+        "text": "",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 17
+      }
+    },
+    "edges": [
+      {
+        "kind": "edge",
+        "a": "s",
+        "b": "method",
+        "pts": [
+          [
+            182,
+            261
+          ],
+          [
+            220,
+            260
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "method",
+        "b": "request",
+        "pts": [
+          [
+            400,
+            260
+          ],
+          [
+            420,
+            260
+          ],
+          [
+            420,
+            465
+          ],
+          [
+            450,
+            465
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "request",
+        "b": "record",
+        "pts": [
+          [
+            640,
+            465
+          ],
+          [
+            720,
+            465
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "request",
+        "b": "gateway",
+        "pts": [
+          [
+            500,
+            500
+          ],
+          [
+            500,
+            720
+          ]
+        ],
+        "label": "Cobrança Pix/cartão",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": true
+      },
+      {
+        "kind": "edge",
+        "a": "gateway",
+        "b": "request",
+        "pts": [
+          [
+            600,
+            720
+          ],
+          [
+            600,
+            500
+          ]
+        ],
+        "label": "Resultado",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": true
+      },
+      {
+        "kind": "edge",
+        "a": "record",
+        "b": "ok",
+        "pts": [
+          [
+            900,
+            465
+          ],
+          [
+            980,
+            465
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "ok",
+        "b": "credit",
+        "pts": [
+          [
+            1030,
+            465
+          ],
+          [
+            1120,
+            455
+          ]
+        ],
+        "label": "Sim",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "credit",
+        "b": "end",
+        "pts": [
+          [
+            1285,
+            455
+          ],
+          [
+            1340,
+            456
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "ok",
+        "b": "fail",
+        "pts": [
+          [
+            1005,
+            490
+          ],
+          [
+            1005,
+            565
+          ]
+        ],
+        "label": "Não",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "fail",
+        "b": "retry",
+        "pts": [
+          [
+            1150,
+            600
+          ],
+          [
+            1300,
+            600
+          ],
+          [
+            1300,
+            340
+          ],
+          [
+            1095,
+            340
+          ],
+          [
+            1095,
+            295
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "retry",
+        "b": "method",
+        "pts": [
+          [
+            1070,
+            270
+          ],
+          [
+            870,
+            270
+          ],
+          [
+            870,
+            195
+          ],
+          [
+            310,
+            195
+          ],
+          [
+            310,
+            225
+          ]
+        ],
+        "label": "Sim",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "retry",
+        "b": "pending",
+        "pts": [
+          [
+            1120,
+            270
+          ],
+          [
+            1310,
+            271
+          ]
+        ],
+        "label": "Não",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      }
+    ]
+  },
+  {
+    "id": "B6-cancelamento",
+    "titulo": "BPMN | cancelamento solicitado pelo cliente",
+    "nodes": {
+      "banner": {
+        "kind": "rect",
+        "id": "banner",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 12,
+        "text": "",
+        "fill": "#1a2e44",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "lane0": {
+        "kind": "rect",
+        "id": "lane0",
+        "x": 48,
+        "y": 165.0,
+        "w": 1344,
+        "h": 320.0,
+        "text": "",
+        "fill": "#f5f8fa",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "lanehead0": {
+        "kind": "rect",
+        "id": "lanehead0",
+        "x": 48,
+        "y": 165.0,
+        "w": 80,
+        "h": 320.0,
+        "text": "",
+        "fill": "#edf4f8",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "lane1": {
+        "kind": "rect",
+        "id": "lane1",
+        "x": 48,
+        "y": 485.0,
+        "w": 1344,
+        "h": 320.0,
+        "text": "",
+        "fill": "white",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "lanehead1": {
+        "kind": "rect",
+        "id": "lanehead1",
+        "x": 48,
+        "y": 485.0,
+        "w": 80,
+        "h": 320.0,
+        "text": "",
+        "fill": "#edf4f8",
+        "stroke": "#b7c7d3",
+        "size": 17
+      },
+      "s": {
+        "kind": "start",
+        "id": "s",
+        "x": 160,
+        "y": 260,
+        "w": 32,
+        "h": 32,
+        "text": "",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "ask": {
+        "kind": "round",
+        "id": "ask",
+        "x": 250,
+        "y": 240,
+        "w": 195,
+        "h": 70,
+        "text": "Consultar política e confirmar cancelamento",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "policy": {
+        "kind": "round",
+        "id": "policy",
+        "x": 515,
+        "y": 540,
+        "w": 190,
+        "h": 70,
+        "text": "Revalidar estado, prazo e autorização",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "allowed": {
+        "kind": "diamond",
+        "id": "allowed",
+        "x": 805,
+        "y": 550,
+        "w": 50,
+        "h": 50,
+        "text": "×",
+        "fill": "#fff2ce",
+        "stroke": "#1a2e44",
+        "size": 27
+      },
+      "deny": {
+        "kind": "round",
+        "id": "deny",
+        "x": 1060,
+        "y": 520,
+        "w": 185,
+        "h": 70,
+        "text": "Informar motivo e preservar estado",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "no": {
+        "kind": "end",
+        "id": "no",
+        "x": 1320,
+        "y": 540,
+        "w": 32,
+        "h": 32,
+        "text": "",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "cancel": {
+        "kind": "round",
+        "id": "cancel",
+        "x": 805,
+        "y": 690,
+        "w": 245,
+        "h": 70,
+        "text": "Cancelar; liberar agenda; registrar taxa se aplicável",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "yes": {
+        "kind": "end",
+        "id": "yes",
+        "x": 1260,
+        "y": 710,
+        "w": 32,
+        "h": 32,
+        "text": "",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 17
+      }
+    },
+    "edges": [
+      {
+        "kind": "edge",
+        "a": "s",
+        "b": "ask",
+        "pts": [
+          [
+            192,
+            276
+          ],
+          [
+            250,
+            275
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "ask",
+        "b": "policy",
+        "pts": [
+          [
+            445,
+            275
+          ],
+          [
+            480,
+            275
+          ],
+          [
+            480,
+            575
+          ],
+          [
+            515,
+            575
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "policy",
+        "b": "allowed",
+        "pts": [
+          [
+            705,
+            575
+          ],
+          [
+            805,
+            575
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "allowed",
+        "b": "deny",
+        "pts": [
+          [
+            855,
+            575
+          ],
+          [
+            1060,
+            555
+          ]
+        ],
+        "label": "Não",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "deny",
+        "b": "no",
+        "pts": [
+          [
+            1245,
+            555
+          ],
+          [
+            1320,
+            556
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "allowed",
+        "b": "cancel",
+        "pts": [
+          [
+            830,
+            600
+          ],
+          [
+            830,
+            690
+          ]
+        ],
+        "label": "Sim",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "cancel",
+        "b": "yes",
+        "pts": [
+          [
+            1050,
+            725
+          ],
+          [
+            1260,
+            726
+          ]
+        ],
+        "label": "Registrar e auditar",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      }
+    ]
+  },
+  {
+    "id": "D1-identidade",
+    "titulo": "DFD | P1 — identidade, acesso e certificação",
+    "nodes": {
+      "banner": {
+        "kind": "rect",
+        "id": "banner",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 12,
+        "text": "",
+        "fill": "#1a2e44",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "core": {
+        "kind": "round",
+        "id": "core",
+        "x": 630,
+        "y": 172,
+        "w": 180,
+        "h": 610,
+        "text": "P1\nGerir\nidentidade,\nacesso e\ncertificação",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 20
+      },
+      "cliente": {
+        "kind": "rect",
+        "id": "cliente",
+        "x": 48,
+        "y": 185,
+        "w": 250,
+        "h": 104,
+        "text": "Cliente surdo",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "interprete": {
+        "kind": "rect",
+        "id": "interprete",
+        "x": 48,
+        "y": 335,
+        "w": 250,
+        "h": 104,
+        "text": "Intérprete de Libras",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "backoffice": {
+        "kind": "rect",
+        "id": "backoffice",
+        "x": 48,
+        "y": 485,
+        "w": 250,
+        "h": 104,
+        "text": "Backoffice",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "email": {
+        "kind": "rect",
+        "id": "email",
+        "x": 1142,
+        "y": 185,
+        "w": 250,
+        "h": 104,
+        "text": "Serviço de e-mail",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "d1": {
+        "kind": "store",
+        "id": "d1",
+        "x": 1142,
+        "y": 335,
+        "w": 250,
+        "h": 104,
+        "text": "D1 | Pessoas, acesso e certificações",
+        "fill": "#fffaf0",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "p6": {
+        "kind": "round",
+        "id": "p6",
+        "x": 1142,
+        "y": 635,
+        "w": 250,
+        "h": 104,
+        "text": "P6 | Governança e notificações",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      }
+    },
+    "edges": [
+      {
+        "kind": "edge",
+        "a": "cliente",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            217
+          ],
+          [
+            630,
+            217
+          ]
+        ],
+        "label": "Dados cadastrais; credenciais; recuperação",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "cliente",
+        "pts": [
+          [
+            630,
+            265
+          ],
+          [
+            298,
+            265
+          ]
+        ],
+        "label": "Conta/sessão; validação; resultado do acesso",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "interprete",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            367
+          ],
+          [
+            630,
+            367
+          ]
+        ],
+        "label": "Perfil, credenciais e certificado; correção",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "interprete",
+        "pts": [
+          [
+            630,
+            415
+          ],
+          [
+            298,
+            415
+          ]
+        ],
+        "label": "Conta/sessão; resultado documental",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "backoffice",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            517
+          ],
+          [
+            630,
+            517
+          ]
+        ],
+        "label": "Parecer e justificativa de análise",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "backoffice",
+        "pts": [
+          [
+            630,
+            565
+          ],
+          [
+            298,
+            565
+          ]
+        ],
+        "label": "Documentação e fila para análise",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "email",
+        "pts": [
+          [
+            810,
+            217
+          ],
+          [
+            1142,
+            217
+          ]
+        ],
+        "label": "Endereço e link de recuperação",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "email",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            265
+          ],
+          [
+            810,
+            265
+          ]
+        ],
+        "label": "Resultado do envio",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "d1",
+        "pts": [
+          [
+            810,
+            367
+          ],
+          [
+            1142,
+            367
+          ]
+        ],
+        "label": "Perfil, sessão, certificado e análise atualizados",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "d1",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            415
+          ],
+          [
+            810,
+            415
+          ]
+        ],
+        "label": "Cadastro, hash de senha, sessão e parecer",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "p6",
+        "pts": [
+          [
+            810,
+            667
+          ],
+          [
+            1142,
+            667
+          ]
+        ],
+        "label": "Eventos de cadastro/acesso/análise; avisos; dados exportáveis",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "p6",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            715
+          ],
+          [
+            810,
+            715
+          ]
+        ],
+        "label": "Pedido autorizado de dados/tratamento LGPD",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      }
+    ]
+  },
+  {
+    "id": "D2-solicitacoes",
+    "titulo": "DFD | P2 — solicitação, distribuição e agenda",
+    "nodes": {
+      "banner": {
+        "kind": "rect",
+        "id": "banner",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 12,
+        "text": "",
+        "fill": "#1a2e44",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "core": {
+        "kind": "round",
+        "id": "core",
+        "x": 630,
+        "y": 172,
+        "w": 180,
+        "h": 610,
+        "text": "P2\nGerir\nsolicitações,\nbusca e\nagenda",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 20
+      },
+      "cliente": {
+        "kind": "rect",
+        "id": "cliente",
+        "x": 48,
+        "y": 185,
+        "w": 250,
+        "h": 104,
+        "text": "Cliente surdo",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "interprete": {
+        "kind": "rect",
+        "id": "interprete",
+        "x": 48,
+        "y": 335,
+        "w": 250,
+        "h": 104,
+        "text": "Intérprete de Libras",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "mapas": {
+        "kind": "rect",
+        "id": "mapas",
+        "x": 48,
+        "y": 485,
+        "w": 250,
+        "h": 104,
+        "text": "Serviço de mapas",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "p6": {
+        "kind": "round",
+        "id": "p6",
+        "x": 48,
+        "y": 635,
+        "w": 250,
+        "h": 104,
+        "text": "P6 | Governança e notificações",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "d1": {
+        "kind": "store",
+        "id": "d1",
+        "x": 1142,
+        "y": 185,
+        "w": 250,
+        "h": 104,
+        "text": "D1 | Pessoas, acesso e certificações",
+        "fill": "#fffaf0",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "d2": {
+        "kind": "store",
+        "id": "d2",
+        "x": 1142,
+        "y": 335,
+        "w": 250,
+        "h": 104,
+        "text": "D2 | Solicitações e agenda",
+        "fill": "#fffaf0",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "d5": {
+        "kind": "store",
+        "id": "d5",
+        "x": 1142,
+        "y": 485,
+        "w": 250,
+        "h": 104,
+        "text": "D5 | Comprovantes e avaliações",
+        "fill": "#fffaf0",
+        "stroke": "#1a2e44",
+        "size": 16
+      }
+    },
+    "edges": [
+      {
+        "kind": "edge",
+        "a": "cliente",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            217
+          ],
+          [
+            630,
+            217
+          ]
+        ],
+        "label": "Serviço, data, duração, local; confirmação/cancelamento",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "cliente",
+        "pts": [
+          [
+            630,
+            265
+          ],
+          [
+            298,
+            265
+          ]
+        ],
+        "label": "Estimativa; status; intérprete; resultado do cancelamento",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "interprete",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            367
+          ],
+          [
+            630,
+            367
+          ]
+        ],
+        "label": "Raio, disponibilidade; aceite/recusa",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "interprete",
+        "pts": [
+          [
+            630,
+            415
+          ],
+          [
+            298,
+            415
+          ]
+        ],
+        "label": "Demandas, mapa e agenda atualizada",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "mapas",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            517
+          ],
+          [
+            630,
+            517
+          ]
+        ],
+        "label": "Endereço, coordenadas, rotas e distâncias",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "mapas",
+        "pts": [
+          [
+            630,
+            565
+          ],
+          [
+            298,
+            565
+          ]
+        ],
+        "label": "Consulta de endereço, rota e distância",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "p6",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            667
+          ],
+          [
+            630,
+            667
+          ]
+        ],
+        "label": "Pedido autorizado de dados/tratamento LGPD",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "p6",
+        "pts": [
+          [
+            630,
+            715
+          ],
+          [
+            298,
+            715
+          ]
+        ],
+        "label": "Eventos de aceite/cancelamento; avisos; dados exportáveis",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "d1",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            265
+          ],
+          [
+            810,
+            265
+          ]
+        ],
+        "label": "Perfil aprovado e endereço-base",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "d2",
+        "pts": [
+          [
+            810,
+            367
+          ],
+          [
+            1142,
+            367
+          ]
+        ],
+        "label": "Cotação; solicitação; aceite/recusa; agenda",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "d2",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            415
+          ],
+          [
+            810,
+            415
+          ]
+        ],
+        "label": "Solicitação, agenda, raio e disponibilidade",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "d5",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            565
+          ],
+          [
+            810,
+            565
+          ]
+        ],
+        "label": "Reputação calculada do intérprete",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      }
+    ]
+  },
+  {
+    "id": "D3-atendimento",
+    "titulo": "DFD | P3 — execução presencial e suporte",
+    "nodes": {
+      "banner": {
+        "kind": "rect",
+        "id": "banner",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 12,
+        "text": "",
+        "fill": "#1a2e44",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "core": {
+        "kind": "round",
+        "id": "core",
+        "x": 630,
+        "y": 172,
+        "w": 180,
+        "h": 610,
+        "text": "P3\nCoordenar\nencontro e\nregistrar\natendimento",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 20
+      },
+      "cliente": {
+        "kind": "rect",
+        "id": "cliente",
+        "x": 48,
+        "y": 185,
+        "w": 250,
+        "h": 104,
+        "text": "Cliente surdo",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "interprete": {
+        "kind": "rect",
+        "id": "interprete",
+        "x": 48,
+        "y": 335,
+        "w": 250,
+        "h": 104,
+        "text": "Intérprete de Libras",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "gps": {
+        "kind": "rect",
+        "id": "gps",
+        "x": 48,
+        "y": 485,
+        "w": 250,
+        "h": 104,
+        "text": "Localização do dispositivo",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "suporte": {
+        "kind": "rect",
+        "id": "suporte",
+        "x": 48,
+        "y": 635,
+        "w": 250,
+        "h": 104,
+        "text": "Suporte",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "d1": {
+        "kind": "store",
+        "id": "d1",
+        "x": 1142,
+        "y": 185,
+        "w": 250,
+        "h": 104,
+        "text": "D1 | Pessoas, acesso e certificações",
+        "fill": "#fffaf0",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "d2": {
+        "kind": "store",
+        "id": "d2",
+        "x": 1142,
+        "y": 335,
+        "w": 250,
+        "h": 104,
+        "text": "D2 | Solicitações e agenda",
+        "fill": "#fffaf0",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "d3": {
+        "kind": "store",
+        "id": "d3",
+        "x": 1142,
+        "y": 485,
+        "w": 250,
+        "h": 104,
+        "text": "D3 | Atendimento e comunicação",
+        "fill": "#fffaf0",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "p6": {
+        "kind": "round",
+        "id": "p6",
+        "x": 1142,
+        "y": 635,
+        "w": 250,
+        "h": 104,
+        "text": "P6 | Governança e notificações",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      }
+    },
+    "edges": [
+      {
+        "kind": "edge",
+        "a": "cliente",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            217
+          ],
+          [
+            630,
+            217
+          ]
+        ],
+        "label": "Mensagens/fotos; solicitação de QR e suporte",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "cliente",
+        "pts": [
+          [
+            630,
+            265
+          ],
+          [
+            298,
+            265
+          ]
+        ],
+        "label": "Conversa/localização; QR; status e suporte",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "interprete",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            367
+          ],
+          [
+            630,
+            367
+          ]
+        ],
+        "label": "Mensagens/fotos; leitura QR; encerramento; suporte",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "interprete",
+        "pts": [
+          [
+            630,
+            415
+          ],
+          [
+            298,
+            415
+          ]
+        ],
+        "label": "Conversa/localização; validação; duração real",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "gps",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            517
+          ],
+          [
+            630,
+            517
+          ]
+        ],
+        "label": "Posição, precisão e instante da leitura",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "gps",
+        "pts": [
+          [
+            630,
+            565
+          ],
+          [
+            298,
+            565
+          ]
+        ],
+        "label": "Pedido autorizado de posição; parada",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "suporte",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            667
+          ],
+          [
+            630,
+            667
+          ]
+        ],
+        "label": "Resposta e situação do chamado",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "suporte",
+        "pts": [
+          [
+            630,
+            715
+          ],
+          [
+            298,
+            715
+          ]
+        ],
+        "label": "Chamado; data, hora e localização permitida",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "d1",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            265
+          ],
+          [
+            810,
+            265
+          ]
+        ],
+        "label": "Participantes e consentimento de localização",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "d2",
+        "pts": [
+          [
+            810,
+            367
+          ],
+          [
+            1142,
+            367
+          ]
+        ],
+        "label": "Estado em andamento ou concluída",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "d2",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            415
+          ],
+          [
+            810,
+            415
+          ]
+        ],
+        "label": "Vínculo, estado, local e horário previsto",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "d3",
+        "pts": [
+          [
+            810,
+            517
+          ],
+          [
+            1142,
+            517
+          ]
+        ],
+        "label": "Mensagens/fotos; QR; início/fim; duração; chamado",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "d3",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            565
+          ],
+          [
+            810,
+            565
+          ]
+        ],
+        "label": "Conversa; check-in; início e chamados",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "p6",
+        "pts": [
+          [
+            810,
+            667
+          ],
+          [
+            1142,
+            667
+          ]
+        ],
+        "label": "Eventos de check-in/fim; avisos de mensagens; dados exportáveis",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "p6",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            715
+          ],
+          [
+            810,
+            715
+          ]
+        ],
+        "label": "Pedido autorizado de dados/tratamento LGPD",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      }
+    ]
+  },
+  {
+    "id": "D4-financeiro",
+    "titulo": "DFD | P4 — pagamento, ganhos e repasse",
+    "nodes": {
+      "banner": {
+        "kind": "rect",
+        "id": "banner",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 12,
+        "text": "",
+        "fill": "#1a2e44",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "core": {
+        "kind": "round",
+        "id": "core",
+        "x": 630,
+        "y": 172,
+        "w": 180,
+        "h": 610,
+        "text": "P4\nProcessar\ncobrança,\nganhos e\nrepasse",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 20
+      },
+      "cliente": {
+        "kind": "rect",
+        "id": "cliente",
+        "x": 48,
+        "y": 185,
+        "w": 250,
+        "h": 104,
+        "text": "Cliente surdo",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "interprete": {
+        "kind": "rect",
+        "id": "interprete",
+        "x": 48,
+        "y": 335,
+        "w": 250,
+        "h": 104,
+        "text": "Intérprete de Libras",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "gateway": {
+        "kind": "rect",
+        "id": "gateway",
+        "x": 48,
+        "y": 485,
+        "w": 250,
+        "h": 104,
+        "text": "Gateway financeiro",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "p6": {
+        "kind": "round",
+        "id": "p6",
+        "x": 48,
+        "y": 635,
+        "w": 250,
+        "h": 104,
+        "text": "P6 | Governança e notificações",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "d2": {
+        "kind": "store",
+        "id": "d2",
+        "x": 1142,
+        "y": 185,
+        "w": 250,
+        "h": 104,
+        "text": "D2 | Solicitações e agenda",
+        "fill": "#fffaf0",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "d3": {
+        "kind": "store",
+        "id": "d3",
+        "x": 1142,
+        "y": 335,
+        "w": 250,
+        "h": 104,
+        "text": "D3 | Atendimento e comunicação",
+        "fill": "#fffaf0",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "d4": {
+        "kind": "store",
+        "id": "d4",
+        "x": 1142,
+        "y": 485,
+        "w": 250,
+        "h": 104,
+        "text": "D4 | Financeiro",
+        "fill": "#fffaf0",
+        "stroke": "#1a2e44",
+        "size": 16
+      }
+    },
+    "edges": [
+      {
+        "kind": "edge",
+        "a": "cliente",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            217
+          ],
+          [
+            630,
+            217
+          ]
+        ],
+        "label": "Meio de pagamento; autorização de cobrança",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "cliente",
+        "pts": [
+          [
+            630,
+            265
+          ],
+          [
+            298,
+            265
+          ]
+        ],
+        "label": "Token/meio cadastrado; valor e resultado",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "interprete",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            367
+          ],
+          [
+            630,
+            367
+          ]
+        ],
+        "label": "Consulta de ganhos; pedido de repasse e conta",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "interprete",
+        "pts": [
+          [
+            630,
+            415
+          ],
+          [
+            298,
+            415
+          ]
+        ],
+        "label": "Extrato; saldo; resultado e previsão do repasse",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "gateway",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            517
+          ],
+          [
+            630,
+            517
+          ]
+        ],
+        "label": "Token; resultado de cobrança e repasse",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "gateway",
+        "pts": [
+          [
+            630,
+            565
+          ],
+          [
+            298,
+            565
+          ]
+        ],
+        "label": "Tokenização; cobrança Pix/cartão; repasse",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "p6",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            667
+          ],
+          [
+            630,
+            667
+          ]
+        ],
+        "label": "Pedido autorizado de dados/tratamento LGPD",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "p6",
+        "pts": [
+          [
+            630,
+            715
+          ],
+          [
+            298,
+            715
+          ]
+        ],
+        "label": "Eventos financeiros e aviso de pagamento; dados exportáveis",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "d2",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            265
+          ],
+          [
+            810,
+            265
+          ]
+        ],
+        "label": "Cotação, participantes e eventual taxa",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "d3",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            415
+          ],
+          [
+            810,
+            415
+          ]
+        ],
+        "label": "Início/fim, duração real e conclusão",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "d4",
+        "pts": [
+          [
+            810,
+            517
+          ],
+          [
+            1142,
+            517
+          ]
+        ],
+        "label": "Resultado; crédito/débito; reserva e repasse",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "d4",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            565
+          ],
+          [
+            810,
+            565
+          ]
+        ],
+        "label": "Token/Pix; tentativas; lançamentos; conta e saldo",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      }
+    ]
+  },
+  {
+    "id": "D5-pos-atendimento",
+    "titulo": "DFD | P5 — histórico, comprovante e avaliação",
+    "nodes": {
+      "banner": {
+        "kind": "rect",
+        "id": "banner",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 12,
+        "text": "",
+        "fill": "#1a2e44",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "core": {
+        "kind": "round",
+        "id": "core",
+        "x": 630,
+        "y": 172,
+        "w": 180,
+        "h": 610,
+        "text": "P5\nProduzir\nhistórico,\ncomprovante\ne reputação",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 20
+      },
+      "cliente": {
+        "kind": "rect",
+        "id": "cliente",
+        "x": 48,
+        "y": 185,
+        "w": 250,
+        "h": 104,
+        "text": "Cliente surdo",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "interprete": {
+        "kind": "rect",
+        "id": "interprete",
+        "x": 48,
+        "y": 335,
+        "w": 250,
+        "h": 104,
+        "text": "Intérprete de Libras",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "p6": {
+        "kind": "round",
+        "id": "p6",
+        "x": 48,
+        "y": 485,
+        "w": 250,
+        "h": 104,
+        "text": "P6 | Governança e notificações",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "d4": {
+        "kind": "store",
+        "id": "d4",
+        "x": 48,
+        "y": 635,
+        "w": 250,
+        "h": 104,
+        "text": "D4 | Financeiro",
+        "fill": "#fffaf0",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "d1": {
+        "kind": "store",
+        "id": "d1",
+        "x": 1142,
+        "y": 185,
+        "w": 250,
+        "h": 104,
+        "text": "D1 | Pessoas, acesso e certificações",
+        "fill": "#fffaf0",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "d2": {
+        "kind": "store",
+        "id": "d2",
+        "x": 1142,
+        "y": 335,
+        "w": 250,
+        "h": 104,
+        "text": "D2 | Solicitações e agenda",
+        "fill": "#fffaf0",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "d3": {
+        "kind": "store",
+        "id": "d3",
+        "x": 1142,
+        "y": 485,
+        "w": 250,
+        "h": 104,
+        "text": "D3 | Atendimento e comunicação",
+        "fill": "#fffaf0",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "d5": {
+        "kind": "store",
+        "id": "d5",
+        "x": 1142,
+        "y": 635,
+        "w": 250,
+        "h": 104,
+        "text": "D5 | Comprovantes e avaliações",
+        "fill": "#fffaf0",
+        "stroke": "#1a2e44",
+        "size": 16
+      }
+    },
+    "edges": [
+      {
+        "kind": "edge",
+        "a": "cliente",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            217
+          ],
+          [
+            630,
+            217
+          ]
+        ],
+        "label": "Filtros; pedido de PDF; nota 1–5 e comentário",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "cliente",
+        "pts": [
+          [
+            630,
+            265
+          ],
+          [
+            298,
+            265
+          ]
+        ],
+        "label": "Histórico, PDF verificável; avaliação registrada",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "interprete",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            367
+          ],
+          [
+            630,
+            367
+          ]
+        ],
+        "label": "Filtros; pedido de PDF; nota 1–5 e comentário",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "interprete",
+        "pts": [
+          [
+            630,
+            415
+          ],
+          [
+            298,
+            415
+          ]
+        ],
+        "label": "Histórico, PDF; avaliação e reputação",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "p6",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            517
+          ],
+          [
+            630,
+            517
+          ]
+        ],
+        "label": "Pedido autorizado de dados/tratamento LGPD",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "p6",
+        "pts": [
+          [
+            630,
+            565
+          ],
+          [
+            298,
+            565
+          ]
+        ],
+        "label": "Eventos de avaliação e emissão de documento; dados exportáveis",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "d4",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            667
+          ],
+          [
+            630,
+            667
+          ]
+        ],
+        "label": "Situação financeira do atendimento",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "d1",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            265
+          ],
+          [
+            810,
+            265
+          ]
+        ],
+        "label": "Dados e certificação do intérprete",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "d2",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            415
+          ],
+          [
+            810,
+            415
+          ]
+        ],
+        "label": "Participantes, local, tipo e estado",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "d3",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            565
+          ],
+          [
+            810,
+            565
+          ]
+        ],
+        "label": "Data, início/fim e duração real",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "d5",
+        "pts": [
+          [
+            810,
+            667
+          ],
+          [
+            1142,
+            667
+          ]
+        ],
+        "label": "Comprovante; avaliação; reputação recalculada",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "d5",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            715
+          ],
+          [
+            810,
+            715
+          ]
+        ],
+        "label": "PDF, código verificável, notas e reputação",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      }
+    ]
+  },
+  {
+    "id": "D6-governanca",
+    "titulo": "DFD | P6 — privacidade, auditoria e notificações",
+    "nodes": {
+      "banner": {
+        "kind": "rect",
+        "id": "banner",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 12,
+        "text": "",
+        "fill": "#1a2e44",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "core": {
+        "kind": "round",
+        "id": "core",
+        "x": 630,
+        "y": 172,
+        "w": 180,
+        "h": 610,
+        "text": "P6\nGerir perfil,\nprivacidade,\nauditoria e\nnotificações",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 20
+      },
+      "cliente": {
+        "kind": "rect",
+        "id": "cliente",
+        "x": 48,
+        "y": 185,
+        "w": 250,
+        "h": 104,
+        "text": "Cliente surdo",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "interprete": {
+        "kind": "rect",
+        "id": "interprete",
+        "x": 48,
+        "y": 335,
+        "w": 250,
+        "h": 104,
+        "text": "Intérprete de Libras",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "origins": {
+        "kind": "round",
+        "id": "origins",
+        "x": 48,
+        "y": 485,
+        "w": 250,
+        "h": 104,
+        "text": "P1, P2, P3, P4 e P5\nReferências aos processos",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "push": {
+        "kind": "rect",
+        "id": "push",
+        "x": 1142,
+        "y": 185,
+        "w": 250,
+        "h": 104,
+        "text": "Serviço de notificações",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "d1": {
+        "kind": "store",
+        "id": "d1",
+        "x": 1142,
+        "y": 335,
+        "w": 250,
+        "h": 104,
+        "text": "D1 | Pessoas, acesso e certificações",
+        "fill": "#fffaf0",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "d6": {
+        "kind": "store",
+        "id": "d6",
+        "x": 1142,
+        "y": 485,
+        "w": 250,
+        "h": 104,
+        "text": "D6 | Governança",
+        "fill": "#fffaf0",
+        "stroke": "#1a2e44",
+        "size": 16
+      }
+    },
+    "edges": [
+      {
+        "kind": "edge",
+        "a": "cliente",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            217
+          ],
+          [
+            630,
+            217
+          ]
+        ],
+        "label": "Perfil/preferências; consentimento; exportação/exclusão",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "cliente",
+        "pts": [
+          [
+            630,
+            265
+          ],
+          [
+            298,
+            265
+          ]
+        ],
+        "label": "Perfil; exportação; protocolo/status; notificações",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "interprete",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            367
+          ],
+          [
+            630,
+            367
+          ]
+        ],
+        "label": "Perfil/preferências; consentimento; exportação/exclusão",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "interprete",
+        "pts": [
+          [
+            630,
+            415
+          ],
+          [
+            298,
+            415
+          ]
+        ],
+        "label": "Perfil; exportação; protocolo/status; notificações",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "origins",
+        "b": "core",
+        "pts": [
+          [
+            298,
+            517
+          ],
+          [
+            630,
+            517
+          ]
+        ],
+        "label": "Eventos críticos; dados para aviso; dados exportáveis",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "origins",
+        "pts": [
+          [
+            630,
+            565
+          ],
+          [
+            298,
+            565
+          ]
+        ],
+        "label": "Pedido autorizado de dados ou tratamento LGPD",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "push",
+        "pts": [
+          [
+            810,
+            217
+          ],
+          [
+            1142,
+            217
+          ]
+        ],
+        "label": "Destinatário e conteúdo da notificação",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "push",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            265
+          ],
+          [
+            810,
+            265
+          ]
+        ],
+        "label": "Confirmação de entrega ou falha",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "d1",
+        "pts": [
+          [
+            810,
+            367
+          ],
+          [
+            1142,
+            367
+          ]
+        ],
+        "label": "Perfil e consentimentos atualizados",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "d1",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            415
+          ],
+          [
+            810,
+            415
+          ]
+        ],
+        "label": "Perfil, consentimentos e preferências",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "core",
+        "b": "d6",
+        "pts": [
+          [
+            810,
+            517
+          ],
+          [
+            1142,
+            517
+          ]
+        ],
+        "label": "Protocolo LGPD; eventos; notificação/status",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "d6",
+        "b": "core",
+        "pts": [
+          [
+            1142,
+            565
+          ],
+          [
+            810,
+            565
+          ]
+        ],
+        "label": "Pedidos LGPD; logs; avisos e entrega",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      }
+    ]
+  },
+  {
+    "id": "E1-estados",
+    "titulo": "Máquina de estados | solicitação e atendimento associado",
+    "nodes": {
+      "banner": {
+        "kind": "rect",
+        "id": "banner",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 12,
+        "text": "",
+        "fill": "#1a2e44",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "init": {
+        "kind": "initial",
+        "id": "init",
+        "x": 75,
+        "y": 330,
+        "w": 24,
+        "h": 24,
+        "text": "",
+        "fill": "#1a2e44",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "search": {
+        "kind": "round",
+        "id": "search",
+        "x": 185,
+        "y": 290,
+        "w": 245,
+        "h": 120,
+        "text": "Buscando intérprete\nentry / distribuir demanda\nrecusa / manter oferta\nsem elegíveis / aguardar",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "accepted": {
+        "kind": "round",
+        "id": "accepted",
+        "x": 625,
+        "y": 290,
+        "w": 245,
+        "h": 120,
+        "text": "Aceita\nentry / vincular agenda e notificar\ncheck-in inválido / informar falha",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "active": {
+        "kind": "round",
+        "id": "active",
+        "x": 1080,
+        "y": 290,
+        "w": 275,
+        "h": 120,
+        "text": "Em andamento\nentry / registrar início\nsuporte / registrar chamado",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 14
+      },
+      "done": {
+        "kind": "round",
+        "id": "done",
+        "x": 1080,
+        "y": 645,
+        "w": 275,
+        "h": 120,
+        "text": "Concluída\n\nentry / parar localização; liberar pós-atendimento",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "cancel": {
+        "kind": "round",
+        "id": "cancel",
+        "x": 625,
+        "y": 645,
+        "w": 260,
+        "h": 120,
+        "text": "Cancelada\n\nentry / liberar agenda; notificar e auditar",
+        "fill": "#edf4f8",
+        "stroke": "#1a2e44",
+        "size": 16
+      },
+      "final": {
+        "kind": "final",
+        "id": "final",
+        "x": 970,
+        "y": 705,
+        "w": 28,
+        "h": 28,
+        "text": "",
+        "fill": "white",
+        "stroke": "#1a2e44",
+        "size": 17
+      }
+    },
+    "edges": [
+      {
+        "kind": "edge",
+        "a": "init",
+        "b": "search",
+        "pts": [
+          [
+            99,
+            342
+          ],
+          [
+            185,
+            342
+          ]
+        ],
+        "label": "/ registrar confirmação",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "search",
+        "b": "accepted",
+        "pts": [
+          [
+            430,
+            350
+          ],
+          [
+            625,
+            350
+          ]
+        ],
+        "label": "aceitar demanda\n[elegível e aberta]\n/ reservar exclusivamente",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "accepted",
+        "b": "active",
+        "pts": [
+          [
+            870,
+            350
+          ],
+          [
+            1080,
+            350
+          ]
+        ],
+        "label": "ler QR [QR/vínculo válidos;\ndistância ≤ 200 m;\nprecisão ≤ 50 m]",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "active",
+        "b": "done",
+        "pts": [
+          [
+            1217,
+            410
+          ],
+          [
+            1217,
+            645
+          ]
+        ],
+        "label": "encerrar [intérprete vinculado]\n/ registrar fim e duração real",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "search",
+        "b": "cancel",
+        "pts": [
+          [
+            305,
+            410
+          ],
+          [
+            305,
+            705
+          ],
+          [
+            625,
+            705
+          ]
+        ],
+        "label": "cancelar [não iniciado;\npolítica autoriza]",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "accepted",
+        "b": "cancel",
+        "pts": [
+          [
+            747,
+            410
+          ],
+          [
+            747,
+            645
+          ]
+        ],
+        "label": "cancelar [não iniciado;\npolítica autoriza]",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "cancel",
+        "b": "final",
+        "pts": [
+          [
+            885,
+            719
+          ],
+          [
+            970,
+            719
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      },
+      {
+        "kind": "edge",
+        "a": "done",
+        "b": "final",
+        "pts": [
+          [
+            1080,
+            719
+          ],
+          [
+            998,
+            719
+          ]
+        ],
+        "label": "",
+        "color": "#213547",
+        "sw": 1.7,
+        "dash": false
+      }
+    ]
+  },
+  {
+    "id": "M1-rastreabilidade",
+    "titulo": "Rastreabilidade | cobertura funcional",
+    "nodes": {
+      "banner": {
+        "kind": "rect",
+        "id": "banner",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 12,
+        "text": "",
+        "fill": "#1a2e44",
+        "stroke": "#1a2e44",
+        "size": 17
+      },
+      "rowRF01–RF09": {
+        "kind": "rect",
+        "id": "rowRF01–RF09",
+        "x": 48,
+        "y": 185,
+        "w": 1344,
+        "h": 63,
+        "text": "",
+        "fill": "#edf4f8",
+        "stroke": "#d7e2ea",
+        "size": 17
+      },
+      "rowRF10–RF16": {
+        "kind": "rect",
+        "id": "rowRF10–RF16",
+        "x": 48,
+        "y": 255,
+        "w": 1344,
+        "h": 63,
+        "text": "",
+        "fill": "white",
+        "stroke": "#d7e2ea",
+        "size": 17
+      },
+      "rowRF17–RF25": {
+        "kind": "rect",
+        "id": "rowRF17–RF25",
+        "x": 48,
+        "y": 325,
+        "w": 1344,
+        "h": 63,
+        "text": "",
+        "fill": "#edf4f8",
+        "stroke": "#d7e2ea",
+        "size": 17
+      },
+      "rowRF26–RF27": {
+        "kind": "rect",
+        "id": "rowRF26–RF27",
+        "x": 48,
+        "y": 395,
+        "w": 1344,
+        "h": 63,
+        "text": "",
+        "fill": "white",
+        "stroke": "#d7e2ea",
+        "size": 17
+      },
+      "rowRF28–RF34": {
+        "kind": "rect",
+        "id": "rowRF28–RF34",
+        "x": 48,
+        "y": 465,
+        "w": 1344,
+        "h": 63,
+        "text": "",
+        "fill": "#edf4f8",
+        "stroke": "#d7e2ea",
+        "size": 17
+      },
+      "rowRF35–RF36": {
+        "kind": "rect",
+        "id": "rowRF35–RF36",
+        "x": 48,
+        "y": 535,
+        "w": 1344,
+        "h": 63,
+        "text": "",
+        "fill": "white",
+        "stroke": "#d7e2ea",
+        "size": 17
+      },
+      "rowRF37–RF41": {
+        "kind": "rect",
+        "id": "rowRF37–RF41",
+        "x": 48,
+        "y": 605,
+        "w": 1344,
+        "h": 63,
+        "text": "",
+        "fill": "#edf4f8",
+        "stroke": "#d7e2ea",
+        "size": 17
+      },
+      "rowRF42–RF45": {
+        "kind": "rect",
+        "id": "rowRF42–RF45",
+        "x": 48,
+        "y": 675,
+        "w": 1344,
+        "h": 63,
+        "text": "",
+        "fill": "white",
+        "stroke": "#d7e2ea",
+        "size": 17
+      }
+    },
+    "edges": []
+  },
+  {
+    "id": "M2-decisoes",
+    "titulo": "Decisões, limites e pendências do domínio",
+    "nodes": {
+      "banner": {
+        "kind": "rect",
+        "id": "banner",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 12,
+        "text": "",
+        "fill": "#1a2e44",
+        "stroke": "#1a2e44",
+        "size": 17
+      }
+    },
+    "edges": []
+  },
+  {
+    "id": "M3-referencias",
+    "titulo": "Referências e arquivos de origem",
+    "nodes": {
+      "banner": {
+        "kind": "rect",
+        "id": "banner",
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 12,
+        "text": "",
+        "fill": "#1a2e44",
+        "stroke": "#1a2e44",
+        "size": 17
+      }
+    },
+    "edges": []
+  }
+]

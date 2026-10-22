@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" role="img" aria-labelledby="title"><title id="title">BPMN | habilitação profissional</title><rect width="100%" height="100%" fill="white"/>
+<rect x="0" y="0" width="1440" height="12" rx="0" fill="#1a2e44" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="48" y="47.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="700" fill="#087e8b" text-anchor="start">VÍAMOS / MODELAGEM DE SISTEMAS</text>
+<text x="48" y="92.0" font-family="DejaVu Sans, sans-serif" font-size="30" font-weight="700" fill="#1a2e44" text-anchor="start">BPMN | habilitação profissional</text>
+<text x="48" y="125.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">Processo de cadastro do intérprete; cliente cadastra-se sem análise de certificação.</text>
+<polyline points="48,145 1392,145" fill="none" stroke="#cbd5df" stroke-width="1"/>
+<text x="48" y="847.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#087e8b" text-anchor="start">JUSTIFICATIVA E REGRAS</text>
+<text x="48" y="874.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="400" fill="#213547" text-anchor="start">A aprovação do Backoffice é pré-condição para receber e aceitar demandas. Correção retorna ao envio; reprovação encerra esta análise sem habilitar o profissional. Os</text>
+<text x="48" y="893.5" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="400" fill="#213547" text-anchor="start">documentos aceitam Prolibras ou equivalente. As raias representam responsabilidades no processo de negócio.</text>
+<text x="48" y="950.0" font-family="DejaVu Sans, sans-serif" font-size="12" font-weight="400" fill="#526578" text-anchor="start">RF04–RF06; RNF36; US02. Losangos X são exclusivos. Fluxos entre raias pertencem ao mesmo processo.</text>
+<rect x="48" y="165.0" width="1344" height="213.33333333333334" rx="0" fill="#f5f8fa" stroke="#b7c7d3" stroke-width="1.8"/>
+<rect x="48" y="165.0" width="80" height="213.33333333333334" rx="0" fill="#edf4f8" stroke="#b7c7d3" stroke-width="1.8"/>
+<text x="88.0" y="260.6666666666667" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#1a2e44" text-anchor="middle">Intérprete</text>
+<rect x="48" y="378.33333333333337" width="1344" height="213.33333333333334" rx="0" fill="white" stroke="#b7c7d3" stroke-width="1.8"/>
+<rect x="48" y="378.33333333333337" width="80" height="213.33333333333334" rx="0" fill="#edf4f8" stroke="#b7c7d3" stroke-width="1.8"/>
+<text x="88.0" y="474.00000000000006" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#1a2e44" text-anchor="middle">Víamos</text>
+<rect x="48" y="591.6666666666667" width="1344" height="213.33333333333334" rx="0" fill="#f5f8fa" stroke="#b7c7d3" stroke-width="1.8"/>
+<rect x="48" y="591.6666666666667" width="80" height="213.33333333333334" rx="0" fill="#edf4f8" stroke="#b7c7d3" stroke-width="1.8"/>
+<text x="88.0" y="687.3333333333334" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#1a2e44" text-anchor="middle">Backoffice</text>
+<ellipse cx="166.0" cy="261.0" rx="16.0" ry="16.0" fill="white" stroke="#1a2e44" stroke-width="1.8"/>
+<rect x="230" y="225" width="164" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="312.0" y="255.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Enviar cadastro e</text>
+<text x="312.0" y="274.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">certificação</text>
+<rect x="460" y="435" width="164" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="542.0" y="465.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Registrar perfil em</text>
+<text x="542.0" y="484.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">análise</text>
+<rect x="690" y="650" width="164" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="772.0" y="680.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Analisar</text>
+<text x="772.0" y="699.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">documentação</text>
+<polygon points="965.0,660 990,685.0 965.0,710 940,685.0" fill="#fff2ce" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="965.0" y="694.45" font-family="DejaVu Sans, sans-serif" font-size="27" font-weight="400" fill="#213547" text-anchor="middle">×</text>
+<text x="965.0" y="634.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Parecer?</text>
+<rect x="930" y="235" width="164" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1012.0" y="265.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Corrigir documentos</text>
+<text x="1012.0" y="284.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">e reenviar</text>
+<rect x="1110" y="405" width="164" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1192.0" y="426.7" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Registrar</text>
+<text x="1192.0" y="444.9" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">aprovação; habilitar</text>
+<text x="1192.0" y="463.09999999999997" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">demandas</text>
+<rect x="1110" y="510" width="164" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1192.0" y="531.7" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Registrar</text>
+<text x="1192.0" y="549.9000000000001" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">reprovação; manter</text>
+<text x="1192.0" y="568.1" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">bloqueio</text>
+<ellipse cx="1346.0" cy="441.0" rx="16.0" ry="16.0" fill="white" stroke="#1a2e44" stroke-width="4"/>
+<text x="1346.0" y="478.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="400" fill="#213547" text-anchor="middle">Habilitado</text>
+<ellipse cx="1346.0" cy="546.0" rx="16.0" ry="16.0" fill="white" stroke="#1a2e44" stroke-width="4"/>
+<text x="1346.0" y="583.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="400" fill="#213547" text-anchor="middle">Não habilitado</text>
+<polyline points="182,261 230,261" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="220.91034250325114,265.16870802429213 230,261 220.91034250325114,256.83129197570787" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="394,260 430,260 430,470 460,470" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="450.9103425032512,474.16870802429213 460,470 450.9103425032512,465.83129197570787" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="624,470 655,470 655,685 690,685" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="680.9103425032512,689.1687080242921 690,685 680.9103425032512,680.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="854,685 940,685" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="930.9103425032512,689.1687080242921 940,685 930.9103425032512,680.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="965,660 965,305" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="969.1687080242921,314.0896574967488 965,305 960.8312919757079,314.0896574967488" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="972" y="357" width="131" height="24.2" fill="white"/>
+<text x="1037.5" y="374.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Corrigir</text>
+<polyline points="930,270 820,270 820,192 312,192 312,225" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="307.83129197570787,215.91034250325114 312,225 316.16870802429213,215.91034250325114" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="517" y="163" width="176" height="24.2" fill="white"/>
+<text x="605.0" y="180.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Nova versão</text>
+<polyline points="990,680 1060,680 1060,440 1110,440" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1100.910342503251,444.16870802429213 1110,440 1100.910342503251,435.83129197570787" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="967" y="591" width="116" height="24.2" fill="white"/>
+<text x="1025.0" y="608.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Aprovar</text>
+<polyline points="965,710 965,764 1090,764 1090,545 1110,545" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1100.910342503251,549.1687080242921 1110,545 1100.910342503251,540.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="972" y="735" width="106" height="24.2" fill="white"/>
+<text x="1025.0" y="752.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Reprovar</text>
+<polyline points="1274,440 1330,441" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1320.8373620518646,445.0057540902295 1330,441 1320.986220749347,436.66966703122074" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="1274,545 1330,546" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1320.8373620518646,550.0057540902295 1330,546 1320.986220749347,541.6696670312207" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="48,970 1392,970" fill="none" stroke="#cbd5df" stroke-width="1"/>
+<text x="48" y="989.0" font-family="DejaVu Sans, sans-serif" font-size="11" font-weight="400" fill="#526578" text-anchor="start">FECAP • Ciência da Computação • 4º semestre | B1-habilitacao</text>
+<text x="1390" y="989.0" font-family="DejaVu Sans, sans-serif" font-size="11" font-weight="400" fill="#526578" text-anchor="end">05 / 20</text>
+</svg>

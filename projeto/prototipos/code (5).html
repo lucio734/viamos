@@ -1,0 +1,381 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Víamos - Gestão de Solicitações</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-on-surface": "#f2f0f2",
+                      "primary-fixed": "#d1e4ff",
+                      "primary-fixed-dim": "#b4c8e4",
+                      "primary-container": "#1a2e44",
+                      "on-error": "#ffffff",
+                      "surface": "#fbf9fb",
+                      "surface-container-highest": "#e4e2e4",
+                      "secondary-fixed": "#e2e2e2",
+                      "on-error-container": "#93000a",
+                      "status-alert": "#D90429",
+                      "error": "#ba1a1a",
+                      "on-tertiary-container": "#ae8f64",
+                      "primary": "#03192e",
+                      "on-secondary-fixed": "#1a1c1c",
+                      "surface-container-low": "#f5f3f5",
+                      "surface-container": "#efedef",
+                      "pro-verification": "#FFB703",
+                      "secondary-fixed-dim": "#c6c6c7",
+                      "on-tertiary-fixed": "#281800",
+                      "surface-bright": "#fbf9fb",
+                      "surface-tint": "#4c6078",
+                      "tertiary": "#241500",
+                      "on-surface": "#1b1c1d",
+                      "background-alt": "#F8FAFC",
+                      "on-background": "#1b1c1d",
+                      "inverse-surface": "#303032",
+                      "inverse-primary": "#b4c8e4",
+                      "on-secondary-container": "#616363",
+                      "outline-variant": "#c4c6cd",
+                      "surface-container-high": "#e9e7ea",
+                      "surface-variant": "#e4e2e4",
+                      "outline": "#74777d",
+                      "secondary-container": "#dfe0e0",
+                      "on-primary-fixed": "#061d32",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#5a431f",
+                      "status-online": "#2D6A4F",
+                      "on-primary-container": "#8296b0",
+                      "background": "#fbf9fb",
+                      "on-surface-variant": "#43474d",
+                      "on-tertiary": "#ffffff",
+                      "on-secondary-fixed-variant": "#454747",
+                      "error-container": "#ffdad6",
+                      "tertiary-container": "#3d2907",
+                      "tertiary-fixed-dim": "#e3c193",
+                      "surface-dim": "#dbd9db",
+                      "on-primary-fixed-variant": "#35485f",
+                      "on-secondary": "#ffffff",
+                      "tertiary-fixed": "#ffddb0",
+                      "secondary": "#5d5f5f",
+                      "surface-container-lowest": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "gutter": "16px",
+                      "margin-desktop": "48px",
+                      "margin-mobile": "20px",
+                      "unit": "8px",
+                      "touch-target": "44px"
+              },
+              "fontFamily": {
+                      "headline-md": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "mobile-headline": ["Inter"],
+                      "label-caps": ["Inter"],
+                      "body-base": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                      "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                      "mobile-headline": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                      "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                      "body-base": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        /* Custom scrollbar for horizontal lists */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-alt text-on-background font-body-base text-body-base antialiased min-h-screen flex flex-col md:flex-row pb-24 md:pb-0">
+<!-- Navigation Drawer (Desktop) -->
+<aside class="hidden md:flex flex-col p-4 space-y-2 h-full w-80 rounded-r-xl bg-surface dark:bg-inverse-surface border-r border-outline-variant shadow-lg sticky top-0 shrink-0">
+<!-- Header Profile -->
+<div class="flex items-center space-x-4 p-4 mb-6">
+<div class="w-12 h-12 rounded-full overflow-hidden shrink-0 border-2 border-primary-container">
+<img alt="Avatar do Intérprete" class="w-full h-full object-cover" data-alt="A professional headshot of a confident sign language interpreter in a brightly lit studio, modern corporate style, friendly expression, solid white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZ_wLC4VM9-hp_dlqBBsntWLbayFFw0ReVlSWN7nE_pLpD7ohUPN1_cZqif-iWwGT985bIuYWnvBdGDlbPM_CqDl-yv_W5t7fITAJqUxVpCGYakmg0XGw40wuhPy_87HNTYHFNWn_PxR6lNhdGk1ctrUJLwY7w9cV9Q3kduJzPAPoM7FqraA_6Q6MnHMwIy56HS5sJA8lCSROzvqeTG50D4lEdkvISoJjO5U1kVw2XhdGAiWa4nlvGMA">
+</div>
+<div class="flex flex-col">
+<span class="font-headline-md text-[18px] text-primary">João Intérprete</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-pro-verification" style="font-variation-settings: 'FILL' 1;">verified</span>
+                    Intérprete Verificado
+                </span>
+<span class="font-label-caps text-label-caps text-status-online flex items-center gap-1 mt-1">
+<span class="w-2 h-2 rounded-full bg-status-online inline-block"></span> Online
+                </span>
+</div>
+</div>
+<!-- Nav Items -->
+<nav class="flex flex-col space-y-2 flex-grow">
+<a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-variant transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-3">event_available</span>
+<span class="font-body-base text-body-base">Disponibilidade</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-xl bg-primary-container text-on-primary-container font-bold transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-3" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-body-base text-body-base">Serviços</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-variant transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-3">verified</span>
+<span class="font-body-base text-body-base">Certificações Prolibras</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-variant transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-3">account_balance_wallet</span>
+<span class="font-body-base text-body-base">Financeiro</span>
+</a>
+<a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-variant transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-3">settings</span>
+<span class="font-body-base text-body-base">Configurações</span>
+</a>
+</nav>
+<div class="mt-auto">
+<a class="flex items-center px-4 py-3 rounded-xl text-on-surface-variant hover:bg-surface-variant transition-all duration-300" href="#">
+<span class="material-symbols-outlined mr-3 text-status-alert">logout</span>
+<span class="font-body-base text-body-base text-status-alert">Sair</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0">
+<!-- TopAppBar (Mobile & Global Header) -->
+<header class="bg-surface dark:bg-inverse-surface border-b border-outline-variant flex justify-between items-center px-margin-mobile h-16 w-full top-0 sticky z-40 transition-colors duration-200">
+<div class="flex items-center">
+<button class="md:hidden mr-4 text-primary dark:text-primary-fixed hover:bg-surface-container-high rounded-full p-2 w-touch-target h-touch-target flex items-center justify-center">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-headline-md text-headline-md text-primary dark:text-primary-fixed tracking-tight">Víamos</h1>
+</div>
+<div class="flex items-center md:hidden">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img alt="Foto do perfil do usuário" class="w-full h-full object-cover" data-alt="A professional headshot of a confident sign language interpreter in a brightly lit studio, modern corporate style, friendly expression, solid white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCsKCnsYxrVQdbVzZWTJCa9Rv94lEBxmfoaEZbxhvfjPVrq0ea4O3OXuvJUzwp0NVViPsUfwBLAJOkhOP_5zsSRgruQVHLOh9tTSuNC2lRUADNkPbQfXWMQ2hF1LVGWZAm72jz06Oit_aaRwS0w0FGR3nxfHzXtUMSYnjLH5t5beVSAlGCaGS7RNuWzr4QdwlMvKMqZJHgFxtekuQ3f9ntOQNofQCCTQcip1liXxQmfltMKR-yd4VgrOA">
+</div>
+</div>
+<!-- Desktop Top Nav Cluster (Replaces BottomNav on Web) -->
+<nav class="hidden md:flex space-x-6 items-center">
+<a class="flex items-center space-x-2 text-secondary hover:bg-surface-container-high px-3 py-2 rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-body-base text-body-base">Início</span>
+</a>
+<a class="flex items-center space-x-2 text-primary font-bold bg-surface-container-high px-3 py-2 rounded-lg transition-colors duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-body-base text-body-base">Serviços</span>
+</a>
+<a class="flex items-center space-x-2 text-secondary hover:bg-surface-container-high px-3 py-2 rounded-lg transition-colors duration-200 relative" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span class="font-body-base text-body-base">Mensagens</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-status-alert rounded-full"></span>
+</a>
+</nav>
+</header>
+<!-- Page Header & Tabs -->
+<div class="bg-surface pt-6 px-margin-mobile md:px-margin-desktop border-b border-outline-variant sticky top-16 z-30">
+<h2 class="font-display-lg text-display-lg text-on-surface mb-2">Gestão de Solicitações</h2>
+<p class="font-body-base text-body-base text-on-surface-variant mb-6">Acompanhe e gerencie seus atendimentos presenciais.</p>
+<div class="flex space-x-8 overflow-x-auto hide-scrollbar border-b border-outline-variant">
+<button class="pb-3 border-b-2 border-primary text-primary font-headline-md text-[16px] whitespace-nowrap px-2">
+                    Novas (3)
+                </button>
+<button class="pb-3 border-b-2 border-transparent text-secondary hover:text-on-surface font-headline-md text-[16px] font-normal whitespace-nowrap px-2 transition-colors">
+                    Em Aberto
+                </button>
+<button class="pb-3 border-b-2 border-transparent text-secondary hover:text-on-surface font-headline-md text-[16px] font-normal whitespace-nowrap px-2 transition-colors">
+                    Agendadas
+                </button>
+</div>
+</div>
+<!-- Scrollable Content -->
+<div class="p-margin-mobile md:p-margin-desktop flex-1 overflow-y-auto">
+<!-- Bento Grid Layout for Requests -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+<!-- Request Card 1 (Urgent/New) -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant flex flex-col relative overflow-hidden group">
+<div class="absolute top-0 left-0 w-1 h-full bg-status-alert"></div>
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="inline-flex items-center px-2 py-1 rounded bg-error-container text-on-error-container font-label-caps text-label-caps mb-2">
+<span class="material-symbols-outlined text-[14px] mr-1">timer</span> Urgente - Hoje
+                            </span>
+<h3 class="font-headline-md text-[20px] text-on-surface">Consulta Médica - Neurologia</h3>
+</div>
+<span class="font-headline-md text-[20px] text-primary">R$ 180<span class="text-[14px] text-secondary font-normal">/h</span></span>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined mr-3 text-primary-container">location_on</span>
+<div class="flex flex-col">
+<span class="font-body-base text-[14px] font-semibold">Hospital Sírio-Libanês</span>
+<span class="font-body-base text-[14px]">R. Dona Adma Jafet, 115</span>
+</div>
+</div>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined mr-3 text-secondary">directions_car</span>
+<span class="font-body-base text-[14px]">Aprox. 4.2 km de você</span>
+</div>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined mr-3 text-secondary">schedule</span>
+<span class="font-body-base text-[14px]">Hoje, 14:30 - 15:30</span>
+</div>
+</div>
+<div class="mt-auto flex space-x-3 pt-4 border-t border-surface-variant">
+<button class="flex-1 bg-surface border border-primary-container text-primary-container font-headline-md text-[16px] h-touch-target rounded-lg flex items-center justify-center hover:bg-surface-container-low transition-colors">
+                            Recusar
+                        </button>
+<button class="flex-1 bg-primary-container text-on-primary-container font-headline-md text-[16px] h-touch-target rounded-lg flex items-center justify-center shadow-sm hover:bg-primary transition-colors">
+                            Aceitar Solicitação
+                        </button>
+</div>
+</div>
+<!-- Request Card 2 (Standard) -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant flex flex-col relative group">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container-high text-on-surface font-label-caps text-label-caps mb-2">
+<span class="material-symbols-outlined text-[14px] mr-1">calendar_month</span> Amanhã
+                            </span>
+<h3 class="font-headline-md text-[20px] text-on-surface">Audiência Trabalhista</h3>
+</div>
+<span class="font-headline-md text-[20px] text-primary">R$ 250<span class="text-[14px] text-secondary font-normal">/h</span></span>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined mr-3 text-primary-container">location_on</span>
+<div class="flex flex-col">
+<span class="font-body-base text-[14px] font-semibold">Fórum Ruy Barbosa</span>
+<span class="font-body-base text-[14px]">Av. Marquês de São Vicente, 235</span>
+</div>
+</div>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined mr-3 text-secondary">directions_car</span>
+<span class="font-body-base text-[14px]">Aprox. 8.5 km de você</span>
+</div>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined mr-3 text-secondary">schedule</span>
+<span class="font-body-base text-[14px]">Amanhã, 09:00 - 11:00</span>
+</div>
+</div>
+<div class="mt-auto flex space-x-3 pt-4 border-t border-surface-variant">
+<button class="flex-1 bg-surface border border-primary-container text-primary-container font-headline-md text-[16px] h-touch-target rounded-lg flex items-center justify-center hover:bg-surface-container-low transition-colors">
+                            Recusar
+                        </button>
+<button class="flex-1 bg-primary-container text-on-primary-container font-headline-md text-[16px] h-touch-target rounded-lg flex items-center justify-center shadow-sm hover:bg-primary transition-colors">
+                            Aceitar Solicitação
+                        </button>
+</div>
+</div>
+<!-- Request Card 3 (Standard) -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-outline-variant flex flex-col relative group">
+<div class="flex justify-between items-start mb-4">
+<div>
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container-high text-on-surface font-label-caps text-label-caps mb-2">
+<span class="material-symbols-outlined text-[14px] mr-1">calendar_month</span> 15 Out
+                            </span>
+<h3 class="font-headline-md text-[20px] text-on-surface">Reunião de Pais e Mestres</h3>
+</div>
+<span class="font-headline-md text-[20px] text-primary">R$ 150<span class="text-[14px] text-secondary font-normal">/h</span></span>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined mr-3 text-primary-container">location_on</span>
+<div class="flex flex-col">
+<span class="font-body-base text-[14px] font-semibold">Colégio Bandeirantes</span>
+<span class="font-body-base text-[14px]">R. Estela, 268</span>
+</div>
+</div>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined mr-3 text-secondary">directions_car</span>
+<span class="font-body-base text-[14px]">Aprox. 2.1 km de você</span>
+</div>
+<div class="flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined mr-3 text-secondary">schedule</span>
+<span class="font-body-base text-[14px]">15 de Outubro, 18:00 - 20:00</span>
+</div>
+</div>
+<div class="mt-auto flex space-x-3 pt-4 border-t border-surface-variant">
+<button class="flex-1 bg-surface border border-primary-container text-primary-container font-headline-md text-[16px] h-touch-target rounded-lg flex items-center justify-center hover:bg-surface-container-low transition-colors">
+                            Recusar
+                        </button>
+<button class="flex-1 bg-primary-container text-on-primary-container font-headline-md text-[16px] h-touch-target rounded-lg flex items-center justify-center shadow-sm hover:bg-primary transition-colors">
+                            Aceitar Solicitação
+                        </button>
+</div>
+</div>
+<!-- Map/Context Visual (Decorative card to break up list) -->
+<div class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant flex flex-col relative h-full min-h-[300px]">
+<div class="absolute top-4 left-4 z-10 bg-surface/90 backdrop-blur-sm p-3 rounded-lg shadow-sm border border-outline-variant">
+<h4 class="font-headline-md text-[16px] text-on-surface mb-1">Mapa de Calor - Demanda</h4>
+<p class="font-label-caps text-[11px] text-on-surface-variant">Alta concentração na sua região</p>
+</div>
+<div class="bg-cover bg-center w-full h-full opacity-80" data-alt="A stylized, light-mode digital map interface of a major city showing glowing heat spots in brand navy blue and green colors indicating high activity areas, modern clean UI aesthetic, subtle grid lines." data-location="São Paulo" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBdsXTmFmH4HnO8gncQLARQwS5HYLwkshcBJv5_aQbrGXgbuOZ5m7tZK5TQ6tNDiXxGpNwyE3Kh7mKlH340HTXD4SThZJQU4lR5qfJJkTOD9UEEL1tcAPcA0HFO65cFcBehLYuutSkQGjSbXS7th7SPe6LLsl4p7S4puWH1hTRi7e0kqO3BEcYFo899Xcw5e-_d9Hpfbc_KdNRMZH4mUZffx7RP-WZIQLVIyzFpIfeN1XXRwMoHixEItg')"></div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden bg-surface dark:bg-inverse-surface border-t border-outline-variant shadow-sm fixed bottom-0 w-full z-50 flex justify-around items-center h-20 px-2">
+<a class="flex flex-col items-center justify-center text-secondary hover:bg-surface-container-low rounded-xl px-4 py-2 transition-colors scale-95 duration-100 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="font-label-caps text-label-caps">Início</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-5 py-2 scale-95 duration-100 active:scale-90 shadow-sm" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-label-caps text-label-caps">Serviços</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary hover:bg-surface-container-low rounded-xl px-4 py-2 transition-colors scale-95 duration-100 active:scale-90 relative" href="#">
+<span class="material-symbols-outlined mb-1">chat</span>
+<span class="font-label-caps text-label-caps">Mensagens</span>
+<span class="absolute top-2 right-4 w-2 h-2 bg-status-alert rounded-full"></span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary hover:bg-surface-container-low rounded-xl px-4 py-2 transition-colors scale-95 duration-100 active:scale-90" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-label-caps text-label-caps">Perfil</span>
+</a>
+</nav>
+<script>
+        // Simple tab interaction
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabs = document.querySelectorAll('.hide-scrollbar button');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Reset all tabs
+                    tabs.forEach(t => {
+                        t.classList.remove('border-primary', 'text-primary', 'font-semibold');
+                        t.classList.add('border-transparent', 'text-secondary', 'font-normal');
+                    });
+                    // Set active tab
+                    tab.classList.remove('border-transparent', 'text-secondary', 'font-normal');
+                    tab.classList.add('border-primary', 'text-primary', 'font-semibold');
+                });
+            });
+        });
+    </script>
+</body></html>

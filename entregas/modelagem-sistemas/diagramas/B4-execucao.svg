@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" role="img" aria-labelledby="title"><title id="title">BPMN | encontro, check-in e encerramento</title><rect width="100%" height="100%" fill="white"/>
+<rect x="0" y="0" width="1440" height="12" rx="0" fill="#1a2e44" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="48" y="47.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="700" fill="#087e8b" text-anchor="start">VÍAMOS / MODELAGEM DE SISTEMAS</text>
+<text x="48" y="92.0" font-family="DejaVu Sans, sans-serif" font-size="30" font-weight="700" fill="#1a2e44" text-anchor="start">BPMN | encontro, check-in e encerramento</text>
+<text x="48" y="125.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">Pré-condição: solicitação aceita e participantes autenticados.</text>
+<polyline points="48,145 1392,145" fill="none" stroke="#cbd5df" stroke-width="1"/>
+<text x="48" y="847.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#087e8b" text-anchor="start">JUSTIFICATIVA E REGRAS</text>
+<text x="48" y="874.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="400" fill="#213547" text-anchor="start">O cliente exibe o QR e o intérprete faz a leitura. Validar vínculo, QR, distância até 200 m e precisão até 50 m impede início indevido. Falha mantém o estado “Aceita”. O</text>
+<text x="48" y="893.5" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="400" fill="#213547" text-anchor="start">encerramento registra duração real, para a localização e libera pagamento, comprovante e avaliação de forma independente.</text>
+<text x="48" y="950.0" font-family="DejaVu Sans, sans-serif" font-size="12" font-weight="400" fill="#526578" text-anchor="start">RF28–RF34, RF37–RF40; RNF21, RNF26, RNF44; US10, US20–US21. Suporte registrado em P3 não encerra automaticamente o atendimento.</text>
+<rect x="48" y="165.0" width="1344" height="213.33333333333334" rx="0" fill="#f5f8fa" stroke="#b7c7d3" stroke-width="1.8"/>
+<rect x="48" y="165.0" width="80" height="213.33333333333334" rx="0" fill="#edf4f8" stroke="#b7c7d3" stroke-width="1.8"/>
+<text x="88.0" y="260.6666666666667" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#1a2e44" text-anchor="middle">Cliente</text>
+<rect x="48" y="378.33333333333337" width="1344" height="213.33333333333334" rx="0" fill="white" stroke="#b7c7d3" stroke-width="1.8"/>
+<rect x="48" y="378.33333333333337" width="80" height="213.33333333333334" rx="0" fill="#edf4f8" stroke="#b7c7d3" stroke-width="1.8"/>
+<text x="88.0" y="474.00000000000006" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#1a2e44" text-anchor="middle">Intérprete</text>
+<rect x="48" y="591.6666666666667" width="1344" height="213.33333333333334" rx="0" fill="#f5f8fa" stroke="#b7c7d3" stroke-width="1.8"/>
+<rect x="48" y="591.6666666666667" width="80" height="213.33333333333334" rx="0" fill="#edf4f8" stroke="#b7c7d3" stroke-width="1.8"/>
+<text x="88.0" y="687.3333333333334" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#1a2e44" text-anchor="middle">Víamos</text>
+<ellipse cx="171.0" cy="256.0" rx="16.0" ry="16.0" fill="white" stroke="#1a2e44" stroke-width="1.8"/>
+<rect x="230" y="220" width="180" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="320.0" y="241.7" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Alinhar encontro;</text>
+<text x="320.0" y="259.9" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">exibir QR ao</text>
+<text x="320.0" y="278.09999999999997" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">intérprete</text>
+<rect x="455" y="440" width="164" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="537.0" y="470.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Ler QR no local e</text>
+<text x="537.0" y="489.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">enviar posição</text>
+<rect x="680" y="650" width="164" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="762.0" y="671.7" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Validar QR e</text>
+<text x="762.0" y="689.9000000000001" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">posição; registrar</text>
+<text x="762.0" y="708.1" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">início se válido</text>
+<polygon points="940.0,660 965,685.0 940.0,710 915,685.0" fill="#fff2ce" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="940.0" y="694.45" font-family="DejaVu Sans, sans-serif" font-size="27" font-weight="400" fill="#213547" text-anchor="middle">×</text>
+<text x="940.0" y="634.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Check-in válido?</text>
+<rect x="980" y="430" width="170" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1065.0" y="451.7" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Realizar</text>
+<text x="1065.0" y="469.9" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">atendimento</text>
+<text x="1065.0" y="488.09999999999997" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">presencial</text>
+<rect x="1200" y="430" width="170" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1285.0" y="460.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Confirmar</text>
+<text x="1285.0" y="479.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">encerramento</text>
+<rect x="1200" y="650" width="170" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1285.0" y="680.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Registrar fim e</text>
+<text x="1285.0" y="699.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">duração; liberar pós</text>
+<ellipse cx="1356.0" cy="771.0" rx="16.0" ry="16.0" fill="white" stroke="#1a2e44" stroke-width="4"/>
+<text x="1356.0" y="808.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="400" fill="#213547" text-anchor="middle">Concluída</text>
+<polyline points="187,256 230,255" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="221.00971999239815,259.3789114383502 230,255 220.8158790066236,251.04374905004465" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="410,255 430,255 430,475 455,475" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="445.9103425032512,479.16870802429213 455,475 445.9103425032512,470.83129197570787" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="619,475 650,475 650,685 680,685" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="670.9103425032512,689.1687080242921 680,685 670.9103425032512,680.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="844,685 915,685" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="905.9103425032512,689.1687080242921 915,685 905.9103425032512,680.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="940,710 940,765 430,765 430,475 455,475" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="445.9103425032512,479.16870802429213 455,475 445.9103425032512,470.83129197570787" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="547" y="730" width="346" height="24.2" fill="white"/>
+<text x="720.0" y="747.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Não: informar falha e repetir leitura</text>
+<polyline points="940,660 940,465 980,465" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="970.9103425032512,469.16870802429213 980,465 970.9103425032512,460.83129197570787" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="802" y="543" width="196" height="24.2" fill="white"/>
+<text x="900.0" y="560.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Sim: registrar início</text>
+<polyline points="1150,465 1200,465" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1190.910342503251,469.16870802429213 1200,465 1190.910342503251,460.83129197570787" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="1285,500 1285,650" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1280.831291975708,640.9103425032512 1285,650 1289.168708024292,640.9103425032512" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="1285,720 1285,771 1340,771" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1330.910342503251,775.1687080242921 1340,771 1330.910342503251,766.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="48,970 1392,970" fill="none" stroke="#cbd5df" stroke-width="1"/>
+<text x="48" y="989.0" font-family="DejaVu Sans, sans-serif" font-size="11" font-weight="400" fill="#526578" text-anchor="start">FECAP • Ciência da Computação • 4º semestre | B4-execucao</text>
+<text x="1390" y="989.0" font-family="DejaVu Sans, sans-serif" font-size="11" font-weight="400" fill="#526578" text-anchor="end">08 / 20</text>
+</svg>

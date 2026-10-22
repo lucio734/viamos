@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" role="img" aria-labelledby="title"><title id="title">Escopo, fontes e critérios de leitura</title><rect width="100%" height="100%" fill="white"/>
+<rect x="0" y="0" width="1440" height="12" rx="0" fill="#1a2e44" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="48" y="47.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="700" fill="#087e8b" text-anchor="start">VÍAMOS / MODELAGEM DE SISTEMAS</text>
+<text x="48" y="92.0" font-family="DejaVu Sans, sans-serif" font-size="30" font-weight="700" fill="#1a2e44" text-anchor="start">Escopo, fontes e critérios de leitura</text>
+<text x="48" y="125.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">Uma base de requisitos; quatro perspectivas complementares.</text>
+<polyline points="48,145 1392,145" fill="none" stroke="#cbd5df" stroke-width="1"/>
+<text x="55" y="200.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="700" fill="#087e8b" text-anchor="start">DOMÍNIO</text>
+<text x="55" y="233.0" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#213547" text-anchor="start">O Víamos conecta cliente surdo e intérprete habilitado para atendimento presencial. Backoffice analisa certificações; Suporte atende chamados.</text>
+<text x="55" y="256.4" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#213547" text-anchor="start">Mapas, gateway financeiro, push, e-mail e localização do dispositivo ficam fora da fronteira do software.</text>
+<text x="55" y="345.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="700" fill="#087e8b" text-anchor="start">BASE CONSULTADA</text>
+<text x="55" y="378.0" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#213547" text-anchor="start">34 arquivos importados: 5 Markdown, 12 HTML, 12 PNG, 2 XLSX, 1 DOCX, 1 PDF e 1 Draw.io. A planilha consolidada contém 45 RF, 45 RNF e 24</text>
+<text x="55" y="401.4" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#213547" text-anchor="start">histórias (113 pontos). A entrega UML anterior contém 23 vistas. Os dois PDFs da disciplina completam as referências.</text>
+<text x="55" y="490.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="700" fill="#087e8b" text-anchor="start">LEITURA DOS MODELOS</text>
+<text x="55" y="523.0" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#213547" text-anchor="start">C1–C2 são vistas do mesmo contexto. B1–B6 detalham processos BPMN em raias. D1–D6 são vistas do mesmo DFD lógico de nível 1: P1–P6 e</text>
+<text x="55" y="546.4" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#213547" text-anchor="start">depósitos D1–D6 se repetem sem duplicação. E1 representa o ciclo da solicitação e de seu atendimento associado.</text>
+<text x="55" y="635.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="700" fill="#087e8b" text-anchor="start">NOTAÇÃO</text>
+<text x="55" y="668.0" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#213547" text-anchor="start">Contexto/DFD: retângulos = entidades externas; caixas arredondadas numeradas = processos; duas linhas paralelas = depósitos; setas = dados.</text>
+<text x="55" y="691.4" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#213547" text-anchor="start">BPMN: círculo fino = início; grosso = fim; tarefa arredondada; losango com X = decisão exclusiva; círculo duplo = espera. UML: estado</text>
+<text x="55" y="714.8" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#213547" text-anchor="start">arredondado; transição = evento [guarda] / ação.</text>
+<text x="55" y="780.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="700" fill="#087e8b" text-anchor="start">DECISÕES DE CONSISTÊNCIA</text>
+<text x="55" y="813.0" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#213547" text-anchor="start">Requisitos e contexto prevalecem sobre resíduos dos protótipos: sem videochamada; mínimo contratado de 60 min; raio de distribuição de até</text>
+<text x="55" y="836.4" font-family="DejaVu Sans, sans-serif" font-size="18" font-weight="400" fill="#213547" text-anchor="start">15 km; check-in até 200 m e erro de posição até 50 m. Conclusão do atendimento não depende de aprovação do pagamento.</text>
+<polyline points="48,970 1392,970" fill="none" stroke="#cbd5df" stroke-width="1"/>
+<text x="48" y="989.0" font-family="DejaVu Sans, sans-serif" font-size="11" font-weight="400" fill="#526578" text-anchor="start">FECAP • Ciência da Computação • 4º semestre | 01-leitura</text>
+<text x="1390" y="989.0" font-family="DejaVu Sans, sans-serif" font-size="11" font-weight="400" fill="#526578" text-anchor="end">02 / 20</text>
+</svg>

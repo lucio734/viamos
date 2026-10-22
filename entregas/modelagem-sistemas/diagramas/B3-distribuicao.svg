@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" role="img" aria-labelledby="title"><title id="title">BPMN | distribuir e obter aceite exclusivo</title><rect width="100%" height="100%" fill="white"/>
+<rect x="0" y="0" width="1440" height="12" rx="0" fill="#1a2e44" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="48" y="47.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="700" fill="#087e8b" text-anchor="start">VÍAMOS / MODELAGEM DE SISTEMAS</text>
+<text x="48" y="92.0" font-family="DejaVu Sans, sans-serif" font-size="30" font-weight="700" fill="#1a2e44" text-anchor="start">BPMN | distribuir e obter aceite exclusivo</text>
+<text x="48" y="125.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">Pré-condição: solicitação confirmada e ainda aberta.</text>
+<polyline points="48,145 1392,145" fill="none" stroke="#cbd5df" stroke-width="1"/>
+<text x="48" y="847.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#087e8b" text-anchor="start">JUSTIFICATIVA E REGRAS</text>
+<text x="48" y="874.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="400" fill="#213547" text-anchor="start">Elegibilidade exige aprovação, disponibilidade, raio configurado de até 15 km e ordenação por proximidade/reputação. Sem elegíveis, a busca espera nova disponibilidade; não</text>
+<text x="48" y="893.5" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="400" fill="#213547" text-anchor="start">há prazo de expiração definido. Recusa individual não cancela a solicitação. O aceite atômico evita alocação duplicada e revalida a elegibilidade.</text>
+<text x="48" y="950.0" font-family="DejaVu Sans, sans-serif" font-size="12" font-weight="400" fill="#526578" text-anchor="start">RF17–RF25, RF42; RNF03, RNF27, RNF36, RNF43; US08, US14–US19. Cancelamento concorrente: B6.</text>
+<rect x="48" y="165.0" width="1344" height="320.0" rx="0" fill="#f5f8fa" stroke="#b7c7d3" stroke-width="1.8"/>
+<rect x="48" y="165.0" width="80" height="320.0" rx="0" fill="#edf4f8" stroke="#b7c7d3" stroke-width="1.8"/>
+<text x="88.0" y="314.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#1a2e44" text-anchor="middle">Víamos</text>
+<rect x="48" y="485.0" width="1344" height="320.0" rx="0" fill="white" stroke="#b7c7d3" stroke-width="1.8"/>
+<rect x="48" y="485.0" width="80" height="320.0" rx="0" fill="#edf4f8" stroke="#b7c7d3" stroke-width="1.8"/>
+<text x="88.0" y="634.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="700" fill="#1a2e44" text-anchor="middle">Intérprete</text>
+<ellipse cx="161.0" cy="261.0" rx="16.0" ry="16.0" fill="white" stroke="#1a2e44" stroke-width="1.8"/>
+<rect x="205" y="225" width="164" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="287.0" y="255.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Selecionar</text>
+<text x="287.0" y="274.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">intérpretes elegíveis</text>
+<polygon points="465.0,235 490,260.0 465.0,285 440,260.0" fill="#fff2ce" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="465.0" y="269.45" font-family="DejaVu Sans, sans-serif" font-size="27" font-weight="400" fill="#213547" text-anchor="middle">×</text>
+<text x="465.0" y="209.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Há elegíveis?</text>
+<ellipse cx="466.0" cy="386.0" rx="16.0" ry="16.0" fill="white" stroke="#1a2e44" stroke-width="1.8"/>
+<ellipse cx="466.0" cy="386.0" rx="11.0" ry="11.0" fill="none" stroke="#1a2e44"/>
+<path d="M 461 379 h 10 v 13 h -10 Z M 463 382 h 6 M 463 386 h 6 M 463 390 h 6" fill="none" stroke="#1a2e44" stroke-width=".8"/>
+<text x="465.0" y="426.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="400" fill="#213547" text-anchor="middle">Mudança de disponibilidade</text>
+<rect x="610" y="225" width="164" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="692.0" y="255.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Distribuir oferta e</text>
+<text x="692.0" y="274.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">exibir demanda</text>
+<rect x="815" y="555" width="164" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="897.0" y="585.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Analisar demanda e</text>
+<text x="897.0" y="604.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">responder</text>
+<polygon points="1075.0,565 1100,590.0 1075.0,615 1050,590.0" fill="#fff2ce" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1075.0" y="599.45" font-family="DejaVu Sans, sans-serif" font-size="27" font-weight="400" fill="#213547" text-anchor="middle">×</text>
+<text x="1075.0" y="539.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Aceitar?</text>
+<rect x="560" y="675" width="164" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="642.0" y="705.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Recusar oferta</text>
+<text x="642.0" y="724.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">(motivo opcional)</text>
+<rect x="1010" y="225" width="175" height="70" rx="15" fill="#edf4f8" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1097.5" y="255.8" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Tentar aceite</text>
+<text x="1097.5" y="274.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">exclusivo; revalidar</text>
+<polygon points="1255.0,235 1280,260.0 1255.0,285 1230,260.0" fill="#fff2ce" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="1255.0" y="269.45" font-family="DejaVu Sans, sans-serif" font-size="27" font-weight="400" fill="#213547" text-anchor="middle">×</text>
+<text x="1255.0" y="209.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Aceite válido?</text>
+<ellipse cx="1356.0" cy="261.0" rx="16.0" ry="16.0" fill="white" stroke="#1a2e44" stroke-width="4"/>
+<text x="1356.0" y="298.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="400" fill="#213547" text-anchor="middle">Aceita; notificar</text>
+<ellipse cx="1276.0" cy="401.0" rx="16.0" ry="16.0" fill="white" stroke="#1a2e44" stroke-width="4"/>
+<text x="1276.0" y="438.0" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="400" fill="#213547" text-anchor="middle">Indisponível; atualizar</text>
+<text x="1276.0" y="454.9" font-family="DejaVu Sans, sans-serif" font-size="13" font-weight="400" fill="#213547" text-anchor="middle">lista</text>
+<polyline points="177,261 205,261" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="195.91034250325114,265.16870802429213 205,261 195.91034250325114,256.83129197570787" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="369,260 440,260" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="430.9103425032512,264.16870802429213 440,260 430.9103425032512,255.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="490,260 610,260" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="600.9103425032512,264.16870802429213 610,260 600.9103425032512,255.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="517" y="230" width="66" height="24.2" fill="white"/>
+<text x="550.0" y="247.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Sim</text>
+<polyline points="465,285 466,370" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="461.7246506903748,360.96001171014655 466,370 470.061489815037,360.8619312498564" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="477" y="312" width="71" height="24.2" fill="white"/>
+<text x="512.5" y="329.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Não</text>
+<polyline points="450,386 287,386 287,295" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="291.16870802429213,304.0896574967488 287,295 282.83129197570787,304.0896574967488" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="774,260 790,260 790,590 815,590" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="805.9103425032512,594.1687080242921 815,590 805.9103425032512,585.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="979,590 1050,590" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1040.910342503251,594.1687080242921 1050,590 1040.910342503251,585.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="1075,565 1092,565 1092,295" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1096.168708024292,304.0896574967488 1092,295 1087.831291975708,304.0896574967488" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="1097" y="454" width="71" height="24.2" fill="white"/>
+<text x="1132.5" y="471.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Sim</text>
+<polyline points="1075,615 1075,710 724,710" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="733.0896574967488,705.8312919757079 724,710 733.0896574967488,714.1687080242921" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="857" y="678" width="71" height="24.2" fill="white"/>
+<text x="892.5" y="695.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Não</text>
+<polyline points="560,710 175,710 175,330 287,330 287,295" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="291.16870802429213,304.0896574967488 287,295 282.83129197570787,304.0896574967488" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="227" y="677" width="301" height="24.2" fill="white"/>
+<text x="377.5" y="694.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Demanda permanece aberta</text>
+<polyline points="1185,260 1230,260" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1220.910342503251,264.16870802429213 1230,260 1220.910342503251,255.8312919757079" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<polyline points="1280,260 1340,261" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1330.8421358734367,265.0166559025398 1340,261 1330.9810735120254,256.6803975872179" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="1282" y="228" width="56" height="24.2" fill="white"/>
+<text x="1310.0" y="245.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Sim</text>
+<polyline points="1255,285 1276,285 1276,385" fill="none" stroke="#213547" stroke-width="1.7"/>
+<polyline points="1271.831291975708,375.9103425032512 1276,385 1280.168708024292,375.9103425032512" fill="#213547" stroke="#213547" stroke-width="1.4"/>
+<rect x="1287" y="317" width="71" height="24.2" fill="white"/>
+<text x="1322.5" y="334.0" font-family="DejaVu Sans, sans-serif" font-size="14" font-weight="400" fill="#213547" text-anchor="middle">Não</text>
+<polyline points="48,970 1392,970" fill="none" stroke="#cbd5df" stroke-width="1"/>
+<text x="48" y="989.0" font-family="DejaVu Sans, sans-serif" font-size="11" font-weight="400" fill="#526578" text-anchor="start">FECAP • Ciência da Computação • 4º semestre | B3-distribuicao</text>
+<text x="1390" y="989.0" font-family="DejaVu Sans, sans-serif" font-size="11" font-weight="400" fill="#526578" text-anchor="end">07 / 20</text>
+</svg>

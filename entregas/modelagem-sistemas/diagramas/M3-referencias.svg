@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1000" viewBox="0 0 1440 1000" role="img" aria-labelledby="title"><title id="title">Referências e arquivos de origem</title><rect width="100%" height="100%" fill="white"/>
+<rect x="0" y="0" width="1440" height="12" rx="0" fill="#1a2e44" stroke="#1a2e44" stroke-width="1.8"/>
+<text x="48" y="47.0" font-family="DejaVu Sans, sans-serif" font-size="15" font-weight="700" fill="#087e8b" text-anchor="start">VÍAMOS / MODELAGEM DE SISTEMAS</text>
+<text x="48" y="92.0" font-family="DejaVu Sans, sans-serif" font-size="30" font-weight="700" fill="#1a2e44" text-anchor="start">Referências e arquivos de origem</text>
+<text x="48" y="125.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">Originais preservados; inventário com caminhos e SHA-256 em projeto/inventario-importacao.json.</text>
+<polyline points="48,145 1392,145" fill="none" stroke="#cbd5df" stroke-width="1"/>
+<text x="55" y="197.0" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="700" fill="#087e8b" text-anchor="start">1. Guia da atividade</text>
+<text x="55" y="227.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">PIRES, Luis Fernando dos Santos. Especificação e Modelagem Integral de Sistemas. Engenharia de Software, atividade curricular prática, 2 páginas. Entregáveis e</text>
+<text x="55" y="247.8" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">critérios: pp. 1–2. Arquivo: referencias/modelagem-sistemas/guia-atividade-pratica.pdf.</text>
+<text x="55" y="317.0" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="700" fill="#087e8b" text-anchor="start">2. Material da disciplina</text>
+<text x="55" y="347.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">PIRES, Luis Fernando dos Santos. Introdução à Modelagem de Sistemas. 22 slides. Contexto: slides 4–6; processos/BPMN: 7–10; DFD: 11–14; estados: 15–19;</text>
+<text x="55" y="367.8" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">ferramentas CASE: 20–21.</text>
+<text x="55" y="437.0" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="700" fill="#087e8b" text-anchor="start">3. Requisitos do Víamos</text>
+<text x="55" y="467.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">ENTREGA VIAMOS COMPLETA.xlsx: seis abas; RF01–RF45, RNF01–RNF45, associações, mapa de histórias e backlog. Planilha separada de 02/09 e DOCX com link</text>
+<text x="55" y="487.8" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">preservados em entregas/anteriores/Engenharia de Requisitos/.</text>
+<text x="55" y="557.0" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="700" fill="#087e8b" text-anchor="start">4. Contexto e produto</text>
+<text x="55" y="587.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">projeto/documentacao/: context.md_projeto_v_amos.md, prd_projeto_v_amos.md, Briefing_Projeto_Viamos.md e DESIGN.md. O briefing é referência histórica,</text>
+<text x="55" y="607.8" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">confrontada com os arquivos do ZIP atual.</text>
+<text x="55" y="677.0" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="700" fill="#087e8b" text-anchor="start">5. Arquitetura e protótipos</text>
+<text x="55" y="707.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">entregas/anteriores/30-09/: Viamos_Entrega_Arquitetura_UML.pdf e Viamos_Diagramas_Editaveis.drawio (23 vistas). projeto/prototipos/Arquivos Stitch/: 12 HTMLs,</text>
+<text x="55" y="727.8" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">12 PNGs e DESIGN.md. Protótipos não representam uma aplicação integrada.</text>
+<text x="55" y="797.0" font-family="DejaVu Sans, sans-serif" font-size="17" font-weight="700" fill="#087e8b" text-anchor="start">6. Reprodução e revisão</text>
+<text x="55" y="827.0" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">A pasta fontes/ contém o gerador comum. diagramas/ contém SVGs vetoriais por página; Viamos_Modelagem_Editavel.drawio permite edição no diagrams.net.</text>
+<text x="55" y="847.8" font-family="DejaVu Sans, sans-serif" font-size="16" font-weight="400" fill="#213547" text-anchor="start">Viamos_Modelagem_Sistemas.pdf reúne as quatro categorias solicitadas e suas justificativas.</text>
+<polyline points="48,970 1392,970" fill="none" stroke="#cbd5df" stroke-width="1"/>
+<text x="48" y="989.0" font-family="DejaVu Sans, sans-serif" font-size="11" font-weight="400" fill="#526578" text-anchor="start">FECAP • Ciência da Computação • 4º semestre | M3-referencias</text>
+<text x="1390" y="989.0" font-family="DejaVu Sans, sans-serif" font-size="11" font-weight="400" fill="#526578" text-anchor="end">20 / 20</text>
+</svg>
