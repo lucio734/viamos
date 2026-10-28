@@ -202,9 +202,7 @@ def main():
         final.save(OUT/'Viamos_Modelagem_Sistemas.pdf', garbage=4, deflate=True, no_new_id=True)
         final.close()
         source.close()
-    pacote = OUT.parent/'pacotes'
-    pacote.mkdir(exist_ok=True)
-    shutil.copyfile(OUT/'Viamos_Modelagem_Sistemas.pdf', pacote/'Viamos_Modelagem_Sistemas_Horizontal.pdf')
+    shutil.copyfile(OUT/'Viamos_Modelagem_Sistemas.pdf', OUT/'Viamos_Modelagem_Sistemas_Horizontal.pdf')
     (HERE/'formatacao_pdf.json').write_text(json.dumps(metadata, ensure_ascii=False, indent=2)+'\n')
     print(f'PDF A4 horizontal gerado: {metadata["paginas"]} páginas; 15 diagramas preservados.')
     if metadata['matriculas_pendentes']:

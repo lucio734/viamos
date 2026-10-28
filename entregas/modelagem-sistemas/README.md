@@ -1,6 +1,6 @@
 # Modelagem integral do Víamos
 
-[PDF de submissão — A4 horizontal, preto e branco](Viamos_Modelagem_Sistemas.pdf).
+[PDF de submissão — A4 horizontal, preto e branco](Viamos_Modelagem_Sistemas_Horizontal.pdf).
 
 O PDF tem capa simples com FECAP, Ciência da Computação, CCOMP4/NOTURNO, equipe e professor Luis Fernando dos Santos Pires; depois, um parágrafo de introdução e uma explicação breve em cada página de diagrama. Usa margens de 3 cm (superior/esquerda) e 2 cm (inferior/direita), texto em fonte serifada de 12 pt e entrelinha de 1,5.
 
