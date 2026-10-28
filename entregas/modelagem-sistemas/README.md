@@ -4,7 +4,7 @@
 
 O PDF tem capa simples com FECAP, Ciência da Computação, CCOMP4/NOTURNO, equipe e professor Luis Fernando dos Santos Pires; depois, um parágrafo de introdução e uma explicação breve em cada página de diagrama. Usa margens de 3 cm (superior/esquerda) e 2 cm (inferior/direita), texto em fonte serifada de 12 pt e entrelinha de 1,5.
 
-Os 15 diagramas aprovados mantêm o conteúdo, as conexões, os símbolos e a geometria. Cada desenho aparece inteiro e em dois detalhes ampliados sobrepostos, conforme solicitado, totalizando **47 páginas**. A escala é uniforme e os desenhos continuam vetoriais. As cores foram substituídas por preto e branco no PDF.
+Os 15 diagramas aprovados mantêm o conteúdo, as conexões, os símbolos e a geometria. Cada desenho aparece inteiro em uma única página, sem recortes ou divisão em metades, totalizando **17 páginas**. A escala é uniforme e os desenhos continuam vetoriais. As cores foram substituídas por preto e branco no PDF.
 
 ## Arquivos
 
@@ -20,12 +20,12 @@ Os 15 diagramas aprovados mantêm o conteúdo, as conexões, os símbolos e a ge
 | --- | --- |
 | 1 | Capa |
 | 2 | Introdução |
-| 3–8 | Contexto: pessoas/operação e integrações |
-| 9–26 | BPMN: habilitação, solicitação, distribuição/aceite, execução, pagamento e cancelamento |
-| 27–44 | DFD lógico: identidade, solicitação, atendimento, financeiro, pós-atendimento e governança |
-| 45–47 | Máquina de estados |
+| 3–4 | Contexto: pessoas/operação e integrações |
+| 5–10 | BPMN: habilitação, solicitação, distribuição/aceite, execução, pagamento e cancelamento |
+| 11–16 | DFD lógico: identidade, solicitação, atendimento, financeiro, pós-atendimento e governança |
+| 17 | Máquina de estados |
 
-Cada conjunto de três páginas contém a visão integral, o detalhe esquerdo e o direito do mesmo diagrama. Os recortes não representam novos processos ou novos estados.
+Cada página de diagrama contém a figura completa e seu parágrafo explicativo. As páginas de detalhes recortados foram removidas.
 
 ## Reprodução
 

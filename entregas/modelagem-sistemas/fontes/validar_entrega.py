@@ -20,7 +20,8 @@ pdf=fitz.open(OUT/'Viamos_Modelagem_Sistemas.pdf')
 formatacao=json.loads((OUT/'fontes/formatacao_pdf.json').read_text())
 check(len(diagrams)==len(models)==20,'Draw.io e modelos originais mantêm 20 páginas.')
 check(len(pdf)==formatacao['paginas'],'PDF corresponde à paginação A4 registrada.')
-check(len([p for p in formatacao['diagramas'] if p['vista']=='integral'])==15,'15 diagramas integrais presentes.')
+check(len(pdf)==17 and len(formatacao['diagramas'])==15,'Capa, introdução e uma página por diagrama: 17 páginas.')
+check(all(p['vista']=='integral' for p in formatacao['diagramas']),'Somente diagramas inteiros; sem páginas de recortes.')
 check(len(list((OUT/'diagramas').glob('*.svg')))==20,'20 SVGs disponíveis.')
 alltext='\n'.join(p.get_text() for p in pdf)
 for keyword in ['FECAP','Lúcio Vecchio','Gustavo Pires','Felipe Mathey','Contexto','BPMN','DFD','Máquina de estados']:
@@ -91,7 +92,7 @@ summary=f"""# Validação da entrega
 Resultado: **verificações automáticas aprovadas**.
 
 - 34 arquivos originais conferidos contra SHA-256 do ZIP.
-- {len(pdf)} páginas A4 verticais no PDF; capa, introdução e 15 diagramas com vistas ampliadas.
+- {len(pdf)} páginas A4 verticais no PDF; capa, introdução e 15 diagramas inteiros, um por página.
 - 20 páginas originais no Draw.io e 20 SVGs mantidos sem alteração.
 - Texto preto, fundo branco e traços pretos; sem ilustrações decorativas.
 - PDF vetorial com texto selecionável e sem texto fora dos limites da folha.
@@ -100,7 +101,7 @@ Resultado: **verificações automáticas aprovadas**.
 - Elementos dos seis BPMNs alcançáveis; gateways com alternativas e elementos não terminais com saída.
 - DFDs usam processos entre entidades/depósitos; RF01–RF45 presentes na matriz de rastreabilidade.
 
-A reformatação mantém o gerador, a geometria e o conteúdo diagramático aprovados. Cada desenho é inserido como gráfico vetorial com escala uniforme; os detalhes ampliados usam recortes sobrepostos do mesmo desenho. Somente as cores mudam na apresentação do PDF. Margens de 3 cm (superior/esquerda) e 2 cm (inferior/direita), texto em Liberation Serif 12 pt, entrelinha de 18 pt e capa textual simples. O PDF integral e os detalhes foram revisados visualmente.
+A reformatação mantém o gerador, a geometria e o conteúdo diagramático aprovados. Cada desenho é inserido como gráfico vetorial com escala uniforme; nenhum diagrama é dividido em recortes ou metades. Somente as cores mudam na apresentação do PDF. Margens de 3 cm (superior/esquerda) e 2 cm (inferior/direita), texto em Liberation Serif 12 pt, entrelinha de 18 pt e capa textual simples. As páginas com os diagramas inteiros foram revisadas visualmente.
 
 As matrículas foram deixadas de fora por solicitação do usuário e devem ser acrescentadas antes do envio para cumprir integralmente a seção 5. A capa usa a identificação acadêmica informada; nenhum modelo institucional adicional foi fornecido. Não houve alteração do domínio ou implementação de um aplicativo.
 

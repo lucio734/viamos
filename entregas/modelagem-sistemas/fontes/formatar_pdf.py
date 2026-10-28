@@ -164,24 +164,6 @@ def main():
                                if item['kind']=='text' and item.get('y')==859)
             title = model.title.replace(' | ', ' — ')
             views = [('integral', clips[key])]
-            if config['detalhes_ampliados']:
-                clip = clips[key]
-                mid = (clip.x0+clip.x1)/2
-                overlap = clip.width*.10
-                left_end, right_start = mid+overlap, mid-overlap
-                sx = source[source_numbers[key]].rect.width/original.W
-                # Recortes acompanham a disposição já aprovada, sem reposicionar elementos.
-                # Contexto/DFD: o processo central aparece inteiro nas duas ampliações.
-                if key.startswith(('C', 'D')):
-                    core = model.nodes['core']
-                    left_end = (core['x']+core['w']+5)*sx
-                    right_start = (core['x']-5)*sx
-                elif key == 'B5-pagamento':
-                    left_end = 940*sx  # pool financeiro completo no detalhe esquerdo
-                elif key == 'E1-estados':
-                    left_end, right_start = 900*sx, 555*sx  # nota e estados inteiros em ao menos um detalhe
-                views += [('detalhe esquerdo', fitz.Rect(clip.x0, clip.y0, left_end, clip.y1)),
-                          ('detalhe direito', fitz.Rect(right_start, clip.y0, clip.x1, clip.y1))]
             for view, clip in views:
                 label = f'{index+1} {title}'
                 if view != 'integral':
