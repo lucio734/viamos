@@ -3,7 +3,7 @@
 
 A fonte diagramática continua em gerar_entrega.py, sem alterações. Esse módulo é
 executado em diretório temporário. O PDF final usa os mesmos desenhos vetoriais,
-com mudança de cor para preto/branco e escala uniforme em folhas A4 verticais.
+com mudança de cor para preto/branco e escala uniforme em folhas A4 horizontais.
 """
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -13,13 +13,14 @@ import io
 import json
 import re
 import sys
+import shutil
 import hashlib
 from collections import Counter
 import fitz
 from reportlab.pdfgen import canvas
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-from reportlab.lib.pagesizes import A4
+from reportlab.lib.pagesizes import A4, landscape
 from reportlab.lib.units import cm
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.platypus import Paragraph
@@ -35,7 +36,7 @@ IDS = ['C1-contexto-pessoas', 'C2-contexto-integracoes',
        'B4-execucao', 'B5-pagamento', 'B6-cancelamento',
        'D1-identidade', 'D2-solicitacoes', 'D3-atendimento',
        'D4-financeiro', 'D5-pos-atendimento', 'D6-governanca', 'E1-estados']
-WIDTH, HEIGHT = A4
+WIDTH, HEIGHT = landscape(A4)
 LEFT, RIGHT, TOP, BOTTOM = 3*cm, 2*cm, 3*cm, 2*cm
 TEXT_WIDTH = WIDTH - LEFT - RIGHT
 INTRO = (
@@ -104,7 +105,7 @@ def main():
     original = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(original)
     models = {p.id: p for p in original.PAGES}
-    metadata = {'formato': 'A4 retrato', 'dimensoes_pt': [WIDTH, HEIGHT],
+    metadata = {'formato': 'A4 paisagem', 'dimensoes_pt': [WIDTH, HEIGHT],
                 'margens_cm': {'superior': 3, 'esquerda': 3, 'inferior': 2, 'direita': 2},
                 'cores': 'preto e branco', 'fonte_texto': 'Liberation Serif 12 pt',
                 'entrelinha_texto_pt': 18, 'diagramas': [],
@@ -135,7 +136,7 @@ def main():
             page.apply_redactions(images=2, graphics=2, text=0)
         monochrome(source)
         typeset = temp/'texto.pdf'
-        c = canvas.Canvas(str(typeset), pagesize=A4, invariant=1)
+        c = canvas.Canvas(str(typeset), pagesize=landscape(A4), invariant=1)
         c.setTitle('Víamos — Especificação e Modelagem Integral de Sistemas')
         c.setAuthor('; '.join(p['nome'] for p in config['integrantes']))
         centered(c, config['instituicao'], TOP, 'TextoNegrito')
@@ -143,13 +144,13 @@ def main():
         centered(c, config['turma'], TOP+44)
         for index, member in enumerate(config['integrantes']):
             matricula = member['matricula']
-            centered(c, member['nome'], 205+index*45)
+            centered(c, member['nome'], 160+index*36)
             if matricula:
-                centered(c, 'Matrícula: '+matricula, 222+index*45)
-        centered(c, config['titulo'], 390, 'TextoNegrito', 14)
-        centered(c, config['subtitulo'], 419)
-        centered(c, config['disciplina'], 505)
-        centered(c, 'Professor: '+config['professor'], 529)
+                centered(c, 'Matrícula: '+matricula, 177+index*36)
+        centered(c, config['titulo'], 300, 'TextoNegrito', 14)
+        centered(c, config['subtitulo'], 327)
+        centered(c, config['disciplina'], 390)
+        centered(c, 'Professor: '+config['professor'], 414)
         centered(c, config['local'], HEIGHT-BOTTOM-40)
         centered(c, config['ano'], HEIGHT-BOTTOM-18)
         c.showPage()
@@ -201,8 +202,11 @@ def main():
         final.save(OUT/'Viamos_Modelagem_Sistemas.pdf', garbage=4, deflate=True, no_new_id=True)
         final.close()
         source.close()
+    pacote = OUT.parent/'pacotes'
+    pacote.mkdir(exist_ok=True)
+    shutil.copyfile(OUT/'Viamos_Modelagem_Sistemas.pdf', pacote/'Viamos_Modelagem_Sistemas_Horizontal.pdf')
     (HERE/'formatacao_pdf.json').write_text(json.dumps(metadata, ensure_ascii=False, indent=2)+'\n')
-    print(f'PDF A4 vertical gerado: {metadata["paginas"]} páginas; 15 diagramas preservados.')
+    print(f'PDF A4 horizontal gerado: {metadata["paginas"]} páginas; 15 diagramas preservados.')
     if metadata['matriculas_pendentes']:
         print('Capa pendente de matrículas: '+', '.join(metadata['matriculas_pendentes']))
 

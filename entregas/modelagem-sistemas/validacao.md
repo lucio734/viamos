@@ -3,7 +3,7 @@
 Resultado: **verificações automáticas aprovadas**.
 
 - 34 arquivos originais conferidos contra SHA-256 do ZIP.
-- 17 páginas A4 verticais no PDF; capa, introdução e 15 diagramas inteiros, um por página.
+- 17 páginas A4 horizontais no PDF; capa, introdução e 15 diagramas inteiros, um por página.
 - 20 páginas originais no Draw.io e 20 SVGs mantidos sem alteração.
 - Texto preto, fundo branco e traços pretos; sem ilustrações decorativas.
 - PDF vetorial com texto selecionável e sem texto fora dos limites da folha.

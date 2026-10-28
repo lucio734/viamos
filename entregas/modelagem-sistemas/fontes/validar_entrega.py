@@ -64,7 +64,7 @@ for diagram,model in zip(diagrams,models):
   for e in edges:check(e['a']=='core' or e['b']=='core','Fluxo DFD passa por processo: '+key)
 # A formatação do PDF é independente dos arquivos diagramáticos originais.
 for number,page in enumerate(pdf,1):
- check(abs(page.rect.width-595.2756)<.02 and abs(page.rect.height-841.8898)<.02 and page.rotation==0,'Página A4 vertical: '+str(number))
+ check(abs(page.rect.width-841.8898)<.02 and abs(page.rect.height-595.2756)<.02 and page.rotation==0,'Página A4 horizontal: '+str(number))
  check(not page.get_images(),'Página vetorial: '+str(number))
  check(len(page.get_text().strip())>100,'Texto selecionável na página: '+str(number))
  for block in page.get_text('dict')['blocks']:
@@ -92,7 +92,7 @@ summary=f"""# Validação da entrega
 Resultado: **verificações automáticas aprovadas**.
 
 - 34 arquivos originais conferidos contra SHA-256 do ZIP.
-- {len(pdf)} páginas A4 verticais no PDF; capa, introdução e 15 diagramas inteiros, um por página.
+- {len(pdf)} páginas A4 horizontais no PDF; capa, introdução e 15 diagramas inteiros, um por página.
 - 20 páginas originais no Draw.io e 20 SVGs mantidos sem alteração.
 - Texto preto, fundo branco e traços pretos; sem ilustrações decorativas.
 - PDF vetorial com texto selecionável e sem texto fora dos limites da folha.
