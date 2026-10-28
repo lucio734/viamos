@@ -1,43 +1,45 @@
 # Modelagem integral do Víamos
 
-**Diagramas concluídos.** A entrega aplica o guia ao contexto completo do projeto: atendimento presencial, intérprete habilitado, busca por proximidade, check-in, financeiro e pós-atendimento.
+[PDF de submissão — A4 vertical, preto e branco](Viamos_Modelagem_Sistemas.pdf).
+
+O PDF tem capa simples com FECAP, Ciência da Computação, CCOMP4/NOTURNO, equipe e professor Luis Fernando dos Santos Pires; depois, um parágrafo de introdução e uma explicação breve em cada página de diagrama. Usa margens de 3 cm (superior/esquerda) e 2 cm (inferior/direita), texto em fonte serifada de 12 pt e entrelinha de 1,5.
+
+Os 15 diagramas aprovados mantêm o conteúdo, as conexões, os símbolos e a geometria. Cada desenho aparece inteiro e em dois detalhes ampliados sobrepostos, conforme solicitado, totalizando **47 páginas**. A escala é uniforme e os desenhos continuam vetoriais. As cores foram substituídas por preto e branco no PDF.
 
 ## Arquivos
 
-- [PDF unificado — 20 páginas](Viamos_Modelagem_Sistemas.pdf).
-- [Draw.io editável — todas as páginas](Viamos_Modelagem_Editavel.drawio): abrir em diagrams.net.
-- [SVGs vetoriais](diagramas/): uma página por arquivo.
-- [Rastreabilidade dos 45 RF](rastreabilidade.md).
-- [Dicionário de dados e fluxos](dicionario-fluxos.md).
-- [Validação dos artefatos](validacao.md).
-- [Análise integral da pasta](../../projeto/analise-contexto.md).
+- [PDF completo](Viamos_Modelagem_Sistemas.pdf).
+- [Pacote completo atualizado](../pacotes/Viamos_Entrega_Modelagem.zip).
+- [Draw.io original editável](Viamos_Modelagem_Editavel.drawio) e [SVGs originais](diagramas/): preservam a apresentação aprovada dos modelos; a nova formatação acadêmica aplica-se ao PDF.
+- [Rastreabilidade dos 45 RF](rastreabilidade.md), [dicionário de fluxos](dicionario-fluxos.md) e [validação](validacao.md).
+- [Análise integral do projeto](../../projeto/analise-contexto.md).
 
-## Conteúdo do PDF
+## Organização do PDF
 
 | Páginas | Conteúdo |
 | --- | --- |
-| 1–2 | Capa, escopo, fontes e notações |
-| 3–4 | Contexto: pessoas/operação e integrações externas |
-| 5–10 | BPMN: habilitação, solicitação, distribuição/aceite, execução, pagamento e cancelamento |
-| 11–16 | DFD lógico de nível 1: seis vistas do mesmo modelo, com processos e depósitos compartilhados |
-| 17 | Máquina de estados da solicitação e do atendimento associado |
-| 18–20 | Rastreabilidade, decisões, pendências e referências |
+| 1 | Capa |
+| 2 | Introdução |
+| 3–8 | Contexto: pessoas/operação e integrações |
+| 9–26 | BPMN: habilitação, solicitação, distribuição/aceite, execução, pagamento e cancelamento |
+| 27–44 | DFD lógico: identidade, solicitação, atendimento, financeiro, pós-atendimento e governança |
+| 45–47 | Máquina de estados |
 
-Cada diagrama tem justificativa e referências. As vistas complementares não são sistemas diferentes. O PDF é vetorial em A3 paisagem para preservar a legibilidade; pode ser consultado com zoom ou impresso em A3.
+Cada conjunto de três páginas contém a visão integral, o detalhe esquerdo e o direito do mesmo diagrama. Os recortes não representam novos processos ou novos estados.
 
 ## Reprodução
 
-Na raiz do repositório, com Python 3, ReportLab e as fontes DejaVu Sans instalados:
+Na raiz do repositório, com Python 3, ReportLab, PyMuPDF e as fontes DejaVu Sans e Liberation Serif instaladas:
 
 ```bash
-python3 entregas/modelagem-sistemas/fontes/gerar_entrega.py
+python3 entregas/modelagem-sistemas/fontes/formatar_pdf.py
 python3 entregas/modelagem-sistemas/fontes/validar_entrega.py
 ```
 
-A validação adicional usa PyMuPDF. O gerador usa a biblioteca padrão e ReportLab; preserva os arquivos originais e recria PDF, SVGs, Draw.io e `fontes/modelos.json`. `gerar_entrega.py` é a fonte dos modelos; `modelos.json` é uma exportação para inspeção, não uma entrada do gerador. Edições manuais no Draw.io devem ser guardadas separadamente antes de regenerar.
+Os dados da capa ficam em [fontes/submissao.json](fontes/submissao.json). Preencher as matrículas nesse arquivo e executar os comandos acima para atualizar a capa. O gerador `formatar_pdf.py` usa a fonte diagramática aprovada em um diretório temporário, altera somente a apresentação do PDF e registra a paginação em `fontes/formatacao_pdf.json`.
 
-## Antes de enviar ao AVA
+`gerar_entrega.py` mantém o formato original dos editáveis; sua execução direta também restaura o PDF antigo em A3. Para produzir o PDF de submissão, utilizar `formatar_pdf.py`.
 
-Completar as matrículas dos três integrantes e conferir o cabeçalho institucional exigido. A instituição, curso, semestre e equipe já estão na capa. Taxas, prazos de cancelamento e fórmula de preço não foram inventados; as lacunas estão explicitadas.
+## Pendência para submissão
 
-O guia exige um único PDF; o arquivo acima é o documento consolidado. Os editáveis e SVGs ficam no repositório para manutenção. Não houve envio ao AVA.
+**As matrículas ficaram de fora por solicitação do usuário.** Acrescentá-las antes de enviar ao AVA para cumprir integralmente a seção 5 do guia. A capa usa a identificação acadêmica informada e apresentação inspirada no padrão ABNT; não foi fornecido um modelo adicional de cabeçalho institucional. Não houve envio ao AVA.

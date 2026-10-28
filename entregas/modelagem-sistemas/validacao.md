@@ -3,16 +3,18 @@
 Resultado: **verificações automáticas aprovadas**.
 
 - 34 arquivos originais conferidos contra SHA-256 do ZIP.
-- 20 páginas no PDF e no Draw.io; 20 SVGs válidos.
-- PDF vetorial com texto selecionável e sem texto fora da página.
-- XML/SVG analisados; IDs e ligações consistentes.
-- Fluxos não atravessam o interior de outras tarefas/estados/entidades.
-- Todos os elementos dos seis BPMNs são alcançáveis a partir do início; gateways têm alternativas e elementos não terminais têm saída.
-- DFDs usam processos entre entidades/depósitos.
-- RF01–RF45 presentes na matriz de rastreabilidade.
+- 47 páginas A4 verticais no PDF; capa, introdução e 15 diagramas com vistas ampliadas.
+- 20 páginas originais no Draw.io e 20 SVGs mantidos sem alteração.
+- Texto preto, fundo branco e traços pretos; sem ilustrações decorativas.
+- PDF vetorial com texto selecionável e sem texto fora dos limites da folha.
+- Conteúdo textual dos 15 diagramas integrais comparado com a fonte aprovada, sem perdas ou acréscimos.
+- XML/SVG analisados; IDs e ligações consistentes; fluxos sem atravessar outras tarefas/estados/entidades.
+- Elementos dos seis BPMNs alcançáveis; gateways com alternativas e elementos não terminais com saída.
+- DFDs usam processos entre entidades/depósitos; RF01–RF45 presentes na matriz de rastreabilidade.
 
-Revisão visual realizada nas páginas e no conjunto de miniaturas; foram ajustados rótulos de dados, contornos e a rota de repetição do pagamento. Revisão documental confrontou as regras com as duas planilhas, os documentos, os protótipos e a entrega UML anterior. As planilhas coincidem após remover a coluna adicional Versão da entrega separada; as associações também coincidem.
+A reformatação mantém o gerador, a geometria e o conteúdo diagramático aprovados. Cada desenho é inserido como gráfico vetorial com escala uniforme; os detalhes ampliados usam recortes sobrepostos do mesmo desenho. Somente as cores mudam na apresentação do PDF. Margens de 3 cm (superior/esquerda) e 2 cm (inferior/direita), texto em Liberation Serif 12 pt, entrelinha de 18 pt e capa textual simples. O PDF integral e os detalhes foram revisados visualmente.
 
-Essas verificações validam os artefatos e sua estrutura, não substituem a avaliação acadêmica da semântica. Não foi executado um aplicativo, pois a pasta contém documentação e protótipos independentes. Matrículas e conferência do cabeçalho institucional permanecem pendentes para submissão.
+As matrículas foram deixadas de fora por solicitação do usuário e devem ser acrescentadas antes do envio para cumprir integralmente a seção 5. A capa usa a identificação acadêmica informada; nenhum modelo institucional adicional foi fornecido. Não houve alteração do domínio ou implementação de um aplicativo.
 
-Reexecutar: `python3 entregas/modelagem-sistemas/fontes/validar_entrega.py`.
+Gerar: `python3 entregas/modelagem-sistemas/fontes/formatar_pdf.py`.
+Validar: `python3 entregas/modelagem-sistemas/fontes/validar_entrega.py`.

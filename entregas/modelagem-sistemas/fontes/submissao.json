@@ -1,0 +1,26 @@
+{
+  "instituicao": "FECAP",
+  "curso": "Ciência da Computação",
+  "turma": "CCOMP4/NOTURNO",
+  "disciplina": "Engenharia de Software e Arquitetura de Sistemas",
+  "professor": "Luis Fernando dos Santos Pires",
+  "titulo": "VÍAMOS",
+  "subtitulo": "Especificação e Modelagem Integral de Sistemas",
+  "local": "São Paulo",
+  "ano": "2026",
+  "integrantes": [
+    {
+      "nome": "Lúcio Vecchio",
+      "matricula": null
+    },
+    {
+      "nome": "Gustavo Pires",
+      "matricula": null
+    },
+    {
+      "nome": "Felipe Mathey",
+      "matricula": null
+    }
+  ],
+  "detalhes_ampliados": true
+}
