@@ -7,19 +7,19 @@ import * as authService from '../services/auth.service.js';
 
 export const esquemaLogin = z.object({
   email: z.email('Informe um e-mail válido.'),
-  senha: z.string().min(1, 'Informe a senha.'),
+  senha: z.string().min(1, 'Informe a senha.').max(128, 'Senha inválida.'),
 });
 
 export const esquemaRecuperar = z.object({ email: z.email('Informe um e-mail válido.') });
 
 export const esquemaRedefinir = z.object({
   token: z.string().min(10, 'Token inválido.'),
-  novaSenha: z.string().min(8, 'A nova senha deve ter pelo menos 8 caracteres.'),
+  novaSenha: z.string().min(8, 'A nova senha deve ter pelo menos 8 caracteres.').max(72, 'Senha muito longa.'),
 });
 
 export const esquemaAlterarSenha = z.object({
-  senhaAtual: z.string().min(1, 'Informe a senha atual.'),
-  novaSenha: z.string().min(8, 'A nova senha deve ter pelo menos 8 caracteres.'),
+  senhaAtual: z.string().min(1, 'Informe a senha atual.').max(128, 'Senha inválida.'),
+  novaSenha: z.string().min(8, 'A nova senha deve ter pelo menos 8 caracteres.').max(72, 'Senha muito longa.'),
 });
 
 export async function login(req: Request, res: Response) {

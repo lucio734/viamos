@@ -236,4 +236,26 @@ describe('Segurança de acesso (RNF35) e LGPD (RF45)', () => {
     await expect(pool.query('delete from eventos_auditoria where true')).rejects.toThrow(/somente-inserção/);
     await expect(pool.query(`update eventos_auditoria set tipo = 'X' where true`)).rejects.toThrow(/somente-inserção/);
   });
+
+  it('rejeita data de nascimento com rollover de calendário (ex.: 2000-02-31) e senha acima de 72 caracteres (revisão QA/Security F1)', async () => {
+    const dataInvalida = await request(app).post('/api/cadastro/cliente').send({
+      nome: 'Teste Data',
+      cpf: '714.287.938-60',
+      dataNascimento: '2000-02-31',
+      email: 'datainvalida@teste.app',
+      telefone: '11911112222',
+      senha: 'SenhaForte123',
+      aceiteTermos: true,
+      aceitePrivacidade: true,
+    });
+    expect(dataInvalida.status).toBe(400);
+    expect(dataInvalida.body.erro.codigo).toBe('VALIDACAO');
+
+    const senhaLonga = await request(app).post('/api/auth/redefinir-senha').send({
+      token: '0123456789abcdef0123456789abcdef',
+      novaSenha: 'a'.repeat(73),
+    });
+    expect(senhaLonga.status).toBe(400);
+    expect(senhaLonga.body.erro.codigo).toBe('VALIDACAO');
+  });
 });

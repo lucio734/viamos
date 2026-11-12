@@ -17,9 +17,10 @@ export const esquemaCadastroCliente = z.object({
     .regex(/^\d{4}-\d{2}-\d{2}$/, 'Data de nascimento inválida (use AAAA-MM-DD).')
     .refine((d) => {
       const data = new Date(`${d}T00:00:00Z`);
+      if (Number.isNaN(data.getTime()) || !data.toISOString().startsWith(d)) return false;
       const idade = (Date.now() - data.getTime()) / (365.25 * 86_400_000);
-      return !Number.isNaN(data.getTime()) && idade >= 16 && idade <= 120;
-    }, 'É necessário ter pelo menos 16 anos.'),
+      return idade >= 16 && idade <= 120;
+    }, 'Data inválida ou menor de 16 anos.'),
   email: z.email('Informe um e-mail válido.'),
   telefone,
   senha,
@@ -33,7 +34,7 @@ export const esquemaCadastroCliente = z.object({
 export const esquemaArquivoBase64 = z.object({
   nome: z.string().min(1).max(200),
   mime: z.string().min(3).max(80),
-  conteudoBase64: z.string().min(10, 'Arquivo vazio.'),
+  conteudoBase64: z.string().min(10, 'Arquivo vazio.').max(7_000_000, 'O arquivo deve ter no máximo 5 MB.'),
 });
 
 export const esquemaCadastroInterprete = z.object({
