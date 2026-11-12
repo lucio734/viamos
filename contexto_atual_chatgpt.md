@@ -248,10 +248,33 @@ Códigos     200/201/202/204 · 400 validação · 401 · 402 pagamento recusado
 
 ---
 
-## 9. Resposta do ChatGPT (modelo)
+## 9. Resposta (Lúcio + Agente IA — conclusão do Bloco F1 em 12/11/2026)
 
-Por favor, responda em `contexto_atual_claude.md` (ou neste mesmo arquivo, abaixo) com:
-1. **Concordâncias / discordâncias** por item (D-01…D-18, divisão de blocos, prioridades) — com motivo e alternativa.
-2. **Perguntas** que precisam do grupo (ex.: valores de D-01, janela de D-05).
-3. **O que você vai fazer no F1** e qualquer ajuste no plano que isso implique.
-4. Ao fim do F1: o que foi feito, pendências, bugs, decisões novas e o próximo bloco do Gustavo.
+> Relatório completo de passagem de bastão para o Gustavo + Claude disponível também em [`contexto_atual_claude.md`](contexto_atual_claude.md).
+
+### 9.1. Concordâncias e observações sobre D-01…D-18, divisão de blocos e prioridades
+- **D-01 a D-18:** **Concordância integral** com todas as decisões técnicas e de regra de negócio adotadas no Bloco 0. A escolha do **Drizzle ORM** (D-17) com migrações SQL explícitas (`0000_esquema_inicial.sql`, `0001_auditoria_imutavel.sql`), a separação MVC estrita e os parâmetros centralizados em `backend/src/config/regras.ts` mantêm o projeto 100% aderente aos itens #34–#41 do Dossiê de 50 critérios.
+- **Divisão de blocos:** Mantida conforme `docs/PLANO_BLOCOS.md`. O componente compartilhado `frontend/src/components/Mapa.tsx` (`react-leaflet` + Nominatim opcional) já foi entregue neste Bloco F1 com interface limpa (`posicao`, `aoSelecionar`, `raioKm`, `marcadores`, `somenteLeitura`) para ser reutilizado diretamente no **Bloco F2** (passo 2 da nova solicitação) e no **Bloco F3** (mapa de demandas).
+- **Branch de trabalho:** Os commits do Bloco 0 já estavam integrados na `main` (`cfccb92`), e o trabalho do Bloco F1 foi desenvolvido e publicado diretamente na `main` conforme instrução do Lúcio.
+
+### 9.2. Perguntas que permanecem para validação do grupo
+1. **D-01 (Preços de referência por tipo):** confirmar se mantemos Saúde R$ 95/h, Jurídico R$ 110/h, Educação R$ 80/h, Evento R$ 100/h, Outro R$ 85/h + deslocamento R$ 15 + taxa de 10%.
+2. **D-05 (Janela de check-in):** confirmar se mantemos **30 min** de antecedência (`REGRAS.CHECKIN_ANTECEDENCIA_MIN = 30`) ou se reduzimos para 15 min como citado no texto ilustrativo do mockup do hub do intérprete.
+3. **P-01 (Link do Figma — item #5 do Dossiê):** importar as 12 telas do Stitch no Figma e disponibilizar o link para o Bloco P2.
+
+### 9.3. O que foi feito e verificado no Bloco F1
+- **Ambiente e banco de testes:** reproduzidos os testes de backend neste ambiente com **PostgreSQL 18.6** real (`embedded-postgres`), ampliando a suíte de 49 para **50/50 testes passando**.
+- **Regras de agentes:** preservados `CLAUDE/AGENTS.md` e `CLAUDE/CLAUDE.md` e espelhados na raiz (`AGENTS.md` e `CLAUDE.md`).
+- **Utilitários e componentes novos:** `frontend/src/utils/validacao.ts`, `frontend/src/components/TelaPublica.tsx` e `frontend/src/components/Mapa.tsx`.
+- **7 rotas do Bloco F1 implementadas e conectadas em `frontend/src/rotas.tsx`:**
+  1. `/recuperar-senha` (`pages/auth/RecuperarSenha.tsx` — RF07, RNF06, com atalho `tokenDev` fora de produção).
+  2. `/redefinir-senha/:token` (`pages/auth/RedefinirSenha.tsx` — RF07).
+  3. `/cadastro` (`pages/auth/SelecaoPerfil.tsx` — RF02).
+  4. `/cadastro/cliente` (`pages/auth/CadastroCliente.tsx` — RF03, RF45, RNF09; protótipo `code (7).html` + telefone e consentimento LGPD).
+  5. `/cadastro/interprete` (`pages/auth/CadastroInterprete.tsx` — RF04, RF05, RF45, RNF09, RNF36; protótipo `code (17).html` + mapa Leaflet, raio ≤ 15 km, número e upload *drag-and-drop* do certificado em Base64 ≤ 5 MB e aviso de análise pelo backoffice).
+  6. `/notificacoes` (`pages/comum/Notificacoes.tsx` — RF42, com os 4 estados visuais, filtro e navegação para `referenciaRecurso`).
+  7. `/suporte` (`pages/comum/Suporte.tsx` — RF34, RNF44, suporte operacional e emergência com geolocalização explícita opcional).
+- **Revisão multiagente real (`PROMPT AGENTES`):** executados 3 subagentes independentes (`revisor_ux_ui`, `revisor_qa_security`, `revisor_po`); todos os achados de validação/UX do F1 foram corrigidos e registrados em `docs/BUGS.md` (B-002 a B-006) e `docs/REGISTRO_TRABALHO.md`.
+
+### 9.4. Próximo bloco do Gustavo + Claude — Bloco F2 (Jornada do Cliente)
+Ver detalhes completos em [`contexto_atual_claude.md`](contexto_atual_claude.md) e [`docs/PLANO_BLOCOS.md`](docs/PLANO_BLOCOS.md).

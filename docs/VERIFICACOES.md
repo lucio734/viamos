@@ -12,13 +12,13 @@ Legenda: ✅ atendido e verificado · 🟡 parcialmente atendido · ⬜ pendente
 | Orientação do labProt | Como foi aplicada | Resultado | Evidência |
 |---|---|---|---|
 | Anatomia do prompt (papel, tarefa, contexto, regras, formato, exemplo) | Modelo de prompt por papel da equipe de agentes | ✅ | `docs/EQUIPE_AGENTES.md` §3 |
-| Persona calibrada (role prompting) | Um perfil por papel do PROMPT AGENTES (PO, QA, Security…) | ✅ definido; 🟡 uso efetivo só a partir do Bloco F1/F2 | `docs/EQUIPE_AGENTES.md` §1 |
+| Persona calibrada (role prompting) | Um perfil por papel do PROMPT AGENTES (PO, QA, Security, UX/UI…) | ✅ aplicado com subagentes independentes no Bloco F1 (`revisor_ux_ui`, `revisor_qa_security`, `revisor_po`) | `docs/EQUIPE_AGENTES.md` §1, `docs/REGISTRO_TRABALHO.md` §2.2 |
 | Delimitadores: separar instrução de dados (defesa contra injeção) | Entrada de código/documentos entre `<<< >>>` nos prompts; na aplicação, toda entrada do usuário é validada com Zod e nunca interpretada como instrução | ✅ | `backend/src/middlewares/validar.ts` |
 | Contrato de saída (formato previsível, JSON) | API responde sempre `{ erro: { codigo, mensagem, detalhes } }` nos erros e JSON tipado nos sucessos; prompts de revisão pedem tabela com colunas fixas | ✅ | `backend/src/middlewares/erros.ts`, `frontend/src/api/cliente.ts` |
 | Chain-of-Thought dirigido para depuração | Smoke test manual passo a passo antes dos testes automatizados (criar → aceitar → check-in → encerrar → pagar) | ✅ | histórico desta sessão; casos em `backend/tests/` |
-| Prompt chaining (extrair requisitos → código → testes → revisão) | Ordem adotada no Bloco 0: leitura do briefing/RF → schema → services → controllers/rotas → smoke test → testes automatizados → documentação | ✅ | commits da branch `feat/plataforma-base` |
-| ReAct (pensar → agir → observar) | Cada regra implementada foi exercitada via HTTP antes de seguir (observação de 200/4xx) | ✅ | `backend/tests/excecoes.test.ts` reproduz as observações |
-| Self-consistency / reflexão | Não aplicada ainda (exige revisões independentes por papel) | ⬜ Bloco F4 | — |
+| Prompt chaining (extrair requisitos → código → testes → revisão) | Ordem adotada no Bloco 0 e no Bloco F1: leitura do briefing/RF → implementação → build/testes → revisão multiagente (UX/UI, QA/Security, PO) → correções → documentação | ✅ | commits na `main` |
+| ReAct (pensar → agir → observar) | Cada regra implementada foi exercitada via HTTP/testes antes de seguir (observação de 200/4xx) | ✅ | `backend/tests/excecoes.test.ts` reproduz as observações |
+| Self-consistency / reflexão | Revisão cruzada independente por 3 subagentes especializados no Bloco F1 + autocrítica aplicada antes do commit | ✅ aplicado no Bloco F1; repetir nos blocos F2–F4 | `docs/REGISTRO_TRABALHO.md` §2.2, `docs/BUGS.md` (B-002 a B-006) |
 | Regra de ouro: "um júnior executaria sem perguntar?" | `PLANO_BLOCOS.md` descreve cada tela com rota, endpoints, protótipo e estados esperados | ✅ | `docs/PLANO_BLOCOS.md` |
 
 ## 2. Software Development Checklist 2026 (SKM) — fases e entregáveis
@@ -32,11 +32,11 @@ Legenda: ✅ atendido e verificado · 🟡 parcialmente atendido · ⬜ pendente
 | 2 Design & Prototyping | Mockups de alta fidelidade | ✅ 12 telas Stitch (HTML + PNG) | `Contexto/Arquivos Stitch/` |
 | 2 | Protótipo interativo (clicável) | ⬜ link do Figma pendente (importar do Stitch) | Pendência P-01 em `docs/DECISOES.md` |
 | 2 | Design system / style guide | ✅ `DESIGN.md` aplicado como tokens do Tailwind | `frontend/src/index.css` |
-| 3 Core Development | Acesso ao repositório de código | ✅ repositório público no GitHub; 🟡 Gustavo ainda sem push via Claude (app do GitHub) | `README.md` §8 |
-| 3 | MVP funcional / builds incrementais | 🟡 backend completo + base do frontend; telas nos Blocos F1–F4 | commits da branch |
+| 3 Core Development | Acesso ao repositório de código | ✅ repositório público no GitHub com commits publicados na `main` | `README.md` §8 |
+| 3 | MVP funcional / builds incrementais | 🟡 backend completo + base do frontend + Bloco F1 (10 rotas prontas); demais telas nos Blocos F2–F4 | commits na `main` |
 | 3 | Documentação da API (Swagger/OpenAPI) | ⬜ adicionar especificação OpenAPI gerada a partir das rotas (Bloco F4) | `backend/src/routes/index.ts` (mapa comentado) → `docs/api/openapi.yaml` |
-| 4 QA & Testing | Plano e casos de teste | 🟡 49 casos automatizados existem; o plano escrito (objetivo, escopo, critérios) fica para o Bloco F4 | `backend/tests/`, `docs/TESTES.md` |
-| 4 | Relatório de bugs e resoluções | ⬜ abrir `docs/BUGS.md` (log) a partir do Bloco F1 | — |
+| 4 QA & Testing | Plano e casos de teste | 🟡 50 casos automatizados passando no backend; plano escrito (objetivo, escopo, critérios) fica para o Bloco F4 | `backend/tests/`, `docs/TESTES.md` |
+| 4 | Relatório de bugs e resoluções | ✅ ativo e atualizado no Bloco F1 (B-001 a B-006 registrados e corrigidos) | `docs/BUGS.md` |
 | 4 | Auditoria de performance e segurança | 🟡 `npm audit` executado (1 vulnerabilidade moderada apenas em dependência de desenvolvimento — esbuild via drizzle-kit); revisão OWASP formal no Bloco F4 | `docs/SEGURANCA.md` |
 | 5 Deployment & SLA | Ambiente de produção ativo | ⬜ Bloco D | `docs/DEPLOY.md` |
 | 5 | Manuais de usuário e administrador | ⬜ Bloco Z (roteiro de demonstração + manual curto por perfil) | `docs/MANUAL.md` |
@@ -62,10 +62,10 @@ Estado por item, com a evidência atual. Itens 1–28 são o documento "Produç�
 | 23, 25, 28 | Estados, DFD, contexto | ✅ entregues em 11/11 | `Entregas/Viamos_Modelagem_Sistemas.pdf` |
 | 24, 26, 27 | Operação, processos de telas, ferramenta CASE | ⬜ | Bloco P1 |
 | 29 | Rotas = sitemap | ✅ | `frontend/src/rotas.tsx` |
-| 30 | Componentes fiéis aos wireframes | 🟡 Login/Hub do cliente prontos; demais nos Blocos F1–F3 | `frontend/src/pages/` |
-| 31 | Responsividade | 🟡 shell mobile + sidebar desktop; revisão no F4 | `frontend/src/components/AppShell.tsx` |
-| 32 | Estados visuais (carregando/sucesso/erro/vazio) | ✅ componentes prontos e usados no Hub | `frontend/src/components/ui.tsx` |
-| 33 | Validação e máscaras | ✅ máscaras no front + validação Zod no back | `frontend/src/utils/formato.ts`, `backend/src/controllers/*` |
+| 30 | Componentes fiéis aos wireframes | 🟡 Splash, Login, Hub do cliente e todo o Bloco F1 (`/recuperar-senha`, `/redefinir-senha/:token`, `/cadastro`, `/cadastro/cliente`, `/cadastro/interprete`, `/notificacoes`, `/suporte`) prontos; demais nos Blocos F2–F4 | `frontend/src/pages/` |
+| 31 | Responsividade | 🟡 shell mobile + sidebar desktop + formulários responsivos no F1; revisão global no F4 | `frontend/src/components/AppShell.tsx`, `TelaPublica.tsx` |
+| 32 | Estados visuais (carregando/sucesso/erro/vazio) | ✅ componentes prontos e usados no Hub e em todas as telas do Bloco F1 | `frontend/src/components/ui.tsx`, `pages/auth/*`, `pages/comum/*` |
+| 33 | Validação e máscaras | ✅ máscaras (`formato.ts`) + validação no cliente (`validacao.ts`) + validação Zod no servidor | `frontend/src/utils/{formato,validacao}.ts`, `backend/src/controllers/*` |
 | 34 | Separação MVC no back-end | ✅ | `backend/src/{models,controllers,views,routes,services}` |
 | 35 | Status HTTP semânticos | ✅ 200/201/202/204/400/401/402/403/404/409/422/423/429 | `backend/src/routes/index.ts`, testes |
 | 36 | Erros sem stack trace | ✅ testado | `backend/src/middlewares/erros.ts`, `tests/excecoes.test.ts` |
@@ -75,10 +75,10 @@ Estado por item, com a evidência atual. Itens 1–28 são o documento "Produç�
 | 40 | ORM / consultas parametrizadas | ✅ Drizzle | `backend/src/models/db.ts` |
 | 41 | Migrações e seed | ✅ | `backend/drizzle/`, `backend/src/db/seed.ts` |
 | 42 | `.gitignore` | ✅ testado (sem `.env`/`node_modules` nos commits) | `.gitignore` |
-| 43 | Branches e commits organizados | 🟡 branch `feat/plataforma-base` com commits por escopo; PR pendente de acesso | histórico git |
+| 43 | Branches e commits organizados | ✅ commits organizados por escopo na `main` | histórico git |
 | 44 | README com clonagem/instalação/execução | ✅ | `README.md` |
 | 45–47 | Deploy, HTTPS, rotas SPA | 🟡 configs prontas (`render.yaml`, `vercel.json`); publicação no Bloco D | — |
-| 48 | Testes de fluxo principal e exceções | ✅ 49 casos passando (backend); frontend no F4 | `backend/tests/` |
+| 48 | Testes de fluxo principal e exceções | ✅ 50 casos passando (backend, reproduzidos com PostgreSQL 18.6 embutido); frontend no F4 | `backend/tests/` |
 | 49 | Auditoria de código (domínio da equipe) | ⬜ cada integrante revisa e explica sua parte (Bloco Z) | — |
 | 50 | Ensaio de demonstração | ⬜ Bloco Z | `docs/ROTEIRO_DEMONSTRACAO.md` |
 
