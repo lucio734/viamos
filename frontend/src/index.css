@@ -1,0 +1,128 @@
+@import 'tailwindcss';
+@import 'leaflet/dist/leaflet.css';
+
+/*
+ * Víamos Design System → tokens do Tailwind v4 (fonte: docs/contexto/arquivos-md/DESIGN.md).
+ * Classes geradas: bg-primary, text-on-primary, bg-surface-container, border-outline-variant, text-status-online...
+ * RNF45: cor primária #1a2e44 (primary-container) e navegação inferior persistente.
+ */
+@theme {
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --color-surface: #fbf9fb;
+  --color-surface-dim: #dbd9db;
+  --color-surface-bright: #fbf9fb;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f5f3f5;
+  --color-surface-container: #efedef;
+  --color-surface-container-high: #e9e7ea;
+  --color-surface-container-highest: #e4e2e4;
+  --color-on-surface: #1b1c1d;
+  --color-on-surface-variant: #43474d;
+  --color-inverse-surface: #303032;
+  --color-inverse-on-surface: #f2f0f2;
+  --color-outline: #74777d;
+  --color-outline-variant: #c4c6cd;
+  --color-surface-tint: #4c6078;
+
+  --color-primary: #03192e;
+  --color-on-primary: #ffffff;
+  --color-primary-container: #1a2e44;
+  --color-on-primary-container: #8296b0;
+  --color-inverse-primary: #b4c8e4;
+  --color-primary-fixed: #d1e4ff;
+  --color-primary-fixed-dim: #b4c8e4;
+  --color-on-primary-fixed: #061d32;
+  --color-on-primary-fixed-variant: #35485f;
+
+  --color-secondary: #5d5f5f;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #dfe0e0;
+  --color-on-secondary-container: #616363;
+  --color-secondary-fixed: #e2e2e2;
+  --color-secondary-fixed-dim: #c6c6c7;
+
+  --color-tertiary: #241500;
+  --color-on-tertiary: #ffffff;
+  --color-tertiary-container: #3d2907;
+  --color-on-tertiary-container: #ae8f64;
+  --color-tertiary-fixed: #ffddb0;
+  --color-tertiary-fixed-dim: #e3c193;
+
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+
+  --color-background: #fbf9fb;
+  --color-on-background: #1b1c1d;
+  --color-background-alt: #f8fafc;
+  --color-surface-variant: #e4e2e4;
+
+  --color-status-online: #2d6a4f;
+  --color-status-alert: #d90429;
+  --color-pro-verification: #ffb703;
+
+  --radius-sm: 0.125rem;
+  --radius-DEFAULT: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+
+  --spacing-touch: 44px; /* RNF13 — área mínima de toque */
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    @apply bg-background text-on-background;
+    font-size: 16px; /* RNF14 — corpo mínimo de 16px para leitura */
+    line-height: 1.5;
+  }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    user-select: none;
+  }
+  .material-symbols-outlined.preenchido {
+    font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  }
+  /* Foco visível para navegação por teclado (WCAG 2.2 AA) */
+  :focus-visible {
+    outline: 3px solid var(--color-primary-container);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex min-h-touch items-center justify-center gap-2 rounded-lg px-5 py-3 text-base font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primario {
+    @apply inline-flex min-h-touch items-center justify-center gap-2 rounded-lg px-5 py-3 text-base font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50 bg-primary-container text-on-primary hover:bg-primary;
+  }
+  .btn-secundario {
+    @apply inline-flex min-h-touch items-center justify-center gap-2 rounded-lg px-5 py-3 text-base font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50 border border-primary-container bg-surface-container-lowest text-primary-container hover:bg-surface-container-low;
+  }
+  .btn-perigo {
+    @apply inline-flex min-h-touch items-center justify-center gap-2 rounded-lg px-5 py-3 text-base font-semibold transition-colors disabled:cursor-not-allowed disabled:opacity-50 bg-error text-on-error hover:bg-on-error-container;
+  }
+  .campo {
+    @apply block w-full min-h-touch rounded-md border border-outline bg-surface-container-lowest px-4 py-3 text-base text-on-surface placeholder:text-outline focus:border-primary-container focus:ring-2 focus:ring-primary-container/30 focus:outline-none;
+  }
+  .campo-erro {
+    @apply border-error focus:border-error focus:ring-error/30;
+  }
+  /* Tailwind v4: classes de @layer components não podem ser reaproveitadas via @apply — por isso .btn repete a base. */
+  .rotulo {
+    @apply mb-1.5 block text-sm font-semibold text-on-surface-variant;
+  }
+  .cartao {
+    @apply rounded-xl border border-outline-variant/60 bg-surface-container-lowest p-5 shadow-[0_2px_12px_rgba(0,0,0,0.06)];
+  }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs font-semibold tracking-wide uppercase;
+  }
+}
