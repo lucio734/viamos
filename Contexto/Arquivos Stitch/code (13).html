@@ -1,0 +1,297 @@
+<!DOCTYPE html><html class="light" lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Histórico de Atendimentos - Víamos</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#f2f0f2",
+                        "primary-fixed": "#d1e4ff",
+                        "primary-fixed-dim": "#b4c8e4",
+                        "primary-container": "#1a2e44",
+                        "on-error": "#ffffff",
+                        "surface": "#fbf9fb",
+                        "surface-container-highest": "#e4e2e4",
+                        "secondary-fixed": "#e2e2e2",
+                        "on-error-container": "#93000a",
+                        "status-alert": "#D90429",
+                        "error": "#ba1a1a",
+                        "on-tertiary-container": "#ae8f64",
+                        "primary": "#03192e",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "surface-container-low": "#f5f3f5",
+                        "surface-container": "#efedef",
+                        "pro-verification": "#FFB703",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "on-tertiary-fixed": "#281800",
+                        "surface-bright": "#fbf9fb",
+                        "surface-tint": "#4c6078",
+                        "tertiary": "#241500",
+                        "on-surface": "#1b1c1d",
+                        "background-alt": "#F8FAFC",
+                        "on-background": "#1b1c1d",
+                        "inverse-surface": "#303032",
+                        "inverse-primary": "#b4c8e4",
+                        "on-secondary-container": "#616363",
+                        "outline-variant": "#c4c6cd",
+                        "surface-container-high": "#e9e7ea",
+                        "surface-variant": "#e4e2e4",
+                        "outline": "#74777d",
+                        "secondary-container": "#dfe0e0",
+                        "on-primary-fixed": "#061d32",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#5a431f",
+                        "status-online": "#2D6A4F",
+                        "on-primary-container": "#8296b0",
+                        "background": "#fbf9fb",
+                        "on-surface-variant": "#43474d",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-fixed-variant": "#454747",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#3d2907",
+                        "tertiary-fixed-dim": "#e3c193",
+                        "surface-dim": "#dbd9db",
+                        "on-primary-fixed-variant": "#35485f",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed": "#ffddb0",
+                        "secondary": "#5d5f5f",
+                        "surface-container-lowest": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin-desktop": "48px",
+                        "margin-mobile": "20px",
+                        "unit": "8px",
+                        "touch-target": "44px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "mobile-headline": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-base": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "mobile-headline": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-base": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-alt text-on-background min-h-screen flex flex-col md:flex-row pb-20 md:pb-0">
+<!-- TopAppBar (Mobile) -->
+<header class="md:hidden bg-surface dark:bg-inverse-surface text-primary dark:text-primary-fixed w-full top-0 sticky flex justify-between items-center px-margin-mobile h-16 border-b border-outline-variant z-40 transition-colors duration-200">
+<button aria-label="Menu" class="w-touch-target h-touch-target flex items-center justify-center text-primary dark:text-primary-fixed hover:bg-surface-container-high rounded-full transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-mobile-headline text-mobile-headline font-bold">Víamos</h1>
+<button aria-label="Profile" class="w-touch-target h-touch-target flex items-center justify-center text-primary dark:text-primary-fixed hover:bg-surface-container-high rounded-full overflow-hidden transition-colors duration-200">
+<img alt="Foto do perfil do usuário" class="w-full h-full object-cover" data-alt="A small, circular avatar portrait of a user. The lighting is bright and professional, adhering to a modern corporate style. Deep navy and crisp white tones dominate the image to match the UI. The face is clearly visible, conveying trust and empathy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtoemCtO_dyQhf4veTUhWOqAnWYi3pghW81BFnWBVf7NySTE7MXEnlPBpg0vH35iUYHZ4_KsgKVIyCApDRkhplKwDp4I68RS9PSxaPb_CH44RiAciZ3H0pzDOqNDjS5FHImi0B0b4AMfa1-gBPTHciT31i3xhmD2DLNxG2bZH89CCw-MZUkqzQZvrD4vkxRlYFswxgqZkDxOSQ3dhBXeB7f3dondDHA01idMnVX0iBCWzC-SZmN6qLpQ">
+</button>
+</header>
+<!-- NavigationDrawer (Desktop) -->
+<nav class="hidden md:flex bg-surface dark:bg-inverse-surface shadow-lg h-screen w-80 rounded-r-xl flex-col p-4 space-y-2 sticky top-0 z-40">
+<div class="flex items-center gap-4 p-4 border-b border-surface-container mb-4">
+<img alt="Avatar do Intérprete" class="w-12 h-12 rounded-full object-cover" data-alt="A high-quality, professional headshot of a verified sign language interpreter. The image uses a clean, bright lighting setup consistent with a modern corporate aesthetic. The subject appears empathetic and approachable, dressed professionally against a soft, neutral background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaOxF1a884LRkiNJ1mKcy20hUbbuLqDJo5nPVzMMzEEb8DOKpyInAUXRw29Sy6FyR2TM9UOnrHqDT4-6xG7VxDO8YUbTc_t85CoU9QOYvIfn6ra9ySCbktdURYolzxJ8A4i1Y8cS4C0oCmDF-TQFYoyTp53yLw33OdrYoVKz0b1LXiXLOQk7lNl72SIkD_OYeNkWrVkjUYsRshZhEToSecvw0gP0tdUxmqncligOhdt3rruvsMDtLmFQ">
+<div>
+<h2 class="font-headline-md text-headline-md text-primary">João Intérprete</h2>
+<p class="font-body-base text-body-base text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-pro-verification" data-weight="fill">verified</span>
+                    Intérprete Verificado
+                </p>
+<p class="text-xs text-status-online flex items-center gap-1 mt-1">
+<span class="w-2 h-2 rounded-full bg-status-online inline-block"></span> Online
+                </p>
+</div>
+</div>
+<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="event_available">event_available</span>
+<span class="font-body-base text-body-base">Disponibilidade</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg bg-primary-container text-on-primary-container font-bold transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-body-base text-body-base">Meus Atendimentos</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="verified">verified</span>
+<span class="font-body-base text-body-base">Certificações Prolibras</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-body-base text-body-base">Financeiro</span>
+</a>
+<div class="flex-grow"></div>
+<a class="flex items-center gap-3 p-3 rounded-lg text-on-surface-variant hover:bg-surface-variant transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-body-base text-body-base">Configurações</span>
+</a>
+<a class="flex items-center gap-3 p-3 rounded-lg text-error hover:bg-error-container transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-body-base text-body-base">Sair</span>
+</a>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 w-full max-w-5xl mx-auto px-margin-mobile md:px-margin-desktop py-8">
+<div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="font-display-lg text-display-lg text-primary mb-2">Histórico de Atendimentos</h1>
+<p class="font-body-base text-body-base text-on-surface-variant">Acompanhe seus registros de serviços passados e acesse comprovantes.</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-surface text-primary border border-outline rounded-full font-label-caps text-label-caps hover:bg-surface-container-low transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">filter_list</span> Filtrar
+                </button>
+<button class="px-4 py-2 bg-surface text-primary border border-outline rounded-full font-label-caps text-label-caps hover:bg-surface-container-low transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">calendar_month</span> Mês Atual
+                </button>
+</div>
+</div>
+<!-- Atendimento Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1 -->
+<div class="bg-surface rounded-xl shadow-sm border border-surface-container p-6 flex flex-col gap-4 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-16 h-16 bg-status-online/10 rounded-bl-full flex items-start justify-end p-2 transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined text-status-online">check_circle</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">medical_services</span>
+</div>
+<div>
+<h3 class="font-mobile-headline text-mobile-headline text-primary">Consulta Médica</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">24 Out 2023 • 14:00 - 15:30</p>
+</div>
+</div>
+<div class="flex items-center gap-3 bg-background-alt p-3 rounded-lg mt-2">
+<img alt="Intérprete" class="w-8 h-8 rounded-full object-cover" data-alt="A close-up headshot of a female sign language interpreter in a professional medical setting. The lighting is clinical yet soft, indicating a healthcare environment. She wears a dark blue top, matching the brand palette. The mood is focused and reassuring." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC6GKkIfTx9nLJaFomuzZdBPxNvrVpknJC6nEsenAWnSAOLcKhdDlUJf1gW3Idyciv9hZEF6VlyB3ym7_N6_JOqwMycfRimRgNK0j_ZaBDLsgbddOEFibVWTuTRXVjutsTpIolyTGb0KlX-zmJ-D9LjDbKT2a89HzTZl9nmrJnSa4Pbi0HKZELh4tVihtQzY8YxV9l312_9ixWYv5ScxZ2Gk-ynOyBAfXv43tYzmkMDAl7t75AOm8euBw">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Intérprete</p>
+<p class="font-body-base text-body-base text-on-surface font-semibold">Maria Silva</p>
+</div>
+</div>
+<div class="mt-auto pt-4 flex gap-2">
+<button class="flex-1 py-2 px-3 bg-surface text-primary border border-primary rounded-lg font-label-caps text-label-caps hover:bg-surface-container-low transition-colors text-center">
+                        Ver Detalhes
+                    </button>
+<button class="flex-1 py-2 px-3 bg-primary text-on-primary rounded-lg font-label-caps text-label-caps hover:bg-primary/90 transition-colors text-center flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px]">receipt_long</span> Comprovante
+                    </button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface rounded-xl shadow-sm border border-surface-container p-6 flex flex-col gap-4 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-16 h-16 bg-status-online/10 rounded-bl-full flex items-start justify-end p-2 transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined text-status-online">check_circle</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">gavel</span>
+</div>
+<div>
+<h3 class="font-mobile-headline text-mobile-headline text-primary">Audiência Trabalhista</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">15 Out 2023 • 09:00 - 11:00</p>
+</div>
+</div>
+<div class="flex items-center gap-3 bg-background-alt p-3 rounded-lg mt-2">
+<img alt="Intérprete" class="w-8 h-8 rounded-full object-cover" data-alt="A portrait of a male sign language interpreter in a formal legal setting, perhaps wearing a tie or professional blazer. The lighting is crisp and serious, with high contrast shadows suited for a courtroom or law office context. Navy blue elements are visible." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKkFfVTH4hWcaGYbDJiOJAknZcAdkLZOC_toshsxNgOttpj7iXi1qpsjLygMcCJzcNxqJlKwGZnpASILWoIPDC-Mcj0fXCRna-rZXPlqNHKJ1MRCk9wDdtD5Hz6RhjAgx3m9GgY4wyVYe3MXO6VM2H1bka2VP_ytVcDmnlmIvzNPOO4M_4mjARaJtKdol1Cht4gWdFsBxj1ksDVs_zwE9iZ_pavLQb-7PWsiwfbn6brjwNNWhw0wr6Cw">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Intérprete</p>
+<p class="font-body-base text-body-base text-on-surface font-semibold flex items-center gap-1">Carlos Eduardo <span class="material-symbols-outlined text-[14px] text-pro-verification" data-weight="fill">verified</span></p>
+</div>
+</div>
+<div class="mt-auto pt-4 flex gap-2">
+<button class="flex-1 py-2 px-3 bg-surface text-primary border border-primary rounded-lg font-label-caps text-label-caps hover:bg-surface-container-low transition-colors text-center">
+                        Ver Detalhes
+                    </button>
+<button class="flex-1 py-2 px-3 bg-primary text-on-primary rounded-lg font-label-caps text-label-caps hover:bg-primary/90 transition-colors text-center flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px]">receipt_long</span> Comprovante
+                    </button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface rounded-xl shadow-sm border border-surface-container p-6 flex flex-col gap-4 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-16 h-16 bg-status-online/10 rounded-bl-full flex items-start justify-end p-2 transition-transform group-hover:scale-110">
+<span class="material-symbols-outlined text-status-online">check_circle</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">school</span>
+</div>
+<div>
+<h3 class="font-mobile-headline text-mobile-headline text-primary">Palestra Acadêmica</h3>
+<p class="font-label-caps text-label-caps text-on-surface-variant">02 Out 2023 • 19:00 - 21:00</p>
+</div>
+</div>
+<div class="flex items-center gap-3 bg-background-alt p-3 rounded-lg mt-2">
+<img alt="Intérprete" class="w-8 h-8 rounded-full object-cover" data-alt="A bright, modern headshot of a sign language interpreter against a university or library background. The focus is sharp on the subject, expressing a friendly and academic demeanor. The color palette emphasizes clean whites, gentle greys, and navy accents." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZ9t32DabvJ5Igsrr9laAYWu9gnbhS9a5z06beJ1tERRLnFqt9MdFmg7h2qqzPdYBWkuxW_SsXJiOSmCt2lfUFpXGgK94FiPFJEfE7DCAx-MxUfbViChy0ZrM7mtBe1knD4Yo61960tS_8h5V0dAKXd5i_nv3zFpNi4QVKyRQhuaArOxQ1U1BgnVWJAci6Sj3kltPlex1u2xoOaMpBEOV0B_BWeEyTjhiFgPeJlNXIYfI9xmwy3PykGA">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Intérprete</p>
+<p class="font-body-base text-body-base text-on-surface font-semibold">Ana Beatriz</p>
+</div>
+</div>
+<div class="mt-auto pt-4 flex gap-2">
+<button class="flex-1 py-2 px-3 bg-surface text-primary border border-primary rounded-lg font-label-caps text-label-caps hover:bg-surface-container-low transition-colors text-center">
+                        Ver Detalhes
+                    </button>
+<button class="flex-1 py-2 px-3 bg-primary text-on-primary rounded-lg font-label-caps text-label-caps hover:bg-primary/90 transition-colors text-center flex items-center justify-center gap-1">
+<span class="material-symbols-outlined text-[16px]">receipt_long</span> Comprovante
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile) -->
+<nav class="md:hidden bg-surface dark:bg-inverse-surface border-t border-outline-variant shadow-sm fixed bottom-0 w-full z-50 flex justify-around items-center h-20 px-2 transition-transform duration-200">
+<a class="flex flex-col items-center justify-center text-secondary hover:bg-surface-container-low rounded-lg p-2 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="home">home</span>
+<span class="font-label-caps text-label-caps">Início</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="history">history</span>
+<span class="font-label-caps text-label-caps">Serviços</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary hover:bg-surface-container-low rounded-lg p-2 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="chat">chat</span>
+<span class="font-label-caps text-label-caps">Mensagens</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary hover:bg-surface-container-low rounded-lg p-2 transition-colors" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-label-caps text-label-caps">Perfil</span>
+</a>
+</nav>
+</body></html>

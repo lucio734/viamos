@@ -1,0 +1,295 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Hub do Cliente - Víamos</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#b4c8e4",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#fbf9fb",
+                        "background": "#fbf9fb",
+                        "outline": "#74777d",
+                        "surface": "#fbf9fb",
+                        "secondary": "#5d5f5f",
+                        "primary-container": "#1a2e44",
+                        "surface-container-low": "#f5f3f5",
+                        "tertiary-fixed": "#ffddb0",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#5a431f",
+                        "surface-container-highest": "#e4e2e4",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "on-tertiary-container": "#ae8f64",
+                        "on-surface": "#1b1c1d",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#241500",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "background-alt": "#F8FAFC",
+                        "on-secondary-container": "#616363",
+                        "surface-variant": "#e4e2e4",
+                        "primary": "#03192e",
+                        "inverse-on-surface": "#f2f0f2",
+                        "on-primary-container": "#8296b0",
+                        "surface-dim": "#dbd9db",
+                        "secondary-fixed": "#e2e2e2",
+                        "pro-verification": "#FFB703",
+                        "error": "#ba1a1a",
+                        "on-background": "#1b1c1d",
+                        "on-primary-fixed-variant": "#35485f",
+                        "on-primary-fixed": "#061d32",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#e3c193",
+                        "tertiary-container": "#3d2907",
+                        "inverse-primary": "#b4c8e4",
+                        "surface-container": "#efedef",
+                        "status-online": "#2D6A4F",
+                        "status-alert": "#D90429",
+                        "surface-tint": "#4c6078",
+                        "on-secondary-fixed-variant": "#454747",
+                        "on-surface-variant": "#43474d",
+                        "inverse-surface": "#303032",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c4c6cd",
+                        "secondary-container": "#dfe0e0",
+                        "primary-fixed": "#d1e4ff",
+                        "surface-container-high": "#e9e7ea",
+                        "on-tertiary-fixed": "#281800"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin-desktop": "48px",
+                        "margin-mobile": "20px",
+                        "unit": "8px",
+                        "touch-target": "44px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "mobile-headline": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-base": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "mobile-headline": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-base": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.background-alt'); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body-base text-on-surface antialiased min-h-screen flex flex-col md:flex-row">
+<!-- Sidebar (Desktop) / Drawer -->
+<aside class="hidden md:flex flex-col w-72 bg-surface h-screen shadow-xl z-[60] py-4 fixed inset-y-0 left-0">
+<div class="px-margin-desktop mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-4xl" data-weight="fill" style="font-variation-settings: 'FILL' 1;">sign_language</span>
+<span class="font-display-lg text-primary">Víamos</span>
+</div>
+<div class="px-margin-desktop mb-6 flex items-center gap-4">
+<img class="w-12 h-12 rounded-full object-cover border-2 border-primary-container" data-alt="A professional portrait of a Deaf user, smiling in a well-lit modern office space. The lighting is soft and natural, conveying approachability and trust. The background is slightly blurred." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC0Pdbc8jCOZc-7pGkUVwCAwAJbvObPqTRdVecqBmc4sIsxy5E2OhoxupsmkHRWExULl6BsgZP1X4h0rVf6K3CJbTRQBg4Ttym67a006DGCVepYLrU0fgL6QFvJuxkQSOYKIc38YXoOxnxRV60yn427xaJWWAFv_tGpIzA_CFjnkNWjNn95kG9QME29cRcPazzRPPN4JhtLBwpFRHrxXlOCWP_8VkD3rynl7YMbBQMUDy8GHw_tuREBFw">
+<div>
+<h3 class="font-headline-md text-on-surface text-lg">João Silva</h3>
+<p class="font-body-base text-on-surface-variant text-sm">Usuário Surdo</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2 px-4 mt-4">
+<a class="flex items-center gap-4 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-full font-semibold transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Início
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">history</span>
+                Histórico
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-full transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Configurações
+            </a>
+<a class="flex items-center gap-4 px-4 py-3 mt-auto text-on-surface-variant hover:bg-surface-container-high rounded-full transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Sair
+            </a>
+</nav>
+</aside>
+<!-- Top App Bar (Mobile) -->
+<header class="md:hidden sticky top-0 z-50 bg-surface flex justify-between items-center px-margin-mobile h-touch-target w-full">
+<button class="text-primary active:opacity-70 transition-colors duration-200">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-display-lg text-mobile-headline font-bold text-primary">Víamos</span>
+<button class="text-primary active:opacity-70 transition-colors duration-200">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<!-- Main Content -->
+<main class="flex-1 w-full max-w-5xl mx-auto px-margin-mobile md:px-margin-desktop py-8 md:py-12 md:ml-72 pb-24 md:pb-12 space-y-8">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+<div>
+<h1 class="font-display-lg text-on-surface">Olá, João!</h1>
+<p class="font-body-base text-on-surface-variant mt-1">Bem-vindo ao seu painel de acessibilidade.</p>
+</div>
+<button class="w-full md:w-auto bg-primary-container text-on-primary rounded-xl px-6 py-4 flex items-center justify-center gap-2 hover:bg-primary transition-colors shadow-sm">
+<span class="material-symbols-outlined">add_circle</span>
+<span class="font-headline-md text-base">Nova Solicitação de Intérprete</span>
+</button>
+</div>
+<!-- Status & Quick Actions -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Active Request Card -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-surface-container-high flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div class="bg-primary-fixed text-on-primary-fixed px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">schedule</span>
+                            Em Andamento
+                        </div>
+<span class="material-symbols-outlined text-primary-container">interpreter_mode</span>
+</div>
+<h3 class="font-headline-md text-on-surface mb-1">Palestra de Inovação</h3>
+<p class="font-body-base text-on-surface-variant text-sm flex items-center gap-1 mb-2">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+                        Hoje, 14:00 - 16:00
+                    </p>
+<p class="font-body-base text-on-surface-variant text-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">location_on</span>
+                        Auditório Central
+                    </p>
+</div>
+<div class="mt-6 flex items-center gap-3">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A professional headshot of a sign language interpreter wearing a dark blue shirt. The background is a simple, neutral gray. The lighting highlights their friendly expression." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkVgIHXmM4QO_E6FQfTkEYyMLswA-Z4xuhpjq2Az6Asb6YRIIQ_6H5OT1__7MmplnKrMh6KJYJkiaxWHah54_WO6Dse7oMj623gvF4haw-SYh87LPHsFmfxsHQyF-Jtk1ktsVbFkCN77lQGHGecuBB-cGOdFjTaNac9oPuRZ0MgF7YJ64c3VxqWH8BrdWqA7VbKV14NVB2TxZv2sb5mqVeRROl7SfX7FCOIrrdI6SgpTqmhaVtqRUblw">
+<div>
+<p class="font-body-base text-sm font-semibold text-on-surface">Maria Santos</p>
+<p class="font-body-base text-xs text-status-online flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">verified</span>
+                            Intérprete Confirmada
+                        </p>
+</div>
+</div>
+</div>
+<!-- Stats / Info Card -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-surface-container-high flex flex-col justify-center items-center text-center">
+<span class="material-symbols-outlined text-4xl text-primary-container mb-3" data-weight="fill" style="font-variation-settings: 'FILL' 1;">assignment_turned_in</span>
+<h4 class="font-display-lg text-primary text-3xl">12</h4>
+<p class="font-body-base text-on-surface-variant">Atendimentos Concluídos</p>
+<div class="mt-4 px-4 py-2 bg-surface-container-low rounded-lg text-sm text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-pro-verification">star</span>
+                    4.9 Avaliação Média
+                </div>
+</div>
+<!-- Map Card Placeholder -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-surface-container-high flex flex-col hidden lg:flex">
+<h3 class="font-headline-md text-on-surface mb-4 text-base">Próximo Evento</h3>
+<div class="w-full h-32 bg-surface-container-highest rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover opacity-60" data-alt="A minimalist digital map showing a generic city layout with a blue route highlighting a path to a specific location marker. The map style is clean, modern, and light-themed, fitting a corporate application interface." data-location="São Paulo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBysh3AtF5H0rbQHJE6OKq6vDva4uKuSu1wUzh6pohY6Kw2dCrI4kwgosm3DcnUlJ3OehH9fiFEjnhSeCvIvqFNdgkhMe56IiGBn1SosV2c-tMRd8sWpBHlw_HFwWqqAA9H6eK-xCJc-BXRkfv30En0Y4Mo42mnF7cByx32nQemm9mQI_f-Dlag21AIrrZUjU_6iyBxhRlX7_4bAyv5Y4XeKCLINMiJDeqdAlMl1I8HIIjBG_7nSbgIfA">
+<span class="material-symbols-outlined text-primary-container text-3xl drop-shadow-md z-10" data-weight="fill" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+<button class="w-full py-2 bg-secondary text-on-secondary rounded-lg font-headline-md text-sm hover:bg-opacity-90 transition-opacity">Ver Detalhes</button>
+</div>
+</div>
+<!-- Recent History -->
+<div>
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-md text-on-surface">Atendimentos Recentes</h2>
+<button class="text-primary-container font-headline-md text-sm hover:underline">Ver todos</button>
+</div>
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-surface-container-high overflow-hidden">
+<!-- Item 1 -->
+<div class="p-4 border-b border-surface-container flex items-center justify-between hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-high rounded-full flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">groups</span>
+</div>
+<div>
+<h4 class="font-headline-md text-on-surface text-base">Reunião de Alinhamento</h4>
+<p class="font-body-base text-on-surface-variant text-sm">12 de Out, 10:00 - Online</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="hidden sm:inline-block px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-xs font-semibold">Concluído</span>
+<button class="text-primary p-2 hover:bg-surface-container-highest rounded-full transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="p-4 border-b border-surface-container flex items-center justify-between hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-high rounded-full flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">medical_services</span>
+</div>
+<div>
+<h4 class="font-headline-md text-on-surface text-base">Consulta Médica</h4>
+<p class="font-body-base text-on-surface-variant text-sm">05 de Out, 15:30 - Clínica São José</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="hidden sm:inline-block px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-xs font-semibold">Concluído</span>
+<button class="text-primary p-2 hover:bg-surface-container-highest rounded-full transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="p-4 flex items-center justify-between hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container-high rounded-full flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">school</span>
+</div>
+<div>
+<h4 class="font-headline-md text-on-surface text-base">Seminário de Educação</h4>
+<p class="font-body-base text-on-surface-variant text-sm">28 de Set, 09:00 - Universidade</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="hidden sm:inline-block px-3 py-1 bg-surface-container text-on-surface-variant rounded-full text-xs font-semibold">Concluído</span>
+<button class="text-primary p-2 hover:bg-surface-container-highest rounded-full transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Nav Bar (Mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full h-16 flex justify-around items-center px-gutter pb-safe bg-surface-container-lowest shadow-md z-50 rounded-t-xl">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-caps text-label-caps mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:opacity-80 scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">assignment</span>
+<span class="font-label-caps text-label-caps mt-1">Atendimentos</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:opacity-80 scale-95 transition-transform duration-150" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-caps text-label-caps mt-1">Perfil</span>
+</a>
+</nav>
+</body></html>

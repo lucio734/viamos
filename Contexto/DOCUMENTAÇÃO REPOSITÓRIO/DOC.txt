@@ -1,0 +1,66 @@
+Produção Técnica
+Texto introdutório falando que será apresentado neste capítulo
+
+Modelagem do Produto
+
+Texto introdutório falando que será apresentado neste subtópico
+
+·        Sitemap ( Link do mapa completo, prints com cada parte e texto explicativo)
+
+·        Wireframe ( Imagem de tela por tela com sua descrição simplificada + tabela)
+
+·        Prototipação ( Link do figma com prints de seu funcionamento e explicação)
+
+Arquitetura de Software
+
+Texto introdutório falando que será apresentado neste subtópico
+
+·        Arquitetura Funcional ( desenho da arquitetura e sua explicação)
+
+·        Arquitetura Técnica ( desenho da arquitetura e sua explicação, sugiro usar tabela na explicação)
+
+·        Arquitetura MVC ( desenho da arquitetura e como será aplicada em seu ambiente de hospedagem)
+
+Engenharia de Requisitos
+
+Texto introdutório falando que será apresentado neste subtópico
+
+·        Requisitos Funcionais (Descrição por tabela)
+
+·        Requisitos Não Funcionais (Descrição por tabela)
+
+·        Requisitos Associados (Descrição por tabela)
+
+·       Projeto Linear (Descrição por tabela)
+
+Modelagem de Processos e Fluxos
+
+Texto introdutório falando que será apresentado neste subtópico
+
+·        Macroprocesso (Mapa e explicação)
+
+·        Fluxograma ( Mapa e Explicação) e/ou
+
+·        BPMN ( Mapa e Explicação) 
+
+Diagramas e Modelagem de Software
+
+Texto introdutório falando que será apresentado neste subtópico
+
+·        Diagrama de Caso de Uso (Diagrama + Tabela por caso de uso para cada tela)
+
+·        Diagrama de Classe (Diagrama + Explicação)
+
+·        Diagrama de Entidade-Relacionamento (Diagrama + Explicação)
+
+·        Diagrama de Estado de Máquina (Diagrama + Explicação)
+
+·        Diagrama de Operação (Diagrama + Explicação)
+
+·        Diagrama de Fluxo de Dados (Diagrama + Explicação) 
+
+·        Diagrama de Processos (Diagrama + Explicação) (Telas)
+
+·        Ferramenta CASE. (Diagrama + Explicação)
+
+·        Diagrama de Contexto  (Diagrama + Explicação)

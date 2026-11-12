@@ -1,0 +1,167 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Víamos - Splash Screen</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#b4c8e4",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#fbf9fb",
+                        "background": "#fbf9fb",
+                        "outline": "#74777d",
+                        "surface": "#fbf9fb",
+                        "secondary": "#5d5f5f",
+                        "primary-container": "#1a2e44",
+                        "surface-container-low": "#f5f3f5",
+                        "tertiary-fixed": "#ffddb0",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#5a431f",
+                        "surface-container-highest": "#e4e2e4",
+                        "secondary-fixed-dim": "#c6c6c7",
+                        "on-tertiary-container": "#ae8f64",
+                        "on-surface": "#1b1c1d",
+                        "on-primary": "#ffffff",
+                        "tertiary": "#241500",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#1a1c1c",
+                        "background-alt": "#F8FAFC",
+                        "on-secondary-container": "#616363",
+                        "surface-variant": "#e4e2e4",
+                        "primary": "#03192e",
+                        "inverse-on-surface": "#f2f0f2",
+                        "on-primary-container": "#8296b0",
+                        "surface-dim": "#dbd9db",
+                        "secondary-fixed": "#e2e2e2",
+                        "pro-verification": "#FFB703",
+                        "error": "#ba1a1a",
+                        "on-background": "#1b1c1d",
+                        "on-primary-fixed-variant": "#35485f",
+                        "on-primary-fixed": "#061d32",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#e3c193",
+                        "tertiary-container": "#3d2907",
+                        "inverse-primary": "#b4c8e4",
+                        "surface-container": "#efedef",
+                        "status-online": "#2D6A4F",
+                        "status-alert": "#D90429",
+                        "surface-tint": "#4c6078",
+                        "on-secondary-fixed-variant": "#454747",
+                        "on-surface-variant": "#43474d",
+                        "inverse-surface": "#303032",
+                        "on-secondary": "#ffffff",
+                        "outline-variant": "#c4c6cd",
+                        "secondary-container": "#dfe0e0",
+                        "primary-fixed": "#d1e4ff",
+                        "surface-container-high": "#e9e7ea",
+                        "on-tertiary-fixed": "#281800"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "margin-desktop": "48px",
+                        "margin-mobile": "20px",
+                        "unit": "8px",
+                        "touch-target": "44px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "mobile-headline": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-base": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "mobile-headline": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "label-caps": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-base": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .loader {
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top: 3px solid #ffffff;
+            width: 24px;
+            height: 24px;
+            -webkit-animation: spin 1s linear infinite;
+            animation: spin 1s linear infinite;
+        }
+
+        @-webkit-keyframes spin {
+            0% { -webkit-transform: rotate(0deg); }
+            100% { -webkit-transform: rotate(360deg); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1.5s ease-in-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-primary-container h-screen w-screen flex flex-col items-center justify-center relative overflow-hidden antialiased">
+<!-- Subtle Background Pattern/Gradient for depth -->
+<div class="absolute inset-0 opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at center, #ffffff 1px, transparent 1px); background-size: 24px 24px;"></div>
+<div class="flex-grow flex flex-col items-center justify-center z-10 fade-in" style="animation-delay: 0.2s;">
+<!-- Logo Area -->
+<div class="flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-[64px] text-on-primary">
+                sign_language
+            </span>
+</div>
+<!-- Brand Name -->
+<h1 class="font-display-lg text-display-lg text-on-primary tracking-tight">
+            Víamos
+        </h1>
+<p class="font-body-base text-body-base text-on-primary-container mt-2 opacity-80">
+            Conectando o Ciclo da Acessibilidade
+        </p>
+</div>
+<!-- Loading Indicator Area -->
+<div class="pb-16 flex flex-col items-center justify-center z-10 fade-in" style="animation-delay: 0.6s;">
+<div class="loader mb-4"></div>
+<p class="font-label-caps text-label-caps text-on-primary-container tracking-widest uppercase opacity-70">
+            Carregando
+        </p>
+</div>
+<script>
+        // Simulate loading process then redirect or transition
+        setTimeout(() => {
+            // In a real app, this would redirect to Home or Login
+            console.log("Splash screen finished loading.");
+        }, 3000);
+    </script>
+</body></html>
