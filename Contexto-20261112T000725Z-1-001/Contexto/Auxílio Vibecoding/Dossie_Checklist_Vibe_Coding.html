@@ -1,0 +1,1857 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="dark"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Governança de Engenharia de Software e Vibe Coding</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            surface: {
+              base: '#070b12',
+              card: '#0f172a',
+              elevated: '#142037',
+              border: '#1e293b',
+              borderLight: '#334155'
+            },
+            accent: {
+              cyan: '#38bdf8',
+              emerald: '#10b981',
+              violet: '#a855f7'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Google Fonts & Lucide Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body {
+      background-color: #070b12;
+      color: #f1f5f9;
+      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    }
+    /* Estilização suave da barra de rolagem */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #070b12;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1e293b;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #334155;
+    }
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:Inter, system-ui, sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:JetBrains Mono, ui-monospace, monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.-bottom-24{bottom:-6rem}.-left-24{left:-6rem}.-right-24{right:-6rem}.-top-24{top:-6rem}.left-3\.5{left:0.875rem}.top-0{top:0px}.top-1\/2{top:50%}.z-10{z-index:10}.z-40{z-index:40}.mx-auto{margin-left:auto;margin-right:auto}.mt-1{margin-top:0.25rem}.mt-6{margin-top:1.5rem}.mt-0\.5{margin-top:0.125rem}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.hidden{display:none}.h-1\.5{height:0.375rem}.h-10{height:2.5rem}.h-16{height:4rem}.h-2{height:0.5rem}.h-3\.5{height:0.875rem}.h-4{height:1rem}.h-72{height:18rem}.h-8{height:2rem}.h-full{height:100%}.h-2\.5{height:0.625rem}.h-5{height:1.25rem}.min-h-screen{min-height:100vh}.w-1\.5{width:0.375rem}.w-3\.5{width:0.875rem}.w-4{width:1rem}.w-72{width:18rem}.w-8{width:2rem}.w-full{width:100%}.w-px{width:1px}.w-2\.5{width:0.625rem}.w-5{width:1.25rem}.max-w-2xl{max-width:42rem}.max-w-6xl{max-width:72rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.-translate-y-1\/2{--tw-translate-y:-50%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}.cursor-pointer{cursor:pointer}.select-none{-webkit-user-select:none;user-select:none}.flex-col{flex-direction:column}.items-start{align-items:flex-start}.items-center{align-items:center}.items-stretch{align-items:stretch}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1\.5{gap:0.375rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-3\.5{gap:0.875rem}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-8 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(2rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(2rem * var(--tw-space-y-reverse))}.space-y-1 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem * var(--tw-space-y-reverse))}.divide-y > :not([hidden]) ~ :not([hidden]){--tw-divide-y-reverse:0;border-top-width:calc(1px * calc(1 - var(--tw-divide-y-reverse)));border-bottom-width:calc(1px * var(--tw-divide-y-reverse))}.divide-surface-border\/60 > :not([hidden]) ~ :not([hidden]){border-color:rgb(30 41 59 / 0.6)}.self-start{align-self:flex-start}.overflow-hidden{overflow:hidden}.overflow-x-auto{overflow-x:auto}.whitespace-nowrap{white-space:nowrap}.rounded-2xl{border-radius:1rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.rounded{border-radius:0.25rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-accent-cyan\/20{border-color:rgb(56 189 248 / 0.2)}.border-accent-cyan\/40{border-color:rgb(56 189 248 / 0.4)}.border-surface-border{--tw-border-opacity:1;border-color:rgb(30 41 59 / var(--tw-border-opacity, 1))}.border-surface-border\/80{border-color:rgb(30 41 59 / 0.8)}.border-surface-borderLight{--tw-border-opacity:1;border-color:rgb(51 65 85 / var(--tw-border-opacity, 1))}.bg-accent-cyan{--tw-bg-opacity:1;background-color:rgb(56 189 248 / var(--tw-bg-opacity, 1))}.bg-accent-cyan\/10{background-color:rgb(56 189 248 / 0.1)}.bg-accent-emerald\/10{background-color:rgb(16 185 129 / 0.1)}.bg-surface-base{--tw-bg-opacity:1;background-color:rgb(7 11 18 / var(--tw-bg-opacity, 1))}.bg-surface-base\/60{background-color:rgb(7 11 18 / 0.6)}.bg-surface-base\/80{background-color:rgb(7 11 18 / 0.8)}.bg-surface-border{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.bg-surface-card{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.bg-surface-base\/30{background-color:rgb(7 11 18 / 0.3)}.bg-gradient-to-b{background-image:linear-gradient(to bottom, var(--tw-gradient-stops))}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.bg-gradient-to-tr{background-image:linear-gradient(to top right, var(--tw-gradient-stops))}.from-accent-cyan{--tw-gradient-from:#38bdf8 var(--tw-gradient-from-position);--tw-gradient-to:rgb(56 189 248 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-accent-cyan\/20{--tw-gradient-from:rgb(56 189 248 / 0.2) var(--tw-gradient-from-position);--tw-gradient-to:rgb(56 189 248 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-surface-card{--tw-gradient-from:#0f172a var(--tw-gradient-from-position);--tw-gradient-to:rgb(15 23 42 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-sky-400{--tw-gradient-to:rgb(56 189 248 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #38bdf8 var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-accent-emerald{--tw-gradient-to:#10b981 var(--tw-gradient-to-position)}.to-accent-emerald\/20{--tw-gradient-to:rgb(16 185 129 / 0.2) var(--tw-gradient-to-position)}.to-surface-card\/60{--tw-gradient-to:rgb(15 23 42 / 0.6) var(--tw-gradient-to-position)}.p-0\.5{padding:0.125rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.p-3\.5{padding:0.875rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-2\.5{padding-top:0.625rem;padding-bottom:0.625rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.py-8{padding-top:2rem;padding-bottom:2rem}.px-1\.5{padding-left:0.375rem;padding-right:0.375rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.pb-2{padding-bottom:0.5rem}.pl-10{padding-left:2.5rem}.pr-4{padding-right:1rem}.pt-1{padding-top:0.25rem}.pt-0\.5{padding-top:0.125rem}.text-center{text-align:center}.text-right{text-align:right}.font-mono{font-family:JetBrains Mono, ui-monospace, monospace}.text-2xl{font-size:1.5rem;line-height:2rem}.text-\[11px\]{font-size:11px}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xs{font-size:0.75rem;line-height:1rem}.text-\[10px\]{font-size:10px}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-none{line-height:1}.leading-relaxed{line-height:1.625}.tracking-tight{letter-spacing:-0.025em}.tracking-wider{letter-spacing:0.05em}.text-accent-cyan{--tw-text-opacity:1;color:rgb(56 189 248 / var(--tw-text-opacity, 1))}.text-accent-emerald{--tw-text-opacity:1;color:rgb(16 185 129 / var(--tw-text-opacity, 1))}.text-slate-200{--tw-text-opacity:1;color:rgb(226 232 240 / var(--tw-text-opacity, 1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-slate-100{--tw-text-opacity:1;color:rgb(241 245 249 / var(--tw-text-opacity, 1))}.text-slate-950{--tw-text-opacity:1;color:rgb(2 6 23 / var(--tw-text-opacity, 1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.placeholder-slate-500::placeholder{--tw-placeholder-opacity:1;color:rgb(100 116 139 / var(--tw-placeholder-opacity, 1))}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.blur-3xl{--tw-blur:blur(64px);filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur-md{--tw-backdrop-blur:blur(12px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-xl{--tw-backdrop-blur:blur(24px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.ease-out{transition-timing-function:cubic-bezier(0, 0, 0.2, 1)}.selection\:bg-accent-cyan\/20 *::selection{background-color:rgb(56 189 248 / 0.2)}.selection\:text-accent-cyan *::selection{--tw-text-opacity:1;color:rgb(56 189 248 / var(--tw-text-opacity, 1))}.selection\:bg-accent-cyan\/20::selection{background-color:rgb(56 189 248 / 0.2)}.selection\:text-accent-cyan::selection{--tw-text-opacity:1;color:rgb(56 189 248 / var(--tw-text-opacity, 1))}.hover\:bg-surface-elevated:hover{--tw-bg-opacity:1;background-color:rgb(20 32 55 / var(--tw-bg-opacity, 1))}.hover\:bg-surface-elevated\/30:hover{background-color:rgb(20 32 55 / 0.3)}.hover\:bg-surface-elevated\/40:hover{background-color:rgb(20 32 55 / 0.4)}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.focus\:border-accent-cyan\/60:focus{border-color:rgb(56 189 248 / 0.6)}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.group:hover .group-hover\:border-accent-cyan\/60{border-color:rgb(56 189 248 / 0.6)}.group:hover .group-hover\:text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}@media (min-width: 640px){.sm\:inline{display:inline}.sm\:flex-row{flex-direction:row}.sm\:items-center{align-items:center}.sm\:p-8{padding:2rem}.sm\:p-4{padding:1rem}.sm\:p-5{padding:1.25rem}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:text-3xl{font-size:1.875rem;line-height:2.25rem}.sm\:text-base{font-size:1rem;line-height:1.5rem}.sm\:text-sm{font-size:0.875rem;line-height:1.25rem}}@media (min-width: 1024px){.lg\:flex-row{flex-direction:row}.lg\:items-center{align-items:center}.lg\:self-auto{align-self:auto}}</style></head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-accent-cyan/20 selection:text-accent-cyan">
+
+  <!-- Topbar Minimalista -->
+  <header class="sticky top-0 z-40 bg-surface-base/80 backdrop-blur-xl border-b border-surface-border">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-accent-cyan/20 to-accent-emerald/20 border border-accent-cyan/40 flex items-center justify-center text-accent-cyan">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shield-check" aria-hidden="true" class="lucide lucide-shield-check w-4 h-4"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path><path d="m9 12 2 2 4-4"></path></svg>
+        </div>
+        <div>
+          <span class="text-sm font-semibold tracking-tight text-white block leading-none">CheckList Coding Audit</span>
+          <span class="text-[11px] text-slate-400 font-mono">Engenharia de Software • 50 Critérios</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2">
+        <button onclick="exportReport()" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white bg-surface-card hover:bg-surface-elevated border border-surface-border transition-all">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="download" aria-hidden="true" class="lucide lucide-download w-3.5 h-3.5"><path d="M12 15V3"></path><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="m7 10 5 5 5-5"></path></svg>
+          <span class="hidden sm:inline">Exportar Relatório</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Container Principal -->
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 space-y-8">
+
+    <!-- Hero Card com Métricas e Progresso Geral -->
+    <section class="relative rounded-2xl bg-gradient-to-b from-surface-card to-surface-card/60 border border-surface-border p-6 sm:p-8 overflow-hidden shadow-2xl">
+      <div class="absolute -top-24 -right-24 w-72 h-72 bg-accent-cyan/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -left-24 w-72 h-72 bg-accent-emerald/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+        <div class="space-y-2 max-w-2xl">
+          <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-accent-cyan/10 text-accent-cyan border border-accent-cyan/20">
+            <span class="w-1.5 h-1.5 rounded-full bg-accent-cyan animate-pulse"></span>
+            Matriz de Auditoria da Reta Final
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+            Produção Técnica e Checklist Operacional
+          </h1>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Painel unificado para monitorar a aderência entre a documentação de engenharia e a implementação orientada a inteligência artificial.
+          </p>
+        </div>
+
+        <!-- Bloco de Indicador Percentual -->
+        <div class="flex items-center gap-4 bg-surface-base/60 backdrop-blur-md p-4 rounded-xl border border-surface-border shrink-0 self-start lg:self-auto">
+          <div class="text-right">
+            <span class="text-xs uppercase tracking-wider text-slate-400 font-medium block">Conclusão</span>
+            <div class="text-2xl sm:text-3xl font-bold font-mono tracking-tight text-white" id="statPercent">0%</div>
+          </div>
+          <div class="w-px h-10 bg-surface-border"></div>
+          <div>
+            <span class="text-xs uppercase tracking-wider text-slate-400 font-medium block">Verificados</span>
+            <div class="text-sm font-semibold font-mono text-slate-200 mt-1">
+              <span id="statChecked" class="text-accent-emerald font-bold">0</span> / <span id="statTotal">50</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de Progresso Fluida -->
+      <div class="mt-6 space-y-2">
+        <div class="w-full h-2 rounded-full bg-surface-base border border-surface-border/80 overflow-hidden p-0.5">
+          <div id="progressBar" class="h-full rounded-full bg-gradient-to-r from-accent-cyan via-sky-400 to-accent-emerald transition-all duration-300 ease-out" style="width: 0%"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Barra de Ferramentas: Busca, Chips e Ações Globais -->
+    <section class="space-y-4">
+      <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+        <!-- Campo de Busca em Tempo Real -->
+        <div class="relative flex-1">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="search" aria-hidden="true" class="lucide lucide-search w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg>
+          <input type="text" id="searchInput" oninput="handleSearch(this.value)" placeholder="Buscar critério por palavra chave (ex: figma, git, ssl, mock, sql)..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-surface-card border border-surface-border text-sm text-white placeholder-slate-500 focus:outline-none focus:border-accent-cyan/60 transition">
+        </div>
+
+        <!-- Ações Rápidas -->
+        <div class="flex items-center gap-2 shrink-0">
+          <button onclick="toggleAll(true)" class="px-3 py-2 rounded-xl text-xs font-medium text-slate-300 hover:text-white bg-surface-card hover:bg-surface-elevated border border-surface-border transition flex items-center gap-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-check" aria-hidden="true" class="lucide lucide-check-check w-3.5 h-3.5 text-accent-emerald"><path d="M18 6 7 17l-5-5"></path><path d="m22 10-7.5 7.5L13 16"></path></svg>
+            <span>Marcar Todos</span>
+          </button>
+          <button onclick="toggleAll(false)" class="px-3 py-2 rounded-xl text-xs font-medium text-slate-300 hover:text-white bg-surface-card hover:bg-surface-elevated border border-surface-border transition flex items-center gap-1.5">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="rotate-ccw" aria-hidden="true" class="lucide lucide-rotate-ccw w-3.5 h-3.5 text-slate-400"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path><path d="M3 3v5h5"></path></svg>
+            <span>Desmarcar Todos</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Filtro em Chips Deslizáveis -->
+      <div class="flex items-center gap-2 overflow-x-auto pb-2 pt-1 scrollbar-none" id="categoryChips">
+        <button onclick="setFilter('ALL')" class="px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all bg-accent-cyan text-slate-950 font-semibold shadow-sm">
+          Todas as Categorias (12)
+        </button>
+      
+          <button onclick="setFilter('cat_1')" class="px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all bg-surface-card text-slate-300 hover:text-white border border-surface-border">
+            1. Produção Técnica e Especificação
+          </button>
+        
+          <button onclick="setFilter('cat_2')" class="px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all bg-surface-card text-slate-300 hover:text-white border border-surface-border">
+            2. Modelagem do Produto
+          </button>
+        
+          <button onclick="setFilter('cat_3')" class="px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all bg-surface-card text-slate-300 hover:text-white border border-surface-border">
+            3. Arquitetura de Software
+          </button>
+        
+          <button onclick="setFilter('cat_4')" class="px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all bg-surface-card text-slate-300 hover:text-white border border-surface-border">
+            4. Engenharia de Requisitos
+          </button>
+        
+          <button onclick="setFilter('cat_5')" class="px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all bg-surface-card text-slate-300 hover:text-white border border-surface-border">
+            5. Modelagem de Processos e Fluxos
+          </button>
+        
+          <button onclick="setFilter('cat_6')" class="px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all bg-surface-card text-slate-300 hover:text-white border border-surface-border">
+            6. Diagramas e Modelagem de Software
+          </button>
+        
+          <button onclick="setFilter('cat_7')" class="px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all bg-surface-card text-slate-300 hover:text-white border border-surface-border">
+            7. Frontend e Interface
+          </button>
+        
+          <button onclick="setFilter('cat_8')" class="px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all bg-surface-card text-slate-300 hover:text-white border border-surface-border">
+            8. Backend e Regras de Negócio
+          </button>
+        
+          <button onclick="setFilter('cat_9')" class="px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all bg-surface-card text-slate-300 hover:text-white border border-surface-border">
+            9. Banco de Dados e Persistência
+          </button>
+        
+          <button onclick="setFilter('cat_10')" class="px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all bg-surface-card text-slate-300 hover:text-white border border-surface-border">
+            10. Versionamento e Governança Git
+          </button>
+        
+          <button onclick="setFilter('cat_11')" class="px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all bg-surface-card text-slate-300 hover:text-white border border-surface-border">
+            11. Publicação e Hospedagem
+          </button>
+        
+          <button onclick="setFilter('cat_12')" class="px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all bg-surface-card text-slate-300 hover:text-white border border-surface-border">
+            12. Testes e Validação de Qualidade
+          </button>
+        </div>
+    </section>
+
+    <!-- Lista Agrupada com Acordeões das 12 Categorias -->
+    <section id="categoriesList" class="space-y-4">
+          <div class="rounded-xl bg-surface-card border transition-all border-surface-border overflow-hidden">
+            <!-- Header da Categoria -->
+            <div onclick="toggleCategoryCollapse('cat_1')" class="p-4 sm:p-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-surface-elevated/40 select-none transition">
+              <div class="flex items-center gap-3">
+                <div class="w-2.5 h-2.5 rounded-full shrink-0 bg-accent-cyan"></div>
+                <div>
+                  <h3 class="text-sm sm:text-base font-semibold text-white tracking-tight flex items-center gap-2">
+                    <span>Produção Técnica e Especificação</span>
+                  </h3>
+                  <p class="text-xs text-slate-400 mt-0.5">Apresentação e contextualização metodológica do projeto</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 shrink-0">
+                <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-surface-base text-slate-400 border border-surface-border">
+                  0 de 1
+                </span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-up" aria-hidden="true" class="lucide lucide-chevron-up w-4 h-4 text-slate-400"><path d="m18 15-6-6-6 6"></path></svg>
+              </div>
+            </div>
+
+            <!-- Lista de Itens -->
+            
+              <div class="border-t border-surface-border divide-y divide-surface-border/60 bg-surface-base/30">
+                
+                    <div onclick="toggleItem('1')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#1</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Texto introdutório do capítulo de Produção Técnica elaborado
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Apresentação formal da abrangência, objetivos e artefatos gerados na especificação</p>
+                      </div>
+                    </div>
+                  
+              </div>
+            
+          </div>
+        
+          <div class="rounded-xl bg-surface-card border transition-all border-surface-border overflow-hidden">
+            <!-- Header da Categoria -->
+            <div onclick="toggleCategoryCollapse('cat_2')" class="p-4 sm:p-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-surface-elevated/40 select-none transition">
+              <div class="flex items-center gap-3">
+                <div class="w-2.5 h-2.5 rounded-full shrink-0 bg-accent-cyan"></div>
+                <div>
+                  <h3 class="text-sm sm:text-base font-semibold text-white tracking-tight flex items-center gap-2">
+                    <span>Modelagem do Produto</span>
+                  </h3>
+                  <p class="text-xs text-slate-400 mt-0.5">Ergonomia visual, estrutura esquelética e prototipação navegável</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 shrink-0">
+                <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-surface-base text-slate-400 border border-surface-border">
+                  0 de 4
+                </span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-up" aria-hidden="true" class="lucide lucide-chevron-up w-4 h-4 text-slate-400"><path d="m18 15-6-6-6 6"></path></svg>
+              </div>
+            </div>
+
+            <!-- Lista de Itens -->
+            
+              <div class="border-t border-surface-border divide-y divide-surface-border/60 bg-surface-base/30">
+                
+                    <div onclick="toggleItem('2')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#2</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Texto introdutório de Modelagem do Produto redigido
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Contextualização da jornada visual e interação do usuário na aplicação</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('3')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#3</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Sitemap com link do mapa completo, prints de cada parte e texto explicativo
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Visão hierárquica das rotas com links funcionais e comentários estruturados</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('4')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#4</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Wireframe com imagem tela por tela, descrição simplificada e tabela
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Estrutura dos blocos de interface e tabela dos componentes essenciais</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('5')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#5</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Prototipação com link do Figma, prints de funcionamento e explicação
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Protótipo interativo em alta fidelidade navegável demonstrando fluxos primários</p>
+                      </div>
+                    </div>
+                  
+              </div>
+            
+          </div>
+        
+          <div class="rounded-xl bg-surface-card border transition-all border-surface-border overflow-hidden">
+            <!-- Header da Categoria -->
+            <div onclick="toggleCategoryCollapse('cat_3')" class="p-4 sm:p-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-surface-elevated/40 select-none transition">
+              <div class="flex items-center gap-3">
+                <div class="w-2.5 h-2.5 rounded-full shrink-0 bg-accent-cyan"></div>
+                <div>
+                  <h3 class="text-sm sm:text-base font-semibold text-white tracking-tight flex items-center gap-2">
+                    <span>Arquitetura de Software</span>
+                  </h3>
+                  <p class="text-xs text-slate-400 mt-0.5">Premissas estruturais, comunicação entre serviços e modelo MVC</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 shrink-0">
+                <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-surface-base text-slate-400 border border-surface-border">
+                  0 de 4
+                </span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-up" aria-hidden="true" class="lucide lucide-chevron-up w-4 h-4 text-slate-400"><path d="m18 15-6-6-6 6"></path></svg>
+              </div>
+            </div>
+
+            <!-- Lista de Itens -->
+            
+              <div class="border-t border-surface-border divide-y divide-surface-border/60 bg-surface-base/30">
+                
+                    <div onclick="toggleItem('6')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#6</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Texto introdutório de Arquitetura de Software redigido
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Apresentação dos princípios arquiteturais e distribuição de responsabilidades</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('7')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#7</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Arquitetura Funcional com desenho esquemático e explicação
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Módulos operacionais do domínio e integração entre funções de negócio</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('8')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#8</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Arquitetura Técnica com desenho e explicação estruturada em tabela
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Servidores, protocolos, portas, bancos de dados e ferramentas de infraestrutura</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('9')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#9</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Arquitetura MVC com desenho e especificação do ambiente de hospedagem
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Distribuição entre Model, View, Controller e ambiente de publicação em nuvem</p>
+                      </div>
+                    </div>
+                  
+              </div>
+            
+          </div>
+        
+          <div class="rounded-xl bg-surface-card border transition-all border-surface-border overflow-hidden">
+            <!-- Header da Categoria -->
+            <div onclick="toggleCategoryCollapse('cat_4')" class="p-4 sm:p-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-surface-elevated/40 select-none transition">
+              <div class="flex items-center gap-3">
+                <div class="w-2.5 h-2.5 rounded-full shrink-0 bg-accent-cyan"></div>
+                <div>
+                  <h3 class="text-sm sm:text-base font-semibold text-white tracking-tight flex items-center gap-2">
+                    <span>Engenharia de Requisitos</span>
+                  </h3>
+                  <p class="text-xs text-slate-400 mt-0.5">Matriz contratual de requisitos funcionais, qualidade e rastreabilidade</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 shrink-0">
+                <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-surface-base text-slate-400 border border-surface-border">
+                  0 de 5
+                </span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-up" aria-hidden="true" class="lucide lucide-chevron-up w-4 h-4 text-slate-400"><path d="m18 15-6-6-6 6"></path></svg>
+              </div>
+            </div>
+
+            <!-- Lista de Itens -->
+            
+              <div class="border-t border-surface-border divide-y divide-surface-border/60 bg-surface-base/30">
+                
+                    <div onclick="toggleItem('10')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#10</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Texto introdutório de Engenharia de Requisitos redigido
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Apresentação formal do escopo e critérios de aceitação de entrega</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('11')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#11</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Requisitos Funcionais descritos por tabela
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Identificador, descrição do comportamento e regras de negócio obrigatórias</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('12')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#12</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Requisitos Não Funcionais descritos por tabela
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Métricas de desempenho, segurança, responsividade e disponibilidade</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('13')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#13</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Requisitos Associados descritos por tabela
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Matriz de rastreabilidade vinculando funções aos seus requisitos de qualidade</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('14')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#14</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Projeto Linear descrito por tabela
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Encadeamento cronológico de entregáveis e marcos de maturação da solução</p>
+                      </div>
+                    </div>
+                  
+              </div>
+            
+          </div>
+        
+          <div class="rounded-xl bg-surface-card border transition-all border-surface-border overflow-hidden">
+            <!-- Header da Categoria -->
+            <div onclick="toggleCategoryCollapse('cat_5')" class="p-4 sm:p-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-surface-elevated/40 select-none transition">
+              <div class="flex items-center gap-3">
+                <div class="w-2.5 h-2.5 rounded-full shrink-0 bg-accent-cyan"></div>
+                <div>
+                  <h3 class="text-sm sm:text-base font-semibold text-white tracking-tight flex items-center gap-2">
+                    <span>Modelagem de Processos e Fluxos</span>
+                  </h3>
+                  <p class="text-xs text-slate-400 mt-0.5">Cadeia de valor, encadeamento de regras e notação BPMN</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 shrink-0">
+                <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-surface-base text-slate-400 border border-surface-border">
+                  0 de 4
+                </span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-up" aria-hidden="true" class="lucide lucide-chevron-up w-4 h-4 text-slate-400"><path d="m18 15-6-6-6 6"></path></svg>
+              </div>
+            </div>
+
+            <!-- Lista de Itens -->
+            
+              <div class="border-t border-surface-border divide-y divide-surface-border/60 bg-surface-base/30">
+                
+                    <div onclick="toggleItem('15')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#15</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Texto introdutório de Modelagem de Processos e Fluxos redigido
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Contextualização dos processos de negócio apoiados pelas rotinas da aplicação</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('16')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#16</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Macroprocesso com mapa e texto explicativo
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Visão sistêmica da cadeia de valor institucional atendida pelo sistema</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('17')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#17</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Fluxograma com mapa e explicação
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Diagramação lógica de pontos de partida, tomada de decisão e término de fluxo</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('18')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#18</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            BPMN com mapa e explicação detalhada
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Notação formal com raias de responsabilidade, eventos, gateways e tarefas</p>
+                      </div>
+                    </div>
+                  
+              </div>
+            
+          </div>
+        
+          <div class="rounded-xl bg-surface-card border transition-all border-surface-border overflow-hidden">
+            <!-- Header da Categoria -->
+            <div onclick="toggleCategoryCollapse('cat_6')" class="p-4 sm:p-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-surface-elevated/40 select-none transition">
+              <div class="flex items-center gap-3">
+                <div class="w-2.5 h-2.5 rounded-full shrink-0 bg-accent-cyan"></div>
+                <div>
+                  <h3 class="text-sm sm:text-base font-semibold text-white tracking-tight flex items-center gap-2">
+                    <span>Diagramas e Modelagem de Software</span>
+                  </h3>
+                  <p class="text-xs text-slate-400 mt-0.5">Detalhamento comportamental, dados relacionais e ciclo de estados</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 shrink-0">
+                <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-surface-base text-slate-400 border border-surface-border">
+                  0 de 10
+                </span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-up" aria-hidden="true" class="lucide lucide-chevron-up w-4 h-4 text-slate-400"><path d="m18 15-6-6-6 6"></path></svg>
+              </div>
+            </div>
+
+            <!-- Lista de Itens -->
+            
+              <div class="border-t border-surface-border divide-y divide-surface-border/60 bg-surface-base/30">
+                
+                    <div onclick="toggleItem('19')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#19</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Texto introdutório de Diagramas e Modelagem de Software redigido
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Apresentação dos modelos lógicos e estruturais de engenharia de software</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('20')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#20</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Diagrama de Caso de Uso com desenho e tabela por caso de uso para cada tela
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Atores, fluxos principais, caminhos alternativos e cenários de exceção</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('21')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#21</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Diagrama de Classe com desenho estrutural e explicação
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Entidades, tipagens de atributos, métodos e relacionamentos de herança</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('22')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#22</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Diagrama de Entidade Relacionamento com desenho e explicação
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Modelo conceitual e lógico de dados, chaves primárias e cardinalidades</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('23')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#23</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Diagrama de Estado de Máquina com fluxo de estados e explicação
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Transições de estado das entidades principais e condições de guarda</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('24')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#24</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Diagrama de Operação com desenho e explicação
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Chamada de métodos internos durante a execução de rotinas críticas</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('25')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#25</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Diagrama de Fluxo de Dados com níveis e explicação
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Processos, depósitos de dados e entidades externas em níveis estruturados</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('26')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#26</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Diagrama de Processos de Telas com transições dinâmicas e explicação
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Transições de interface desencadeadas pelos cliques e eventos do usuário</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('27')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#27</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Ferramenta CASE com modelo gerado e documentação associada
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Evidência de projeto concebido por ferramenta computacional de modelagem</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('28')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#28</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Diagrama de Contexto com mapa de integrações externas e explicação
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Fronteiras do sistema operando como caixa preta e serviços integrados</p>
+                      </div>
+                    </div>
+                  
+              </div>
+            
+          </div>
+        
+          <div class="rounded-xl bg-surface-card border transition-all border-surface-border overflow-hidden">
+            <!-- Header da Categoria -->
+            <div onclick="toggleCategoryCollapse('cat_7')" class="p-4 sm:p-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-surface-elevated/40 select-none transition">
+              <div class="flex items-center gap-3">
+                <div class="w-2.5 h-2.5 rounded-full shrink-0 bg-accent-cyan"></div>
+                <div>
+                  <h3 class="text-sm sm:text-base font-semibold text-white tracking-tight flex items-center gap-2">
+                    <span>Frontend e Interface</span>
+                  </h3>
+                  <p class="text-xs text-slate-400 mt-0.5">Fidelidade aos wireframes, responsividade fluida e estados visuais</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 shrink-0">
+                <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-surface-base text-slate-400 border border-surface-border">
+                  0 de 5
+                </span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-up" aria-hidden="true" class="lucide lucide-chevron-up w-4 h-4 text-slate-400"><path d="m18 15-6-6-6 6"></path></svg>
+              </div>
+            </div>
+
+            <!-- Lista de Itens -->
+            
+              <div class="border-t border-surface-border divide-y divide-surface-border/60 bg-surface-base/30">
+                
+                    <div onclick="toggleItem('29')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#29</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Rotas e navegação do front espelhando fielmente o Sitemap
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Hierarquia de URLs amigáveis sem caminhos inacessíveis ou quebrados</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('30')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#30</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Componentes visuais e formulários fiéis aos Wireframes e Prototipação
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Implementação alinhada à disposição validada previamente no Figma</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('31')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#31</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Layout responsivo testado em desktop, tablet e mobile
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Ausência de quebras visuais e rolagem horizontal involuntária em viewports móveis</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('32')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#32</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Estados visuais tratados: loading, sucesso, erro e tela vazia
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Feedback visual contextual em todas as interações e esperas de rede</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('33')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#33</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Validação de dados e máscaras nos campos de entrada do usuário
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Validações instantâneas de formulário e formatações de dados no cliente</p>
+                      </div>
+                    </div>
+                  
+              </div>
+            
+          </div>
+        
+          <div class="rounded-xl bg-surface-card border transition-all border-surface-border overflow-hidden">
+            <!-- Header da Categoria -->
+            <div onclick="toggleCategoryCollapse('cat_8')" class="p-4 sm:p-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-surface-elevated/40 select-none transition">
+              <div class="flex items-center gap-3">
+                <div class="w-2.5 h-2.5 rounded-full shrink-0 bg-accent-cyan"></div>
+                <div>
+                  <h3 class="text-sm sm:text-base font-semibold text-white tracking-tight flex items-center gap-2">
+                    <span>Backend e Regras de Negócio</span>
+                  </h3>
+                  <p class="text-xs text-slate-400 mt-0.5">Isolamento de camadas, status HTTP adequados e proteção de segredos</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 shrink-0">
+                <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-surface-base text-slate-400 border border-surface-border">
+                  0 de 4
+                </span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-up" aria-hidden="true" class="lucide lucide-chevron-up w-4 h-4 text-slate-400"><path d="m18 15-6-6-6 6"></path></svg>
+              </div>
+            </div>
+
+            <!-- Lista de Itens -->
+            
+              <div class="border-t border-surface-border divide-y divide-surface-border/60 bg-surface-base/30">
+                
+                    <div onclick="toggleItem('34')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#34</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Separação de responsabilidades respeitando a Arquitetura MVC planejada
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Regras de negócio e persistência isoladas de arquivos de apresentação</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('35')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#35</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Endpoints de API com códigos de status HTTP semânticos
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Respostas padronizadas para cada cenário como duzentos, quatrocentos ou quinhentos</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('36')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#36</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Tratamento seguro de erros sem exibição de stack trace ao usuário final
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Captura de exceções com mensagens amigáveis sem expor vulnerabilidades do servidor</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('37')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#37</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Variáveis de ambiente isoladas em arquivo .env
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Credenciais, segredos e conexões mantidas fora do código versionado</p>
+                      </div>
+                    </div>
+                  
+              </div>
+            
+          </div>
+        
+          <div class="rounded-xl bg-surface-card border transition-all border-surface-border overflow-hidden">
+            <!-- Header da Categoria -->
+            <div onclick="toggleCategoryCollapse('cat_9')" class="p-4 sm:p-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-surface-elevated/40 select-none transition">
+              <div class="flex items-center gap-3">
+                <div class="w-2.5 h-2.5 rounded-full shrink-0 bg-accent-cyan"></div>
+                <div>
+                  <h3 class="text-sm sm:text-base font-semibold text-white tracking-tight flex items-center gap-2">
+                    <span>Banco de Dados e Persistência</span>
+                  </h3>
+                  <p class="text-xs text-slate-400 mt-0.5">Integridade relacional, proteção contra injeção e dados de semente</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 shrink-0">
+                <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-surface-base text-slate-400 border border-surface-border">
+                  0 de 4
+                </span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-up" aria-hidden="true" class="lucide lucide-chevron-up w-4 h-4 text-slate-400"><path d="m18 15-6-6-6 6"></path></svg>
+              </div>
+            </div>
+
+            <!-- Lista de Itens -->
+            
+              <div class="border-t border-surface-border divide-y divide-surface-border/60 bg-surface-base/30">
+                
+                    <div onclick="toggleItem('38')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#38</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Esquema de tabelas e campos rigorosamente alinhado ao DER documentado
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Nomenclatura, tipos de campos e restrições idênticas ao modelo formal</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('39')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#39</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Chaves primárias, estrangeiras e regras de integridade configuradas
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Consistência relacional ativada com integridade referencial estrita</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('40')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#40</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Consultas protegidas contra SQL Injection via ORM ou Prepared Statements
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Zero concatenação de strings brutas em instruções direcionadas ao banco</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('41')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#41</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Scripts de migração ou carga inicial de sementes prontos para teste
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Comandos preparados para subir base populada com registros consistentes</p>
+                      </div>
+                    </div>
+                  
+              </div>
+            
+          </div>
+        
+          <div class="rounded-xl bg-surface-card border transition-all border-surface-border overflow-hidden">
+            <!-- Header da Categoria -->
+            <div onclick="toggleCategoryCollapse('cat_10')" class="p-4 sm:p-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-surface-elevated/40 select-none transition">
+              <div class="flex items-center gap-3">
+                <div class="w-2.5 h-2.5 rounded-full shrink-0 bg-accent-cyan"></div>
+                <div>
+                  <h3 class="text-sm sm:text-base font-semibold text-white tracking-tight flex items-center gap-2">
+                    <span>Versionamento e Governança Git</span>
+                  </h3>
+                  <p class="text-xs text-slate-400 mt-0.5">Higiene de repositório, boas práticas de ramificação e documentação</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 shrink-0">
+                <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-surface-base text-slate-400 border border-surface-border">
+                  0 de 3
+                </span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-up" aria-hidden="true" class="lucide lucide-chevron-up w-4 h-4 text-slate-400"><path d="m18 15-6-6-6 6"></path></svg>
+              </div>
+            </div>
+
+            <!-- Lista de Itens -->
+            
+              <div class="border-t border-surface-border divide-y divide-surface-border/60 bg-surface-base/30">
+                
+                    <div onclick="toggleItem('42')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#42</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Repositório Git inicializado com arquivo .gitignore funcional e testado
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Pastas de dependências, arquivos temporários de compilação e .env ignorados</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('43')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#43</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Histórico de commits organizado e desenvolvimento dividido por branches
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Mensagens claras e desenvolvimento separado por funcionalidade</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('44')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#44</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Arquivo README contendo instruções claras de clonagem, setup e execução local
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Guia objetivo para subir a aplicação do zero em qualquer computador</p>
+                      </div>
+                    </div>
+                  
+              </div>
+            
+          </div>
+        
+          <div class="rounded-xl bg-surface-card border transition-all border-surface-border overflow-hidden">
+            <!-- Header da Categoria -->
+            <div onclick="toggleCategoryCollapse('cat_11')" class="p-4 sm:p-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-surface-elevated/40 select-none transition">
+              <div class="flex items-center gap-3">
+                <div class="w-2.5 h-2.5 rounded-full shrink-0 bg-accent-cyan"></div>
+                <div>
+                  <h3 class="text-sm sm:text-base font-semibold text-white tracking-tight flex items-center gap-2">
+                    <span>Publicação e Hospedagem</span>
+                  </h3>
+                  <p class="text-xs text-slate-400 mt-0.5">Entrega em nuvem, criptografia SSL ativa e resolução de rotas SPA</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 shrink-0">
+                <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-surface-base text-slate-400 border border-surface-border">
+                  0 de 3
+                </span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-up" aria-hidden="true" class="lucide lucide-chevron-up w-4 h-4 text-slate-400"><path d="m18 15-6-6-6 6"></path></svg>
+              </div>
+            </div>
+
+            <!-- Lista de Itens -->
+            
+              <div class="border-t border-surface-border divide-y divide-surface-border/60 bg-surface-base/30">
+                
+                    <div onclick="toggleItem('45')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#45</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Deploy funcional configurado na nuvem
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Hospedagem ativa em plataformas como Vercel, Netlify, Render ou Railway</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('46')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#46</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Certificado SSL ativo com redirecionamento HTTPS obrigatório
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Tráfego de rede criptografado de ponta a ponta em produção</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('47')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#47</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Suporte a rotas SPA configurado para evitar erro 404 em recarregamento
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Regras de redirecionamento ativas para permitir navegação direta por URL</p>
+                      </div>
+                    </div>
+                  
+              </div>
+            
+          </div>
+        
+          <div class="rounded-xl bg-surface-card border transition-all border-surface-border overflow-hidden">
+            <!-- Header da Categoria -->
+            <div onclick="toggleCategoryCollapse('cat_12')" class="p-4 sm:p-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-surface-elevated/40 select-none transition">
+              <div class="flex items-center gap-3">
+                <div class="w-2.5 h-2.5 rounded-full shrink-0 bg-accent-cyan"></div>
+                <div>
+                  <h3 class="text-sm sm:text-base font-semibold text-white tracking-tight flex items-center gap-2">
+                    <span>Testes e Validação de Qualidade</span>
+                  </h3>
+                  <p class="text-xs text-slate-400 mt-0.5">Auditoria do código criado pela IA, testes de regras e ensaio de banca</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 shrink-0">
+                <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-surface-base text-slate-400 border border-surface-border">
+                  0 de 3
+                </span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="chevron-up" aria-hidden="true" class="lucide lucide-chevron-up w-4 h-4 text-slate-400"><path d="m18 15-6-6-6 6"></path></svg>
+              </div>
+            </div>
+
+            <!-- Lista de Itens -->
+            
+              <div class="border-t border-surface-border divide-y divide-surface-border/60 bg-surface-base/30">
+                
+                    <div onclick="toggleItem('48')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#48</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Testes de validação executados cobrindo fluxo principal e caminhos de exceção
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Conferência empírica de todos os cenários documentados na matriz de requisitos</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('49')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#49</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Auditoria de código realizada garantindo pleno domínio sobre o que a IA gerou
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Equipe consciente de cada instrução sem trechos opacos no projeto</p>
+                      </div>
+                    </div>
+                  
+                    <div onclick="toggleItem('50')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60">
+                          
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#50</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors text-slate-100 group-hover:text-white">
+                            Ensaio geral de demonstração finalizado com dados de teste consistentes
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed text-slate-400">Apresentação simulada no ambiente de produção com roteiro validado</p>
+                      </div>
+                    </div>
+                  
+              </div>
+            
+          </div>
+        </section>
+
+  </main>
+
+  <!-- Rodapé Discreto -->
+  <footer class="border-t border-surface-border bg-surface-base py-6 text-center text-xs text-slate-400">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <span>Governança de Engenharia de Software e Desenvolvimento Guiado por IA</span>
+      <span class="font-mono text-slate-400">50 Itens • 12 Categorias • Persistência Ativa</span>
+    </div>
+  </footer>
+
+  <!-- Script da Aplicação -->
+  <script>
+    // Estrutura completa dos 50 critérios em 12 categorias
+    const criteriaData = [
+      {
+        id: "cat_1",
+        title: "Produção Técnica e Especificação",
+        subtitle: "Apresentação e contextualização metodológica do projeto",
+        items: [
+          { id: "1", label: "Texto introdutório do capítulo de Produção Técnica elaborado", desc: "Apresentação formal da abrangência, objetivos e artefatos gerados na especificação" }
+        ]
+      },
+      {
+        id: "cat_2",
+        title: "Modelagem do Produto",
+        subtitle: "Ergonomia visual, estrutura esquelética e prototipação navegável",
+        items: [
+          { id: "2", label: "Texto introdutório de Modelagem do Produto redigido", desc: "Contextualização da jornada visual e interação do usuário na aplicação" },
+          { id: "3", label: "Sitemap com link do mapa completo, prints de cada parte e texto explicativo", desc: "Visão hierárquica das rotas com links funcionais e comentários estruturados" },
+          { id: "4", label: "Wireframe com imagem tela por tela, descrição simplificada e tabela", desc: "Estrutura dos blocos de interface e tabela dos componentes essenciais" },
+          { id: "5", label: "Prototipação com link do Figma, prints de funcionamento e explicação", desc: "Protótipo interativo em alta fidelidade navegável demonstrando fluxos primários" }
+        ]
+      },
+      {
+        id: "cat_3",
+        title: "Arquitetura de Software",
+        subtitle: "Premissas estruturais, comunicação entre serviços e modelo MVC",
+        items: [
+          { id: "6", label: "Texto introdutório de Arquitetura de Software redigido", desc: "Apresentação dos princípios arquiteturais e distribuição de responsabilidades" },
+          { id: "7", label: "Arquitetura Funcional com desenho esquemático e explicação", desc: "Módulos operacionais do domínio e integração entre funções de negócio" },
+          { id: "8", label: "Arquitetura Técnica com desenho e explicação estruturada em tabela", desc: "Servidores, protocolos, portas, bancos de dados e ferramentas de infraestrutura" },
+          { id: "9", label: "Arquitetura MVC com desenho e especificação do ambiente de hospedagem", desc: "Distribuição entre Model, View, Controller e ambiente de publicação em nuvem" }
+        ]
+      },
+      {
+        id: "cat_4",
+        title: "Engenharia de Requisitos",
+        subtitle: "Matriz contratual de requisitos funcionais, qualidade e rastreabilidade",
+        items: [
+          { id: "10", label: "Texto introdutório de Engenharia de Requisitos redigido", desc: "Apresentação formal do escopo e critérios de aceitação de entrega" },
+          { id: "11", label: "Requisitos Funcionais descritos por tabela", desc: "Identificador, descrição do comportamento e regras de negócio obrigatórias" },
+          { id: "12", label: "Requisitos Não Funcionais descritos por tabela", desc: "Métricas de desempenho, segurança, responsividade e disponibilidade" },
+          { id: "13", label: "Requisitos Associados descritos por tabela", desc: "Matriz de rastreabilidade vinculando funções aos seus requisitos de qualidade" },
+          { id: "14", label: "Projeto Linear descrito por tabela", desc: "Encadeamento cronológico de entregáveis e marcos de maturação da solução" }
+        ]
+      },
+      {
+        id: "cat_5",
+        title: "Modelagem de Processos e Fluxos",
+        subtitle: "Cadeia de valor, encadeamento de regras e notação BPMN",
+        items: [
+          { id: "15", label: "Texto introdutório de Modelagem de Processos e Fluxos redigido", desc: "Contextualização dos processos de negócio apoiados pelas rotinas da aplicação" },
+          { id: "16", label: "Macroprocesso com mapa e texto explicativo", desc: "Visão sistêmica da cadeia de valor institucional atendida pelo sistema" },
+          { id: "17", label: "Fluxograma com mapa e explicação", desc: "Diagramação lógica de pontos de partida, tomada de decisão e término de fluxo" },
+          { id: "18", label: "BPMN com mapa e explicação detalhada", desc: "Notação formal com raias de responsabilidade, eventos, gateways e tarefas" }
+        ]
+      },
+      {
+        id: "cat_6",
+        title: "Diagramas e Modelagem de Software",
+        subtitle: "Detalhamento comportamental, dados relacionais e ciclo de estados",
+        items: [
+          { id: "19", label: "Texto introdutório de Diagramas e Modelagem de Software redigido", desc: "Apresentação dos modelos lógicos e estruturais de engenharia de software" },
+          { id: "20", label: "Diagrama de Caso de Uso com desenho e tabela por caso de uso para cada tela", desc: "Atores, fluxos principais, caminhos alternativos e cenários de exceção" },
+          { id: "21", label: "Diagrama de Classe com desenho estrutural e explicação", desc: "Entidades, tipagens de atributos, métodos e relacionamentos de herança" },
+          { id: "22", label: "Diagrama de Entidade Relacionamento com desenho e explicação", desc: "Modelo conceitual e lógico de dados, chaves primárias e cardinalidades" },
+          { id: "23", label: "Diagrama de Estado de Máquina com fluxo de estados e explicação", desc: "Transições de estado das entidades principais e condições de guarda" },
+          { id: "24", label: "Diagrama de Operação com desenho e explicação", desc: "Chamada de métodos internos durante a execução de rotinas críticas" },
+          { id: "25", label: "Diagrama de Fluxo de Dados com níveis e explicação", desc: "Processos, depósitos de dados e entidades externas em níveis estruturados" },
+          { id: "26", label: "Diagrama de Processos de Telas com transições dinâmicas e explicação", desc: "Transições de interface desencadeadas pelos cliques e eventos do usuário" },
+          { id: "27", label: "Ferramenta CASE com modelo gerado e documentação associada", desc: "Evidência de projeto concebido por ferramenta computacional de modelagem" },
+          { id: "28", label: "Diagrama de Contexto com mapa de integrações externas e explicação", desc: "Fronteiras do sistema operando como caixa preta e serviços integrados" }
+        ]
+      },
+      {
+        id: "cat_7",
+        title: "Frontend e Interface",
+        subtitle: "Fidelidade aos wireframes, responsividade fluida e estados visuais",
+        items: [
+          { id: "29", label: "Rotas e navegação do front espelhando fielmente o Sitemap", desc: "Hierarquia de URLs amigáveis sem caminhos inacessíveis ou quebrados" },
+          { id: "30", label: "Componentes visuais e formulários fiéis aos Wireframes e Prototipação", desc: "Implementação alinhada à disposição validada previamente no Figma" },
+          { id: "31", label: "Layout responsivo testado em desktop, tablet e mobile", desc: "Ausência de quebras visuais e rolagem horizontal involuntária em viewports móveis" },
+          { id: "32", label: "Estados visuais tratados: loading, sucesso, erro e tela vazia", desc: "Feedback visual contextual em todas as interações e esperas de rede" },
+          { id: "33", label: "Validação de dados e máscaras nos campos de entrada do usuário", desc: "Validações instantâneas de formulário e formatações de dados no cliente" }
+        ]
+      },
+      {
+        id: "cat_8",
+        title: "Backend e Regras de Negócio",
+        subtitle: "Isolamento de camadas, status HTTP adequados e proteção de segredos",
+        items: [
+          { id: "34", label: "Separação de responsabilidades respeitando a Arquitetura MVC planejada", desc: "Regras de negócio e persistência isoladas de arquivos de apresentação" },
+          { id: "35", label: "Endpoints de API com códigos de status HTTP semânticos", desc: "Respostas padronizadas para cada cenário como duzentos, quatrocentos ou quinhentos" },
+          { id: "36", label: "Tratamento seguro de erros sem exibição de stack trace ao usuário final", desc: "Captura de exceções com mensagens amigáveis sem expor vulnerabilidades do servidor" },
+          { id: "37", label: "Variáveis de ambiente isoladas em arquivo .env", desc: "Credenciais, segredos e conexões mantidas fora do código versionado" }
+        ]
+      },
+      {
+        id: "cat_9",
+        title: "Banco de Dados e Persistência",
+        subtitle: "Integridade relacional, proteção contra injeção e dados de semente",
+        items: [
+          { id: "38", label: "Esquema de tabelas e campos rigorosamente alinhado ao DER documentado", desc: "Nomenclatura, tipos de campos e restrições idênticas ao modelo formal" },
+          { id: "39", label: "Chaves primárias, estrangeiras e regras de integridade configuradas", desc: "Consistência relacional ativada com integridade referencial estrita" },
+          { id: "40", label: "Consultas protegidas contra SQL Injection via ORM ou Prepared Statements", desc: "Zero concatenação de strings brutas em instruções direcionadas ao banco" },
+          { id: "41", label: "Scripts de migração ou carga inicial de sementes prontos para teste", desc: "Comandos preparados para subir base populada com registros consistentes" }
+        ]
+      },
+      {
+        id: "cat_10",
+        title: "Versionamento e Governança Git",
+        subtitle: "Higiene de repositório, boas práticas de ramificação e documentação",
+        items: [
+          { id: "42", label: "Repositório Git inicializado com arquivo .gitignore funcional e testado", desc: "Pastas de dependências, arquivos temporários de compilação e .env ignorados" },
+          { id: "43", label: "Histórico de commits organizado e desenvolvimento dividido por branches", desc: "Mensagens claras e desenvolvimento separado por funcionalidade" },
+          { id: "44", label: "Arquivo README contendo instruções claras de clonagem, setup e execução local", desc: "Guia objetivo para subir a aplicação do zero em qualquer computador" }
+        ]
+      },
+      {
+        id: "cat_11",
+        title: "Publicação e Hospedagem",
+        subtitle: "Entrega em nuvem, criptografia SSL ativa e resolução de rotas SPA",
+        items: [
+          { id: "45", label: "Deploy funcional configurado na nuvem", desc: "Hospedagem ativa em plataformas como Vercel, Netlify, Render ou Railway" },
+          { id: "46", label: "Certificado SSL ativo com redirecionamento HTTPS obrigatório", desc: "Tráfego de rede criptografado de ponta a ponta em produção" },
+          { id: "47", label: "Suporte a rotas SPA configurado para evitar erro 404 em recarregamento", desc: "Regras de redirecionamento ativas para permitir navegação direta por URL" }
+        ]
+      },
+      {
+        id: "cat_12",
+        title: "Testes e Validação de Qualidade",
+        subtitle: "Auditoria do código criado pela IA, testes de regras e ensaio de banca",
+        items: [
+          { id: "48", label: "Testes de validação executados cobrindo fluxo principal e caminhos de exceção", desc: "Conferência empírica de todos os cenários documentados na matriz de requisitos" },
+          { id: "49", label: "Auditoria de código realizada garantindo pleno domínio sobre o que a IA gerou", desc: "Equipe consciente de cada instrução sem trechos opacos no projeto" },
+          { id: "50", label: "Ensaio geral de demonstração finalizado com dados de teste consistentes", desc: "Apresentação simulada no ambiente de produção com roteiro validado" }
+        ]
+      }
+    ];
+
+    const STORAGE_KEY = 'vibe_audit_state_v2';
+    let checkedState = {};
+    let activeFilter = 'ALL';
+    let searchQuery = '';
+    let collapsedCategories = {};
+
+    function init() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) checkedState = JSON.parse(saved);
+      } catch (e) {
+        checkedState = {};
+      }
+      renderChips();
+      renderCategories();
+      updateMetrics();
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(checkedState));
+      } catch (e) {
+        console.error(e);
+      }
+      updateMetrics();
+    }
+
+    function toggleItem(id) {
+      checkedState[id] = !checkedState[id];
+      saveState();
+      renderCategories();
+    }
+
+    function toggleCategoryCollapse(catId) {
+      collapsedCategories[catId] = !collapsedCategories[catId];
+      renderCategories();
+    }
+
+    function toggleAll(status) {
+      criteriaData.forEach(cat => {
+        cat.items.forEach(item => {
+          checkedState[item.id] = status;
+        });
+      });
+      saveState();
+      renderCategories();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val.toLowerCase().trim();
+      renderCategories();
+    }
+
+    function setFilter(catId) {
+      activeFilter = catId;
+      renderChips();
+      renderCategories();
+    }
+
+    function updateMetrics() {
+      let total = 0;
+      let checked = 0;
+
+      criteriaData.forEach(cat => {
+        cat.items.forEach(item => {
+          total++;
+          if (checkedState[item.id]) checked++;
+        });
+      });
+
+      const pct = total === 0 ? 0 : Math.round((checked / total) * 100);
+      document.getElementById('statPercent').innerText = `${pct}%`;
+      document.getElementById('statChecked').innerText = checked;
+      document.getElementById('statTotal').innerText = total;
+      document.getElementById('progressBar').style.width = `${pct}%`;
+    }
+
+    function renderChips() {
+      const container = document.getElementById('categoryChips');
+      if (!container) return;
+
+      let html = `
+        <button onclick="setFilter('ALL')" class="px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${activeFilter === 'ALL' ? 'bg-accent-cyan text-slate-950 font-semibold shadow-sm' : 'bg-surface-card text-slate-300 hover:text-white border border-surface-border'}">
+          Todas as Categorias (12)
+        </button>
+      `;
+
+      criteriaData.forEach((cat, index) => {
+        const isSelected = activeFilter === cat.id;
+        html += `
+          <button onclick="setFilter('${cat.id}')" class="px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-all ${isSelected ? 'bg-accent-cyan text-slate-950 font-semibold shadow-sm' : 'bg-surface-card text-slate-300 hover:text-white border border-surface-border'}">
+            ${index + 1}. ${cat.title}
+          </button>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    function renderCategories() {
+      const container = document.getElementById('categoriesList');
+      if (!container) return;
+
+      const filtered = criteriaData.filter(cat => {
+        if (activeFilter !== 'ALL' && cat.id !== activeFilter) return false;
+        if (!searchQuery) return true;
+
+        const catMatches = cat.title.toLowerCase().includes(searchQuery) || cat.subtitle.toLowerCase().includes(searchQuery);
+        const itemMatches = cat.items.some(item =>
+          item.label.toLowerCase().includes(searchQuery) || item.desc.toLowerCase().includes(searchQuery)
+        );
+        return catMatches || itemMatches;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div class="p-12 text-center rounded-2xl bg-surface-card border border-surface-border">
+            <i data-lucide="search-x" class="w-8 h-8 text-slate-500 mx-auto mb-3"></i>
+            <h3 class="text-sm font-semibold text-white">Nenhum critério corresponde à sua busca</h3>
+            <p class="text-xs text-slate-400 mt-1">Experimente buscar por outros termos como rota, wireframe ou banco.</p>
+          </div>
+        `;
+        if (window.lucide) lucide.createIcons();
+        return;
+      }
+
+      let html = '';
+
+      filtered.forEach(cat => {
+        const items = searchQuery
+          ? cat.items.filter(i => i.label.toLowerCase().includes(searchQuery) || i.desc.toLowerCase().includes(searchQuery))
+          : cat.items;
+
+        const totalInCat = cat.items.length;
+        const checkedInCat = cat.items.filter(i => checkedState[i.id]).length;
+        const isCompleted = checkedInCat === totalInCat;
+        const isCollapsed = !searchQuery && collapsedCategories[cat.id];
+
+        html += `
+          <div class="rounded-xl bg-surface-card border transition-all ${isCompleted ? 'border-accent-emerald/40' : 'border-surface-border'} overflow-hidden">
+            <!-- Header da Categoria -->
+            <div onclick="toggleCategoryCollapse('${cat.id}')" class="p-4 sm:p-5 flex items-center justify-between gap-4 cursor-pointer hover:bg-surface-elevated/40 select-none transition">
+              <div class="flex items-center gap-3">
+                <div class="w-2.5 h-2.5 rounded-full shrink-0 ${isCompleted ? 'bg-accent-emerald' : 'bg-accent-cyan'}"></div>
+                <div>
+                  <h3 class="text-sm sm:text-base font-semibold text-white tracking-tight flex items-center gap-2">
+                    <span>${cat.title}</span>
+                  </h3>
+                  <p class="text-xs text-slate-400 mt-0.5">${cat.subtitle}</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3 shrink-0">
+                <span class="text-xs font-mono px-2.5 py-1 rounded-full ${isCompleted ? 'bg-emerald-950/60 text-accent-emerald border border-accent-emerald/40 font-semibold' : 'bg-surface-base text-slate-400 border border-surface-border'}">
+                  ${checkedInCat} de ${totalInCat}
+                </span>
+                <i data-lucide="${isCollapsed ? 'chevron-down' : 'chevron-up'}" class="w-4 h-4 text-slate-400"></i>
+              </div>
+            </div>
+
+            <!-- Lista de Itens -->
+            ${isCollapsed ? '' : `
+              <div class="border-t border-surface-border divide-y divide-surface-border/60 bg-surface-base/30">
+                ${items.map(item => {
+                  const isChecked = !!checkedState[item.id];
+                  return `
+                    <div onclick="toggleItem('${item.id}')" class="p-3.5 sm:p-4 flex items-start gap-3.5 cursor-pointer hover:bg-surface-elevated/30 transition select-none group">
+                      <div class="pt-0.5 shrink-0">
+                        <div class="w-5 h-5 rounded border transition-all flex items-center justify-center ${isChecked ? 'bg-accent-emerald border-accent-emerald text-slate-950' : 'border-surface-borderLight bg-surface-base group-hover:border-accent-cyan/60'}">
+                          ${isChecked ? '<i data-lucide="check" class="w-3.5 h-3.5 stroke-[3]"></i>' : ''}
+                        </div>
+                      </div>
+
+                      <div class="flex-1 space-y-1">
+                        <div class="flex items-center gap-2">
+                          <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-surface-card border border-surface-border text-slate-400">#${item.id}</span>
+                          <span class="text-xs sm:text-sm font-medium transition-colors ${isChecked ? 'text-slate-400 line-through decoration-accent-emerald/50' : 'text-slate-100 group-hover:text-white'}">
+                            ${item.label}
+                          </span>
+                        </div>
+                        <p class="text-xs text-slate-400 leading-relaxed ${isChecked ? 'text-slate-400' : 'text-slate-400'}">${item.desc}</p>
+                      </div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            `}
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function exportReport() {
+      let total = 0;
+      let checked = 0;
+
+      criteriaData.forEach(cat => {
+        cat.items.forEach(item => {
+          total++;
+          if (checkedState[item.id]) checked++;
+        });
+      });
+
+      const pct = Math.round((checked / total) * 100);
+
+      let text = "=========================================================\n";
+      text += "RELATÓRIO DE AUDITORIA DE ENGENHARIA E VIBE CODING\n";
+      text += "=========================================================\n";
+      text += `Data da Avaliação: ${new Date().toLocaleDateString('pt-BR')} ${new Date().toLocaleTimeString('pt-BR')}\n`;
+      text += `Resultado Geral: ${pct}% de conformidade (${checked} de ${total} critérios atendidos)\n`;
+      text += "=========================================================\n\n";
+
+      criteriaData.forEach((cat, idx) => {
+        text += `CATEGORIA ${idx + 1}: ${cat.title.toUpperCase()}\n`;
+        cat.items.forEach(item => {
+          const status = checkedState[item.id] ? "[ CONFORME ]" : "[ PENDENTE ]";
+          text += `  ${status} #${item.id} ${item.label}\n`;
+        });
+        text += "\n";
+      });
+
+      const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `auditoria_vibe_coding_${new Date().toISOString().slice(0, 10)}.txt`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    window.onload = init;
+  </script>
+
+<a id="bottomBar" style="position: fixed; bottom: -40px; left: 0px; z-index: 9999; transform: translateX(-50%); background-color: transparent; border-radius: 5px 5px 0px 0px; opacity: 0.3; padding: 5px; transition: 0.3s; cursor: pointer; max-height: 100px; max-width: 45px;"><img src="chrome-extension://kobncfkmjelbefaoohoblamnbackjggk/icon/icon_32.png" style="width: 32px; height: 32px;"></a></body><div id="codex-agent-overlay-root" data-codex-agent-overlay-root="true"></div></html>
