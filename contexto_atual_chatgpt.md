@@ -12,9 +12,10 @@ Víamos: plataforma web (mobile-first) que conecta pessoas surdas a intérpretes
 estimativa → distribuição para intérpretes aprovados em até 15 km → aceite exclusivo → sala de atendimento
 (chat/foto/localização) → check-in por QR Code com GPS (≤ 200 m) → encerramento com duração real → pagamento
 → Comprovante de Acessibilidade Garantida (PDF verificável) → avaliação bilateral. Backoffice aprova certificados.
-Fontes de verdade do escopo: `docs/contexto/arquivos-md/Briefing_Projeto_Viamos.md` (45 RF, 45 RNF, histórias),
-`docs/contexto/checklist/estrutura_producao_tecnica.txt` (28 itens do documento) e
-`docs/contexto/checklist/Dossie_Checklist_Vibe_Coding.html` (50 critérios de avaliação do professor).
+Fontes de verdade do escopo: `Contexto/ARQUIVOS .MD/Briefing_Projeto_Viamos.md` (45 RF, 45 RNF, histórias),
+`Contexto/DOCUMENTAÇÃO REPOSITÓRIO/DOC.txt` (28 itens do documento) e
+`Contexto/Auxílio Vibecoding/Dossie_Checklist_Vibe_Coding.html` (50 critérios de avaliação do professor).
+**Antes de tudo, leia `CLAUDE/AGENTS.md`** (regras obrigatórias para qualquer IA) e os registros em `docs/EQUIPE_AGENTES.md`, `docs/VERIFICACOES.md` e `docs/REGISTRO_TRABALHO.md`.
 **Nunca saia do escopo desses documentos.** Prazo final: **21/11/2026**.
 
 ## 2. O que já está pronto (não refazer)
@@ -36,7 +37,7 @@ Fontes de verdade do escopo: `docs/contexto/arquivos-md/Briefing_Projeto_Viamos.
 
 ### Repositório
 - `README.md` com clonagem/instalação/execução/testes/deploy; `.gitignore` testado; `docker-compose.yml` (Postgres local); `render.yaml` (deploy da API).
-- Material original do grupo reorganizado em `docs/contexto/` (o zip e a página salva da web foram removidos do versionamento).
+- Material original do grupo permanece intocado em `Contexto/` e `Entregas/` (regra do `AGENTS.md`); tudo que a IA produz vai em `docs/`, `backend/` e `frontend/`.
 
 ## 3. Como rodar em 5 minutos
 
@@ -54,9 +55,9 @@ Login com `joao@viamos.app` / `Viamos@2026` mostra o hub do cliente consumindo a
 
 Detalhes e checkpoints em `docs/PLANO_BLOCOS.md` (seção "Bloco F1"). Resumo:
 1. `/recuperar-senha` e `/redefinir-senha/:token` → `POST /api/auth/recuperar-senha` (em dev a resposta traz `tokenDev` para testar) e `POST /api/auth/redefinir-senha`.
-2. `/cadastro` (seleção de perfil) — protótipo `docs/contexto/stitch/code_3.html`.
-3. `/cadastro/cliente` → `POST /api/cadastro/cliente` — campos e validações em `backend/src/controllers/cadastro.controller.ts` (`esquemaCadastroCliente`). Protótipo `code_4.html`.
-4. `/cadastro/interprete` → `POST /api/cadastro/interprete` (`esquemaCadastroInterprete`): precisa de `latitudeBase/longitudeBase` (crie `src/components/Mapa.tsx` com react-leaflet — já instalado — para o usuário marcar o ponto) e do certificado em base64 (`{ nome, mime, conteudoBase64 }`, ≤ 5 MB, PDF/JPG/PNG). Protótipo `code_5.html`.
+2. `/cadastro` (seleção de perfil) — não há protótipo dedicado — seguir o `DESIGN.md` e o padrão do Login.
+3. `/cadastro/cliente` → `POST /api/cadastro/cliente` — campos e validações em `backend/src/controllers/cadastro.controller.ts` (`esquemaCadastroCliente`). Protótipo `Contexto/Arquivos Stitch/code (7).html`.
+4. `/cadastro/interprete` → `POST /api/cadastro/interprete` (`esquemaCadastroInterprete`): precisa de `latitudeBase/longitudeBase` (crie `src/components/Mapa.tsx` com react-leaflet — já instalado — para o usuário marcar o ponto) e do certificado em base64 (`{ nome, mime, conteudoBase64 }`, ≤ 5 MB, PDF/JPG/PNG). Protótipo `Contexto/Arquivos Stitch/code (17).html`.
 5. `/notificacoes` → `GET /api/notificacoes`, `POST /api/notificacoes/:id/lida`, `POST /api/notificacoes/ler-todas`.
 6. `/suporte` → `POST /api/suporte` com `{ tipo: 'SUPORTE' | 'EMERGENCIA', descricao?, latitude?, longitude? }`.
 
@@ -64,13 +65,14 @@ Para cada tela: substitua o `tela({...})` da rota em `src/rotas.tsx` pelo compon
 
 Em paralelo, o Gustavo fará o **Bloco F2 (jornada do cliente)** em `src/pages/cliente/`. Não edite essa pasta nem `ui.tsx` além de acréscimos pequenos; componentes novos vão em arquivos novos.
 
-## 5. Regras de convivência no código
+## 5. Regras de convivência no código (além do `CLAUDE/AGENTS.md`)
 
 - Branch: continue em `feat/plataforma-base` (ou crie `feat/f1-auth-cadastros` a partir dela e abra PR). Commits `tipo(escopo): descrição`.
 - Não versionar `.env`, `node_modules`, `dist`.
 - Antes de commitar: `cd frontend && npm run build` (tem que compilar) e, se tocou no backend, `cd backend && npm test`.
 - Português em nomes de arquivos, variáveis e mensagens (padrão do projeto).
 - Qualquer decisão de regra de negócio nova → acrescentar linha em `docs/DECISOES.md`.
+- Use a equipe de agentes (`docs/EQUIPE_AGENTES.md`): no ChatGPT, acione os papéis em sequência (Front-end implementa → UX/UI confere o protótipo → QA testa → PO confere o RF) e registre os pareceres em `docs/REGISTRO_TRABALHO.md`. Bugs encontrados vão para `docs/BUGS.md`.
 
 ## 6. Pendências que dependem de pessoas (não de IA)
 

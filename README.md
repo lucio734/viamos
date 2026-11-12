@@ -3,6 +3,9 @@
 > Projeto da disciplina **Engenharia de Software e Arquitetura de Sistemas** — FECAP, Ciência da Computação (CCOMP4 noturno).
 > Equipe: Lúcio Vecchio, Gustavo Pires e Felipe Mathey. Professor: Luis Fernando dos Santos Pires.
 
+> **Para qualquer IA ou integrante que for trabalhar aqui:** leia primeiro [`CLAUDE/AGENTS.md`](CLAUDE/AGENTS.md) (regras obrigatórias),
+> depois [`docs/PLANO_BLOCOS.md`](docs/PLANO_BLOCOS.md), [`docs/REGISTRO_TRABALHO.md`](docs/REGISTRO_TRABALHO.md) e o `contexto_atual_*.md` mais recente.
+
 O Víamos conecta pessoas surdas a intérpretes de Libras certificados para **atendimentos presenciais** (saúde, jurídico, educação, eventos),
 com distribuição por proximidade (até 15 km), aceite exclusivo, sala de atendimento, check-in por QR Code geolocalizado,
 pagamento e emissão do **Comprovante de Acessibilidade Garantida**.
@@ -13,7 +16,7 @@ pagamento e emissão do **Comprovante de Acessibilidade Garantida**.
 | Backend (API REST, **arquitetura MVC**) | Node 22 + Express 5 + TypeScript + Zod + JWT | [`backend/`](backend) |
 | Banco de dados | PostgreSQL 16 + **Drizzle ORM** (migrações SQL versionadas + seed) | [`backend/src/models/schema.ts`](backend/src/models/schema.ts), [`backend/drizzle/`](backend/drizzle) |
 | Hospedagem prevista | Vercel (frontend) · Render (API) · Neon ou Render Postgres (banco) — todos com HTTPS | [`render.yaml`](render.yaml), [`frontend/vercel.json`](frontend/vercel.json) |
-| Documentação | Material do projeto e capítulo "Produção Técnica" | [`docs/`](docs) |
+| Documentação | Instruções para IAs, material do projeto, entregas e capítulo "Produção Técnica" | [`CLAUDE/`](CLAUDE), [`Contexto/`](Contexto), [`Entregas/`](Entregas), [`docs/`](docs) |
 
 ---
 
@@ -132,10 +135,14 @@ viamos/
 │       ├── components/       # design system (ui.tsx) e AppShell (navegação inferior/lateral)
 │       ├── pages/            # telas por perfil (auth/, cliente/, interprete/, backoffice/)
 │       └── utils/            # máscaras (CPF, CEP, telefone, cartão) e formatadores pt-BR
+├── CLAUDE/                   # CLAUDE.md e AGENTS.md — instruções obrigatórias para qualquer IA (leia antes de tudo)
+├── Contexto/                 # material original do grupo: briefing, PRD, design system, protótipos Stitch, auxílio ao vibecoding
+├── Entregas/                 # entregas anteriores (requisitos 02/09, UML 07/10, modelagem 11/11) e modelo_entrega.docx
 ├── docs/
 │   ├── PLANO_BLOCOS.md       # plano de trabalho até a entrega, dividido em blocos
 │   ├── DECISOES.md           # decisões de regra de negócio (D-01…) referenciadas no código
-│   ├── contexto/             # briefing, PRD, design system, protótipos Stitch, entregas anteriores, checklist
+│   ├── REGISTRO_TRABALHO.md  # estado real do trabalho: feito/verificado × pendente, contribuições, divergências
+│   ├── VERIFICACOES.md       # verificação dos prompts e processos contra labProt, Checklist 2026 e Dossiê
 │   └── producao-tecnica/     # capítulo final do documento (em construção)
 ├── contexto_atual_chatgpt.md # passagem de bastão entre as duplas (Claude ↔ ChatGPT)
 ├── docker-compose.yml        # PostgreSQL local

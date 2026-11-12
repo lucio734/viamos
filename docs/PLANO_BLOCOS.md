@@ -5,6 +5,16 @@ e o arquivo de passagem de bastão atualizado (`contexto_atual_chatgpt.md` quand
 `contexto_atual_claude.md` quando o próximo é o Gustavo). Se um bloco for grande, ele tem *checkpoints*
 (commits intermediários) — assim nada se perde se os créditos acabarem no meio.
 
+Regras obrigatórias de `CLAUDE/AGENTS.md` que valem para todos os blocos:
+- **Preservar** `Contexto/` e `Entregas/`: não mover, renomear, excluir nem reorganizar; material novo vai em `docs/`.
+- Ler as fontes obrigatórias (`PROMPT AGENTES`, `labProt`, `Software Development Checklist 2026`, `Dossie_Checklist_Vibe_Coding`) e **registrar** as verificações em `docs/VERIFICACOES.md`.
+- Trabalhar com a **equipe de agentes** de `docs/EQUIPE_AGENTES.md` (subagentes no Claude; papéis em sequência no ChatGPT) e declarar honestamente quando um bloco foi feito por um agente só.
+- Ao fechar o bloco, atualizar `docs/REGISTRO_TRABALHO.md` (feito/verificado × pendente, contribuições por papel, divergências) e nunca commitar `.env`, segredos ou arquivos fora da tarefa.
+
+Entregáveis do *Software Development Checklist 2026* incorporados ao plano: documentação OpenAPI (F4), plano de testes
+e log de bugs (`docs/TESTES.md`, `docs/BUGS.md` — F4, alimentado desde F1), auditoria de segurança (`docs/SEGURANCA.md` — F4),
+`docs/DEPLOY.md` + `docs/SLA.md` (D), manuais de usuário/administrador (`docs/MANUAL.md` — Z).
+
 Legenda de responsáveis: **G** = Gustavo + Claude · **L** = Lúcio + ChatGPT. Os blocos de G e L do mesmo
 período mexem em pastas diferentes, para evitar conflito de merge.
 
@@ -17,6 +27,7 @@ período mexem em pastas diferentes, para evitar conflito de merge.
 | Frontend — demais telas (≈ 30) | ⬜ Blocos F1–F4 |
 | Deploy com HTTPS (Vercel + Render + banco) | ⬜ Bloco D |
 | Documento "Produção Técnica" (28 itens) e diagramas novos | ⬜ Blocos P1–P3 |
+| Registros exigidos pelo `AGENTS.md` (verificações, equipe de agentes, registro de trabalho) | ✅ criados em 12/11 — manter a cada bloco |
 | Ensaio de demonstração e auditoria dos 50 itens | ⬜ Bloco Z |
 
 ## Cronograma sugerido
@@ -41,7 +52,7 @@ Convenções para todos os blocos F:
 - Componentes novos compartilhados vão em **arquivos novos** em `frontend/src/components/` (ex.: `Mapa.tsx`, `LeitorQr.tsx`, `Passos.tsx`); `ui.tsx` só recebe acréscimos pequenos.
 - Toda tela tem os 4 estados: carregando (`<Carregando/>`), erro (`<EstadoErro/>` com tentar novamente), vazio (`<EstadoVazio/>`) e sucesso (`<Alerta tipo="sucesso">`).
 - Máscaras e formatadores já existem em `frontend/src/utils/formato.ts`; os erros por campo vêm em `ErroApi.porCampo`.
-- Fidelidade ao protótipo: abrir o HTML/PNG indicado em `docs/contexto/stitch/` (o `EmConstrucao` de cada rota já diz qual) e ao `DESIGN.md`.
+- Fidelidade ao protótipo: abrir o HTML/PNG indicado em `Contexto/Arquivos Stitch/` (o `EmConstrucao` de cada rota já diz qual) e ao `DESIGN.md`.
 
 ### Bloco F1 — Autenticação, cadastros, notificações e suporte (L)
 Pasta: `frontend/src/pages/auth/`, `pages/comum/`.
@@ -75,12 +86,14 @@ Pasta: `frontend/src/pages/interprete/`.
 7. `/interprete/historico` e `/interprete/perfil` (RF39/RF43/RF05) — + status da documentação e reenvio do certificado.
 Checkpoint sugerido: commit após 1–2, após 3–4, após 5–7.
 
-### Bloco F4 — Backoffice, verificação pública e polimento (G)
+### Bloco F4 — Backoffice, verificação pública, qualidade e segurança (G)
 1. `/backoffice` indicadores + fila de certificações; `/backoffice/certificacoes/:id` visualizar arquivo e dar parecer; `/backoffice/chamados`; `/backoffice/auditoria`.
 2. `/verificar/:codigo` (RF38) — página pública do comprovante.
-3. Responsividade desktop (sidebar) e acessibilidade (foco visível, contraste, `aria-*`, alvos ≥ 44 px) em todas as telas.
+3. Responsividade desktop (sidebar) e acessibilidade (foco visível, contraste, `aria-*`, alvos ≥ 44 px) em todas as telas; fonte Inter e Material Symbols empacotadas localmente (sem depender do Google Fonts na apresentação).
 4. Testes de frontend (Vitest + Testing Library): máscaras, validações do formulário de solicitação, renderização dos estados.
-5. Revisão cruzada das telas dos blocos F1–F3 (estados, mensagens, fidelidade ao protótipo).
+5. **Revisões por papel com subagentes** (equipe de agentes): QA (executa e amplia os testes; escreve `docs/TESTES.md` com plano, casos e resultado), Security (revisão OWASP de autenticação/sessão/validação; `docs/SEGURANCA.md` com `npm audit`), UX/UI (fidelidade aos protótipos Stitch), PO (RF/RNF por tela). Resultados em `docs/REGISTRO_TRABALHO.md`.
+6. Documentação da API em OpenAPI (`docs/api/openapi.yaml`, gerada a partir de `backend/src/routes/index.ts` + esquemas Zod) e pipeline de CI (`.github/workflows/ci.yml`: typecheck, testes, build).
+7. `docs/BUGS.md` consolidado (bugs encontrados desde F1, status e correção).
 
 ## Bloco D — Deploy em produção (L)
 1. Criar contas: Neon (banco) **ou** usar o Postgres do Render; Render (API via `render.yaml`); Vercel (frontend, *Root Directory* = `frontend`, `VITE_API_URL`).
@@ -88,6 +101,7 @@ Checkpoint sugerido: commit após 1–2, após 3–4, após 5–7.
 3. Rodar `npm run db:seed:prod` uma vez (dados de demonstração) a partir do shell do Render ou localmente apontando para o banco de produção.
 4. Validar: HTTPS nos dois domínios, `GET /api/health`, login, recarregar `/cliente/historico` direto na URL (rewrite SPA), PDF do comprovante.
 5. Escrever `docs/DEPLOY.md` com URLs, prints e passos; anotar o *cold start* do Render free (~50 s na primeira chamada) no roteiro de demonstração.
+6. Escrever `docs/SLA.md` (curto): disponibilidade esperada da hospedagem gratuita, tempo de resposta a incidentes durante a avaliação, responsáveis, plano de contingência.
 
 ## Blocos do documento "Produção Técnica"
 
@@ -101,7 +115,7 @@ Pasta: `docs/diagramas/` (fontes Mermaid/Graphviz + scripts) → PNGs em `docs/p
 6. **Diagrama de processos de telas** (#26): transições entre telas por evento (gerado do sitemap + eventos).
 
 ### Bloco P2 — Consolidação do capítulo (G monta; L escreve textos)
-Pasta: `docs/producao-tecnica/` — um `.md` por item do `DOC.txt`, no formato do `modelo_entrega.docx`
+Pasta: `docs/producao-tecnica/` — um `.md` por item do `Contexto/DOCUMENTAÇÃO REPOSITÓRIO/DOC.txt`, no formato do `Entregas/modelo_entrega.docx`
 (texto introdutório → figura → "Fonte: Autoria própria apoiado por IA generativa" → explicação (i), (ii)… → tabela → conclusão).
 - L: textos introdutórios (#1, #2, #6, #10, #15, #19), tabela de requisitos (do xlsx), tabela por caso de uso para cada tela (#20), descrição dos wireframes (#4) tela a tela.
 - G: montagem das figuras já existentes (extrair dos PDFs de 07/10 e 11/11), DER/sitemap/arquiteturas do P1, script `docs/producao-tecnica/build/gerar_docx.py` que gera o `.docx` final com a formatação do modelo.
@@ -113,4 +127,5 @@ Leitura completa do `.docx`, numeração de figuras/tabelas, coerência com o c�
 ## Bloco Z — Ensaio de demonstração e auditoria (G + L)
 1. Roteiro passo a passo (`docs/ROTEIRO_DEMONSTRACAO.md`) com as contas do seed: cliente solicita → intérprete aceita → sala → QR/check-in (usar coordenadas simuladas do navegador) → encerramento → pagamento → comprovante → avaliação → backoffice aprova Pedro.
 2. Plano de contingência: Render dormindo (abrir `/api/health` 2 min antes), GPS impreciso (DevTools → Sensors), banco de produção resetado pelo seed.
-3. Auditoria dos 50 itens do `Dossie_Checklist_Vibe_Coding.html` com a evidência de cada um (arquivo/rota/print) — cada integrante explica o código da sua parte (#49).
+3. Auditoria dos 50 itens do `Dossie_Checklist_Vibe_Coding.html` com a evidência de cada um (arquivo/rota/print) — cada integrante explica o código da sua parte (#49). Atualizar `docs/VERIFICACOES.md` §3.
+4. `docs/MANUAL.md`: manual curto de usuário (cliente e intérprete) e de administrador (backoffice), com capturas das telas em produção.
