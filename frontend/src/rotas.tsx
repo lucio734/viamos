@@ -15,9 +15,16 @@ import { destinoPorPapel, useAuth } from './auth/AuthContext';
 import { AppShell } from './components/AppShell';
 import { Carregando } from './components/ui';
 import { EmConstrucao, type InfoTela } from './pages/EmConstrucao';
+import { CadastroCliente } from './pages/auth/CadastroCliente';
+import { CadastroInterprete } from './pages/auth/CadastroInterprete';
 import { Login } from './pages/auth/Login';
+import { RecuperarSenha } from './pages/auth/RecuperarSenha';
+import { RedefinirSenha } from './pages/auth/RedefinirSenha';
+import { SelecaoPerfil } from './pages/auth/SelecaoPerfil';
 import { Splash } from './pages/auth/Splash';
 import { HubCliente } from './pages/cliente/Hub';
+import { Notificacoes } from './pages/comum/Notificacoes';
+import { Suporte } from './pages/comum/Suporte';
 
 /** Protege um grupo de rotas por papel; sem sessão → /login; papel errado → hub do próprio papel. */
 function Protegida({ papeis }: { papeis: Papel[] }) {
@@ -34,11 +41,11 @@ export const SITEMAP = {
   publico: [
     { path: '/', nome: 'Splash', element: <Splash /> },
     { path: '/login', nome: 'Login', element: <Login /> },
-    { path: '/recuperar-senha', nome: 'Recuperar senha', element: tela({ titulo: 'Recuperar senha', requisitos: 'RF07', endpoints: ['POST /auth/recuperar-senha'] }) },
-    { path: '/redefinir-senha/:token', nome: 'Redefinir senha', element: tela({ titulo: 'Redefinir senha', requisitos: 'RF07', endpoints: ['POST /auth/redefinir-senha'] }) },
-    { path: '/cadastro', nome: 'Seleção de perfil', element: tela({ titulo: 'Como você quer usar o Víamos?', requisitos: 'RF02', endpoints: [] }) },
-    { path: '/cadastro/cliente', nome: 'Cadastro do cliente', element: tela({ titulo: 'Cadastro — usuário surdo', requisitos: 'RF03', endpoints: ['POST /cadastro/cliente'], prototipo: 'code (7).html' }) },
-    { path: '/cadastro/interprete', nome: 'Cadastro do intérprete', element: tela({ titulo: 'Cadastro — intérprete', requisitos: 'RF04, RF05', endpoints: ['POST /cadastro/interprete'], prototipo: 'code (17).html' }) },
+    { path: '/recuperar-senha', nome: 'Recuperar senha', element: <RecuperarSenha /> },
+    { path: '/redefinir-senha/:token', nome: 'Redefinir senha', element: <RedefinirSenha /> },
+    { path: '/cadastro', nome: 'Seleção de perfil', element: <SelecaoPerfil /> },
+    { path: '/cadastro/cliente', nome: 'Cadastro do cliente', element: <CadastroCliente /> },
+    { path: '/cadastro/interprete', nome: 'Cadastro do intérprete', element: <CadastroInterprete /> },
     { path: '/verificar/:codigo', nome: 'Verificar comprovante', element: tela({ titulo: 'Verificação de comprovante', requisitos: 'RF38', endpoints: ['GET /comprovantes/:codigo/verificar'] }) },
   ],
   cliente: [
@@ -71,8 +78,8 @@ export const SITEMAP = {
     { path: '/backoffice/auditoria', nome: 'Trilha de auditoria', element: tela({ titulo: 'Auditoria', requisitos: 'RF44', endpoints: ['GET /backoffice/auditoria'] }) },
   ],
   comum: [
-    { path: '/notificacoes', nome: 'Notificações', element: tela({ titulo: 'Notificações', requisitos: 'RF42', endpoints: ['GET /notificacoes', 'POST /notificacoes/:id/lida', 'POST /notificacoes/ler-todas'] }) },
-    { path: '/suporte', nome: 'Suporte', element: tela({ titulo: 'Suporte e emergência', requisitos: 'RF34', endpoints: ['POST /suporte'] }) },
+    { path: '/notificacoes', nome: 'Notificações', element: <Notificacoes /> },
+    { path: '/suporte', nome: 'Suporte', element: <Suporte /> },
   ],
 };
 

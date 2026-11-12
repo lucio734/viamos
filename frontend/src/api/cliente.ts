@@ -59,7 +59,14 @@ async function requisicao<T>(metodo: Metodo, caminho: string, corpo?: unknown): 
 
   if (resposta.status === 204) return undefined as T;
   const texto = await resposta.text();
-  const dados = texto ? (JSON.parse(texto) as unknown) : null;
+  let dados: unknown = null;
+  if (texto) {
+    try {
+      dados = JSON.parse(texto) as unknown;
+    } catch {
+      dados = null;
+    }
+  }
 
   if (!resposta.ok) {
     const erro = (dados as { erro?: { codigo?: string; mensagem?: string; detalhes?: unknown } } | null)?.erro;
