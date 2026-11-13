@@ -1,0 +1,505 @@
+openapi: 3.1.0
+info:
+  title: Víamos API — Mediação Presencial em Libras
+  version: 1.0.0
+  description: >
+    Especificação OpenAPI 3.1 da API RESTful do projeto Víamos (conectando pessoas surdas a intérpretes
+    de Libras habilitados para atendimentos exclusivamente presenciais em até 15 km).
+    Cobre integralmente os requisitos funcionais RF01–RF45 e não funcionais RNF01–RNF45.
+servers:
+  - url: http://localhost:3333/api
+    description: Ambiente de desenvolvimento local
+  - url: https://viamos-api.onrender.com/api
+    description: Ambiente de produção (Render)
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    ErroPadrao:
+      type: object
+      required: [erro]
+      properties:
+        erro:
+          type: object
+          required: [codigo, mensagem]
+          properties:
+            codigo:
+              type: string
+              example: VALIDACAO
+            mensagem:
+              type: string
+              example: Os dados informados são inválidos.
+            detalhes:
+              type: array
+              items:
+                type: object
+                properties:
+                  campo: { type: string }
+                  mensagem: { type: string }
+
+paths:
+  /health:
+    get:
+      summary: Healthcheck da API e conexão com PostgreSQL (RNF34)
+      tags: [Público]
+      responses:
+        '200':
+          description: Serviço operacional
+  /comprovantes/{codigo}/verificar:
+    get:
+      summary: Verificação pública de autenticidade de comprovante (RF38)
+      tags: [Público]
+      parameters:
+        - name: codigo
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: Comprovante válido }
+        '404': { description: Comprovante não encontrado }
+
+  /auth/login:
+    post:
+      summary: Autenticação por e-mail e senha com bloqueio após 5 falhas (RF01, RNF35)
+      tags: [Autenticação]
+      responses:
+        '200': { description: Token JWT + dados do usuário }
+        '401': { description: Credenciais inválidas }
+        '423': { description: Conta temporariamente bloqueada por 15 min }
+  /auth/logout:
+    post:
+      summary: Revoga a sessão atual (RF09)
+      tags: [Autenticação]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '204': { description: Sessão encerrada }
+  /auth/me:
+    get:
+      summary: Retorna o usuário autenticado da sessão (RF08)
+      tags: [Autenticação]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Dados do usuário }
+  /auth/recuperar-senha:
+    post:
+      summary: Solicita token de redefinição de senha (RF07, RNF06)
+      tags: [Autenticação]
+      responses:
+        '200': { description: Instruções enviadas }
+  /auth/redefinir-senha:
+    post:
+      summary: Redefine a senha com token válido e revoga sessões (RF07)
+      tags: [Autenticação]
+      responses:
+        '200': { description: Senha redefinida }
+  /auth/alterar-senha:
+    post:
+      summary: Altera a senha do usuário logado e revoga demais sessões (RF43)
+      tags: [Autenticação]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '204': { description: Senha alterada }
+
+  /cadastro/cliente:
+    post:
+      summary: Cadastro de cliente/pessoa surda com validação de CPF e LGPD (RF02, RF03, RF45)
+      tags: [Cadastro]
+      responses:
+        '201': { description: Cliente cadastrado e autenticado }
+        '400': { description: Erro de validação por campo }
+        '409': { description: E-mail ou CPF já cadastrado }
+  /cadastro/interprete:
+    post:
+      summary: Cadastro de intérprete com mapa-base, raio ≤ 15 km e certificado Prolibras (RF04, RF05, RF45)
+      tags: [Cadastro]
+      responses:
+        '201': { description: Intérprete cadastrado com certificação EM_ANALISE }
+        '400': { description: Erro de validação ou assinatura binária inválida }
+        '409': { description: E-mail ou documento já cadastrado }
+
+  /perfil:
+    get:
+      summary: Dados cadastrais e preferências do usuário logado (RF43)
+      tags: [Perfil & LGPD]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Perfil completo }
+    put:
+      summary: Atualiza dados cadastrais, foto de perfil e preferências (RF43, RF04)
+      tags: [Perfil & LGPD]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Perfil atualizado }
+  /perfil/consentimentos:
+    get:
+      summary: Lista consentimentos LGPD do titular (RF45)
+      tags: [Perfil & LGPD]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Lista de consentimentos }
+    put:
+      summary: Atualiza consentimento opcional de localização/notificações (RF45)
+      tags: [Perfil & LGPD]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '204': { description: Consentimento atualizado }
+  /perfil/dados/exportar:
+    get:
+      summary: Exporta todos os dados pessoais do titular em JSON (RF45 — portabilidade LGPD)
+      tags: [Perfil & LGPD]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Pacote JSON de dados pessoais }
+  /perfil/dados/excluir:
+    post:
+      summary: Solicita exclusão e anonimização imediata da conta (RF45 — LGPD)
+      tags: [Perfil & LGPD]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Conta anonimizada e sessões revogadas }
+
+  /notificacoes:
+    get:
+      summary: Lista notificações internas e contagem de não lidas (RF42)
+      tags: [Notificações]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Lista de notificações }
+  /notificacoes/{id}/lida:
+    post:
+      summary: Marca uma notificação como lida (RF42)
+      tags: [Notificações]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '204': { description: Marcada como lida }
+  /notificacoes/ler-todas:
+    post:
+      summary: Marca todas as notificações do usuário como lidas (RF42)
+      tags: [Notificações]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '204': { description: Todas marcadas como lidas }
+
+  /cliente/hub:
+    get:
+      summary: Painel inicial do cliente com solicitações ativas, pagamentos pendentes e histórico recente
+      tags: [Cliente]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Resumo do Hub do Cliente }
+  /solicitacoes/estimativa:
+    post:
+      summary: Calcula estimativa prévia de valor antes da confirmação (RF15)
+      tags: [Cliente]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Estimativa discriminada (serviço, deslocamento, taxa, total) }
+  /solicitacoes:
+    get:
+      summary: Lista solicitações do cliente autenticado (RF18)
+      tags: [Cliente]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Lista de solicitações }
+    post:
+      summary: Cria solicitação presencial e distribui para intérpretes habilitados no raio (RF10–RF17)
+      tags: [Cliente]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '201': { description: Solicitação criada e ofertas distribuídas por Haversine }
+  /solicitacoes/{id}:
+    get:
+      summary: Detalhe e linha do tempo da solicitação (RF18)
+      tags: [Cliente]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Detalhe da solicitação }
+  /solicitacoes/{id}/cancelar:
+      post:
+        summary: Cancela solicitação aplicando política de antecedência/taxa (RF19)
+        tags: [Cliente]
+        security: [{ bearerAuth: [] }]
+        responses:
+          '200': { description: Solicitação cancelada com cálculo de taxa }
+          '422': { description: Cancelamento não permitido após check-in }
+
+  /formas-pagamento:
+    get:
+      summary: Lista formas de pagamento salvas pelo cliente (RF35)
+      tags: [Pagamentos]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Lista de cartões/Pix }
+    post:
+      summary: Cadastra nova forma de pagamento tokenizada (RF35)
+      tags: [Pagamentos]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '201': { description: Forma de pagamento salva }
+  /formas-pagamento/{id}:
+    delete:
+      summary: Remove forma de pagamento salva (RF35)
+      tags: [Pagamentos]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '204': { description: Removida }
+  /pagamentos/pendentes:
+    get:
+      summary: Lista pagamentos pendentes do cliente (RF36)
+      tags: [Pagamentos]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Pagamentos pendentes }
+  /pagamentos/{id}:
+    get:
+      summary: Detalhe de um pagamento específico (RF36)
+      tags: [Pagamentos]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Detalhe do pagamento }
+  /pagamentos/{id}/processar:
+    post:
+      summary: Processa pagamento de forma idempotente e emite comprovante + crédito ao intérprete (RF36, RF37)
+      tags: [Pagamentos]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Pagamento aprovado e comprovante emitido }
+        '402': { description: Pagamento recusado pelo gateway }
+
+  /interprete/hub:
+    get:
+      summary: Painel do intérprete com status de habilitação, demandas no raio e próximos atendimentos (RF20, RF24)
+      tags: [Intérprete]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Resumo do Hub do Intérprete }
+  /demandas:
+    get:
+      summary: Lista demandas presenciais compatíveis dentro do raio do intérprete (RF20, RF21)
+      tags: [Intérprete]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Lista de demandas ordenadas por distância }
+  /demandas/{id}/aceitar:
+    post:
+      summary: Aceite exclusivo atômico da demanda com verificação de conflito de agenda (RF22, RNF33)
+      tags: [Intérprete]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Atendimento alocado ao intérprete }
+        '409': { description: Demanda já aceita por outro intérprete ou conflito de horário }
+        '422': { description: Intérprete ainda não habilitado ou fora do raio }
+  /demandas/{id}/recusar:
+    post:
+      summary: Recusa oferta de demanda sem penalidade (RF23)
+      tags: [Intérprete]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '204': { description: Demanda recusada }
+  /interprete/configuracao:
+    put:
+      summary: Atualiza disponibilidade imediata (online/offline), raio ≤ 15 km, endereço-base e preço/hora (RF24, RNF27)
+      tags: [Intérprete]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Configuração atualizada }
+  /interprete/disponibilidades:
+    get:
+      summary: Obtém grade semanal de horários disponíveis (RF25)
+      tags: [Intérprete]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Janelas semanais }
+    put:
+      summary: Substitui grade semanal de horários disponíveis (RF25)
+      tags: [Intérprete]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Grade atualizada }
+  /interprete/certificacoes:
+    get:
+      summary: Lista certificações enviadas pelo intérprete e respectivos pareceres (RF05, RF06)
+      tags: [Intérprete]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Lista de certificações }
+    post:
+      summary: Envia nova certificação ou reenvia documento após solicitação de correção (RF05)
+      tags: [Intérprete]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '201': { description: Certificação enviada para análise }
+  /interprete/ganhos:
+    get:
+      summary: Resumo financeiro semanal, saldo disponível, a receber e extrato (RF26)
+      tags: [Intérprete]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Resumo de ganhos }
+  /interprete/contas-bancarias:
+    get:
+      summary: Lista contas bancárias/Pix do intérprete para repasse (RF27)
+      tags: [Intérprete]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Contas cadastradas }
+    post:
+      summary: Cadastra conta bancária/Pix para repasse (RF27)
+      tags: [Intérprete]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '201': { description: Conta cadastrada }
+  /interprete/repasses:
+    get:
+      summary: Histórico de solicitações de repasse (RF27)
+      tags: [Intérprete]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Lista de repasses }
+    post:
+      summary: Solicita transferência do saldo disponível para a conta principal (RF27)
+      tags: [Intérprete]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '201': { description: Repasse processado }
+
+  /atendimentos:
+    get:
+      summary: Histórico de atendimentos filtrável por período, tipo de serviço e status (RF39)
+      tags: [Atendimento & Sala]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Lista de atendimentos }
+  /atendimentos/{id}:
+    get:
+      summary: Detalhes completos do atendimento para os participantes (RF31, RF33)
+      tags: [Atendimento & Sala]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Detalhe do atendimento }
+  /atendimentos/{id}/qrcode:
+    get:
+      summary: Obtém o código do QR Code de check-in exclusivo do cliente (RF31)
+      tags: [Atendimento & Sala]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Código QR para exibição pelo cliente }
+  /atendimentos/{id}/checkin:
+    post:
+      summary: Realiza check-in presencial validando QR Code, janela de 30 min, precisão ≤ 50 m e distância ≤ 200 m (RF31, RF32, RNF26)
+      tags: [Atendimento & Sala]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Check-in confirmado e atendimento iniciado }
+        '422': { description: Violação de janela temporal, precisão GPS, distância máxima ou QR inválido }
+  /atendimentos/{id}/encerrar:
+    post:
+      summary: Encerra o atendimento calculando duração real, valor final e gerando cobrança (RF33)
+      tags: [Atendimento & Sala]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Atendimento concluído }
+  /atendimentos/{id}/mensagens:
+    get:
+      summary: Lista mensagens da sala do atendimento com suporte a polling incremental (?apos=) (RF28, RF29)
+      tags: [Atendimento & Sala]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Mensagens da sala }
+    post:
+      summary: Envia mensagem de texto ou imagem do ponto de encontro na sala (RF28, RF29)
+      tags: [Atendimento & Sala]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '201': { description: Mensagem registrada }
+  /atendimentos/{id}/localizacoes:
+    get:
+      summary: Obtém últimas coordenadas compartilhadas pelos participantes na sala (RF30)
+      tags: [Atendimento & Sala]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Coordenadas recentes }
+    post:
+      summary: Compartilha localização temporária durante a janela do atendimento (RF30)
+      tags: [Atendimento & Sala]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '201': { description: Localização registrada }
+  /atendimentos/{id}/comprovante.pdf:
+    get:
+      summary: Gera e baixa o comprovante oficial do atendimento em PDF (RF37)
+      tags: [Atendimento & Sala]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200':
+          description: Documento PDF
+          content:
+            application/pdf: {}
+  /atendimentos/{id}/avaliacoes:
+    post:
+      summary: Registra avaliação bilateral (1 a 5 estrelas + comentário) e recalcula reputação (RF40, RF41)
+      tags: [Atendimento & Sala]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '201': { description: Avaliação registrada }
+  /suporte:
+    post:
+      summary: Abre chamado de suporte operacional ou alerta SOS de emergência com geolocalização (RF34)
+      tags: [Atendimento & Sala]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '201': { description: Chamado aberto }
+
+  /backoffice/indicadores:
+    get:
+      summary: Indicadores operacionais do backoffice (RF06, RF34)
+      tags: [Backoffice]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Totais de certificações, intérpretes, clientes e chamados }
+  /backoffice/certificacoes:
+    get:
+      summary: Fila de certificações filtrável por status (RF06)
+      tags: [Backoffice]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Lista de certificações }
+  /backoffice/certificacoes/{id}/arquivo:
+    get:
+      summary: Baixa/visualiza o arquivo original do certificado enviado pelo intérprete (RF06)
+      tags: [Backoffice]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Binário do certificado (PDF/JPG/PNG) }
+  /backoffice/certificacoes/{id}/parecer:
+    post:
+      summary: Registra parecer técnico (APROVADO, CORRECAO, REPROVADO) e atualiza habilitação do intérprete (RF06)
+      tags: [Backoffice]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Parecer registrado e intérprete notificado }
+  /backoffice/chamados:
+    get:
+      summary: Lista chamados de suporte e alertas de emergência (RF34)
+      tags: [Backoffice]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Lista de chamados }
+  /backoffice/chamados/{id}/status:
+    post:
+      summary: Assume ou encerra um chamado de suporte/emergência (RF34)
+      tags: [Backoffice]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Status atualizado }
+  /backoffice/auditoria:
+    get:
+      summary: Consulta a trilha imutável de auditoria com filtros por tipo e período (RF44, RNF08)
+      tags: [Backoffice]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Registros de auditoria }

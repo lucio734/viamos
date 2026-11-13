@@ -74,7 +74,7 @@ export function ChamadosSuporte() {
               key={aba.valor || 'TODOS'}
               type="button"
               onClick={() => setFiltroStatus(aba.valor)}
-              className={`px-3.5 py-2 rounded-xl text-xs font-bold transition ${
+              className={`min-h-touch inline-flex items-center px-3.5 py-2 rounded-xl text-xs font-bold transition ${
                 filtroStatus === aba.valor
                   ? 'bg-primary text-on-primary shadow-sm'
                   : 'bg-surface-container-low text-on-surface-variant hover:bg-surface-container'
@@ -177,7 +177,7 @@ export function ChamadosSuporte() {
                     </p>
                     <Mapa
                       posicao={{ lat: c.latitude, lng: c.longitude }}
-                      altura="180px"
+                      altura="h-48"
                       somenteLeitura
                     />
                   </div>

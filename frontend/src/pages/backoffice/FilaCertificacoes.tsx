@@ -136,7 +136,7 @@ export function FilaCertificacoes() {
                 role="tab"
                 aria-selected={ativo}
                 onClick={() => setFiltroStatus(aba.valor)}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition ${
+                className={`min-h-touch inline-flex items-center px-4 py-2 rounded-xl text-xs font-bold transition ${
                   ativo
                     ? 'bg-primary text-on-primary shadow-sm'
                     : 'bg-surface-container-low text-on-surface-variant hover:bg-surface-container'
