@@ -33,11 +33,11 @@ Legenda: ✅ atendido e verificado · 🟡 parcialmente atendido · ⬜ pendente
 | 2 | Protótipo interativo (clicável) | ⬜ link do Figma pendente (importar do Stitch) | Pendência P-01 em `docs/DECISOES.md` |
 | 2 | Design system / style guide | ✅ `DESIGN.md` aplicado como tokens do Tailwind | `frontend/src/index.css` |
 | 3 Core Development | Acesso ao repositório de código | ✅ repositório público no GitHub com commits publicados na `main` | `README.md` §8 |
-| 3 | MVP funcional / builds incrementais | 🟡 backend completo + base do frontend + Bloco F1 (10 rotas prontas); demais telas nos Blocos F2–F4 | commits na `main` |
-| 3 | Documentação da API (Swagger/OpenAPI) | ⬜ adicionar especificação OpenAPI gerada a partir das rotas (Bloco F4) | `backend/src/routes/index.ts` (mapa comentado) → `docs/api/openapi.yaml` |
-| 4 QA & Testing | Plano e casos de teste | 🟡 50 casos automatizados passando no backend; plano escrito (objetivo, escopo, critérios) fica para o Bloco F4 | `backend/tests/`, `docs/TESTES.md` |
-| 4 | Relatório de bugs e resoluções | ✅ ativo e atualizado no Bloco F1 (B-001 a B-006 registrados e corrigidos) | `docs/BUGS.md` |
-| 4 | Auditoria de performance e segurança | 🟡 `npm audit` executado (1 vulnerabilidade moderada apenas em dependência de desenvolvimento — esbuild via drizzle-kit); revisão OWASP formal no Bloco F4 | `docs/SEGURANCA.md` |
+| 3 | MVP funcional / builds incrementais | ✅ backend completo + 100% das 23 rotas do frontend (`SITEMAP`) implementadas e compiladas nos Blocos F1–F4 | commits na `main` |
+| 3 | Documentação da API (Swagger/OpenAPI) | ⬜ adicionar especificação OpenAPI gerada a partir das rotas | `backend/src/routes/index.ts` (mapa comentado) → `docs/api/openapi.yaml` |
+| 4 QA & Testing | Plano e casos de teste | 🟡 50 casos automatizados passando no backend (incluindo validações OWASP de magic bytes e suporte); plano escrito fica para `docs/TESTES.md` | `backend/tests/`, `docs/TESTES.md` |
+| 4 | Relatório de bugs e resoluções | ✅ ativo e atualizado nos Blocos F1–F4 (B-001 a B-009 registrados e corrigidos) | `docs/BUGS.md` |
+| 4 | Auditoria de performance e segurança | ✅ hardening OWASP aplicado (magic bytes, revogação de sessões em `alterarSenha`, validação de `fotoUrl`, download via Blob, limpeza LGPD) + `npm audit` | `backend/src/`, `docs/BUGS.md` |
 | 5 Deployment & SLA | Ambiente de produção ativo | ⬜ Bloco D | `docs/DEPLOY.md` |
 | 5 | Manuais de usuário e administrador | ⬜ Bloco Z (roteiro de demonstração + manual curto por perfil) | `docs/MANUAL.md` |
 | 5 | SLA | ⬜ documento curto com disponibilidade esperada da hospedagem gratuita e janela de suporte (Bloco D) | `docs/SLA.md` |
@@ -61,10 +61,10 @@ Estado por item, com a evidência atual. Itens 1–28 são o documento "Produç�
 | 22 | DER | 🟡 fonte pronta (schema); figura pendente | `backend/src/models/schema.ts` → Bloco P1 |
 | 23, 25, 28 | Estados, DFD, contexto | ✅ entregues em 11/11 | `Entregas/Viamos_Modelagem_Sistemas.pdf` |
 | 24, 26, 27 | Operação, processos de telas, ferramenta CASE | ⬜ | Bloco P1 |
-| 29 | Rotas = sitemap | ✅ | `frontend/src/rotas.tsx` |
-| 30 | Componentes fiéis aos wireframes | 🟡 Splash, Login, Hub do cliente e todo o Bloco F1 (`/recuperar-senha`, `/redefinir-senha/:token`, `/cadastro`, `/cadastro/cliente`, `/cadastro/interprete`, `/notificacoes`, `/suporte`) prontos; demais nos Blocos F2–F4 | `frontend/src/pages/` |
-| 31 | Responsividade | 🟡 shell mobile + sidebar desktop + formulários responsivos no F1; revisão global no F4 | `frontend/src/components/AppShell.tsx`, `TelaPublica.tsx` |
-| 32 | Estados visuais (carregando/sucesso/erro/vazio) | ✅ componentes prontos e usados no Hub e em todas as telas do Bloco F1 | `frontend/src/components/ui.tsx`, `pages/auth/*`, `pages/comum/*` |
+| 29 | Rotas = sitemap | ✅ 23/23 rotas ativas com componentes reais (0 placeholders) | `frontend/src/rotas.tsx` |
+| 30 | Componentes fiéis aos wireframes | ✅ Todas as 23 rotas implementadas (Splash, Login, F1 Autenticação/Cadastro/Notificações/Suporte, F2 Jornada do Cliente, F3 Jornada do Intérprete, F4 Backoffice e Verificação Pública) | `frontend/src/pages/`, `frontend/src/components/` |
+| 31 | Responsividade | ✅ shell mobile + sidebar desktop + grids responsivos em todas as 23 telas | `frontend/src/components/AppShell.tsx`, `TelaPublica.tsx`, `pages/*` |
+| 32 | Estados visuais (carregando/sucesso/erro/vazio) | ✅ componentes prontos e aplicados em todas as 23 rotas da aplicação | `frontend/src/components/ui.tsx`, `pages/*` |
 | 33 | Validação e máscaras | ✅ máscaras (`formato.ts`) + validação no cliente (`validacao.ts`) + validação Zod no servidor | `frontend/src/utils/{formato,validacao}.ts`, `backend/src/controllers/*` |
 | 34 | Separação MVC no back-end | ✅ | `backend/src/{models,controllers,views,routes,services}` |
 | 35 | Status HTTP semânticos | ✅ 200/201/202/204/400/401/402/403/404/409/422/423/429 | `backend/src/routes/index.ts`, testes |

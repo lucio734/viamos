@@ -355,3 +355,86 @@ export interface CertificacaoInterprete {
   enviadaEm: string;
   analisadaEm: string | null;
 }
+
+export interface VerificacaoComprovante {
+  valido: boolean;
+  codigoVerificacao?: string;
+  emitidoEm?: string;
+  dataAtendimento?: string;
+  tipoServico?: string;
+  duracaoRealMin?: number | null;
+  cidadeOuEndereco?: string;
+  interprete?: {
+    nome: string;
+    certificacao: string;
+  };
+}
+
+export interface IndicadoresBackoffice {
+  certificacoesEmAnalise: number;
+  certificacoesAprovadas: number;
+  chamadosAbertos: number;
+  interpretesAprovados: number;
+  interpretes: number;
+  clientes: number;
+}
+
+export interface CertificacaoBackoffice {
+  id: string;
+  tipo: 'PROLIBRAS' | 'EQUIVALENTE';
+  numero: string;
+  nomeArquivo: string;
+  mimeArquivo: string;
+  tamanhoBytes: number;
+  status: 'EM_ANALISE' | 'APROVADA' | 'RECUSADA' | 'CORRECAO_SOLICITADA';
+  enviadaEm: string;
+  interprete: {
+    id: string;
+    nome: string;
+    email: string;
+    documento: string;
+    especialidades: string[];
+    statusHabilitacao: string;
+  } | null;
+  analises: {
+    resultado: string;
+    justificativa: string | null;
+    data: string;
+    operador: string;
+  }[];
+}
+
+export interface ChamadoBackoffice {
+  id: string;
+  atendimentoId: string | null;
+  solicitanteId: string;
+  operadorId: string | null;
+  tipo: 'SUPORTE' | 'EMERGENCIA';
+  descricao: string | null;
+  latitude: number | null;
+  longitude: number | null;
+  status: 'ABERTO' | 'EM_ATENDIMENTO' | 'ENCERRADO';
+  abertoEm: string;
+  encerradoEm: string | null;
+  solicitante: {
+    nome: string;
+    papel: string;
+    telefone: string | null;
+  } | null;
+  atendimento: {
+    id: string;
+    status: string;
+  } | null;
+}
+
+export interface LogAuditoriaItem {
+  id: string;
+  usuarioId: string | null;
+  tipo: string;
+  entidade: string | null;
+  entidadeId: string | null;
+  detalhes: Record<string, unknown> | null;
+  ip: string | null;
+  criadoEm: string;
+}
+

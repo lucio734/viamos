@@ -1,14 +1,15 @@
-# Víamos — Relatório de passagem de bastão para o Gustavo e o Claude (pós-Bloco F1)
+# Víamos — Relatório de passagem de bastão para o Gustavo e o Claude (pós-Blocos F1, F2, F3 e F4)
 
-> Gerado em 12/11/2026 (noite) após a conclusão e verificação do **Bloco F1** na branch `main`.
+> Gerado em 12/11/2026 (noite) após a conclusão e verificação dos **Blocos F1, F2, F3 e F4 (100% das 23 rotas do SITEMAP + Hardening OWASP)** na branch `main`.
 
 ---
 
 ## 1. Estado do repositório e da branch `main`
 
 - Os commits do Bloco 0 (`c429bb5`, `b69566b`, `48dc820`, `cfccb92`) já estavam publicados na `main` remota (`origin/main`).
-- Seguindo a orientação do Lúcio, todo o trabalho do **Bloco F1** foi integrado, testado e publicado diretamente na `main`.
-- Antes de iniciar o **Bloco F2**, basta atualizar o clone local:
+- Seguindo a orientação do Lúcio, todo o trabalho dos **Blocos F1, F2, F3 e F4** foi integrado, testado e publicado diretamente na `main`.
+- **100% das 23 rotas definidas em `frontend/src/rotas.tsx` (`SITEMAP`) estão implementadas com componentes reais (0 placeholders `<EmConstrucao />` restantes).**
+- Antes de iniciar os próximos blocos (**Bloco P1/P2** de diagramas/Produção Técnica e **Bloco D** de deploy), basta atualizar o clone local:
   ```bash
   git checkout main
   git pull --ff-only origin main
@@ -53,19 +54,46 @@ Três subagentes especializados revisaram o Bloco F1 de forma independente (`rev
 - **B-005 (Média — QA):** adicionado ícone para `SOLICITACAO` em `Notificacoes.tsx` e `try/catch` no `JSON.parse` de `frontend/src/api/cliente.ts`.
 - **B-006 (Baixa — UX/UI):** ajustados `min-h-touch` (44 px, RNF13) no slider e links secundários e `text-base` (16 px, RNF14) nos textos descritivos de `Notificacoes.tsx` e `Suporte.tsx`.
 
-### 3.4. Verificações executadas
-- `backend`: `npm test` → **50/50 testes passando** (PostgreSQL 18.6); `npm run typecheck` → OK (0 erros).
-- `frontend`: `npm run typecheck` → OK (0 erros); `npm run build` → OK (bundle gerado em `dist/`); `npm run lint` → 0 erros.
+### 3.4. Blocos F2, F3, F4 e Hardening OWASP (entregues na sequência na `main`)
+- **Hardening OWASP no Backend (`backend/src/`) e Cliente HTTP (`frontend/src/api/`)**:
+  - `alterarSenha` revoga todas as demais sessões ativas do usuário (`B-008`).
+  - `decodificarArquivo` valida *magic bytes* (`%PDF`, JPEG, PNG) além do MIME e tamanho (`B-007`), testado em `excecoes.test.ts`.
+  - `esquemaSuporte` exige `descricao` (mín. 5 caracteres) quando `tipo === 'SUPORTE'` (`B-009`), testado em `excecoes.test.ts`.
+  - `PUT /perfil` valida esquema/MIME de `fotoUrl` e `POST /perfil/dados/excluir` limpa `cep`, `endereco` e `preferenciasAcessibilidade` em `clientes` (`B-009`).
+  - `api.abrirArquivo` faz download/abertura autenticada via `fetch` + `Blob` URL sem expor JWT na query string (`B-008`).
+- **Bloco F2 — Jornada do Cliente (`frontend/src/pages/cliente/` + compartilhados)**:
+  - `/cliente/solicitacoes/nova` (`NovaSolicitacao.tsx` — assistente em 3 passos com `<Mapa />` e estimativa prévia).
+  - `/cliente/solicitacoes/:id` (`DetalheSolicitacao.tsx` — linha do tempo, QR Code, intérprete e cancelamento com política/taxa).
+  - `/cliente/atendimentos/:id` (`DetalheAtendimentoCliente.tsx` — QR Code, encerramento, comprovante PDF, avaliação).
+  - `/cliente/atendimentos/:id/sala` e `/interprete/atendimentos/:id/sala` (`components/Sala.tsx` — chat por polling de 4 s, foto do ponto de encontro, GPS temporário no `<Mapa />` e botão SOS).
+  - `/cliente/atendimentos/:id/pagamento` (`PagamentoAtendimento.tsx` — Pix/cartão, processamento idempotente, tratamento de 402 e PDF).
+  - `/cliente/atendimentos/:id/avaliar` e `/interprete/atendimentos/:id/avaliar` (`pages/comum/AvaliarAtendimento.tsx`).
+  - `/cliente/historico` e `/interprete/historico` (`pages/comum/HistoricoAtendimentos.tsx`).
+  - `/cliente/perfil` (`PerfilCliente.tsx` — dados pessoais/acessibilidade, formas de pagamento, senha e direitos LGPD).
+- **Bloco F3 — Jornada do Intérprete (`frontend/src/pages/interprete/` + `LeitorQr.tsx`)**:
+  - `components/LeitorQr.tsx` (`html5-qrcode` por câmera + fallback manual).
+  - `/interprete` (`HubInterprete.tsx` — chave Online/Offline, `<Mapa />` com raio e demandas, aceite/recusa rápida, ganhos da semana e próximo atendimento).
+  - `/interprete/demandas` (`DemandasInterprete.tsx`) e `/interprete/demandas/:id` (`DetalheDemanda.tsx`).
+  - `/interprete/agenda` (`AgendaInterprete.tsx` — slider de raio 1–15 km no `<Mapa />` e grade semanal de disponibilidade).
+  - `/interprete/atendimentos/:id` (`DetalheAtendimentoInterprete.tsx` — check-in com GPS + simulador indoor de 1 clique + `<LeitorQr />` e encerramento).
+  - `/interprete/ganhos` (`GanhosInterprete.tsx` — resumo semanal, contas bancárias, solicitação de repasse e extrato).
+  - `/interprete/perfil` (`PerfilInterprete.tsx` — upload de foto de perfil `fotoUrl` ≤ 350 KB fechando o RF04, dados profissionais, endereço-base no `<Mapa />`, certificações Prolibras + reenvio, senha e LGPD).
+- **Bloco F4 — Backoffice e Verificação Pública (`frontend/src/pages/backoffice/` e `VerificarComprovante.tsx`)**:
+  - `/verificar/:codigo` (`pages/comum/VerificarComprovante.tsx` — RF38).
+  - `/backoffice` (`FilaCertificacoes.tsx` — RF06, indicadores + fila filtrável).
+  - `/backoffice/certificacoes/:id` (`ParecerCertificacao.tsx` — RF06, dossiê + visualização via Blob + parecer `APROVADO`/`CORRECAO`/`REPROVADO`).
+  - `/backoffice/chamados` (`ChamadosSuporte.tsx` — RF34, destaque para SOS Emergência com `<Mapa />` e atualização de status).
+  - `/backoffice/auditoria` (`TrilhaAuditoria.tsx` — RF44, filtros por evento e período).
+
+### 3.5. Verificações executadas
+- `backend`: `npm test` → **50/50 testes passando** (PostgreSQL 18.6, incluindo os casos de *magic bytes* e validação de suporte); `npm run typecheck` → OK (0 erros).
+- `frontend`: `npm run typecheck` → OK (0 erros); `npm run build` → OK (130 módulos transformados em `dist/`); `npm run lint` → 0 erros.
 
 ---
 
-## 4. Próximo passo — Bloco F2 (Gustavo + Claude): Jornada do Cliente
+## 4. Próximos passos — Blocos P1/P2 (Produção Técnica), D (Deploy) e Z (Ensaio)
 
-Pasta alvo: `frontend/src/pages/cliente/` (substituindo os *placeholders* de `SITEMAP.cliente` em `frontend/src/rotas.tsx`):
-1. `/cliente/solicitacoes/nova` (RF10–RF16, protótipo `code (15).html`) — 3 passos: (a) tipo, data/hora, duração (blocos de 30 min, mín. 60), observações ≤ 300; (b) endereço + `<Mapa />` (`src/components/Mapa.tsx`) para confirmar `latitude`/`longitude` + complemento/ponto de referência; (c) resumo com estimativa (`POST /solicitacoes/estimativa`) → confirmar (`POST /solicitacoes`).
-2. `/cliente/solicitacoes/:id` e `/cliente/atendimentos/:id` (RF18, RF19, RF31, RF33, RF37) — linha do tempo de status, dados do intérprete, botões para sala, cancelar (exibindo política/taxa), QR Code (`qrcode.react` com `GET /atendimentos/:id/qrcode`), pagar, avaliar e comprovante PDF.
-3. `/cliente/atendimentos/:id/sala` (RF28–RF30, RF34, protótipo `code (21).html`) — se possível, extrair a sala em `frontend/src/components/Sala.tsx` para reutilização direta na rota `/interprete/atendimentos/:id/sala` no Bloco F3.
-4. `/cliente/atendimentos/:id/pagamento` (RF35, RF36) — formas salvas, adicionar Pix/cartão, processar pagamento (tratar 402 e idempotência).
-5. `/cliente/atendimentos/:id/avaliar` (RF40, protótipo `code (3).html`) — estrelas 1–5 + comentário.
-6. `/cliente/historico` (RF39, RF37, protótipo `code (13).html`) — filtros por período/tipo/status e download do PDF.
-7. `/cliente/perfil` (RF43, RF45, RF35, protótipo `code (11).html`) — abas Dados, Pagamento, Segurança (`POST /auth/alterar-senha`) e Privacidade LGPD (consentimentos, exportar, excluir).
+Com **100% das telas da aplicação e endpoints do backend prontos e verificados na `main`**, o foco passa para:
+1. **Bloco P1 / P2 (Documentação Acadêmica e Diagramas):** gerar as figuras a partir do código real (Sitemap de `rotas.tsx`, DER de `schema.ts`, arquitetura funcional/técnica/MVC, macroprocesso, fluxograma, sequências) e montar o documento de Produção Técnica no formato de `modelo_entrega.docx`, além de `docs/api/openapi.yaml`, `docs/TESTES.md` e `docs/SEGURANCA.md`.
+2. **Bloco D (Deploy em Nuvem):** publicar a API no Render (`render.yaml`), o banco no Neon/Render Postgres (rodando `db:migrate` e `db:seed`) e o frontend na Vercel (`frontend/vercel.json`), registrando as URLs em `docs/DEPLOY.md` e `docs/SLA.md`.
+3. **Bloco Z (Ensaio e Auditoria Final):** ensaiar o roteiro de demonstração ponta a ponta e preencher `docs/MANUAL.md`.

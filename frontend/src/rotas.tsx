@@ -13,8 +13,8 @@ import { Navigate, Outlet, createBrowserRouter } from 'react-router-dom';
 import type { Papel } from './api/tipos';
 import { destinoPorPapel, useAuth } from './auth/AuthContext';
 import { AppShell } from './components/AppShell';
+import { Sala } from './components/Sala';
 import { Carregando } from './components/ui';
-import { EmConstrucao, type InfoTela } from './pages/EmConstrucao';
 import { CadastroCliente } from './pages/auth/CadastroCliente';
 import { CadastroInterprete } from './pages/auth/CadastroInterprete';
 import { Login } from './pages/auth/Login';
@@ -22,9 +22,13 @@ import { RecuperarSenha } from './pages/auth/RecuperarSenha';
 import { RedefinirSenha } from './pages/auth/RedefinirSenha';
 import { SelecaoPerfil } from './pages/auth/SelecaoPerfil';
 import { Splash } from './pages/auth/Splash';
-import { HubCliente } from './pages/cliente/Hub';
+import { ChamadosSuporte } from './pages/backoffice/ChamadosSuporte';
+import { FilaCertificacoes } from './pages/backoffice/FilaCertificacoes';
+import { ParecerCertificacao } from './pages/backoffice/ParecerCertificacao';
+import { TrilhaAuditoria } from './pages/backoffice/TrilhaAuditoria';
 import { DetalheAtendimentoCliente } from './pages/cliente/DetalheAtendimentoCliente';
 import { DetalheSolicitacao } from './pages/cliente/DetalheSolicitacao';
+import { HubCliente } from './pages/cliente/Hub';
 import { NovaSolicitacao } from './pages/cliente/NovaSolicitacao';
 import { PagamentoAtendimento } from './pages/cliente/PagamentoAtendimento';
 import { PerfilCliente } from './pages/cliente/PerfilCliente';
@@ -32,6 +36,7 @@ import { AvaliarAtendimento } from './pages/comum/AvaliarAtendimento';
 import { HistoricoAtendimentos } from './pages/comum/HistoricoAtendimentos';
 import { Notificacoes } from './pages/comum/Notificacoes';
 import { Suporte } from './pages/comum/Suporte';
+import { VerificarComprovante } from './pages/comum/VerificarComprovante';
 import { AgendaInterprete } from './pages/interprete/AgendaInterprete';
 import { DemandasInterprete } from './pages/interprete/DemandasInterprete';
 import { DetalheAtendimentoInterprete } from './pages/interprete/DetalheAtendimentoInterprete';
@@ -39,7 +44,6 @@ import { DetalheDemanda } from './pages/interprete/DetalheDemanda';
 import { GanhosInterprete } from './pages/interprete/GanhosInterprete';
 import { HubInterprete } from './pages/interprete/HubInterprete';
 import { PerfilInterprete } from './pages/interprete/PerfilInterprete';
-import { Sala } from './components/Sala';
 
 /** Protege um grupo de rotas por papel; sem sessão → /login; papel errado → hub do próprio papel. */
 function Protegida({ papeis }: { papeis: Papel[] }) {
@@ -50,8 +54,6 @@ function Protegida({ papeis }: { papeis: Papel[] }) {
   return <Outlet />;
 }
 
-const tela = (info: InfoTela) => <EmConstrucao info={info} />;
-
 export const SITEMAP = {
   publico: [
     { path: '/', nome: 'Splash', element: <Splash /> },
@@ -61,7 +63,7 @@ export const SITEMAP = {
     { path: '/cadastro', nome: 'Seleção de perfil', element: <SelecaoPerfil /> },
     { path: '/cadastro/cliente', nome: 'Cadastro do cliente', element: <CadastroCliente /> },
     { path: '/cadastro/interprete', nome: 'Cadastro do intérprete', element: <CadastroInterprete /> },
-    { path: '/verificar/:codigo', nome: 'Verificar comprovante', element: tela({ titulo: 'Verificação de comprovante', requisitos: 'RF38', endpoints: ['GET /comprovantes/:codigo/verificar'] }) },
+    { path: '/verificar/:codigo', nome: 'Verificar comprovante', element: <VerificarComprovante /> },
   ],
   cliente: [
     { path: '/cliente', nome: 'Hub do cliente', element: <HubCliente /> },
@@ -87,10 +89,10 @@ export const SITEMAP = {
     { path: '/interprete/perfil', nome: 'Perfil e habilitação', element: <PerfilInterprete /> },
   ],
   backoffice: [
-    { path: '/backoffice', nome: 'Fila de certificações', element: tela({ titulo: 'Análise documental', requisitos: 'RF06', endpoints: ['GET /backoffice/indicadores', 'GET /backoffice/certificacoes?status=EM_ANALISE'] }) },
-    { path: '/backoffice/certificacoes/:id', nome: 'Parecer da certificação', element: tela({ titulo: 'Parecer', requisitos: 'RF06', endpoints: ['GET /backoffice/certificacoes/:id/arquivo', 'POST /backoffice/certificacoes/:id/parecer'] }) },
-    { path: '/backoffice/chamados', nome: 'Chamados de suporte', element: tela({ titulo: 'Chamados', requisitos: 'RF34', endpoints: ['GET /backoffice/chamados', 'POST /backoffice/chamados/:id/status'] }) },
-    { path: '/backoffice/auditoria', nome: 'Trilha de auditoria', element: tela({ titulo: 'Auditoria', requisitos: 'RF44', endpoints: ['GET /backoffice/auditoria'] }) },
+    { path: '/backoffice', nome: 'Fila de certificações', element: <FilaCertificacoes /> },
+    { path: '/backoffice/certificacoes/:id', nome: 'Parecer da certificação', element: <ParecerCertificacao /> },
+    { path: '/backoffice/chamados', nome: 'Chamados de suporte', element: <ChamadosSuporte /> },
+    { path: '/backoffice/auditoria', nome: 'Trilha de auditoria', element: <TrilhaAuditoria /> },
   ],
   comum: [
     { path: '/notificacoes', nome: 'Notificações', element: <Notificacoes /> },

@@ -13,6 +13,7 @@ Documento de continuidade: o que foi **concluído e verificado**, o que está **
 | 11–12/11 | **Bloco 0** | Gustavo + Claude (agente único) | Backend completo e testado; base do frontend; documentação de trabalho (publicados na `main`) |
 | 12/11 | — | Lúcio | `CLAUDE/CLAUDE.md` e `CLAUDE/AGENTS.md` com regras obrigatórias; `PROMPT AGENTES.docx`; material extraído em `Contexto/` e `Entregas/` |
 | 12/11 (noite) | **Bloco F1** | Lúcio + Equipe de Agentes (Scrum Master/Front-end + subagentes `revisor_ux_ui`, `revisor_qa_security`, `revisor_po`) | Conferência do repositório (`main` já continha o Bloco 0), reprodução dos testes de backend em PostgreSQL 18.6 local (50/50), espelhamento de `AGENTS.md`/`CLAUDE.md` na raiz, implementação e revisão das 7 rotas do Bloco F1 + `Mapa.tsx` + `TelaPublica.tsx` + `validacao.ts` |
+| 12/11 (noite) | **Blocos F2, F3 e F4 (Telas + Hardening OWASP)** | Lúcio + Equipe de Agentes | Implementação integral da Jornada do Cliente (**Bloco F2**: 7 rotas + `Sala.tsx`, `AvaliarAtendimento.tsx`, `HistoricoAtendimentos.tsx`), Jornada do Intérprete (**Bloco F3**: 7 rotas + `LeitorQr.tsx`), Backoffice e Verificação Pública (**Bloco F4**: 5 rotas finais — **100% das 23 rotas de `rotas.tsx` implementadas, 0 placeholders**) e hardening OWASP no backend (magic bytes no upload, revogação de sessões em `alterarSenha`, validação de `fotoUrl`, limpeza LGPD de endereço/CEP e download seguro via Blob) |
 
 ## 2. Bloco 0 — o que foi feito (concluído e verificado)
 
@@ -51,6 +52,44 @@ Documento de continuidade: o que foi **concluído e verificado**, o que está **
 9. **`/suporte` (`pages/comum/Suporte.tsx` — RF34, RNF44)**: acionamento de Suporte operacional ou Emergência no local (avulso em `/suporte` ou vinculado via `?atendimentoId=`), aviso 190/192 e anexação opcional/explícita de geolocalização.
 10. **`frontend/src/rotas.tsx`**: substituição dos 7 *placeholders* `tela({...})` do Bloco F1 pelos componentes reais.
 
+## 2.2. Blocos F2, F3 e F4 (Telas + Hardening OWASP) — o que foi feito (concluído e verificado em 12/11)
+
+### Hardening OWASP no Backend (`backend/src/`) e Cliente HTTP (`frontend/src/api/`)
+- **Revogação de sessões ao alterar senha (`auth.controller.ts`, `auth.service.ts`)**: `POST /api/auth/alterar-senha` agora invalida todas as demais sessões ativas do usuário (`ne(sessoes.id, sessaoAtualId)`), preservando apenas a sessão atual.
+- **Validação de *magic bytes* em uploads (`cadastro.service.ts`)**: `decodificarArquivo` inspeciona a assinatura binária real do arquivo (`%PDF` para PDF, `FF D8 FF` para JPEG e `89 50 4E 47` para PNG), rejeitando arquivos forjados com HTTP 400 (`VALIDACAO`), coberto por teste automatizado em `backend/tests/excecoes.test.ts`.
+- **Detalhes por campo em conflito de e-mail (`erros.ts`, `cadastro.service.ts`)**: `Erros.conflito` aceita `detalhes` e retorna `[{ campo: 'email', mensagem }]` em `EMAIL_EM_USO` (409), permitindo destaque automático no formulário.
+- **Descrição obrigatória em chamados `SUPORTE` (`atendimento.controller.ts`)**: `esquemaSuporte` exige `descricao` (mínimo 5 caracteres) quando `tipo === 'SUPORTE'`, mantendo-a opcional em acionamentos rápidos de `EMERGENCIA` (testado em `excecoes.test.ts`).
+- **Validação de `fotoUrl` e anonimização completa LGPD (`perfil.controller.ts`, `perfil.service.ts`)**: `PUT /api/perfil` valida esquema/MIME de `fotoUrl` (`data:image/(jpeg|png|webp);base64,` ou `https://`, máx. 500k caracteres), e `POST /api/perfil/dados/excluir` limpa também `cep`, `endereco` e `preferenciasAcessibilidade` em `clientes`.
+- **Download autenticado sem token na URL (`frontend/src/api/cliente.ts`)**: `api.abrirArquivo(caminho, nomeArquivo?)` realiza `fetch` com header `Authorization: Bearer <token>` e abre o PDF/certificado via `Blob` URL (`URL.createObjectURL`), eliminando exposição de JWT em query string.
+
+### Bloco F2 — Jornada do Cliente e Componentes Compartilhados (`frontend/src/`)
+1. **`/cliente/solicitacoes/nova` (`pages/cliente/NovaSolicitacao.tsx` — RF10–RF16, `code (15).html`)**: assistente em 3 passos (contexto/data/duração em blocos de 30 min com mínimo de 60 min; endereço + `<Mapa />` interativo + atalho de demonstração HC-FMUSP; estimativa prévia via `POST /solicitacoes/estimativa` antes de confirmar em `POST /solicitacoes`).
+2. **`/cliente/solicitacoes/:id` (`pages/cliente/DetalheSolicitacao.tsx` — RF18, RF19, RF31)**: linha do tempo em tempo real, cartão do intérprete alocado, `<QRCodeSVG />` (`GET /atendimentos/:id/qrcode`) + código manual copiável, atalhos para sala/pagamento/PDF/avaliação e cancelamento com cálculo transparente de política/taxa (`POST /solicitacoes/:id/cancelar`).
+3. **`/cliente/atendimentos/:id` (`pages/cliente/DetalheAtendimentoCliente.tsx` — RF31, RF33, RF37)**: cartão de check-in com `<QRCodeSVG />`, botão de encerramento (`POST /atendimentos/:id/encerrar`), ações de pagamento/comprovante PDF/verificação pública/avaliação e `<Mapa somenteLeitura />`.
+4. **`/cliente/atendimentos/:id/sala` e `/interprete/atendimentos/:id/sala` (`components/Sala.tsx` — RF28–RF30, RF34, `code (21).html`)**: sala compartilhada com polling incremental de 4 s (`?apos=`), mensagens de texto, envio de foto do ponto de encontro (`Data URL ≤ 1 MB`), compartilhamento temporário de GPS (`POST /atendimentos/:id/localizacoes` + `<Mapa />` expansível) e botão SOS.
+5. **`/cliente/atendimentos/:id/pagamento` (`pages/cliente/PagamentoAtendimento.tsx` — RF35, RF36, RF37)**: seleção de forma de pagamento salva, Pix imediato ou novo cartão/Pix com máscaras, processamento idempotente (`POST /pagamentos/:id/processar`), tratamento de recusa HTTP 402 e emissão de comprovante PDF.
+6. **`/cliente/atendimentos/:id/avaliar` e `/interprete/atendimentos/:id/avaliar` (`pages/comum/AvaliarAtendimento.tsx` — RF40, `code (3).html`)**: avaliação bilateral de 1 a 5 estrelas com comentário opcional (`POST /atendimentos/:id/avaliacoes`).
+7. **`/cliente/historico` e `/interprete/historico` (`pages/comum/HistoricoAtendimentos.tsx` — RF39, RF37, `code (13).html`)**: filtros por período (`de`/`ate`), atalho "Mês Atual", tipo de serviço e status, com abertura de comprovante PDF.
+8. **`/cliente/perfil` (`pages/cliente/PerfilCliente.tsx` — RF43, RF45, RF35, `code (11).html`)**: Bento grid com edição de dados pessoais e preferências de acessibilidade (`PUT /perfil`), gestão de formas de pagamento (`GET/POST/DELETE /formas-pagamento`), alteração de senha (`POST /auth/alterar-senha`) e portal de direitos LGPD (consentimentos, exportação JSON e exclusão/anonimização).
+
+### Bloco F3 — Jornada do Intérprete e Leitor de QR Code (`frontend/src/`)
+1. **`frontend/src/components/LeitorQr.tsx` (RF31)**: leitor de QR Code por câmera (`html5-qrcode`) com parada segura de stream no `unmount` e fallback imediato de digitação manual do código.
+2. **`/interprete` (`pages/interprete/HubInterprete.tsx` — RF20, RF24, RF26, RNF36, `code (1).html`)**: chave Online/Offline (`PUT /interprete/configuracao`), banner de status de habilitação, `<Mapa />` com círculo de raio e pinos das demandas próximas, cartões de demandas com Aceitar/Recusar, resumo de ganhos da semana e próximo atendimento.
+3. **`/interprete/demandas` (`pages/interprete/DemandasInterprete.tsx` — RF20–RF23, `code (5).html`)**: abas "Novas no Raio" e "Agendadas / Em Aberto", destaque de urgência, distância em km, aceite exclusivo (`POST /demandas/:id/aceitar`), recusa (`POST /demandas/:id/recusar`) e mapa regional.
+4. **`/interprete/demandas/:id` (`pages/interprete/DetalheDemanda.tsx` — RF21–RF23)**: contexto completo da solicitação, `<Mapa somenteLeitura />`, discriminação do repasse líquido estimado (90%) e botões de Aceitar ou Recusar.
+5. **`/interprete/agenda` (`pages/interprete/AgendaInterprete.tsx` — RF24, RF25, RNF27)**: controle de raio de atuação (1–15 km) no `<Mapa />` (`PUT /interprete/configuracao`) e editor semanal de janelas de disponibilidade (`GET/PUT /interprete/disponibilidades`) com preset de 1 clique (Seg–Sex 08h–18h).
+6. **`/interprete/atendimentos/:id` (`pages/interprete/DetalheAtendimentoInterprete.tsx` — RF31–RF33, RNF26)**: captura de GPS + simulador indoor de 1 clique para demonstração + `<LeitorQr />` (`POST /atendimentos/:id/checkin`), encerramento (`POST /atendimentos/:id/encerrar`), acesso à sala, avaliação e comprovante PDF.
+7. **`/interprete/ganhos` (`pages/interprete/GanhosInterprete.tsx` — RF26, RF27)**: ganhos da semana, saldo disponível, valores a receber, cadastro de contas bancárias/Pix (`GET/POST /interprete/contas-bancarias`), solicitação de repasse (`GET/POST /interprete/repasses`) e extrato financeiro.
+8. **`/interprete/perfil` (`pages/interprete/PerfilInterprete.tsx` — RF43, RF04, RF05, RF45, `code (11).html`)**: upload de foto de perfil (`fotoUrl` Data URL ≤ 350 KB, concluindo o RF04), edição de dados profissionais e localização-base no `<Mapa />`, consulta e reenvio de certificações Prolibras (`GET/POST /interprete/certificacoes`), alteração de senha e direitos LGPD.
+
+### Bloco F4 — Backoffice e Verificação Pública (`frontend/src/`)
+1. **`/verificar/:codigo` (`pages/comum/VerificarComprovante.tsx` — RF38)**: consulta pública sem login (`GET /comprovantes/:codigo/verificar`) com selo de autenticidade, dados auditados do atendimento e busca por qualquer código.
+2. **`/backoffice` (`pages/backoffice/FilaCertificacoes.tsx` — RF06)**: painel de indicadores operacionais (`GET /backoffice/indicadores`) e fila filtrável de certificações (`GET /backoffice/certificacoes?status=`), abertura de documento via Blob e atalho para parecer.
+3. **`/backoffice/certificacoes/:id` (`pages/backoffice/ParecerCertificacao.tsx` — RF06)**: dossiê do intérprete, visualização do certificado (`GET /backoffice/certificacoes/:id/arquivo`), histórico de análises e emissão de parecer (`APROVADO`, `CORRECAO`, `REPROVADO` via `POST /backoffice/certificacoes/:id/parecer`).
+4. **`/backoffice/chamados` (`pages/backoffice/ChamadosSuporte.tsx` — RF34)**: gestão de alertas de `EMERGENCIA` (com `<Mapa somenteLeitura />` das coordenadas reportadas) e chamados de `SUPORTE`, com transição para `EM_ATENDIMENTO` e `ENCERRADO` (`POST /backoffice/chamados/:id/status`).
+5. **`/backoffice/auditoria` (`pages/backoffice/TrilhaAuditoria.tsx` — RF44)**: consulta filtrável (`tipo`, `de`, `ate`) da trilha imutável de auditoria (`GET /backoffice/auditoria`).
+6. **`frontend/src/rotas.tsx`**: **23/23 rotas do `SITEMAP` conectadas a componentes reais (0 rotas com `<EmConstrucao />`)**.
+
 ## 3. Contribuições por papel/agente (AGENTS.md §3 — declaração honesta)
 
 - **Bloco 0 (11–12/11):** executado por **um único agente (Claude)**, sob direção do Gustavo, acumulando os papéis de Back-end, Dados, Front-end, QA e Security de forma sequencial, sem subagentes independentes.
@@ -76,15 +115,15 @@ Documento de continuidade: o que foi **concluído e verificado**, o que está **
 
 | Tipo | Item | Responsável | Bloco |
 |---|---|---|---|
-| Resolvido | Push na `main` destravado e Bloco F1 publicado diretamente na `main` | Lúcio / Gustavo | F1 (concluído) |
-| Pendência | Validar D-01 (preços de referência) e D-05 (janela de 30 min) | grupo | F2 |
+| Resolvido | Push na `main` destravado e Blocos F1, F2, F3 e F4 (todas as 23 rotas do SITEMAP + hardening OWASP) publicados na `main` | Lúcio / Equipe de Agentes | F1–F4 (concluído) |
+| Pendência | Validar D-01 (preços de referência) e D-05 (janela de 30 min) | grupo | P1/P2 |
 | Pendência | Link do Figma (#5) | grupo | P2 |
 | Pendência | Contas Render/Vercel/Neon | Lúcio | D |
 | Risco | Render free "dorme" (cold start ~50 s) — abrir `/api/health` antes da demonstração | QA/DevOps | Z |
-| Risco | Geolocalização em demonstração indoor: usar DevTools → Sensors para simular coordenadas | QA | Z |
-| Risco | Google Fonts/Material Symbols dependem de internet na apresentação; alternativa: empacotar a fonte localmente (F4) | Front-end | F4 |
-| Débito | Documentação OpenAPI, plano de testes escrito, melhorias OWASP sugeridas pelo `revisor_qa_security` (*magic bytes* no upload, revogação de outras sessões em `alterarSenha`, download de PDF via Blob), manuais, SLA | QA/Security/DevOps | F4, D, Z |
-| Próximo passo | **Bloco F2** (Gustavo + Claude: jornada do cliente) e **Bloco F3** (Lúcio: jornada do intérprete) conforme `docs/PLANO_BLOCOS.md` | ambos | 13–15/11 |
+| Mitigado | Geolocalização em demonstração indoor: tela `/interprete/atendimentos/:id` inclui botão de 1 clique para preencher as coordenadas exatas do atendimento na demonstração | Front-end / QA | F3 (concluído) |
+| Risco | Google Fonts/Material Symbols dependem de internet na apresentação; alternativa: empacotar a fonte localmente | Front-end | D/Z |
+| Débito | Documentação OpenAPI (`docs/api/openapi.yaml`), plano de testes escrito (`docs/TESTES.md`), `docs/SEGURANCA.md`, manuais e SLA | QA/Security/DevOps | P1, D, Z |
+| Próximo passo | **Bloco P1/P2** (diagramas e documento de Produção Técnica) e **Bloco D** (deploy em Render + Vercel + Neon) conforme `docs/PLANO_BLOCOS.md` | ambos | 14–19/11 |
 
 ## 6. Instruções reproduzíveis
 
