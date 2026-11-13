@@ -23,7 +23,7 @@ export const Erros = {
     new AppError(401, 'NAO_AUTENTICADO', mensagem),
   proibido: (mensagem = 'Você não tem permissão para realizar esta ação.') => new AppError(403, 'PROIBIDO', mensagem),
   naoEncontrado: (recurso = 'Recurso') => new AppError(404, 'NAO_ENCONTRADO', `${recurso} não encontrado(a).`),
-  conflito: (mensagem: string, codigo = 'CONFLITO') => new AppError(409, codigo, mensagem),
+  conflito: (mensagem: string, codigo = 'CONFLITO', detalhes?: unknown) => new AppError(409, codigo, mensagem, detalhes),
   regraNegocio: (mensagem: string, codigo = 'REGRA_NEGOCIO') => new AppError(422, codigo, mensagem),
   bloqueado: (mensagem: string) => new AppError(423, 'BLOQUEADO', mensagem),
   muitasTentativas: (mensagem = 'Muitas tentativas. Aguarde alguns minutos.') =>

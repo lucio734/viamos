@@ -47,6 +47,6 @@ export async function redefinirSenha(req: Request, res: Response) {
 }
 
 export async function alterarSenha(req: Request, res: Response) {
-  await authService.alterarSenha(req.usuario!.id, req.body.senhaAtual, req.body.novaSenha);
+  await authService.alterarSenha(req.usuario!.id, req.body.senhaAtual, req.body.novaSenha, req.usuario!.sessaoId);
   res.json({ mensagem: 'Senha alterada com sucesso.' });
 }

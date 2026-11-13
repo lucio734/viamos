@@ -3,7 +3,7 @@
  */
 import { randomBytes, randomUUID } from 'node:crypto';
 import bcrypt from 'bcryptjs';
-import { and, eq, gt, isNull, sql } from 'drizzle-orm';
+import { and, eq, gt, isNull, ne, sql } from 'drizzle-orm';
 import jwt from 'jsonwebtoken';
 import { env } from '../config/env.js';
 import { REGRAS } from '../config/regras.js';
@@ -163,10 +163,18 @@ export async function redefinirSenha(token: string, novaSenha: string): Promise<
   });
 }
 
-export async function alterarSenha(usuarioId: string, senhaAtual: string, novaSenha: string): Promise<void> {
+export async function alterarSenha(usuarioId: string, senhaAtual: string, novaSenha: string, sessaoAtualId?: string): Promise<void> {
   const [usuario] = await db.select().from(usuarios).where(eq(usuarios.id, usuarioId)).limit(1);
   if (!usuario) throw Erros.naoAutenticado();
   if (!(await bcrypt.compare(senhaAtual, usuario.senhaHash))) throw Erros.regraNegocio('Senha atual incorreta.', 'SENHA_ATUAL_INCORRETA');
-  await db.update(usuarios).set({ senhaHash: await gerarHashSenha(novaSenha), atualizadoEm: new Date() }).where(eq(usuarios.id, usuarioId));
-  await registrarEvento({ usuarioId, tipo: 'SENHA_REDEFINIDA', detalhes: { origem: 'perfil' } });
+  const senhaHash = await gerarHashSenha(novaSenha);
+  await db.transaction(async (tx) => {
+    await tx.update(usuarios).set({ senhaHash, atualizadoEm: new Date() }).where(eq(usuarios.id, usuarioId));
+    // Revoga todas as outras sessões ativas do usuário (preservando a sessão atual que fez a troca)
+    await tx
+      .update(sessoes)
+      .set({ revogada: true })
+      .where(sessaoAtualId ? and(eq(sessoes.usuarioId, usuarioId), ne(sessoes.id, sessaoAtualId)) : eq(sessoes.usuarioId, usuarioId));
+    await registrarEvento({ usuarioId, tipo: 'SENHA_REDEFINIDA', detalhes: { origem: 'perfil' } }, tx);
+  });
 }

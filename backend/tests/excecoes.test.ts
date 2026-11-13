@@ -257,5 +257,27 @@ describe('Segurança de acesso (RNF35) e LGPD (RF45)', () => {
     });
     expect(senhaLonga.status).toBe(400);
     expect(senhaLonga.body.erro.codigo).toBe('VALIDACAO');
+
+    const pdfFalso = await request(app).post('/api/cadastro/interprete').send({
+      nome: 'Teste PDF Falso',
+      documento: '390.533.447-05',
+      email: 'pdffalso@teste.app',
+      telefone: '11911112222',
+      senha: 'SenhaForte123',
+      enderecoBase: 'Av. Paulista, 1000',
+      latitudeBase: -23.5614,
+      longitudeBase: -46.6559,
+      especialidades: ['SAUDE'],
+      precoHora: 90,
+      certificacao: { tipo: 'PROLIBRAS', numero: 'PRO-X', arquivo: { nome: 'falso.pdf', mime: 'application/pdf', conteudoBase64: Buffer.from('NAO_EH_PDF_EXECUTAVEL').toString('base64') } },
+      aceiteTermos: true,
+      aceitePrivacidade: true,
+    });
+    expect(pdfFalso.status).toBe(400);
+    expect(pdfFalso.body.erro.codigo).toBe('VALIDACAO');
+
+    const suporteSemDescricao = await request(app).post('/api/suporte').set(auth(joao)).send({ tipo: 'SUPORTE', descricao: 'oi' });
+    expect(suporteSemDescricao.status).toBe(400);
+    expect(suporteSemDescricao.body.erro.codigo).toBe('VALIDACAO');
   });
 });

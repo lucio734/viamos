@@ -10,7 +10,12 @@ import { telefoneValido } from '../utils/documentos.js';
 export const esquemaAtualizarPerfil = z.object({
   nome: z.string().trim().min(3).max(120).optional(),
   telefone: z.string().refine(telefoneValido, 'Telefone inválido.').optional(),
-  fotoUrl: z.string().max(500_000).nullable().optional(),
+  fotoUrl: z
+    .string()
+    .max(500_000, 'A foto deve ter no máximo 350 KB.')
+    .refine((v) => !v || /^data:image\/(jpeg|png|webp);base64,|^https?:\/\//i.test(v), 'Envie uma foto em JPG, PNG ou WebP.')
+    .nullable()
+    .optional(),
   cliente: z
     .object({ cep: z.string().max(9).optional(), endereco: z.string().max(200).optional(), preferenciasAcessibilidade: z.string().max(300).optional() })
     .optional(),

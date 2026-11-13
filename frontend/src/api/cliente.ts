@@ -83,4 +83,27 @@ export const api = {
   delete: <T>(caminho: string) => requisicao<T>('DELETE', caminho),
   /** URL absoluta para abrir arquivos (PDF do comprovante) em nova aba, com o token na query. */
   urlArquivo: (caminho: string) => `${BASE_URL}/api${caminho}${caminho.includes('?') ? '&' : '?'}token=${encodeURIComponent(tokenStore.obter() ?? '')}`,
+  /** Baixa arquivo autenticado via header Authorization (evitando expor o JWT na URL) e abre/salva como Blob. */
+  abrirArquivo: async (caminho: string, nomeArquivo?: string) => {
+    const cabecalhos: Record<string, string> = {};
+    const token = tokenStore.obter();
+    if (token) cabecalhos.Authorization = `Bearer ${token}`;
+    const resposta = await fetch(`${BASE_URL}/api${caminho}`, { headers: cabecalhos });
+    if (!resposta.ok) {
+      throw new ErroApi(resposta.status, 'ERRO_ARQUIVO', 'Não foi possível abrir o documento.');
+    }
+    const blob = await resposta.blob();
+    const url = URL.createObjectURL(blob);
+    if (nomeArquivo) {
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = nomeArquivo;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+    } else {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+    setTimeout(() => URL.revokeObjectURL(url), 60_000);
+  },
 };

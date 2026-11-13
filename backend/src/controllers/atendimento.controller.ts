@@ -43,12 +43,17 @@ export const esquemaCheckin = z.object({
   precisaoM: z.number().min(0).max(100_000),
 });
 
-export const esquemaSuporte = z.object({
-  tipo: z.enum(['SUPORTE', 'EMERGENCIA']),
-  descricao: z.string().trim().max(500).optional(),
-  latitude: z.number().min(-90).max(90).optional(),
-  longitude: z.number().min(-180).max(180).optional(),
-});
+export const esquemaSuporte = z
+  .object({
+    tipo: z.enum(['SUPORTE', 'EMERGENCIA']),
+    descricao: z.string().trim().max(500).optional(),
+    latitude: z.number().min(-90).max(90).optional(),
+    longitude: z.number().min(-180).max(180).optional(),
+  })
+  .refine((s) => s.tipo !== 'SUPORTE' || (s.descricao && s.descricao.trim().length >= 5), {
+    message: 'Descreva brevemente como podemos ajudar (mínimo de 5 caracteres).',
+    path: ['descricao'],
+  });
 
 export const esquemaAvaliacao = z.object({
   nota: z.number().int().min(1, 'Escolha de 1 a 5 estrelas.').max(5, 'Escolha de 1 a 5 estrelas.'),

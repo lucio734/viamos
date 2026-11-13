@@ -153,6 +153,9 @@ export async function solicitarExclusao(usuarioId: string, papel: PapelUsuario, 
       .update(usuarios)
       .set({ nome: 'Usuário removido', email: `removido+${usuarioId}@viamos.invalid`, telefone: '', fotoUrl: null, ativo: false, atualizadoEm: new Date() })
       .where(eq(usuarios.id, usuarioId));
+    if (papel === 'CLIENTE') {
+      await tx.update(clientes).set({ cep: null, endereco: null, preferenciasAcessibilidade: null }).where(eq(clientes.usuarioId, usuarioId));
+    }
     await tx.update(sessoes).set({ revogada: true }).where(eq(sessoes.usuarioId, usuarioId));
     await tx.update(consentimentos).set({ revogadoEm: new Date() }).where(and(eq(consentimentos.usuarioId, usuarioId), isNull(consentimentos.revogadoEm)));
     await registrarEvento({ usuarioId, tipo: 'SOLICITACAO_DADOS', detalhes: { tipo: 'EXCLUSAO' }, ip }, tx);

@@ -23,8 +23,16 @@ import { RedefinirSenha } from './pages/auth/RedefinirSenha';
 import { SelecaoPerfil } from './pages/auth/SelecaoPerfil';
 import { Splash } from './pages/auth/Splash';
 import { HubCliente } from './pages/cliente/Hub';
+import { DetalheAtendimentoCliente } from './pages/cliente/DetalheAtendimentoCliente';
+import { DetalheSolicitacao } from './pages/cliente/DetalheSolicitacao';
+import { NovaSolicitacao } from './pages/cliente/NovaSolicitacao';
+import { PagamentoAtendimento } from './pages/cliente/PagamentoAtendimento';
+import { PerfilCliente } from './pages/cliente/PerfilCliente';
+import { AvaliarAtendimento } from './pages/comum/AvaliarAtendimento';
+import { HistoricoAtendimentos } from './pages/comum/HistoricoAtendimentos';
 import { Notificacoes } from './pages/comum/Notificacoes';
 import { Suporte } from './pages/comum/Suporte';
+import { Sala } from './components/Sala';
 
 /** Protege um grupo de rotas por papel; sem sessão → /login; papel errado → hub do próprio papel. */
 function Protegida({ papeis }: { papeis: Papel[] }) {
@@ -50,14 +58,14 @@ export const SITEMAP = {
   ],
   cliente: [
     { path: '/cliente', nome: 'Hub do cliente', element: <HubCliente /> },
-    { path: '/cliente/solicitacoes/nova', nome: 'Nova solicitação', element: tela({ titulo: 'Solicitar intérprete', requisitos: 'RF10–RF16', endpoints: ['POST /solicitacoes/estimativa', 'POST /solicitacoes'], prototipo: 'code (15).html' }) },
-    { path: '/cliente/solicitacoes/:id', nome: 'Acompanhamento da solicitação', element: tela({ titulo: 'Acompanhar solicitação', requisitos: 'RF18, RF19, RF31', endpoints: ['GET /solicitacoes/:id', 'POST /solicitacoes/:id/cancelar', 'GET /atendimentos/:id/qrcode'] }) },
-    { path: '/cliente/atendimentos/:id', nome: 'Detalhe do atendimento (cliente)', element: tela({ titulo: 'Atendimento', requisitos: 'RF31, RF33, RF37', endpoints: ['GET /atendimentos/:id', 'GET /atendimentos/:id/qrcode', 'POST /atendimentos/:id/encerrar', 'GET /atendimentos/:id/comprovante.pdf'] }) },
-    { path: '/cliente/atendimentos/:id/sala', nome: 'Sala de atendimento (cliente)', element: tela({ titulo: 'Sala de atendimento', requisitos: 'RF28–RF30, RF34', endpoints: ['GET/POST /atendimentos/:id/mensagens', 'GET/POST /atendimentos/:id/localizacoes', 'POST /atendimentos/:id/suporte'], prototipo: 'code (21).html' }) },
-    { path: '/cliente/atendimentos/:id/pagamento', nome: 'Pagamento', element: tela({ titulo: 'Pagamento do atendimento', requisitos: 'RF35, RF36', endpoints: ['GET /formas-pagamento', 'POST /formas-pagamento', 'POST /pagamentos/:id/processar'] }) },
-    { path: '/cliente/atendimentos/:id/avaliar', nome: 'Avaliar intérprete', element: tela({ titulo: 'Avaliar atendimento', requisitos: 'RF40', endpoints: ['POST /atendimentos/:id/avaliacoes'], prototipo: 'code (3).html' }) },
-    { path: '/cliente/historico', nome: 'Histórico (cliente)', element: tela({ titulo: 'Meus atendimentos', requisitos: 'RF39, RF37', endpoints: ['GET /atendimentos?de&ate&tipoServico&status'], prototipo: 'code (13).html' }) },
-    { path: '/cliente/perfil', nome: 'Perfil (cliente)', element: tela({ titulo: 'Meu perfil', requisitos: 'RF43, RF45, RF35', endpoints: ['GET/PUT /perfil', 'GET/PUT /perfil/consentimentos', 'GET /perfil/dados/exportar', 'POST /perfil/dados/excluir', 'POST /auth/alterar-senha'], prototipo: 'code (11).html' }) },
+    { path: '/cliente/solicitacoes/nova', nome: 'Nova solicitação', element: <NovaSolicitacao /> },
+    { path: '/cliente/solicitacoes/:id', nome: 'Acompanhamento da solicitação', element: <DetalheSolicitacao /> },
+    { path: '/cliente/atendimentos/:id', nome: 'Detalhe do atendimento (cliente)', element: <DetalheAtendimentoCliente /> },
+    { path: '/cliente/atendimentos/:id/sala', nome: 'Sala de atendimento (cliente)', element: <Sala /> },
+    { path: '/cliente/atendimentos/:id/pagamento', nome: 'Pagamento', element: <PagamentoAtendimento /> },
+    { path: '/cliente/atendimentos/:id/avaliar', nome: 'Avaliar intérprete', element: <AvaliarAtendimento /> },
+    { path: '/cliente/historico', nome: 'Histórico (cliente)', element: <HistoricoAtendimentos /> },
+    { path: '/cliente/perfil', nome: 'Perfil (cliente)', element: <PerfilCliente /> },
   ],
   interprete: [
     { path: '/interprete', nome: 'Hub do intérprete', element: tela({ titulo: 'Hub do intérprete', requisitos: 'RF20, RF24, RF26', endpoints: ['GET /interprete/hub', 'PUT /interprete/configuracao'], prototipo: 'code (1).html' }) },
@@ -65,10 +73,10 @@ export const SITEMAP = {
     { path: '/interprete/demandas/:id', nome: 'Detalhe da demanda', element: tela({ titulo: 'Detalhe da demanda', requisitos: 'RF21–RF23', endpoints: ['GET /solicitacoes/:id', 'POST /demandas/:id/aceitar', 'POST /demandas/:id/recusar'] }) },
     { path: '/interprete/agenda', nome: 'Raio e disponibilidade', element: tela({ titulo: 'Raio de atuação e disponibilidade', requisitos: 'RF24, RF25', endpoints: ['PUT /interprete/configuracao', 'GET/PUT /interprete/disponibilidades'] }) },
     { path: '/interprete/atendimentos/:id', nome: 'Detalhe do atendimento (intérprete)', element: tela({ titulo: 'Atendimento — check-in e encerramento', requisitos: 'RF31–RF33', endpoints: ['GET /atendimentos/:id', 'POST /atendimentos/:id/checkin', 'POST /atendimentos/:id/encerrar'] }) },
-    { path: '/interprete/atendimentos/:id/sala', nome: 'Sala de atendimento (intérprete)', element: tela({ titulo: 'Sala de atendimento', requisitos: 'RF28–RF30, RF34', endpoints: ['GET/POST /atendimentos/:id/mensagens', 'GET/POST /atendimentos/:id/localizacoes'], prototipo: 'code (21).html' }) },
-    { path: '/interprete/atendimentos/:id/avaliar', nome: 'Avaliar cliente', element: tela({ titulo: 'Avaliar atendimento', requisitos: 'RF40', endpoints: ['POST /atendimentos/:id/avaliacoes'], prototipo: 'code (3).html' }) },
+    { path: '/interprete/atendimentos/:id/sala', nome: 'Sala de atendimento (intérprete)', element: <Sala /> },
+    { path: '/interprete/atendimentos/:id/avaliar', nome: 'Avaliar cliente', element: <AvaliarAtendimento /> },
     { path: '/interprete/ganhos', nome: 'Ganhos e repasse', element: tela({ titulo: 'Ganhos', requisitos: 'RF26, RF27', endpoints: ['GET /interprete/ganhos', 'GET/POST /interprete/contas-bancarias', 'GET/POST /interprete/repasses'] }) },
-    { path: '/interprete/historico', nome: 'Histórico (intérprete)', element: tela({ titulo: 'Meus atendimentos', requisitos: 'RF39', endpoints: ['GET /atendimentos?de&ate&tipoServico&status'], prototipo: 'code (13).html' }) },
+    { path: '/interprete/historico', nome: 'Histórico (intérprete)', element: <HistoricoAtendimentos /> },
     { path: '/interprete/perfil', nome: 'Perfil e habilitação', element: tela({ titulo: 'Meu perfil e documentação', requisitos: 'RF43, RF05, RF45', endpoints: ['GET/PUT /perfil', 'GET/POST /interprete/certificacoes', 'GET/PUT /perfil/consentimentos'], prototipo: 'code (11).html' }) },
   ],
   backoffice: [

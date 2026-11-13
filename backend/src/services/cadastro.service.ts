@@ -58,6 +58,13 @@ async function emailJaUsado(email: string): Promise<boolean> {
   return Boolean(linha);
 }
 
+function assinaturaBinariaValida(buffer: Buffer, mime: string): boolean {
+  if (mime === 'application/pdf') return buffer.subarray(0, 4).toString('ascii') === '%PDF';
+  if (mime === 'image/jpeg') return buffer.length >= 3 && buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff;
+  if (mime === 'image/png') return buffer.length >= 4 && buffer[0] === 0x89 && buffer[1] === 0x50 && buffer[2] === 0x4e && buffer[3] === 0x47;
+  return false;
+}
+
 export function decodificarArquivo(arquivo: ArquivoBase64): { buffer: Buffer; mime: string; nome: string } {
   if (!(REGRAS.CERTIFICADO_MIMES as readonly string[]).includes(arquivo.mime)) {
     throw Erros.validacao([{ campo: 'certificacao.arquivo', mensagem: 'Envie o certificado em PDF, JPG ou PNG.' }]);
@@ -67,6 +74,9 @@ export function decodificarArquivo(arquivo: ArquivoBase64): { buffer: Buffer; mi
   if (buffer.length === 0) throw Erros.validacao([{ campo: 'certificacao.arquivo', mensagem: 'Arquivo vazio ou corrompido.' }]);
   if (buffer.length > REGRAS.CERTIFICADO_TAMANHO_MAX_BYTES) {
     throw Erros.validacao([{ campo: 'certificacao.arquivo', mensagem: 'O arquivo deve ter no máximo 5 MB.' }]);
+  }
+  if (!assinaturaBinariaValida(buffer, arquivo.mime)) {
+    throw Erros.validacao([{ campo: 'certificacao.arquivo', mensagem: 'O conteúdo do arquivo não corresponde ao formato declarado (PDF, JPG ou PNG).' }]);
   }
   return { buffer, mime: arquivo.mime, nome: arquivo.nome.slice(0, 200) };
 }
@@ -82,7 +92,9 @@ export async function cadastrarCliente(entrada: EntradaCliente, ip?: string) {
   if (!entrada.aceiteTermos || !entrada.aceitePrivacidade) {
     throw Erros.validacao([{ campo: 'aceiteTermos', mensagem: 'É necessário aceitar os termos de uso e a política de privacidade.' }]);
   }
-  if (await emailJaUsado(entrada.email)) throw Erros.conflito('Já existe uma conta com este e-mail.', 'EMAIL_EM_USO');
+  if (await emailJaUsado(entrada.email)) {
+    throw Erros.conflito('Já existe uma conta com este e-mail.', 'EMAIL_EM_USO', [{ campo: 'email', mensagem: 'Já existe uma conta com este e-mail.' }]);
+  }
 
   const senhaHash = await gerarHashSenha(entrada.senha);
   const usuarioId = await db.transaction(async (tx) => {
@@ -121,7 +133,9 @@ export async function cadastrarInterprete(entrada: EntradaInterprete, ip?: strin
   if (!entrada.aceiteTermos || !entrada.aceitePrivacidade) {
     throw Erros.validacao([{ campo: 'aceiteTermos', mensagem: 'É necessário aceitar os termos de uso e a política de privacidade.' }]);
   }
-  if (await emailJaUsado(entrada.email)) throw Erros.conflito('Já existe uma conta com este e-mail.', 'EMAIL_EM_USO');
+  if (await emailJaUsado(entrada.email)) {
+    throw Erros.conflito('Já existe uma conta com este e-mail.', 'EMAIL_EM_USO', [{ campo: 'email', mensagem: 'Já existe uma conta com este e-mail.' }]);
+  }
   const arquivo = decodificarArquivo(entrada.certificacao.arquivo);
   const senhaHash = await gerarHashSenha(entrada.senha);
 
