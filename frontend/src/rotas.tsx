@@ -32,6 +32,13 @@ import { AvaliarAtendimento } from './pages/comum/AvaliarAtendimento';
 import { HistoricoAtendimentos } from './pages/comum/HistoricoAtendimentos';
 import { Notificacoes } from './pages/comum/Notificacoes';
 import { Suporte } from './pages/comum/Suporte';
+import { AgendaInterprete } from './pages/interprete/AgendaInterprete';
+import { DemandasInterprete } from './pages/interprete/DemandasInterprete';
+import { DetalheAtendimentoInterprete } from './pages/interprete/DetalheAtendimentoInterprete';
+import { DetalheDemanda } from './pages/interprete/DetalheDemanda';
+import { GanhosInterprete } from './pages/interprete/GanhosInterprete';
+import { HubInterprete } from './pages/interprete/HubInterprete';
+import { PerfilInterprete } from './pages/interprete/PerfilInterprete';
 import { Sala } from './components/Sala';
 
 /** Protege um grupo de rotas por papel; sem sessão → /login; papel errado → hub do próprio papel. */
@@ -68,16 +75,16 @@ export const SITEMAP = {
     { path: '/cliente/perfil', nome: 'Perfil (cliente)', element: <PerfilCliente /> },
   ],
   interprete: [
-    { path: '/interprete', nome: 'Hub do intérprete', element: tela({ titulo: 'Hub do intérprete', requisitos: 'RF20, RF24, RF26', endpoints: ['GET /interprete/hub', 'PUT /interprete/configuracao'], prototipo: 'code (1).html' }) },
-    { path: '/interprete/demandas', nome: 'Demandas próximas', element: tela({ titulo: 'Demandas próximas', requisitos: 'RF20–RF23', endpoints: ['GET /demandas', 'POST /demandas/:id/aceitar', 'POST /demandas/:id/recusar'], prototipo: 'code (5).html' }) },
-    { path: '/interprete/demandas/:id', nome: 'Detalhe da demanda', element: tela({ titulo: 'Detalhe da demanda', requisitos: 'RF21–RF23', endpoints: ['GET /solicitacoes/:id', 'POST /demandas/:id/aceitar', 'POST /demandas/:id/recusar'] }) },
-    { path: '/interprete/agenda', nome: 'Raio e disponibilidade', element: tela({ titulo: 'Raio de atuação e disponibilidade', requisitos: 'RF24, RF25', endpoints: ['PUT /interprete/configuracao', 'GET/PUT /interprete/disponibilidades'] }) },
-    { path: '/interprete/atendimentos/:id', nome: 'Detalhe do atendimento (intérprete)', element: tela({ titulo: 'Atendimento — check-in e encerramento', requisitos: 'RF31–RF33', endpoints: ['GET /atendimentos/:id', 'POST /atendimentos/:id/checkin', 'POST /atendimentos/:id/encerrar'] }) },
+    { path: '/interprete', nome: 'Hub do intérprete', element: <HubInterprete /> },
+    { path: '/interprete/demandas', nome: 'Demandas próximas', element: <DemandasInterprete /> },
+    { path: '/interprete/demandas/:id', nome: 'Detalhe da demanda', element: <DetalheDemanda /> },
+    { path: '/interprete/agenda', nome: 'Raio e disponibilidade', element: <AgendaInterprete /> },
+    { path: '/interprete/atendimentos/:id', nome: 'Detalhe do atendimento (intérprete)', element: <DetalheAtendimentoInterprete /> },
     { path: '/interprete/atendimentos/:id/sala', nome: 'Sala de atendimento (intérprete)', element: <Sala /> },
     { path: '/interprete/atendimentos/:id/avaliar', nome: 'Avaliar cliente', element: <AvaliarAtendimento /> },
-    { path: '/interprete/ganhos', nome: 'Ganhos e repasse', element: tela({ titulo: 'Ganhos', requisitos: 'RF26, RF27', endpoints: ['GET /interprete/ganhos', 'GET/POST /interprete/contas-bancarias', 'GET/POST /interprete/repasses'] }) },
+    { path: '/interprete/ganhos', nome: 'Ganhos e repasse', element: <GanhosInterprete /> },
     { path: '/interprete/historico', nome: 'Histórico (intérprete)', element: <HistoricoAtendimentos /> },
-    { path: '/interprete/perfil', nome: 'Perfil e habilitação', element: tela({ titulo: 'Meu perfil e documentação', requisitos: 'RF43, RF05, RF45', endpoints: ['GET/PUT /perfil', 'GET/POST /interprete/certificacoes', 'GET/PUT /perfil/consentimentos'], prototipo: 'code (11).html' }) },
+    { path: '/interprete/perfil', nome: 'Perfil e habilitação', element: <PerfilInterprete /> },
   ],
   backoffice: [
     { path: '/backoffice', nome: 'Fila de certificações', element: tela({ titulo: 'Análise documental', requisitos: 'RF06', endpoints: ['GET /backoffice/indicadores', 'GET /backoffice/certificacoes?status=EM_ANALISE'] }) },
