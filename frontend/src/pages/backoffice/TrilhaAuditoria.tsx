@@ -22,8 +22,8 @@ export function TrilhaAuditoria() {
     try {
       const params = new URLSearchParams();
       if (tipo.trim()) params.set('tipo', tipo.trim());
-      if (de) params.set('de', new Date(`${de}T00:00:00`).toISOString());
-      if (ate) params.set('ate', new Date(`${ate}T23:59:59`).toISOString());
+      if (de) params.set('de', de);
+      if (ate) params.set('ate', ate);
       params.set('limite', '200');
       const qs = params.toString();
       const lista = await api.get<LogAuditoriaItem[]>(`/backoffice/auditoria?${qs}`);

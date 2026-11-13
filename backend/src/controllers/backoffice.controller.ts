@@ -24,8 +24,9 @@ export async function listarCertificacoes(req: Request, res: Response) {
 
 export async function arquivoCertificacao(req: Request, res: Response) {
   const { buffer, mime, nome } = await backofficeService.obterArquivoCertificacao(req.params.id as string, req.usuario!.id, req.usuario!.papel);
+  const nomeSeguro = nome.replace(/["\r\n\\]/g, '_');
   res.setHeader('Content-Type', mime);
-  res.setHeader('Content-Disposition', `inline; filename="${nome}"`);
+  res.setHeader('Content-Disposition', `inline; filename="${nomeSeguro}"`);
   res.send(buffer);
 }
 

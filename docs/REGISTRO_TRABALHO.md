@@ -89,6 +89,13 @@ Documento de continuidade: o que foi **concluído e verificado**, o que está **
 4. **`/backoffice/chamados` (`pages/backoffice/ChamadosSuporte.tsx` — RF34)**: gestão de alertas de `EMERGENCIA` (com `<Mapa somenteLeitura />` das coordenadas reportadas) e chamados de `SUPORTE`, com transição para `EM_ATENDIMENTO` e `ENCERRADO` (`POST /backoffice/chamados/:id/status`).
 5. **`/backoffice/auditoria` (`pages/backoffice/TrilhaAuditoria.tsx` — RF44)**: consulta filtrável (`tipo`, `de`, `ate`) da trilha imutável de auditoria (`GET /backoffice/auditoria`).
 6. **`frontend/src/rotas.tsx`**: **23/23 rotas do `SITEMAP` conectadas a componentes reais (0 rotas com `<EmConstrucao />`)**.
+7. **Entregáveis de Qualidade, Arquitetura, CI/CD e Operação (Bloco F4 / P1 / D / Z)**:
+   - `frontend/tests/validacao-formato.test.ts` (6 suítes de testes unitários de máscaras e validações passando com `npm test`).
+   - `.github/workflows/ci.yml` (pipeline GitHub Actions com PostgreSQL 16 service container para Backend + Frontend).
+   - `docs/api/openapi.yaml` (especificação OpenAPI 3.1 cobrindo todas as rotas de `backend/src/routes/index.ts`).
+   - `docs/TESTES.md`, `docs/SEGURANCA.md`, `docs/DEPLOY.md`, `docs/SLA.md`, `docs/ROTEIRO_DEMONSTRACAO.md`, `docs/MANUAL.md`.
+   - `docs/diagramas/DIAGRAMAS_PRODUCAO_TECNICA.md` (diagramas Mermaid gerados do código real: Sitemap #3, Arquitetura Funcional/Técnica/MVC #7–#9, Macroprocesso #16, Fluxograma #17, DER de 27 tabelas #22 e Sequência/Operação #24).
+   - **Revisão multiagente dos Blocos F2, F3 e F4 (`revisor_ux_ui`, `revisor_qa_security`, `revisor_po`)**: 20/20 novas rotas aprovadas e 5 ajustes imediatos aplicados (`B-010` a `B-014` em `docs/BUGS.md`).
 
 ## 3. Contribuições por papel/agente (AGENTS.md §3 — declaração honesta)
 

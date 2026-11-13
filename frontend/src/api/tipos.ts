@@ -350,7 +350,7 @@ export interface CertificacaoInterprete {
   nomeArquivo: string;
   mimeArquivo: string;
   tamanhoBytes: number;
-  status: 'EM_ANALISE' | 'APROVADA' | 'RECUSADA' | 'CORRECAO_SOLICITADA';
+  status: 'EM_ANALISE' | 'APROVADA' | 'REPROVADA' | 'CORRECAO_SOLICITADA';
   motivoParecer: string | null;
   enviadaEm: string;
   analisadaEm: string | null;
@@ -386,7 +386,7 @@ export interface CertificacaoBackoffice {
   nomeArquivo: string;
   mimeArquivo: string;
   tamanhoBytes: number;
-  status: 'EM_ANALISE' | 'APROVADA' | 'RECUSADA' | 'CORRECAO_SOLICITADA';
+  status: 'EM_ANALISE' | 'APROVADA' | 'REPROVADA' | 'CORRECAO_SOLICITADA';
   enviadaEm: string;
   interprete: {
     id: string;

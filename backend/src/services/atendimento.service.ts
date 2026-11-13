@@ -210,11 +210,13 @@ export async function enviarMensagem(
 
   let arquivoUri: string | null = null;
   if (entrada.tipo === 'IMAGEM') {
-    if (!entrada.imagemDataUrl?.startsWith('data:image/')) throw Erros.validacao([{ campo: 'imagemDataUrl', mensagem: 'Envie uma imagem válida.' }]);
-    if (entrada.imagemDataUrl.length > REGRAS.FOTO_CHAT_TAMANHO_MAX_BYTES * 1.37) {
+    if (!/^data:image\/(jpeg|png|webp);base64,/i.test(entrada.imagemDataUrl ?? '')) {
+      throw Erros.validacao([{ campo: 'imagemDataUrl', mensagem: 'Envie uma imagem válida (JPEG, PNG ou WebP).' }]);
+    }
+    if (entrada.imagemDataUrl!.length > REGRAS.FOTO_CHAT_TAMANHO_MAX_BYTES * 1.37) {
       throw Erros.validacao([{ campo: 'imagemDataUrl', mensagem: 'A foto deve ter no máximo 1 MB.' }]);
     }
-    arquivoUri = entrada.imagemDataUrl;
+    arquivoUri = entrada.imagemDataUrl ?? null;
   }
   if (entrada.tipo === 'TEXTO' && !entrada.texto?.trim()) throw Erros.validacao([{ campo: 'texto', mensagem: 'Digite uma mensagem.' }]);
   if (entrada.tipo === 'LOCALIZACAO' && (entrada.latitude === undefined || entrada.longitude === undefined)) {

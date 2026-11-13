@@ -43,7 +43,7 @@ export async function listarCertificacoes(status?: string) {
 export async function obterArquivoCertificacao(id: string, usuarioId: string, papel: string) {
   const [c] = await db.select().from(certificacoes).where(eq(certificacoes.id, id)).limit(1);
   if (!c) throw Erros.naoEncontrado('Certificação');
-  if (papel !== 'BACKOFFICE' && c.interpreteId !== usuarioId) throw Erros.proibido();
+  if (papel !== 'BACKOFFICE' && papel !== 'SUPORTE' && c.interpreteId !== usuarioId) throw Erros.proibido();
   return { buffer: c.arquivo, mime: c.mimeArquivo, nome: c.nomeArquivo };
 }
 
@@ -99,7 +99,19 @@ export async function minhasCertificacoes(interpreteId: string) {
     with: { analises: { orderBy: [desc(analisesDocumentais.data)] } },
     orderBy: [desc(certificacoes.enviadaEm)],
   });
-  return linhas.map((c) => ({ id: c.id, tipo: c.tipo, numero: c.numero, nomeArquivo: c.nomeArquivo, status: c.status, enviadaEm: c.enviadaEm, analises: c.analises.map((a) => ({ resultado: a.resultado, justificativa: a.justificativa, data: a.data })) }));
+  return linhas.map((c) => ({
+    id: c.id,
+    tipo: c.tipo,
+    numero: c.numero,
+    nomeArquivo: c.nomeArquivo,
+    mimeArquivo: c.mimeArquivo,
+    tamanhoBytes: c.tamanhoBytes,
+    status: c.status,
+    motivoParecer: c.analises[0]?.justificativa ?? null,
+    enviadaEm: c.enviadaEm,
+    analisadaEm: c.analises[0]?.data ?? null,
+    analises: c.analises.map((a) => ({ resultado: a.resultado, justificativa: a.justificativa, data: a.data })),
+  }));
 }
 
 export async function listarChamados(status?: string[]) {

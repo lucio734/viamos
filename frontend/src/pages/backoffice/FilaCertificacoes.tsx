@@ -125,7 +125,7 @@ export function FilaCertificacoes() {
             { valor: 'EM_ANALISE', rotulo: 'Em Análise' },
             { valor: 'APROVADA', rotulo: 'Aprovadas' },
             { valor: 'CORRECAO_SOLICITADA', rotulo: 'Correção Solicitada' },
-            { valor: 'RECUSADA', rotulo: 'Recusadas' },
+            { valor: 'REPROVADA', rotulo: 'Reprovadas' },
             { valor: '', rotulo: 'Todas' },
           ].map((aba) => {
             const ativo = filtroStatus === aba.valor;

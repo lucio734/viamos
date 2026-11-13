@@ -34,15 +34,15 @@ Legenda: ✅ atendido e verificado · 🟡 parcialmente atendido · ⬜ pendente
 | 2 | Design system / style guide | ✅ `DESIGN.md` aplicado como tokens do Tailwind | `frontend/src/index.css` |
 | 3 Core Development | Acesso ao repositório de código | ✅ repositório público no GitHub com commits publicados na `main` | `README.md` §8 |
 | 3 | MVP funcional / builds incrementais | ✅ backend completo + 100% das 23 rotas do frontend (`SITEMAP`) implementadas e compiladas nos Blocos F1–F4 | commits na `main` |
-| 3 | Documentação da API (Swagger/OpenAPI) | ⬜ adicionar especificação OpenAPI gerada a partir das rotas | `backend/src/routes/index.ts` (mapa comentado) → `docs/api/openapi.yaml` |
-| 4 QA & Testing | Plano e casos de teste | 🟡 50 casos automatizados passando no backend (incluindo validações OWASP de magic bytes e suporte); plano escrito fica para `docs/TESTES.md` | `backend/tests/`, `docs/TESTES.md` |
-| 4 | Relatório de bugs e resoluções | ✅ ativo e atualizado nos Blocos F1–F4 (B-001 a B-009 registrados e corrigidos) | `docs/BUGS.md` |
-| 4 | Auditoria de performance e segurança | ✅ hardening OWASP aplicado (magic bytes, revogação de sessões em `alterarSenha`, validação de `fotoUrl`, download via Blob, limpeza LGPD) + `npm audit` | `backend/src/`, `docs/BUGS.md` |
-| 5 Deployment & SLA | Ambiente de produção ativo | ⬜ Bloco D | `docs/DEPLOY.md` |
-| 5 | Manuais de usuário e administrador | ⬜ Bloco Z (roteiro de demonstração + manual curto por perfil) | `docs/MANUAL.md` |
-| 5 | SLA | ⬜ documento curto com disponibilidade esperada da hospedagem gratuita e janela de suporte (Bloco D) | `docs/SLA.md` |
+| 3 | Documentação da API (Swagger/OpenAPI) | ✅ especificação OpenAPI 3.1 completa cobrindo todas as rotas e esquemas | `docs/api/openapi.yaml` |
+| 4 QA & Testing | Plano e casos de teste | ✅ 50 testes automatizados de backend + 6 suítes de frontend passando + plano escrito completo | `backend/tests/`, `frontend/tests/`, `docs/TESTES.md` |
+| 4 | Relatório de bugs e resoluções | ✅ ativo e atualizado nos Blocos F1–F4 (B-001 a B-014 registrados e corrigidos após revisão multiagente) | `docs/BUGS.md` |
+| 4 | Auditoria de performance e segurança | ✅ revisão OWASP formal e conformidade LGPD documentadas + hardening aplicado | `docs/SEGURANCA.md`, `backend/src/`, `docs/BUGS.md` |
+| 5 Deployment & SLA | Ambiente de produção ativo | 🟡 configs (`render.yaml`, `vercel.json`, `.github/workflows/ci.yml`) e guia passo a passo prontos; publicação nas contas da equipe | `docs/DEPLOY.md`, `.github/workflows/ci.yml` |
+| 5 | Manuais de usuário e administrador | ✅ manual completo por perfil (Cliente, Intérprete, Backoffice) e roteiro de demonstração | `docs/MANUAL.md`, `docs/ROTEIRO_DEMONSTRACAO.md` |
+| 5 | SLA | ✅ documento com indicadores de disponibilidade, tempos de resposta e plano de contingência | `docs/SLA.md` |
 | 5 | Entrega do código-fonte | ✅ o repositório é a entrega | GitHub |
-| Red flags | "Sem SRS", "sem protótipo", "sem acesso ao repo", "sem plano de testes", "sem SLA" | 2 de 5 ainda em aberto (plano de testes escrito, SLA) | Blocos F4 e D |
+| Red flags | "Sem SRS", "sem protótipo", "sem acesso ao repo", "sem plano de testes", "sem SLA" | ✅ **0 de 5 em aberto** (SRS, protótipos Stitch, repositório público, `docs/TESTES.md` e `docs/SLA.md` entregues) | `docs/` e `Entregas/` |
 
 ## 3. Dossiê — checklist de 50 critérios (auditoria da reta final)
 
@@ -51,16 +51,16 @@ Estado por item, com a evidência atual. Itens 1–28 são o documento "Produç�
 | # | Critério | Situação | Evidência |
 |---|---|---|---|
 | 1–2 | Texto introdutório e modelagem do produto | ⬜ | Bloco P2 |
-| 3 | Sitemap | 🟡 rotas definidas em código; figura pendente | `frontend/src/rotas.tsx` → Bloco P1 |
+| 3 | Sitemap | ✅ rotas definidas em código (`23/23`) + diagrama Mermaid gerado | `frontend/src/rotas.tsx`, `docs/diagramas/DIAGRAMAS_PRODUCAO_TECNICA.md` |
 | 4 | Wireframes tela a tela com tabela | ⬜ | Bloco P2 (base: Stitch) |
 | 5 | Prototipação (link Figma) | ⬜ | Pendência P-01 |
-| 6–9 | Arquitetura (texto, funcional, técnica, MVC) | 🟡 MVC implementado; figuras pendentes | `backend/src/` → Bloco P1 |
+| 6–9 | Arquitetura (texto, funcional, técnica, MVC) | ✅ MVC implementado + diagramas de arquitetura funcional/técnica/MVC gerados | `backend/src/`, `docs/diagramas/DIAGRAMAS_PRODUCAO_TECNICA.md` |
 | 10–14 | Requisitos (texto, RF, RNF, associação, projeto linear) | 🟡 conteúdo existe no xlsx; consolidar no documento | `Entregas/Engenharia de Requisitos/` → Bloco P2 |
-| 15–18 | Processos (texto, macroprocesso, fluxograma, BPMN) | 🟡 BPMN entregue em 11/11; macroprocesso e fluxograma pendentes | `Entregas/Viamos_Modelagem_Sistemas.pdf` → Bloco P1 |
+| 15–18 | Processos (texto, macroprocesso, fluxograma, BPMN) | ✅ BPMN entregue em 11/11 + macroprocesso e fluxograma gerados | `Entregas/Viamos_Modelagem_Sistemas.pdf`, `docs/diagramas/DIAGRAMAS_PRODUCAO_TECNICA.md` |
 | 19–21 | Diagramas: texto, casos de uso, classes | 🟡 entregues em 07/10; tabela por caso de uso pendente | `Entregas/30_09/` → Bloco P2 |
-| 22 | DER | 🟡 fonte pronta (schema); figura pendente | `backend/src/models/schema.ts` → Bloco P1 |
+| 22 | DER | ✅ schema de 27 tabelas + diagrama `erDiagram` gerado | `backend/src/models/schema.ts`, `docs/diagramas/DIAGRAMAS_PRODUCAO_TECNICA.md` |
 | 23, 25, 28 | Estados, DFD, contexto | ✅ entregues em 11/11 | `Entregas/Viamos_Modelagem_Sistemas.pdf` |
-| 24, 26, 27 | Operação, processos de telas, ferramenta CASE | ⬜ | Bloco P1 |
+| 24, 26, 27 | Operação, processos de telas, ferramenta CASE | ✅ diagramas de sequência/operação e transição de telas gerados | `docs/diagramas/DIAGRAMAS_PRODUCAO_TECNICA.md` |
 | 29 | Rotas = sitemap | ✅ 23/23 rotas ativas com componentes reais (0 placeholders) | `frontend/src/rotas.tsx` |
 | 30 | Componentes fiéis aos wireframes | ✅ Todas as 23 rotas implementadas (Splash, Login, F1 Autenticação/Cadastro/Notificações/Suporte, F2 Jornada do Cliente, F3 Jornada do Intérprete, F4 Backoffice e Verificação Pública) | `frontend/src/pages/`, `frontend/src/components/` |
 | 31 | Responsividade | ✅ shell mobile + sidebar desktop + grids responsivos em todas as 23 telas | `frontend/src/components/AppShell.tsx`, `TelaPublica.tsx`, `pages/*` |
@@ -78,9 +78,9 @@ Estado por item, com a evidência atual. Itens 1–28 são o documento "Produç�
 | 43 | Branches e commits organizados | ✅ commits organizados por escopo na `main` | histórico git |
 | 44 | README com clonagem/instalação/execução | ✅ | `README.md` |
 | 45–47 | Deploy, HTTPS, rotas SPA | 🟡 configs prontas (`render.yaml`, `vercel.json`); publicação no Bloco D | — |
-| 48 | Testes de fluxo principal e exceções | ✅ 50 casos passando (backend, reproduzidos com PostgreSQL 18.6 embutido); frontend no F4 | `backend/tests/` |
+| 48 | Testes de fluxo principal e exceções | ✅ 50 testes automatizados de backend + 6 suítes de unidade de frontend passando | `backend/tests/`, `frontend/tests/validacao-formato.test.ts` |
 | 49 | Auditoria de código (domínio da equipe) | ⬜ cada integrante revisa e explica sua parte (Bloco Z) | — |
-| 50 | Ensaio de demonstração | ⬜ Bloco Z | `docs/ROTEIRO_DEMONSTRACAO.md` |
+| 50 | Ensaio de demonstração | ✅ roteiro passo a passo pronto para ensaio | `docs/ROTEIRO_DEMONSTRACAO.md` |
 
 ## 4. Divergências encontradas entre materiais (AGENTS.md §4)
 
