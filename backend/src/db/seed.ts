@@ -101,7 +101,9 @@ export async function popularBanco() {
   ]);
 
   // --- Disponibilidade, consentimentos, formas de pagamento, conta bancária ---
-  await db.insert(t.disponibilidades).values([1, 2, 3, 4, 5].map((dia) => ({ interpreteId: maria.id, diaSemana: dia, inicio: '08:00', fim: '18:00' })));
+  // RF25 / D-20: Maria tem a grade preenchida em todos os dias (demonstração e testes funcionam em qualquer horário);
+  // Carlos fica sem grade, o que significa "disponível em qualquer horário". A restrição por janela é coberta nos testes.
+  await db.insert(t.disponibilidades).values([0, 1, 2, 3, 4, 5, 6].map((dia) => ({ interpreteId: maria.id, diaSemana: dia, inicio: '00:00', fim: '23:59:59' })));
   await db.insert(t.consentimentos).values(
     [operador, joao, ana, maria, carlos, pedro].flatMap((u) => [
       { usuarioId: u.id, finalidade: 'TERMOS_USO' as const, versaoTermo: '2026-11' },

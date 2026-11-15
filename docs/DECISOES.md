@@ -24,6 +24,9 @@ Alterar uma decisão = alterar o parâmetro em `regras.ts`, atualizar este arqui
 | D-16 | Exclusão de conta (RF45/RNF29) | Anonimização dos dados pessoais + inativação; registros de atendimento/comprovante são retidos pelo prazo legal. Bloqueada se houver atendimento em andamento ou pagamento pendente. | `solicitarExclusao` | Adotada |
 | D-17 | ORM | **Drizzle ORM** em vez de Prisma: 100% JavaScript (sem binários), migrações SQL legíveis e consultas parametrizadas; o schema TypeScript é a fonte do DER. | `backend/drizzle.config.ts` | Adotada |
 | D-18 | Stack e hospedagem | React + Vite + Tailwind v4 (frontend) · Express + TS (API) · PostgreSQL · Vercel + Render + Neon/Render Postgres (todos gratuitos, HTTPS automático). | `README.md`, `render.yaml` | Adotada |
+| D-20 | Elegibilidade do intérprete e nova distribuição (RF17, RF20–RF25) | **Uma regra só** para distribuição, lista, detalhe e aceite: habilitação APROVADA → raio ≤ min(raio do intérprete, 15 km) → disponibilidade semanal → agenda sem sobreposição. **Disponibilidade:** a demanda é compatível quando o horário de **início** (horário de Brasília) cai dentro de uma janela daquele dia da semana; intérprete **sem janelas** cadastradas é considerado disponível em qualquer horário. **Nova distribuição:** a demanda aberta é oferecida (oferta + aviso) a quem ficar elegível depois da criação — ao ficar online, mudar o raio ou salvar a agenda; sem nenhum elegível, a solicitação continua BUSCANDO até alguém ficar elegível ou o cliente cancelar. O toggle "online" decide quem recebe a oferta/aviso; ver, abrir e aceitar dependem só da regra. | `backend/src/utils/elegibilidade.ts`, `demanda.service.ts` (`ofertarDemandasAbertas`), `solicitacao.service.ts` (`distribuir`) | Adotada em 15/11 — **validar com o grupo** (agenda vazia = sempre disponível; regra pelo horário de início) |
+
+> D-19 não é usada: a numeração foi reservada numa proposta que acabou substituída pela correção B-021 (simulação de GPS restrita ao servidor de desenvolvimento).
 
 ## Pendências que dependem do grupo
 
@@ -31,3 +34,5 @@ Alterar uma decisão = alterar o parâmetro em `regras.ts`, atualizar este arqui
 - **P-02** Validar os valores de D-01 (preços de referência) e D-05 (janela de 30 min).
 - **P-03** Criar as contas gratuitas Render, Vercel e Neon (um integrante) e registrar as URLs em `docs/DEPLOY.md`.
 - **P-04** Fotos de perfil: hoje `fotoUrl` aceita uma URL/data URL pequena; decidir se entra no MVP.
+- **P-05** Validar D-20: agenda vazia significa "disponível sempre"? A compatibilidade pelo horário de início basta, ou o atendimento inteiro deve caber na janela?
+- **P-06** Momento do comprovante (RF37/RF38): o DFD P5 da entrega de Modelagem libera o PDF no encerramento; D-10 e a aplicação o emitem após a confirmação do pagamento. Escolher um e ajustar o outro artefato.

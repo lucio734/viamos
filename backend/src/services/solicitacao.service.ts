@@ -9,6 +9,7 @@ import { db, type Tx } from '../models/db.js';
 import {
   atendimentos,
   cotacoes,
+  disponibilidades,
   interpretes,
   localizacoesCompartilhadas,
   ofertas,
@@ -17,11 +18,12 @@ import {
   type StatusSolicitacao,
   type TipoServico,
 } from '../models/schema.js';
-import { arredondar2, diferencaHoras } from '../utils/datas.js';
+import { adicionarMinutos, arredondar2, diferencaHoras } from '../utils/datas.js';
+import { avaliarElegibilidade } from '../utils/elegibilidade.js';
 import { Erros } from '../utils/erros.js';
-import { distanciaKm } from '../utils/geo.js';
 import { apresentarInterpretePublico, ROTULOS } from '../views/presenters.js';
 import { registrarEvento } from './auditoria.service.js';
+import { interpreteElegivelParaDemanda } from './demanda.service.js';
 import { notificar } from './notificacao.service.js';
 
 export interface EntradaEstimativa {
@@ -118,13 +120,16 @@ export async function criarSolicitacao(clienteId: string, entrada: EntradaSolici
 }
 
 /**
- * RF17 / RNF27 / RNF43 — distribuição: intérpretes APROVADOS, online, cujo raio configurado (≤ 15 km)
- * alcança o local; ordenados por proximidade e depois por reputação. Cria uma Oferta por intérprete.
+ * RF17 / RF25 / RNF27 / RNF43 — distribuição: intérpretes APROVADOS e online para os quais a demanda é elegível
+ * pela mesma regra da lista e do aceite (raio ≤ 15 km, disponibilidade semanal e agenda livre — utils/elegibilidade),
+ * ordenados por proximidade e depois por reputação. Cria uma Oferta por intérprete. Quem ficar elegível depois
+ * recebe a oferta na nova distribuição (demanda.service › ofertarDemandasAbertas).
  */
 async function distribuir(tx: Tx, s: typeof solicitacoes.$inferSelect) {
   const candidatos = await tx
     .select({
       usuarioId: interpretes.usuarioId,
+      statusHabilitacao: interpretes.statusHabilitacao,
       latitudeBase: interpretes.latitudeBase,
       longitudeBase: interpretes.longitudeBase,
       raioKm: interpretes.raioKm,
@@ -134,10 +139,30 @@ async function distribuir(tx: Tx, s: typeof solicitacoes.$inferSelect) {
     .innerJoin(usuarios, eq(usuarios.id, interpretes.usuarioId))
     .where(and(eq(interpretes.statusHabilitacao, 'APROVADO'), eq(interpretes.disponivelAgora, true), eq(usuarios.ativo, true)));
 
-  const local = { latitude: s.latitude, longitude: s.longitude };
+  // janelas de disponibilidade e atendimentos ativos de todos os candidatos, em duas consultas
+  const ids = candidatos.map((c) => c.usuarioId);
+  const janelas = ids.length ? await tx.select().from(disponibilidades).where(inArray(disponibilidades.interpreteId, ids)) : [];
+  const ocupados = ids.length
+    ? await tx
+        .select({ interpreteId: atendimentos.interpreteId, inicio: solicitacoes.inicioPrevisto, duracao: solicitacoes.duracaoPrevistaMin })
+        .from(atendimentos)
+        .innerJoin(solicitacoes, eq(solicitacoes.id, atendimentos.solicitacaoId))
+        .where(and(inArray(atendimentos.interpreteId, ids), inArray(atendimentos.status, ['AGENDADO', 'EM_ANDAMENTO'])))
+    : [];
+
   const elegiveis = candidatos
-    .map((c) => ({ ...c, distanciaKm: distanciaKm(local, { latitude: c.latitudeBase, longitude: c.longitudeBase }) }))
-    .filter((c) => c.distanciaKm <= Math.min(c.raioKm, REGRAS.RAIO_MAXIMO_KM))
+    .map((c) => {
+      const avaliacao = avaliarElegibilidade(
+        {
+          interprete: c,
+          janelas: janelas.filter((j) => j.interpreteId === c.usuarioId),
+          agenda: ocupados.filter((o) => o.interpreteId === c.usuarioId).map((o) => ({ inicio: o.inicio, fim: adicionarMinutos(o.inicio, o.duracao) })),
+        },
+        s,
+      );
+      return { ...c, elegivel: avaliacao.elegivel, distanciaKm: avaliacao.distanciaKm };
+    })
+    .filter((c) => c.elegivel)
     .sort((a, b) => a.distanciaKm - b.distanciaKm || (b.reputacao ?? 0) - (a.reputacao ?? 0));
 
   if (elegiveis.length) {
@@ -218,7 +243,9 @@ export async function obterSolicitacao(id: string, usuarioId: string, papel: str
   const ehDono = s.clienteId === usuarioId;
   const ehInterpreteVinculado = s.atendimento?.interpreteId === usuarioId || s.ofertas.some((o) => o.interpreteId === usuarioId);
   const ehOperador = papel === 'BACKOFFICE' || papel === 'SUPORTE';
-  if (!ehDono && !ehInterpreteVinculado && !ehOperador) throw Erros.proibido();
+  // a demanda que aparece na lista do intérprete (mesma regra de elegibilidade) também abre no detalhe, com ou sem oferta
+  const ehInterpreteElegivel = papel === 'INTERPRETE' && !ehInterpreteVinculado && (await interpreteElegivelParaDemanda(usuarioId, s));
+  if (!ehDono && !ehInterpreteVinculado && !ehOperador && !ehInterpreteElegivel) throw Erros.proibido();
   return apresentarSolicitacao(s, usuarioId);
 }
 

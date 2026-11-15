@@ -13,7 +13,11 @@ export const esquemaConfiguracao = z
   .object({ raioKm: z.number().int().min(1, 'Raio mínimo: 1 km.').max(15, 'Raio máximo: 15 km.').optional(), disponivelAgora: z.boolean().optional() })
   .refine((d) => d.raioKm !== undefined || d.disponivelAgora !== undefined, 'Informe raioKm e/ou disponivelAgora.');
 
-const hora = z.string().regex(/^([01]\d|2[0-3]):[0-5]\d$/, 'Use o formato HH:MM.');
+// Aceita HH:MM ou HH:MM:SS (o PostgreSQL devolve os horários com segundos — B-024) e normaliza para HH:MM:SS.
+const hora = z
+  .string()
+  .regex(/^([01]\d|2[0-3]):[0-5]\d(:[0-5]\d)?$/, 'Use o formato HH:MM.')
+  .transform((h) => (h.length === 5 ? `${h}:00` : h));
 export const esquemaDisponibilidades = z.object({
   faixas: z.array(z.object({ diaSemana: z.number().int().min(0).max(6), inicio: hora, fim: hora })).max(21),
 });

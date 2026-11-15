@@ -1,18 +1,21 @@
 /**
  * RF20–RF25 — lado do intérprete: demandas próximas (lista e mapa), aceite exclusivo, recusa,
  * raio de atuação e disponibilidade. RNF36: só intérprete APROVADO recebe/aceita demandas.
+ * Lista, detalhe, aceite e distribuição usam a mesma regra de elegibilidade (utils/elegibilidade.ts).
  */
 import { randomBytes } from 'node:crypto';
-import { and, desc, eq, gt, inArray, lt, ne, notExists, sql } from 'drizzle-orm';
+import { and, desc, eq, gt, inArray, ne, notExists } from 'drizzle-orm';
 import { REGRAS } from '../config/regras.js';
-import { db } from '../models/db.js';
+import { db, type Tx } from '../models/db.js';
 import { atendimentos, checkins, disponibilidades, interpretes, ofertas, solicitacoes, usuarios } from '../models/schema.js';
 import { adicionarMinutos } from '../utils/datas.js';
+import { avaliarElegibilidade, type ContextoElegibilidade } from '../utils/elegibilidade.js';
 import { Erros } from '../utils/erros.js';
-import { distanciaKm } from '../utils/geo.js';
 import { ROTULOS } from '../views/presenters.js';
 import { registrarEvento } from './auditoria.service.js';
 import { notificar } from './notificacao.service.js';
+
+type Conexao = typeof db | Tx;
 
 async function carregarInterprete(usuarioId: string) {
   const [i] = await db.select().from(interpretes).where(eq(interpretes.usuarioId, usuarioId)).limit(1);
@@ -26,7 +29,32 @@ function exigirHabilitado(i: { statusHabilitacao: string }) {
   }
 }
 
-/** RF20/RF21 — demandas abertas dentro do raio configurado, não recusadas pelo intérprete. */
+/** Janelas de disponibilidade (RF25) e atendimentos ativos do intérprete, para a regra de elegibilidade. */
+export async function carregarContextoElegibilidade(conexao: Conexao, interprete: typeof interpretes.$inferSelect): Promise<ContextoElegibilidade> {
+  const janelas = await conexao
+    .select({ diaSemana: disponibilidades.diaSemana, inicio: disponibilidades.inicio, fim: disponibilidades.fim })
+    .from(disponibilidades)
+    .where(eq(disponibilidades.interpreteId, interprete.usuarioId));
+  const ocupados = await conexao
+    .select({ inicio: solicitacoes.inicioPrevisto, duracao: solicitacoes.duracaoPrevistaMin })
+    .from(atendimentos)
+    .innerJoin(solicitacoes, eq(solicitacoes.id, atendimentos.solicitacaoId))
+    .where(and(eq(atendimentos.interpreteId, interprete.usuarioId), inArray(atendimentos.status, ['AGENDADO', 'EM_ANDAMENTO'])));
+  return { interprete, janelas, agenda: ocupados.map((o) => ({ inicio: o.inicio, fim: adicionarMinutos(o.inicio, o.duracao) })) };
+}
+
+/** Detalhe (GET /solicitacoes/:id): o intérprete vê a demanda aberta para a qual é elegível agora, com ou sem oferta registrada. */
+export async function interpreteElegivelParaDemanda(
+  interpreteId: string,
+  demanda: { status: string; latitude: number; longitude: number; inicioPrevisto: Date; duracaoPrevistaMin: number },
+) {
+  if (demanda.status !== 'BUSCANDO' || demanda.inicioPrevisto.getTime() <= Date.now()) return false;
+  const [i] = await db.select().from(interpretes).where(eq(interpretes.usuarioId, interpreteId)).limit(1);
+  if (!i) return false;
+  return avaliarElegibilidade(await carregarContextoElegibilidade(db, i), demanda).elegivel;
+}
+
+/** RF20/RF21 — demandas abertas para as quais o intérprete é elegível (raio, disponibilidade, agenda), não recusadas por ele. */
 export async function listarDemandas(usuarioId: string) {
   const i = await carregarInterprete(usuarioId);
   if (i.statusHabilitacao !== 'APROVADO') return { habilitado: false, statusHabilitacao: i.statusHabilitacao, demandas: [] };
@@ -48,9 +76,11 @@ export async function listarDemandas(usuarioId: string) {
 
   const base = { latitude: i.latitudeBase, longitude: i.longitudeBase };
   const raio = Math.min(i.raioKm, REGRAS.RAIO_MAXIMO_KM);
+  const ctx = await carregarContextoElegibilidade(db, i);
   const demandas = abertas
-    .map((s) => ({ s, distancia: distanciaKm(base, { latitude: s.latitude, longitude: s.longitude }) }))
-    .filter(({ distancia }) => distancia <= raio)
+    .map((s) => ({ s, avaliacao: avaliarElegibilidade(ctx, s) }))
+    .filter(({ avaliacao }) => avaliacao.elegivel)
+    .map(({ s, avaliacao }) => ({ s, distancia: avaliacao.distanciaKm }))
     .sort((a, b) => a.distancia - b.distancia)
     .map(({ s, distancia }) => ({
       id: s.id,
@@ -89,26 +119,15 @@ export async function aceitarDemanda(usuarioId: string, solicitacaoId: string, i
     if (s.status !== 'BUSCANDO') throw Erros.conflito('Esta demanda já foi aceita por outro intérprete ou foi cancelada.', 'DEMANDA_INDISPONIVEL');
     if (s.inicioPrevisto <= agora) throw Erros.regraNegocio('O horário desta demanda já passou.', 'DEMANDA_EXPIRADA');
 
-    const distancia = distanciaKm({ latitude: i.latitudeBase, longitude: i.longitudeBase }, { latitude: s.latitude, longitude: s.longitude });
-    if (distancia > Math.min(i.raioKm, REGRAS.RAIO_MAXIMO_KM)) {
-      throw Erros.regraNegocio(`A demanda está a ${distancia} km, fora do seu raio de atuação (${i.raioKm} km).`, 'FORA_DO_RAIO');
+    // Mesma regra da lista e da distribuição; a agenda é lida depois do bloqueio do intérprete (dois aceites dele não se sobrepõem).
+    const avaliacao = avaliarElegibilidade(await carregarContextoElegibilidade(tx, i), s);
+    const distancia = avaliacao.distanciaKm;
+    if (!avaliacao.elegivel) {
+      if (avaliacao.motivo === 'FORA_DO_RAIO') throw Erros.regraNegocio(`A demanda está a ${distancia} km, fora do seu raio de atuação (${i.raioKm} km).`, 'FORA_DO_RAIO');
+      if (avaliacao.motivo === 'FORA_DA_DISPONIBILIDADE') throw Erros.regraNegocio('O horário desta demanda está fora da sua disponibilidade semanal. Ajuste a agenda para aceitá-la.', 'FORA_DA_DISPONIBILIDADE');
+      if (avaliacao.motivo === 'AGENDA_CONFLITANTE') throw Erros.conflito('Você já tem um atendimento agendado neste horário.', 'AGENDA_CONFLITANTE');
+      exigirHabilitado(i);
     }
-
-    const fimPrevisto = adicionarMinutos(s.inicioPrevisto, s.duracaoPrevistaMin);
-    const [conflito] = await tx
-      .select({ id: atendimentos.id })
-      .from(atendimentos)
-      .innerJoin(solicitacoes, eq(solicitacoes.id, atendimentos.solicitacaoId))
-      .where(
-        and(
-          eq(atendimentos.interpreteId, usuarioId),
-          inArray(atendimentos.status, ['AGENDADO', 'EM_ANDAMENTO']),
-          lt(solicitacoes.inicioPrevisto, fimPrevisto),
-          gt(sql`${solicitacoes.inicioPrevisto} + make_interval(mins => ${solicitacoes.duracaoPrevistaMin})`, s.inicioPrevisto),
-        ),
-      )
-      .limit(1);
-    if (conflito) throw Erros.conflito('Você já tem um atendimento agendado neste horário.', 'AGENDA_CONFLITANTE');
 
     const [travada] = await tx
       .update(solicitacoes)
@@ -172,7 +191,7 @@ export async function recusarDemanda(usuarioId: string, solicitacaoId: string, m
   return { solicitacaoId, status: 'RECUSADA' };
 }
 
-/** RF24 — raio (≤ 15 km) e toggle online. */
+/** RF24 — raio (≤ 15 km) e toggle online. Ficar online ou mudar o raio dispara nova distribuição (RF17, D-20). */
 export async function atualizarConfiguracao(usuarioId: string, dados: { raioKm?: number; disponivelAgora?: boolean }) {
   await carregarInterprete(usuarioId);
   if (dados.raioKm !== undefined && (dados.raioKm < 1 || dados.raioKm > REGRAS.RAIO_MAXIMO_KM)) {
@@ -183,7 +202,50 @@ export async function atualizarConfiguracao(usuarioId: string, dados: { raioKm?:
     .set({ ...(dados.raioKm !== undefined ? { raioKm: dados.raioKm } : {}), ...(dados.disponivelAgora !== undefined ? { disponivelAgora: dados.disponivelAgora } : {}) })
     .where(eq(interpretes.usuarioId, usuarioId))
     .returning({ raioKm: interpretes.raioKm, disponivelAgora: interpretes.disponivelAgora, statusHabilitacao: interpretes.statusHabilitacao });
-  return i;
+  const novasOfertas = dados.disponivelAgora === true || dados.raioKm !== undefined ? await ofertarDemandasAbertas(usuarioId) : 0;
+  return { ...i, novasOfertas };
+}
+
+/**
+ * Nova distribuição (RF17, BPMN do atendimento, D-20): a demanda aberta que ainda não foi oferecida a um intérprete
+ * elegível — porque ele estava offline, fora do raio ou da agenda quando ela foi criada — passa a ser oferecida
+ * quando ele fica online ou muda o raio ou a disponibilidade. Cria a oferta e avisa o intérprete.
+ */
+export async function ofertarDemandasAbertas(interpreteId: string): Promise<number> {
+  return db.transaction(async (tx) => {
+    const [i] = await tx.select().from(interpretes).where(eq(interpretes.usuarioId, interpreteId)).limit(1);
+    if (!i || i.statusHabilitacao !== 'APROVADO' || !i.disponivelAgora) return 0;
+    const ctx = await carregarContextoElegibilidade(tx, i);
+    const abertas = await tx
+      .select()
+      .from(solicitacoes)
+      .where(
+        and(
+          eq(solicitacoes.status, 'BUSCANDO'),
+          gt(solicitacoes.inicioPrevisto, new Date()),
+          notExists(tx.select({ id: ofertas.id }).from(ofertas).where(and(eq(ofertas.solicitacaoId, solicitacoes.id), eq(ofertas.interpreteId, interpreteId)))),
+        ),
+      );
+    let novas = 0;
+    for (const s of abertas) {
+      const avaliacao = avaliarElegibilidade(ctx, s);
+      if (!avaliacao.elegivel) continue;
+      const [oferta] = await tx.insert(ofertas).values({ solicitacaoId: s.id, interpreteId, distanciaKm: avaliacao.distanciaKm }).onConflictDoNothing().returning({ id: ofertas.id });
+      if (!oferta) continue;
+      novas += 1;
+      await notificar(
+        {
+          usuarioId: interpreteId,
+          tipo: 'SOLICITACAO',
+          titulo: 'Nova demanda próxima de você',
+          conteudo: `${ROTULOS.tipoServico[s.tipoServico]} a ${avaliacao.distanciaKm} km • ${s.duracaoPrevistaMin} min.`,
+          referencia: `/interprete/demandas/${s.id}`,
+        },
+        tx,
+      );
+    }
+    return novas;
+  });
 }
 
 /** RF25 — disponibilidade semanal (substitui a grade inteira). */
@@ -200,6 +262,8 @@ export async function salvarDisponibilidades(usuarioId: string, faixas: { diaSem
     await tx.delete(disponibilidades).where(eq(disponibilidades.interpreteId, usuarioId));
     if (faixas.length) await tx.insert(disponibilidades).values(faixas.map((f) => ({ ...f, interpreteId: usuarioId })));
   });
+  // a nova agenda pode tornar o intérprete elegível para demandas abertas (nova distribuição — D-20)
+  await ofertarDemandasAbertas(usuarioId);
   return listarDisponibilidades(usuarioId);
 }
 

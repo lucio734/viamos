@@ -49,7 +49,8 @@ export function AgendaInterprete() {
     api
       .get<FaixaDisponibilidade[]>('/interprete/disponibilidades')
       .then((lista) => {
-        setFaixas(lista.map((f) => ({ diaSemana: f.diaSemana, inicio: f.inicio, fim: f.fim })));
+        // a API devolve HH:MM:SS; a grade trabalha com HH:MM (B-024)
+        setFaixas(lista.map((f) => ({ diaSemana: f.diaSemana, inicio: f.inicio.slice(0, 5), fim: f.fim.slice(0, 5) })));
         if (usuario?.interprete) {
           setRaioKm(usuario.interprete.raioKm);
           setDisponivelAgora(usuario.interprete.disponivelAgora);
@@ -115,7 +116,7 @@ export function AgendaInterprete() {
     setMensagem('');
     try {
       const salvas = await api.put<FaixaDisponibilidade[]>('/interprete/disponibilidades', { faixas });
-      setFaixas(salvas.map((f) => ({ diaSemana: f.diaSemana, inicio: f.inicio, fim: f.fim })));
+      setFaixas(salvas.map((f) => ({ diaSemana: f.diaSemana, inicio: f.inicio.slice(0, 5), fim: f.fim.slice(0, 5) })));
       setMensagem('Grade semanal de disponibilidade salva com sucesso (RF25).');
     } catch (e) {
       setErroAcao(e instanceof ErroApi ? e.mensagem : 'Não foi possível salvar as disponibilidades.');

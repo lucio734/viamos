@@ -4,8 +4,11 @@
  * dois aceites simultâneos, QR de outro atendimento, localização imprecisa/distante, mensagem de não
  * participante, encerramento repetido, confirmação de pagamento repetida, comprovante alheio, bloqueio de login.
  */
+import { eq } from 'drizzle-orm';
 import request from 'supertest';
 import { beforeAll, describe, expect, it } from 'vitest';
+import { db } from '../src/models/db.js';
+import { lancamentosFinanceiros, pagamentos } from '../src/models/schema.js';
 import { aceitarEFazerCheckin, app, auth, criarSolicitacao, daquiAMinutos, login, LOCAL_HC } from './helpers.js';
 
 let joao = '';
@@ -144,6 +147,64 @@ describe('Distribuição e aceite (RF17, RF22, RF23, RNF27, RNF36)', () => {
   });
 });
 
+/** ISO de um horário de Brasília (UTC−3, sem horário de verão desde 2019) no próximo `diaSemana` (0 = domingo), a partir de amanhã. */
+function proximoHorarioLocal(diaSemana: number, hora: string): string {
+  const relogioLocal = new Date(Date.now() - 3 * 3_600_000);
+  const dias = (diaSemana - relogioLocal.getUTCDay() + 7) % 7 || 7;
+  const data = new Date(relogioLocal.getTime() + dias * 86_400_000).toISOString().slice(0, 10);
+  return new Date(`${data}T${hora}:00-03:00`).toISOString();
+}
+
+describe('Elegibilidade única e nova distribuição (RF17, RF20–RF25, D-20)', () => {
+  it('fora da disponibilidade semanal a demanda não aparece, não abre e não é aceita; dentro dela, sim', async () => {
+    const quarta = 3;
+    const grade = await request(app).put('/api/interprete/disponibilidades').set(auth(carlos)).send({ faixas: [{ diaSemana: quarta, inicio: '08:00', fim: '09:00' }] });
+    expect(grade.status).toBe(200);
+    expect(grade.body[0].inicio).toBe('08:00:00');
+
+    const dentro = await criarSolicitacao(joao, { inicioPrevisto: proximoHorarioLocal(quarta, '08:30') });
+    const fora = await criarSolicitacao(joao, { inicioPrevisto: proximoHorarioLocal(quarta, '10:00') });
+    expect([dentro.status, fora.status]).toEqual([201, 201]);
+
+    const ids = (await request(app).get('/api/demandas').set(auth(carlos))).body.demandas.map((d: { id: string }) => d.id);
+    expect(ids).toContain(dentro.body.id);
+    expect(ids).not.toContain(fora.body.id);
+    expect((await request(app).get(`/api/solicitacoes/${dentro.body.id}`).set(auth(carlos))).status).toBe(200);
+    expect((await request(app).get(`/api/solicitacoes/${fora.body.id}`).set(auth(carlos))).status).toBe(403);
+
+    const aceite = await request(app).post(`/api/demandas/${fora.body.id}/aceitar`).set(auth(carlos)).send({});
+    expect(aceite.status).toBe(422);
+    expect(aceite.body.erro.codigo).toBe('FORA_DA_DISPONIBILIDADE');
+
+    // a grade devolvida pela API (HH:MM:SS) pode ser reenviada sem erro (B-024); sem grade = disponível sempre
+    expect((await request(app).put('/api/interprete/disponibilidades').set(auth(carlos)).send({ faixas: grade.body.map((f: { diaSemana: number; inicio: string; fim: string }) => ({ diaSemana: f.diaSemana, inicio: f.inicio, fim: f.fim })) })).status).toBe(200);
+    expect((await request(app).put('/api/interprete/disponibilidades').set(auth(carlos)).send({ faixas: [] })).status).toBe(200);
+  });
+
+  it('a demanda listada abre no detalhe mesmo sem oferta, e quem fica online recebe a oferta (nova distribuição)', async () => {
+    expect((await request(app).put('/api/interprete/configuracao').set(auth(carlos)).send({ disponivelAgora: false })).status).toBe(200);
+    const sol = await criarSolicitacao(joao, { inicioPrevisto: daquiAMinutos(300) });
+    expect(sol.status).toBe(201);
+
+    // offline, Carlos não recebeu oferta, mas a regra da lista e a do detalhe são a mesma (antes: 403 no detalhe)
+    const lista = await request(app).get('/api/demandas').set(auth(carlos));
+    expect(lista.body.demandas.some((d: { id: string }) => d.id === sol.body.id)).toBe(true);
+    expect((await request(app).get(`/api/solicitacoes/${sol.body.id}`).set(auth(carlos))).status).toBe(200);
+
+    const online = await request(app).put('/api/interprete/configuracao').set(auth(carlos)).send({ disponivelAgora: true });
+    expect(online.status).toBe(200);
+    expect(online.body.novasOfertas).toBeGreaterThanOrEqual(1);
+    const avisos = (await request(app).get('/api/notificacoes').set(auth(carlos))).body as { referenciaRecurso: string | null }[];
+    expect(avisos.some((n) => n.referenciaRecurso === `/interprete/demandas/${sol.body.id}`)).toBe(true);
+
+    // a oferta não é criada duas vezes: ficar online de novo não gera nova oferta para a mesma demanda
+    const deNovo = await request(app).put('/api/interprete/configuracao').set(auth(carlos)).send({ disponivelAgora: true });
+    const avisosDepois = (await request(app).get('/api/notificacoes').set(auth(carlos))).body as { referenciaRecurso: string | null }[];
+    expect(deNovo.body.novasOfertas).toBe(0);
+    expect(avisosDepois.filter((n) => n.referenciaRecurso === `/interprete/demandas/${sol.body.id}`)).toHaveLength(1);
+  });
+});
+
 describe('Check-in geolocalizado (RF31, RF32, RNF26) e encerramento (RF33)', () => {
   let atendimentoId = '';
   let codigo = '';
@@ -274,6 +335,36 @@ describe('Pagamento (RF36) e comprovante (RF37/RF38)', () => {
     const pdf = await request(app).get(`/api/atendimentos/${atendimentoId}/comprovante.pdf`).set(auth(ana));
     expect(pdf.status).toBe(422);
     expect(pdf.body.erro.codigo).toBe('COMPROVANTE_INDISPONIVEL');
+  });
+
+  it('dois pagamentos simultâneos do mesmo atendimento cobram e creditam uma única vez (RF36)', async () => {
+    const sol = await criarSolicitacao(joao, { inicioPrevisto: daquiAMinutos(10) });
+    const { atendimentoId } = await aceitarEFazerCheckin(joao, maria, sol.body.id);
+    const pagamentoId = (await request(app).post(`/api/atendimentos/${atendimentoId}/encerrar`).set(auth(maria)).send({})).body.pagamentoId as string;
+
+    const respostas = await Promise.all([1, 2].map(() => request(app).post(`/api/pagamentos/${pagamentoId}/processar`).set(auth(joao)).send({ meio: 'PIX' })));
+    expect(respostas.map((r) => r.status)).toEqual([200, 200]);
+    expect(respostas.map((r) => Boolean(r.body.repetido)).sort()).toEqual([false, true]);
+    const creditos = await db.select().from(lancamentosFinanceiros).where(eq(lancamentosFinanceiros.pagamentoId, pagamentoId));
+    expect(creditos).toHaveLength(1);
+  });
+
+  it('o saldo soma todo o extrato, além dos 100 lançamentos exibidos, e repasses simultâneos pagam uma vez só (RF26, RF27)', async () => {
+    const [pagamento] = await db.select({ id: pagamentos.id }).from(pagamentos).limit(1);
+    const carlosId = (await request(app).get('/api/auth/me').set(auth(carlos))).body.usuario.id as string;
+    const antes = (await request(app).get('/api/interprete/ganhos').set(auth(carlos))).body.saldoDisponivel as number;
+    await db.insert(lancamentosFinanceiros).values(
+      Array.from({ length: 105 }, (_, i) => ({ interpreteId: carlosId, pagamentoId: pagamento.id, tipo: 'CREDITO_ATENDIMENTO' as const, valor: 1, descricao: `Teste de saldo ${i + 1}` })),
+    );
+    const ganhos = (await request(app).get('/api/interprete/ganhos').set(auth(carlos))).body;
+    expect(ganhos.saldoDisponivel).toBeCloseTo(antes + 105, 2);
+    expect(ganhos.extrato).toHaveLength(100);
+
+    await request(app).post('/api/interprete/contas-bancarias').set(auth(carlos)).send({ banco: 'Banco de Teste', agencia: '0001', conta: '12345-6', titular: 'Carlos Lima' });
+    const repasses = await Promise.all([1, 2].map(() => request(app).post('/api/interprete/repasses').set(auth(carlos)).send({})));
+    expect(repasses.map((r) => r.status).sort()).toEqual([201, 422]);
+    expect(repasses.find((r) => r.status === 422)?.body.erro.codigo).toBe('SALDO_INSUFICIENTE');
+    expect((await request(app).get('/api/interprete/ganhos').set(auth(carlos))).body.saldoDisponivel).toBe(0);
   });
 });
 

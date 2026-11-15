@@ -217,7 +217,8 @@ paths:
       tags: [Cliente]
       security: [{ bearerAuth: [] }]
       responses:
-        '200': { description: Detalhe da solicitação }
+        '200': { description: 'Detalhe da solicitação (cliente dono, intérprete vinculado ou elegível pela regra D-20, operador)' }
+        '403': { description: Usuário sem vínculo com a solicitação }
   /solicitacoes/{id}/cancelar:
     post:
       summary: Cancela solicitação aplicando política de antecedência/taxa (RF19)
@@ -290,9 +291,10 @@ paths:
       tags: [Intérprete]
       security: [{ bearerAuth: [] }]
       responses:
-        '200': { description: Atendimento alocado ao intérprete }
-        '409': { description: Demanda já aceita por outro intérprete ou conflito de horário }
-        '422': { description: Intérprete ainda não habilitado ou fora do raio }
+        '201': { description: Atendimento alocado ao intérprete }
+        '403': { description: Intérprete ainda não habilitado (RNF36) }
+        '409': { description: 'Demanda já aceita por outro intérprete (DEMANDA_INDISPONIVEL) ou conflito de horário (AGENDA_CONFLITANTE)' }
+        '422': { description: 'Horário já passou (DEMANDA_EXPIRADA), fora do raio (FORA_DO_RAIO) ou fora da disponibilidade semanal (FORA_DA_DISPONIBILIDADE — D-20)' }
   /demandas/{id}/recusar:
     post:
       summary: Recusa oferta de demanda sem penalidade (RF23)
@@ -306,7 +308,7 @@ paths:
       tags: [Intérprete]
       security: [{ bearerAuth: [] }]
       responses:
-        '200': { description: Configuração atualizada }
+        '200': { description: 'Configuração atualizada; novasOfertas = demandas abertas oferecidas ao ficar online ou mudar o raio (nova distribuição — D-20)' }
   /interprete/disponibilidades:
     get:
       summary: Obtém grade semanal de horários disponíveis (RF25)
@@ -319,7 +321,7 @@ paths:
       tags: [Intérprete]
       security: [{ bearerAuth: [] }]
       responses:
-        '200': { description: Grade atualizada }
+        '200': { description: 'Grade atualizada (horários aceitos em HH:MM ou HH:MM:SS); dispara a nova distribuição se o intérprete estiver online' }
   /interprete/certificacoes:
     get:
       summary: Lista certificações enviadas pelo intérprete e respectivos pareceres (RF05, RF06)
@@ -366,6 +368,8 @@ paths:
       security: [{ bearerAuth: [] }]
       responses:
         '201': { description: Repasse processado }
+        '409': { description: Já existe repasse em processamento (REPASSE_EM_ANDAMENTO) }
+        '422': { description: 'Sem saldo (SALDO_INSUFICIENTE) ou sem conta bancária (SEM_CONTA_BANCARIA); pedidos simultâneos são serializados' }
 
   /atendimentos:
     get:

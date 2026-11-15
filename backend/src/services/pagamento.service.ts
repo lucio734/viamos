@@ -5,8 +5,8 @@
 import { and, desc, eq, gte, inArray, isNull, lt, sql } from 'drizzle-orm';
 import { env } from '../config/env.js';
 import { REGRAS } from '../config/regras.js';
-import { db } from '../models/db.js';
-import { atendimentos, comprovantes, contasBancarias, cotacoes, formasPagamento, lancamentosFinanceiros, pagamentos, repasses, solicitacoes } from '../models/schema.js';
+import { db, type Tx } from '../models/db.js';
+import { atendimentos, comprovantes, contasBancarias, cotacoes, formasPagamento, interpretes, lancamentosFinanceiros, pagamentos, repasses, solicitacoes } from '../models/schema.js';
 import { arredondar2, semanaCorrente } from '../utils/datas.js';
 import { Erros } from '../utils/erros.js';
 import { registrarEvento } from './auditoria.service.js';
@@ -89,10 +89,16 @@ export async function processarPagamento(
   const meio = forma?.tipo ?? entrada.meio;
   if (!meio) throw Erros.validacao([{ campo: 'meio', mensagem: 'Escolha Pix ou uma forma de pagamento salva.' }]);
 
-  const resultado = await gateway.cobrar({ valor: p.valor, meio, tokenCartao: forma?.tokenGateway, finalCartao: forma?.finalCartao });
-  const agora = new Date();
-
   return db.transaction(async (tx) => {
+    // RF36 — serializa as cobranças do mesmo atendimento: uma segunda requisição simultânea espera a primeira
+    // terminar e encontra o pagamento já PAGO (resposta idempotente), sem chamar o gateway de novo.
+    // Com um gateway real, a referência do pagamento também seria enviada como chave de idempotência.
+    await tx.select({ id: pagamentos.id }).from(pagamentos).where(eq(pagamentos.atendimentoId, p.atendimentoId)).for('update');
+    const [pagoAntes] = await tx.select().from(pagamentos).where(and(eq(pagamentos.atendimentoId, p.atendimentoId), eq(pagamentos.status, 'PAGO'))).limit(1);
+    if (pagoAntes) return { id: pagoAntes.id, status: 'PAGO' as const, valor: pagoAntes.valor, meio: pagoAntes.meio, mensagem: 'Pagamento já confirmado anteriormente.', confirmadoEm: pagoAntes.confirmadoEm, repetido: true };
+
+    const resultado = await gateway.cobrar({ valor: p.valor, meio, tokenCartao: forma?.tokenGateway, finalCartao: forma?.finalCartao });
+    const agora = new Date();
     const [atualizado] = await tx
       .update(pagamentos)
       .set({
@@ -138,16 +144,30 @@ export async function processarPagamento(
 // ---------------------------------------------------------------------------
 // Ganhos e repasse do intérprete (RF26, RF27)
 // ---------------------------------------------------------------------------
+/** RF26/RF27 — saldo = soma de TODOS os lançamentos do intérprete (créditos positivos, repasses negativos). */
+async function saldoDoInterprete(conexao: typeof db | Tx, interpreteId: string): Promise<number> {
+  const [r] = await conexao
+    .select({ total: sql<string>`coalesce(sum(${lancamentosFinanceiros.valor}), 0)` })
+    .from(lancamentosFinanceiros)
+    .where(eq(lancamentosFinanceiros.interpreteId, interpreteId));
+  return arredondar2(Number(r?.total ?? 0));
+}
+
 export async function resumoGanhos(interpreteId: string) {
   const { inicio, fim } = semanaCorrente();
+  // O extrato exibe os 100 lançamentos mais recentes; saldo e recebido na semana somam o histórico inteiro no banco.
   const lancamentos = await db.query.lancamentosFinanceiros.findMany({
     where: eq(lancamentosFinanceiros.interpreteId, interpreteId),
     with: { pagamento: { with: { atendimento: { with: { solicitacao: true } } } }, repasse: true },
     orderBy: [desc(lancamentosFinanceiros.data)],
     limit: 100,
   });
-  const saldoDisponivel = arredondar2(lancamentos.reduce((acc, l) => acc + l.valor, 0));
-  const recebidoSemana = arredondar2(lancamentos.filter((l) => l.tipo === 'CREDITO_ATENDIMENTO' && l.data >= inicio && l.data < fim).reduce((acc, l) => acc + l.valor, 0));
+  const saldoDisponivel = await saldoDoInterprete(db, interpreteId);
+  const [semanaCreditos] = await db
+    .select({ total: sql<string>`coalesce(sum(${lancamentosFinanceiros.valor}), 0)` })
+    .from(lancamentosFinanceiros)
+    .where(and(eq(lancamentosFinanceiros.interpreteId, interpreteId), eq(lancamentosFinanceiros.tipo, 'CREDITO_ATENDIMENTO'), gte(lancamentosFinanceiros.data, inicio), lt(lancamentosFinanceiros.data, fim)));
+  const recebidoSemana = arredondar2(Number(semanaCreditos?.total ?? 0));
 
   // A receber: atendimentos concluídos ainda sem pagamento confirmado
   const pendentes = await db
@@ -192,16 +212,19 @@ export async function salvarContaBancaria(interpreteId: string, dados: { banco: 
 }
 
 export async function solicitarRepasse(interpreteId: string, ip?: string) {
-  const ganhos = await resumoGanhos(interpreteId);
-  if (ganhos.saldoDisponivel <= 0) throw Erros.regraNegocio('Não há saldo disponível para repasse.', 'SALDO_INSUFICIENTE');
-  const [conta] = await db.select().from(contasBancarias).where(and(eq(contasBancarias.interpreteId, interpreteId), eq(contasBancarias.principal, true))).limit(1);
-  if (!conta) throw Erros.regraNegocio('Cadastre uma conta bancária antes de solicitar o repasse.', 'SEM_CONTA_BANCARIA');
-  const [aberto] = await db.select({ id: repasses.id }).from(repasses).where(and(eq(repasses.interpreteId, interpreteId), inArray(repasses.status, ['SOLICITADO', 'PROCESSANDO']))).limit(1);
-  if (aberto) throw Erros.conflito('Já existe um repasse em processamento.', 'REPASSE_EM_ANDAMENTO');
-
-  const valor = ganhos.saldoDisponivel;
-  const resultado = await gateway.transferir({ valor, contaDescricao: `${conta.banco} ag ${conta.agencia} cc ${conta.conta}` });
   return db.transaction(async (tx) => {
+    // RF27 — um repasse por vez: o bloqueio do intérprete serializa pedidos simultâneos; o segundo encontra o saldo
+    // já debitado (422 SALDO_INSUFICIENTE) em vez de transferir o mesmo valor duas vezes.
+    const [interprete] = await tx.select({ id: interpretes.usuarioId }).from(interpretes).where(eq(interpretes.usuarioId, interpreteId)).for('no key update');
+    if (!interprete) throw Erros.naoEncontrado('Perfil de intérprete');
+    const valor = await saldoDoInterprete(tx, interpreteId);
+    if (valor <= 0) throw Erros.regraNegocio('Não há saldo disponível para repasse.', 'SALDO_INSUFICIENTE');
+    const [conta] = await tx.select().from(contasBancarias).where(and(eq(contasBancarias.interpreteId, interpreteId), eq(contasBancarias.principal, true))).limit(1);
+    if (!conta) throw Erros.regraNegocio('Cadastre uma conta bancária antes de solicitar o repasse.', 'SEM_CONTA_BANCARIA');
+    const [aberto] = await tx.select({ id: repasses.id }).from(repasses).where(and(eq(repasses.interpreteId, interpreteId), inArray(repasses.status, ['SOLICITADO', 'PROCESSANDO']))).limit(1);
+    if (aberto) throw Erros.conflito('Já existe um repasse em processamento.', 'REPASSE_EM_ANDAMENTO');
+
+    const resultado = await gateway.transferir({ valor, contaDescricao: `${conta.banco} ag ${conta.agencia} cc ${conta.conta}` });
     const [r] = await tx
       .insert(repasses)
       .values({ interpreteId, contaBancariaId: conta.id, valor, status: resultado.aprovado ? 'PAGO' : 'FALHOU', referenciaGateway: resultado.referencia, concluidoEm: resultado.aprovado ? new Date() : null })
