@@ -249,6 +249,9 @@ describe('Pagamento (RF36) e comprovante (RF37/RF38)', () => {
     const recusado = await request(app).post(`/api/pagamentos/${pagamentoId}/processar`).set(auth(joao)).send({ formaPagamentoId: formas.find((f: { finalCartao?: string }) => f.finalCartao === '0000').id });
     expect(recusado.status).toBe(402);
     expect(recusado.body.status).toBe('FALHOU');
+    // B-022: a recusa segue o envelope padrão de erro, com o motivo devolvido pelo gateway (não uma mensagem genérica)
+    expect(recusado.body.erro.codigo).toBe('PAGAMENTO_RECUSADO');
+    expect(recusado.body.erro.mensagem).toMatch(/recusada/i);
 
     const pix = await request(app).post(`/api/pagamentos/${pagamentoId}/processar`).set(auth(joao)).send({ meio: 'PIX' });
     expect(pix.status).toBe(200);

@@ -55,8 +55,14 @@ export async function obter(req: Request, res: Response) {
 
 export async function processar(req: Request, res: Response) {
   const resultado = await pagamentoService.processarPagamento(req.params.id as string, req.usuario!.id, req.body, req.ip);
-  // 200 para pago (inclusive repetição idempotente); 402 quando o gateway recusa
-  res.status(resultado.status === 'PAGO' ? 200 : 402).json(resultado);
+  // 200 para pago (inclusive repetição idempotente)
+  if (resultado.status === 'PAGO') {
+    res.json(resultado);
+    return;
+  }
+  // 402 quando o gateway recusa: além do estado do pagamento, segue o envelope padrão de erro da API
+  // ({ erro: { codigo, mensagem } }) para que o motivo da recusa chegue à tela como em qualquer outro erro (B-022).
+  res.status(402).json({ ...resultado, erro: { codigo: 'PAGAMENTO_RECUSADO', mensagem: resultado.mensagem } });
 }
 
 export async function ganhos(req: Request, res: Response) {

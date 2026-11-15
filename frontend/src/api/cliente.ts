@@ -69,9 +69,12 @@ async function requisicao<T>(metodo: Metodo, caminho: string, corpo?: unknown): 
   }
 
   if (!resposta.ok) {
-    const erro = (dados as { erro?: { codigo?: string; mensagem?: string; detalhes?: unknown } } | null)?.erro;
+    const corpoErro = dados as { erro?: { codigo?: string; mensagem?: string; detalhes?: unknown }; mensagem?: unknown } | null;
+    const erro = corpoErro?.erro;
+    // Respostas de erro sem o envelope { erro } (ex.: versões antigas do 402 de pagamento) ainda trazem `mensagem` na raiz (B-022).
+    const mensagemRaiz = typeof corpoErro?.mensagem === 'string' ? corpoErro.mensagem : undefined;
     if (resposta.status === 401 && token) tokenStore.limpar();
-    throw new ErroApi(resposta.status, erro?.codigo ?? 'ERRO', erro?.mensagem ?? 'Ocorreu um erro inesperado.', erro?.detalhes);
+    throw new ErroApi(resposta.status, erro?.codigo ?? 'ERRO', erro?.mensagem ?? mensagemRaiz ?? 'Ocorreu um erro inesperado.', erro?.detalhes);
   }
   return dados as T;
 }
