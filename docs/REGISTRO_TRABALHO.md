@@ -5,7 +5,7 @@ Documento de continuidade: o que foi **concluído e verificado**, o que está **
 
 ## Retomada em 15/11/2026
 
-A revisão começou em `089774a`, com `main` e `origin/main` iguais no clone e sem alterações locais. A etapa de estabilização foi preparada em `codex/fix-retomada-viamos` e compartilhada em `codex/retomada-viamos-equipe`. O ajuste do workflow permanece pendente e está descrito em `contexto_atual_claude.md`. As pastas `Contexto/` e `Entregas/` foram preservadas.
+A revisão começou em `089774a`, com `main` e `origin/main` iguais no clone e sem alterações locais. A etapa de estabilização e a passagem de bastão foram integradas à `main`. As pastas `Contexto/` e `Entregas/` foram preservadas.
 
 | Área | Estado conferido |
 |---|---|

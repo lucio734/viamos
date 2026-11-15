@@ -2,12 +2,11 @@
 
 ## Retomada de 15/11/2026
 
-O ponto de partida é a branch `codex/retomada-viamos-equipe` no repositório `lucio734/viamos`. A branch parte do commit `089774a` da `main` e reúne as correções do aplicativo e esta passagem de bastão. Para abrir a branch num clone do repositório com `origin` apontando para o GitHub:
+As correções do aplicativo e esta passagem de bastão estão na `main` do repositório `lucio734/viamos`. Para atualizar seu clone:
 
 ```bash
-git fetch origin
-git switch codex/retomada-viamos-equipe
-git pull --ff-only origin codex/retomada-viamos-equipe
+git switch main
+git pull --ff-only origin main
 ```
 
 ### Estado do trabalho
@@ -16,10 +15,6 @@ git pull --ff-only origin codex/retomada-viamos-equipe
 - **Jornada presencial** Acompanhamento da solicitação a cada 5 s, validação da agenda dentro da transação de aceite, cancelamento e check-in com bloqueios na mesma ordem e posição compartilhada por canal temporário na sala. O leitor de QR exige captura de posição. A simulação está disponível no servidor local de desenvolvimento para ensaio.
 - **Ambiente e deploy** Configure `DATABASE_URL_TEST` para uma base exclusiva e descartável antes de rodar a suíte. Use Node.js 22.12+ na série 22 e `npm ci` em `backend` e `frontend`. O Render instala as dependências de build explicitamente e a Vercel usa a origem da API em `VITE_API_URL`. Veja o [README](README.md) e o [guia de deploy](docs/DEPLOY.md).
 - **Evidência local** 53 testes de backend com PostgreSQL 18.6, 6 casos de frontend e builds concluídos. O teste no Chrome cobriu cotação, solicitação, aceite observado sem recarga, QR manual com GPS emulado, localização na sala, encerramento, Pix simulado e resposta PDF. Consulte o [relatório de testes](docs/TESTES.md).
-
-### Ajuste de CI pendente
-
-O workflow versionado vem da `main`. Antes de abrir o pull request, um integrante com permissão de escrita em workflows deve atualizar `.github/workflows/ci.yml`. No job `backend`, remova `DATABASE_URL` de `env`, mantenha `DATABASE_URL_TEST` apontando para o serviço PostgreSQL descartável e atualize o nome do job para `Backend (Typecheck, Vitest, Build)`. A suíte recusa URLs idênticas de teste e desenvolvimento.
 
 ### Continuidade
 

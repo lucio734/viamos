@@ -1,6 +1,6 @@
 # Víamos — Relatório de contexto atual para o Lúcio e o ChatGPT
 
-> Atualização de 15/11/2026. A base dos Blocos F1–F4 já está na `main`. A retomada está na branch `codex/retomada-viamos-equipe`. A [passagem de bastão para Gustavo e Claude](contexto_atual_claude.md#retomada-de-15112026) indica como acessar a branch e por onde continuar. Consulte também o [registro de trabalho](docs/REGISTRO_TRABALHO.md#retomada-em-15112026).
+> Atualização de 15/11/2026. A base dos Blocos F1–F4 e as correções da retomada estão na `main`. A [passagem de bastão para Gustavo e Claude](contexto_atual_claude.md#retomada-de-15112026) indica como atualizar o clone e por onde continuar. Consulte também o [registro de trabalho](docs/REGISTRO_TRABALHO.md#retomada-em-15112026).
 
 > Gerado em 12/11/2026 (18h) por Gustavo + Claude. Este é o documento de passagem de bastão previsto no nosso
 > protocolo de revezamento. Ele descreve **o que já existe**, **o que falta**, **o passo a passo até a entrega

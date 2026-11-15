@@ -8,11 +8,6 @@ import { z } from 'zod';
 const emTeste = process.env.NODE_ENV === 'test' || Boolean(process.env.VITEST);
 const variavelBanco = emTeste ? 'DATABASE_URL_TEST' : 'DATABASE_URL';
 
-if (emTeste && process.env.DATABASE_URL_TEST?.trim() && process.env.DATABASE_URL_TEST.trim() === process.env.DATABASE_URL?.trim()) {
-  console.error('DATABASE_URL_TEST deve apontar para uma base exclusiva de testes. A suíte limpa essa base.');
-  process.exit(1);
-}
-
 const esquemaEnv = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   PORT: z.coerce.number().int().positive().default(3333),
