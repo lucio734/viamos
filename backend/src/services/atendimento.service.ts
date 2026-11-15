@@ -3,9 +3,9 @@
  * QR Code + check-in geolocalizado (≤ 200 m, precisão ≤ 50 m), encerramento com duração real,
  * suporte/emergência e histórico com filtros.
  */
-import { and, asc, desc, eq, gt, gte, inArray, lte, or, sql, type SQL } from 'drizzle-orm';
+import { and, asc, desc, eq, gt, gte, inArray, isNull, lte, or, sql, type SQL } from 'drizzle-orm';
 import { REGRAS } from '../config/regras.js';
-import { db } from '../models/db.js';
+import { db, type Tx } from '../models/db.js';
 import {
   atendimentos,
   chamadosSuporte,
@@ -188,8 +188,8 @@ export async function listarMensagens(atendimentoId: string, usuarioId: string, 
     tipo: m.tipo,
     texto: m.texto,
     arquivoUri: m.arquivoUri,
-    latitude: m.latitude,
-    longitude: m.longitude,
+    latitude: null,
+    longitude: null,
     enviadaEm: m.enviadaEm,
     autor: m.autor ? { id: m.autor.id, nome: m.autor.nome, papel: m.autor.papel } : { id: null, nome: 'Víamos', papel: 'SISTEMA' },
     minha: m.autorId === usuarioId,
@@ -219,59 +219,68 @@ export async function enviarMensagem(
     arquivoUri = entrada.imagemDataUrl ?? null;
   }
   if (entrada.tipo === 'TEXTO' && !entrada.texto?.trim()) throw Erros.validacao([{ campo: 'texto', mensagem: 'Digite uma mensagem.' }]);
-  if (entrada.tipo === 'LOCALIZACAO' && (entrada.latitude === undefined || entrada.longitude === undefined)) {
-    throw Erros.validacao([{ campo: 'latitude', mensagem: 'Localização incompleta.' }]);
-  }
-
-  const [m] = await db
-    .insert(mensagens)
-    .values({
-      atendimentoId,
-      autorId: usuarioId,
-      tipo: entrada.tipo,
-      texto: entrada.texto?.trim() || null,
-      arquivoUri,
-      latitude: entrada.latitude ?? null,
-      longitude: entrada.longitude ?? null,
-    })
-    .returning();
-
   const destinatario = a.solicitacao.clienteId === usuarioId ? a.interpreteId : a.solicitacao.clienteId;
   const rota = destinatario === a.interpreteId ? `/interprete/atendimentos/${atendimentoId}/sala` : `/cliente/atendimentos/${atendimentoId}/sala`;
-  await notificar({
-    usuarioId: destinatario,
-    tipo: 'MENSAGEM',
-    titulo: 'Nova mensagem na sala de atendimento',
-    conteudo: entrada.tipo === 'TEXTO' ? (entrada.texto ?? '').slice(0, 120) : entrada.tipo === 'IMAGEM' ? 'Foto do ponto de encontro enviada.' : 'Localização compartilhada.',
-    referencia: rota,
+  return db.transaction(async (tx) => {
+    let texto = entrada.texto?.trim() || null;
+    if (entrada.tipo === 'LOCALIZACAO') {
+      const { latitude, longitude } = entrada;
+      if (latitude === undefined || longitude === undefined) {
+        throw Erros.validacao([{ campo: 'latitude', mensagem: 'Localização incompleta.' }]);
+      }
+      await registrarLocalizacao(tx, a, usuarioId, { latitude, longitude });
+      texto = 'Localização compartilhada temporariamente no mapa da sala.';
+    }
+
+    const [m] = await tx.insert(mensagens).values({ atendimentoId, autorId: usuarioId, tipo: entrada.tipo, texto, arquivoUri }).returning();
+    await notificar({
+      usuarioId: destinatario,
+      tipo: 'MENSAGEM',
+      titulo: 'Nova mensagem na sala de atendimento',
+      conteudo: entrada.tipo === 'IMAGEM' ? 'Foto do ponto de encontro enviada.' : texto?.slice(0, 120) ?? '',
+      referencia: rota,
+    }, tx);
+    return m;
   });
-  return m;
 }
 
 /** RF29 / RNF44 / RNF21 — localização temporária: só no dia do atendimento e enquanto não concluído. */
-export async function compartilharLocalizacao(atendimentoId: string, usuarioId: string, papel: string, pos: { latitude: number; longitude: number; precisaoM?: number }) {
-  const a = await exigirParticipante(atendimentoId, usuarioId, papel);
-  if (a.status === 'CONCLUIDO' || a.status === 'CANCELADO') throw Erros.regraNegocio('O compartilhamento de localização encerra com o atendimento.', 'LOCALIZACAO_ENCERRADA');
+type Coordenadas = { latitude: number; longitude: number; precisaoM?: number };
+
+async function registrarLocalizacao(tx: Tx, a: AtendimentoCompleto, usuarioId: string, pos: Coordenadas) {
+  const [atual] = await tx.select({ status: atendimentos.status }).from(atendimentos).where(eq(atendimentos.id, a.id)).for('no key update');
+  if (!atual || atual.status === 'CONCLUIDO' || atual.status === 'CANCELADO') throw Erros.regraNegocio('O compartilhamento de localização encerra com o atendimento.', 'LOCALIZACAO_ENCERRADA');
   const janela = adicionarMinutos(a.solicitacao.inicioPrevisto, -120);
   if (Date.now() < janela.getTime()) throw Erros.regraNegocio('A localização só pode ser compartilhada a partir de 2 h antes do atendimento.', 'FORA_DA_JANELA');
-  const [l] = await db
+  const [l] = await tx
     .insert(localizacoesCompartilhadas)
-    .values({ atendimentoId, usuarioId, latitude: pos.latitude, longitude: pos.longitude, precisaoM: pos.precisaoM ?? null })
+    .values({ atendimentoId: a.id, usuarioId, latitude: pos.latitude, longitude: pos.longitude, precisaoM: pos.precisaoM ?? null })
     .returning();
   return l;
+}
+
+export async function compartilharLocalizacao(atendimentoId: string, usuarioId: string, papel: string, pos: Coordenadas) {
+  const a = await exigirParticipante(atendimentoId, usuarioId, papel);
+  return db.transaction((tx) => registrarLocalizacao(tx, a, usuarioId, pos));
 }
 
 export async function obterLocalizacoes(atendimentoId: string, usuarioId: string, papel: string) {
   await exigirParticipante(atendimentoId, usuarioId, papel);
   const linhas = await db
-    .select()
+    .select({ localizacao: localizacoesCompartilhadas })
     .from(localizacoesCompartilhadas)
-    .where(and(eq(localizacoesCompartilhadas.atendimentoId, atendimentoId), gt(localizacoesCompartilhadas.registradaEm, new Date(Date.now() - 15 * 60_000))))
+    .innerJoin(atendimentos, eq(atendimentos.id, localizacoesCompartilhadas.atendimentoId))
+    .where(and(
+      eq(localizacoesCompartilhadas.atendimentoId, atendimentoId),
+      inArray(atendimentos.status, ['AGENDADO', 'EM_ANDAMENTO']),
+      isNull(localizacoesCompartilhadas.encerradaEm),
+      gt(localizacoesCompartilhadas.registradaEm, new Date(Date.now() - 15 * 60_000)),
+    ))
     .orderBy(desc(localizacoesCompartilhadas.registradaEm))
     .limit(20);
   // última posição de cada participante
-  const porUsuario = new Map<string, (typeof linhas)[number]>();
-  for (const l of linhas) if (!porUsuario.has(l.usuarioId)) porUsuario.set(l.usuarioId, l);
+  const porUsuario = new Map<string, (typeof localizacoesCompartilhadas)['$inferSelect']>();
+  for (const { localizacao } of linhas) if (!porUsuario.has(localizacao.usuarioId)) porUsuario.set(localizacao.usuarioId, localizacao);
   return Array.from(porUsuario.values()).map((l) => ({ usuarioId: l.usuarioId, latitude: l.latitude, longitude: l.longitude, precisaoM: l.precisaoM, registradaEm: l.registradaEm }));
 }
 
@@ -328,6 +337,9 @@ export async function realizarCheckin(
 
   const agora = new Date();
   await db.transaction(async (tx) => {
+    const [solicitacao] = await tx.select({ status: solicitacoes.status }).from(solicitacoes).where(eq(solicitacoes.id, a.solicitacaoId)).for('no key update');
+    if (solicitacao?.status === 'EM_ANDAMENTO') throw Erros.conflito('Check-in já realizado.', 'CHECKIN_DUPLICADO');
+    if (solicitacao?.status !== 'ACEITA') throw Erros.regraNegocio('Este atendimento não está agendado.', 'ESTADO_INVALIDO');
     const [ok] = await tx
       .update(atendimentos)
       .set({ status: 'EM_ANDAMENTO', inicioReal: agora })

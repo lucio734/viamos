@@ -3,6 +3,40 @@
 Documento de continuidade: o que foi **concluído e verificado**, o que está **pendente ou não testado**, quem fez
 (papel/agente), arquivos relevantes, decisões, riscos e próximos passos. Atualizar ao fim de cada bloco.
 
+## Retomada em 15/11/2026
+
+A revisão começou em `089774a`, com `main` e `origin/main` iguais no clone e sem alterações locais. A etapa de estabilização foi preparada em `codex/fix-retomada-viamos` e compartilhada em `codex/retomada-viamos-equipe`. O ajuste do workflow permanece pendente e está descrito em `contexto_atual_claude.md`. As pastas `Contexto/` e `Entregas/` foram preservadas.
+
+| Área | Estado conferido |
+|---|---|
+| Aplicação e arquitetura | React/Vite, API MVC Express/Drizzle, PostgreSQL com 27 tabelas e duas migrações. O sitemap soma 33 telas (8 públicas, 9 de cliente, 10 de intérprete, 4 de backoffice, 2 comuns), além do redirecionamento coringa. Os registros históricos de 23 telas não representam a contagem atual. |
+| Requisitos e design | Foram consultados o Briefing, PRD, design e protótipos Stitch, as duas planilhas de requisitos, os PDFs de UML e Modelagem e o modelo DOCX. A planilha consolidada contém 45 RF, 45 RNF, associações, projeto linear e histórias. A presença de uma tela indica implementação da rota. A evidência de cada comportamento depende da revisão e dos testes correspondentes. |
+| Produção Técnica | Já existem diagramas Mermaid, PDFs de contexto/BPMN/DFD/estados e arquivos UML/CASE da equipe. `Contexto/DOCUMENTAÇÃO REPOSITÓRIO/DOC.txt` e o Dossiê descrevem os itens 1–28. O `modelo_entrega.docx` mostra a sequência de introdução, figura numerada com fonte, explicação, tabela quando aplicável e conclusão. A consolidação final com figuras, tabelas por caso de uso e link do Figma segue pendente. |
+| Operação e qualidade | CI, OpenAPI parcial, guia de deploy, SLA, plano de testes, manual e roteiro já existiam no commit de base. O roteiro não comprova ensaio na hospedagem. Publicação, HTTPS, metas de carga/disponibilidade e cobertura integral de acessibilidade ainda precisam de evidências. |
+
+### Correções desta etapa
+
+- **RF18** O acompanhamento atualiza a cada 5 s durante os estados ativos e preserva o conteúdo quando uma atualização falha. O cliente recebe o QR quando o aceite é confirmado e pode repetir a consulta do código se ela falhar.
+- **RF19, RF22 e RF31** O aceite serializa a verificação da agenda por intérprete. Cancelamento e check-in seguem a mesma ordem de bloqueio. A política de cancelamento usa o vínculo e o estado lidos após adquirir o bloqueio.
+- **RF29 e RNF44** A sala publica a posição capturada pelo navegador no canal temporário e sinaliza sua disponibilidade à contraparte. O mapa deixa de mostrar posições no encerramento ou cancelamento. Chamadas antigas de mensagem do tipo `LOCALIZACAO` continuam aceitas e usam o canal temporário. O histórico continua retornando os campos de coordenadas com valor nulo. A eliminação de valores históricos já gravados depende da política de retenção do grupo.
+- **RF31, RF32 e RNF26** Leitura do QR liberada após a captura explícita de posição. A simulação do aplicativo está disponível apenas no servidor de desenvolvimento para ensaios com dados fictícios.
+- **Dossiê #41, #44–48** Os testes exigem uma URL de base descartável. O Render recebe as dependências de build, e a SPA aceita a origem da API com ou sem o sufixo `/api`. Guia de deploy, roteiro e contrato do health foram conferidos contra a implementação.
+
+### Papéis e verificações
+
+- **Codex principal (coordenação, implementação e validação)** cruzou os artefatos com o código, priorizou as correções do fluxo presencial e executou a validação em ambiente local. `docs/TESTES.md` registra comandos, resultados e limites.
+- **Revisão independente de Produto/UX** conferiu RF/RNF, contagem do sitemap, fixtures do roteiro e os diffs da sala, acompanhamento e check-in. A revisão levou ao aviso da contraparte, ao estado de erro do QR e ao anúncio de captura do GPS.
+- **Revisão independente de Backend/Dados/QA** comparou serviços, schema e suítes, identificou corridas de aceites, cancelamento e localização e revisou os bloqueios e os casos adicionados.
+- **Revisão independente de CI/CD e DevOps** conferiu Blueprint, lockfiles, variáveis, OpenAPI e pré-requisitos locais. A revisão levou ao isolamento obrigatório do banco, à correção do build e ao alinhamento do guia com a configuração publicada no repositório.
+- **Fontes de processo** `PROMPT AGENTES.docx` e `docs/EQUIPE_AGENTES.md` orientaram os papéis. Os prompts das revisões aplicaram papel, tarefa, contexto, entrada documental, restrições, formato e exemplo, conforme labProt. A sequência requisitos → correção → caso reproduzível → revisão foi cruzada com as fases 3–5 do Checklist 2026 e com os itens #29, #31–32 e #38–50 do Dossiê. Resultados e pendências estão em `docs/VERIFICACOES.md` e `docs/BUGS.md`.
+
+### Próxima etapa proposta
+
+1. **RF17, RF20–RF25** Reconciliar a elegibilidade entre distribuição, lista, detalhe e aceite. A disponibilidade semanal é gravada, mas não participa da seleção. Uma demanda listada sem oferta pode retornar 403 no detalhe. O BPMN prevê nova distribuição quando não há elegíveis, e o código distribui apenas na criação. Definir o comportamento da agenda vazia e a política de nova distribuição com o grupo.
+2. **RF26–RF27, RF36** Agregar o saldo sobre todo o extrato e serializar repasses. Revisar cobrança simultânea e separar o a receber da semana do saldo total. Manter pagamentos e e-mail no escopo simulado (D-08 e configuração existente).
+3. **RF37–RF38** Conciliar o DFD P5 da entrega de Modelagem, que libera o PDF no encerramento, com D-10 e a aplicação, que o emitem depois da confirmação do pagamento. Encaminhar ao grupo junto com os valores D-01 e a janela D-05.
+4. **Dossiê #1–28 e #45–50** Consolidar a Produção Técnica no modelo solicitado, obter o link do Figma, publicar nas contas da equipe e repetir a demonstração com dados fictícios, HTTPS, recarga de rota, QR com câmera e GPS em dispositivo físico.
+
 ## 1. Linha do tempo
 
 | Data | Bloco | Executor | Resultado |

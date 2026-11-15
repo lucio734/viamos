@@ -24,7 +24,11 @@ interface PosicaoCheckin {
 
 export function DetalheAtendimentoInterprete() {
   const { id } = useParams<{ id: string }>();
+  if (!id) return <EstadoErro mensagem="Atendimento não encontrado." />;
+  return <AtendimentoInterprete key={id} id={id} />;
+}
 
+function AtendimentoInterprete({ id }: { id: string }) {
   const [dados, setDados] = useState<DetalheAtendimento | null>(null);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState('');
@@ -38,23 +42,11 @@ export function DetalheAtendimentoInterprete() {
   const [erroAcao, setErroAcao] = useState('');
 
   const carregar = useCallback(() => {
-    if (!id) return;
     setCarregando(true);
     setErro('');
     api
       .get<DetalheAtendimento>(`/atendimentos/${id}`)
-      .then((at) => {
-        setDados(at);
-        // Inicializa com coordenadas do ponto do atendimento caso o usuário esteja em ambiente desktop sem GPS
-        setPosicao((ant) =>
-          ant ?? {
-            latitude: at.local.latitude,
-            longitude: at.local.longitude,
-            precisaoM: 12,
-            origem: 'LOCAL_ATENDIMENTO',
-          },
-        );
-      })
+      .then(setDados)
       .catch((e) => setErro(e instanceof ErroApi ? e.mensagem : 'Atendimento não encontrado.'))
       .finally(() => setCarregando(false));
   }, [id]);
@@ -64,7 +56,8 @@ export function DetalheAtendimentoInterprete() {
   }, [carregar]);
 
   function capturarGpsDispositivo() {
-    if (!('geolocation' in navigator)) {
+    setPosicao(null);
+    if (!navigator.geolocation) {
       setErroAcao('Seu navegador não suporta geolocalização.');
       return;
     }
@@ -75,14 +68,14 @@ export function DetalheAtendimentoInterprete() {
         setPosicao({
           latitude: pos.coords.latitude,
           longitude: pos.coords.longitude,
-          precisaoM: Math.round(pos.coords.accuracy),
+          precisaoM: pos.coords.accuracy,
           origem: 'GPS',
         });
         setCapturandoGps(false);
       },
       () => {
         setCapturandoGps(false);
-        setErroAcao('Não foi possível obter o GPS real do dispositivo. Você pode usar a posição do local para demonstração.');
+        setErroAcao('Não foi possível obter sua localização. Confira a permissão de localização e tente novamente.');
       },
       { enableHighAccuracy: true, timeout: 8000 },
     );
@@ -100,13 +93,7 @@ export function DetalheAtendimentoInterprete() {
   }
 
   async function realizarCheckin(codigoLido: string) {
-    if (!id || !dados) return;
-    const pos = posicao ?? {
-      latitude: dados.local.latitude,
-      longitude: dados.local.longitude,
-      precisaoM: 12,
-      origem: 'LOCAL_ATENDIMENTO' as const,
-    };
+    if (!dados || !posicao || fazendoCheckin) return;
 
     setFazendoCheckin(true);
     setErroAcao('');
@@ -114,9 +101,9 @@ export function DetalheAtendimentoInterprete() {
     try {
       const res = await api.post<{ distanciaM: number }>(`/atendimentos/${id}/checkin`, {
         codigo: codigoLido,
-        latitude: pos.latitude,
-        longitude: pos.longitude,
-        precisaoM: pos.precisaoM,
+        latitude: posicao.latitude,
+        longitude: posicao.longitude,
+        precisaoM: posicao.precisaoM,
       });
       setMensagem(`Check-in presencial confirmado a ${res.distanciaM} m do ponto marcado! O atendimento está em andamento.`);
       carregar();
@@ -128,7 +115,6 @@ export function DetalheAtendimentoInterprete() {
   }
 
   async function encerrarAtendimento() {
-    if (!id) return;
     setEncerrando(true);
     setErroAcao('');
     setMensagem('');
@@ -206,15 +192,15 @@ export function DetalheAtendimentoInterprete() {
 
             {/* Status da posição GPS */}
             <div className="flex flex-col justify-between gap-3 rounded-xl border border-outline-variant bg-surface-container-low p-3.5 sm:flex-row sm:items-center">
-              <div>
+              <div role="status">
                 <p className="text-sm font-semibold text-primary">
                   Coordenadas para validação:{' '}
                   {posicao ? `${posicao.latitude.toFixed(5)}, ${posicao.longitude.toFixed(5)}` : 'Não capturadas'}
                 </p>
-                <p className="text-xs text-on-surface-variant">
-                  Precisão estimada: <strong>{posicao?.precisaoM ?? '—'} m</strong> (
-                  {posicao?.origem === 'GPS' ? 'GPS do dispositivo' : 'Posição do local de encontro'})
-                </p>
+                {posicao && <p className="text-sm text-on-surface-variant">
+                  Precisão estimada: <strong>{Math.round(posicao.precisaoM)} m</strong> (
+                  {posicao.origem === 'GPS' ? 'GPS do dispositivo' : 'Posição simulada'})
+                </p>}
               </div>
               <div className="flex flex-wrap gap-2">
                 <Botao
@@ -222,17 +208,22 @@ export function DetalheAtendimentoInterprete() {
                   variante="secundario"
                   icone="my_location"
                   carregando={capturandoGps}
+                  disabled={fazendoCheckin}
                   onClick={capturarGpsDispositivo}
                 >
                   Atualizar meu GPS
                 </Botao>
-                <Botao type="button" variante="secundario" icone="pin_drop" onClick={usarPosicaoDoLocal}>
-                  Simular no local (Demo)
-                </Botao>
+                {import.meta.env.DEV && (
+                  <Botao type="button" variante="secundario" icone="pin_drop" disabled={capturandoGps || fazendoCheckin} onClick={usarPosicaoDoLocal}>
+                    Simular no local (Demo)
+                  </Botao>
+                )}
               </div>
             </div>
 
-            <LeitorQr aoLer={realizarCheckin} carregando={fazendoCheckin} />
+            {posicao
+              ? <LeitorQr aoLer={realizarCheckin} carregando={fazendoCheckin} />
+              : <p className="text-base text-on-surface-variant">Capture sua localização para liberar a leitura do QR Code.</p>}
           </div>
         </Cartao>
       )}

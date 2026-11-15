@@ -4,8 +4,8 @@
 
 | Perfil | E-mail | Situação Inicial no Seed |
 |---|---|---|
-| **Cliente (Pessoa Surda)** | `joao@viamos.app` | Possui atendimento agendado com QR Code pronto, atendimento concluído com comprovante PDF e cartão salvo |
-| **Cliente (Pessoa Surda)** | `ana@viamos.app` | Possui atendimento encerrado com pagamento pendente |
+| **Cliente (Pessoa Surda)** | `joao@viamos.app` | Possui solicitação em busca, cartão salvo e dois atendimentos encerrados, um pago com comprovante e outro com pagamento pendente |
+| **Cliente (Pessoa Surda)** | `ana@viamos.app` | Possui atendimento agendado com Maria e QR Code disponível para exibição |
 | **Intérprete Habilitada** | `maria@viamos.app` | Habilitação `APROVADO`, online, com demanda no raio, atendimento agendado para check-in e saldo para repasse |
 | **Intérprete Habilitado** | `carlos@viamos.app` | Habilitação `APROVADO`, online em São Paulo |
 | **Intérprete em Análise** | `pedro@viamos.app` | Habilitação `EM_ANALISE` com certificado Prolibras na fila do Backoffice |
@@ -22,20 +22,20 @@
 ### Ato 1 — Jornada do Cliente: Solicitação Presencial com Estimativa e Mapa (2 min)
 1. Na janela 1, entre com `joao@viamos.app` / `Viamos@2026`.
 2. No **Hub do Cliente** (`/cliente`), mostre o resumo de atendimentos e clique em **Solicitar Intérprete** (`/cliente/solicitacoes/nova`).
-3. **Passo 1:** escolha o contexto **Saúde**, data/hora futura e duração de **90 min** (blocos de 30 min, mín. 60 min — RF11).
-4. **Passo 2:** clique no atalho **"Usar Hospital das Clínicas (Demo)"** (ou marque no mapa Leaflet) e avance.
-5. **Passo 3:** mostre a **estimativa discriminada** calculada pela API (`POST /solicitacoes/estimativa` — RF15: valor das horas + deslocamento R$ 15 + taxa de 10%) e clique em **Confirmar Solicitação**.
+3. **Passo 1:** escolha **Saúde**, início entre 10 e 20 minutos adiante e duração de **90 min**. O horário deixa o check-in dentro da janela de 30 minutos e evita sobreposição com o agendamento de Ana na primeira preparação do seed (RF11–RF13, D-05).
+4. **Passo 2:** clique em **Usar endereço de exemplo (HC-FMUSP)** ou marque um ponto no mapa e avance.
+5. **Passo 3:** mostre a estimativa calculada pela API (`POST /solicitacoes/estimativa`, RF15) e clique em **Buscar Intérprete Agora**.
 
 ### Ato 2 — Jornada do Intérprete: Mapa de Raio, Aceite Exclusivo e Sala (2 min)
 1. Na janela 2, entre com `maria@viamos.app` / `Viamos@2026`.
 2. No **Hub da Intérprete** (`/interprete`), mostre o botão **Online**, o mapa com o raio de atuação (≤ 15 km — RNF27) e a nova demanda recebida com distância calculada por Haversine.
 3. Clique na demanda e clique em **Aceitar Demanda** (`POST /demandas/:id/aceitar` — RF22, aceite atômico exclusivo).
-4. Acesse a **Sala do Atendimento** (`/interprete/atendimentos/:id/sala` — RF28–RF30) e envie uma mensagem de texto e o compartilhamento temporário de localização GPS; mostre a mensagem chegando na janela do cliente.
+4. Acesse a **Sala do Atendimento** (`/interprete/atendimentos/:id/sala` — RF28–RF30). Envie uma mensagem, abra **Ver mapa** na janela do cliente e use **Enviar GPS** na janela da intérprete. Confira a mensagem no chat e a posição no mapa após conceder a permissão de localização.
 
 ### Ato 3 — Check-in Presencial com QR Code + GPS, Encerramento, Pagamento e PDF (3 min)
 1. No atendimento agendado entre João e Maria:
    - Na janela do **Cliente João** (`/cliente/atendimentos/:id`), exiba na tela o **QR Code de Check-in** (`GET /atendimentos/:id/qrcode` — RF31) e copie o código manual.
-   - Na janela da **Intérprete Maria** (`/interprete/atendimentos/:id`), clique no botão **"Simular GPS no Local do Atendimento (Demo Indoor)"** (garantindo precisão ≤ 50 m e distância ≤ 200 m — RF32/RNF26), cole o código do QR Code no `<LeitorQr />` e confirme o **Check-in Presencial**.
+   - Na janela da **Intérprete Maria** (`/interprete/atendimentos/:id`), clique em **Atualizar meu GPS** para liberar o leitor de QR. Em produção, use um local de encontro onde seja possível captar GPS a até 200 m do ponto e com precisão de até 50 m. Para o ensaio local com `npm run dev`, o botão **Simular no local (Demo)** permite apresentar o fluxo com dados fictícios. Leia o QR ou cole o código manual e confirme o check-in.
 2. Em seguida, clique em **Encerrar Atendimento** (`POST /atendimentos/:id/encerrar` — RF33), mostrando o cálculo automático da duração real e geração da cobrança.
 3. Na janela do **Cliente João**, clique em **Realizar Pagamento** (`/cliente/atendimentos/:id/pagamento` — RF36), selecione o cartão salvo (ou Pix) e confirme.
 4. Clique em **Baixar Comprovante PDF** (`RF37`) e depois em **Verificar Autenticidade Pública** (`/verificar/:codigo` — RF38), mostrando o selo **Comprovante Autêntico**.

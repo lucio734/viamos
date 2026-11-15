@@ -1,8 +1,6 @@
 /**
  * SITEMAP DA APLICAÇÃO (item #3 do documento e #29 do checklist).
- * Cada rota abaixo corresponde a uma tela do protótipo. As ainda não implementadas renderizam <EmConstrucao>
- * com a lista de endpoints já disponíveis — substitua pelo componente real quando a tela ficar pronta.
- * A figura do sitemap em docs/producao-tecnica é gerada a partir deste arquivo (scripts/gerar-sitemap).
+ * As rotas abaixo correspondem às telas do aplicativo e ao sitemap em docs/diagramas/DIAGRAMAS_PRODUCAO_TECNICA.md.
  * Protótipos Stitch (Contexto/Arquivos Stitch): Login=code.html, Splash=code (19), Cadastro cliente=code (7),
  * Cadastro intérprete=code (17), Hub cliente=code (9), Nova solicitação=code (15), Sala=code (21), Avaliação=code (3),
  * Histórico=code (13), Perfil=code (11), Hub intérprete=code (1), Gestão de solicitações=code (5).

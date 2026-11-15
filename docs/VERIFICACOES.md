@@ -33,16 +33,16 @@ Legenda: ✅ atendido e verificado · 🟡 parcialmente atendido · ⬜ pendente
 | 2 | Protótipo interativo (clicável) | ⬜ link do Figma pendente (importar do Stitch) | Pendência P-01 em `docs/DECISOES.md` |
 | 2 | Design system / style guide | ✅ `DESIGN.md` aplicado como tokens do Tailwind | `frontend/src/index.css` |
 | 3 Core Development | Acesso ao repositório de código | ✅ repositório público no GitHub com commits publicados na `main` | `README.md` §8 |
-| 3 | MVP funcional / builds incrementais | ✅ backend completo + 100% das 23 rotas do frontend (`SITEMAP`) implementadas e compiladas nos Blocos F1–F4 | commits na `main` |
-| 3 | Documentação da API (Swagger/OpenAPI) | ✅ especificação OpenAPI 3.1 completa cobrindo todas as rotas e esquemas | `docs/api/openapi.yaml` |
-| 4 QA & Testing | Plano e casos de teste | ✅ 50 testes automatizados de backend + 6 suítes de frontend passando + plano escrito completo | `backend/tests/`, `frontend/tests/`, `docs/TESTES.md` |
-| 4 | Relatório de bugs e resoluções | ✅ ativo e atualizado nos Blocos F1–F4 (B-001 a B-014 registrados e corrigidos após revisão multiagente) | `docs/BUGS.md` |
-| 4 | Auditoria de performance e segurança | ✅ revisão OWASP formal e conformidade LGPD documentadas + hardening aplicado | `docs/SEGURANCA.md`, `backend/src/`, `docs/BUGS.md` |
+| 3 | MVP funcional / builds incrementais | ✅ 33 rotas de tela implementadas e compiladas. Cobertura de comportamento e lacunas registradas por fluxo | `frontend/src/rotas.tsx`, `docs/REGISTRO_TRABALHO.md` |
+| 3 | Documentação da API (Swagger/OpenAPI) | 🟡 65 operações listadas. Faltam parâmetros de caminho e contratos de entrada em diversas operações | `docs/api/openapi.yaml`, `backend/src/routes/index.ts` |
+| 4 QA & Testing | Plano e casos de teste | ✅ 53 casos no backend e 6 casos em 2 suítes no frontend | `backend/tests/`, `frontend/tests/`, `docs/TESTES.md` |
+| 4 | Relatório de bugs e resoluções | ✅ log atualizado com as correções da retomada | `docs/BUGS.md` |
+| 4 | Auditoria de performance e segurança | 🟡 revisão de código e controles registrados. Faltam as medições de carga e as evidências operacionais de segurança e privacidade | `docs/SEGURANCA.md`, `docs/SLA.md` |
 | 5 Deployment & SLA | Ambiente de produção ativo | 🟡 configs (`render.yaml`, `vercel.json`, `.github/workflows/ci.yml`) e guia passo a passo prontos; publicação nas contas da equipe | `docs/DEPLOY.md`, `.github/workflows/ci.yml` |
 | 5 | Manuais de usuário e administrador | ✅ manual completo por perfil (Cliente, Intérprete, Backoffice) e roteiro de demonstração | `docs/MANUAL.md`, `docs/ROTEIRO_DEMONSTRACAO.md` |
 | 5 | SLA | ✅ documento com indicadores de disponibilidade, tempos de resposta e plano de contingência | `docs/SLA.md` |
 | 5 | Entrega do código-fonte | ✅ o repositório é a entrega | GitHub |
-| Red flags | "Sem SRS", "sem protótipo", "sem acesso ao repo", "sem plano de testes", "sem SLA" | ✅ **0 de 5 em aberto** (SRS, protótipos Stitch, repositório público, `docs/TESTES.md` e `docs/SLA.md` entregues) | `docs/` e `Entregas/` |
+| Red flags | SRS, protótipo interativo, acesso ao repo, plano de testes, SLA | 🟡 SRS, repositório, testes e SLA presentes. O link do protótipo interativo segue pendente | `docs/`, `Entregas/`, `docs/DECISOES.md` P-01 |
 
 ## 3. Dossiê — checklist de 50 critérios (auditoria da reta final)
 
@@ -51,7 +51,7 @@ Estado por item, com a evidência atual. Itens 1–28 são o documento "Produç�
 | # | Critério | Situação | Evidência |
 |---|---|---|---|
 | 1–2 | Texto introdutório e modelagem do produto | ⬜ | Bloco P2 |
-| 3 | Sitemap | ✅ rotas definidas em código (`23/23`) + diagrama Mermaid gerado | `frontend/src/rotas.tsx`, `docs/diagramas/DIAGRAMAS_PRODUCAO_TECNICA.md` |
+| 3 | Sitemap | 🟡 código e Mermaid cobrem 33 rotas. Faltam as figuras por parte e a explicação no documento final | `frontend/src/rotas.tsx`, `docs/diagramas/DIAGRAMAS_PRODUCAO_TECNICA.md` |
 | 4 | Wireframes tela a tela com tabela | ⬜ | Bloco P2 (base: Stitch) |
 | 5 | Prototipação (link Figma) | ⬜ | Pendência P-01 |
 | 6–9 | Arquitetura (texto, funcional, técnica, MVC) | ✅ MVC implementado + diagramas de arquitetura funcional/técnica/MVC gerados | `backend/src/`, `docs/diagramas/DIAGRAMAS_PRODUCAO_TECNICA.md` |
@@ -61,16 +61,16 @@ Estado por item, com a evidência atual. Itens 1–28 são o documento "Produç�
 | 22 | DER | ✅ schema de 27 tabelas + diagrama `erDiagram` gerado | `backend/src/models/schema.ts`, `docs/diagramas/DIAGRAMAS_PRODUCAO_TECNICA.md` |
 | 23, 25, 28 | Estados, DFD, contexto | ✅ entregues em 11/11 | `Entregas/Viamos_Modelagem_Sistemas.pdf` |
 | 24, 26, 27 | Operação, processos de telas, ferramenta CASE | ✅ diagramas de sequência/operação e transição de telas gerados | `docs/diagramas/DIAGRAMAS_PRODUCAO_TECNICA.md` |
-| 29 | Rotas = sitemap | ✅ 23/23 rotas ativas com componentes reais (0 placeholders) | `frontend/src/rotas.tsx` |
-| 30 | Componentes fiéis aos wireframes | ✅ Todas as 23 rotas implementadas (Splash, Login, F1 Autenticação/Cadastro/Notificações/Suporte, F2 Jornada do Cliente, F3 Jornada do Intérprete, F4 Backoffice e Verificação Pública) | `frontend/src/pages/`, `frontend/src/components/` |
-| 31 | Responsividade | ✅ shell mobile + sidebar desktop + grids responsivos em todas as 23 telas | `frontend/src/components/AppShell.tsx`, `TelaPublica.tsx`, `pages/*` |
-| 32 | Estados visuais (carregando/sucesso/erro/vazio) | ✅ componentes prontos e aplicados em todas as 23 rotas da aplicação | `frontend/src/components/ui.tsx`, `pages/*` |
+| 29 | Rotas = sitemap | ✅ 33 rotas com componentes reais conferidas no código e no Mermaid. A rota coringa redireciona para o splash | `frontend/src/rotas.tsx`, `docs/diagramas/DIAGRAMAS_PRODUCAO_TECNICA.md` |
+| 30 | Componentes fiéis aos wireframes | 🟡 telas implementadas. A evidência de aderência ao protótipo final depende dos wireframes e do link do Figma | `frontend/src/pages/`, `Contexto/Arquivos Stitch/` |
+| 31 | Responsividade | 🟡 pagamento conferido a 320, 768 e 1280 px no Chrome. Falta evidência sistemática das demais telas e de dispositivos físicos | `docs/TESTES.md` |
+| 32 | Estados visuais (carregando/sucesso/erro/vazio) | 🟡 componentes disponíveis e fluxos principais exercitados. Falta cobertura por tela | `frontend/src/components/ui.tsx`, `pages/*` |
 | 33 | Validação e máscaras | ✅ máscaras (`formato.ts`) + validação no cliente (`validacao.ts`) + validação Zod no servidor | `frontend/src/utils/{formato,validacao}.ts`, `backend/src/controllers/*` |
 | 34 | Separação MVC no back-end | ✅ | `backend/src/{models,controllers,views,routes,services}` |
 | 35 | Status HTTP semânticos | ✅ 200/201/202/204/400/401/402/403/404/409/422/423/429 | `backend/src/routes/index.ts`, testes |
 | 36 | Erros sem stack trace | ✅ testado | `backend/src/middlewares/erros.ts`, `tests/excecoes.test.ts` |
 | 37 | `.env` para segredos | ✅ | `backend/.env.example`, `src/config/env.ts` |
-| 38 | Schema alinhado ao DER | ✅ (o DER será gerado do schema) | `backend/src/models/schema.ts` |
+| 38 | Schema alinhado ao DER | 🟡 schema, migrações e DER presentes. O cotejo completo de campos, tipos e restrições segue pendente | `backend/src/models/schema.ts`, `backend/drizzle/`, `docs/diagramas/DIAGRAMAS_PRODUCAO_TECNICA.md` |
 | 39 | PK/FK/integridade | ✅ FKs, CHECKs, índices únicos (inclusive parcial) | `backend/drizzle/0000_esquema_inicial.sql` |
 | 40 | ORM / consultas parametrizadas | ✅ Drizzle | `backend/src/models/db.ts` |
 | 41 | Migrações e seed | ✅ | `backend/drizzle/`, `backend/src/db/seed.ts` |
@@ -78,9 +78,9 @@ Estado por item, com a evidência atual. Itens 1–28 são o documento "Produç�
 | 43 | Branches e commits organizados | ✅ commits organizados por escopo na `main` | histórico git |
 | 44 | README com clonagem/instalação/execução | ✅ | `README.md` |
 | 45–47 | Deploy, HTTPS, rotas SPA | 🟡 configs prontas (`render.yaml`, `vercel.json`); publicação no Bloco D | — |
-| 48 | Testes de fluxo principal e exceções | ✅ 50 testes automatizados de backend + 6 suítes de unidade de frontend passando | `backend/tests/`, `frontend/tests/validacao-formato.test.ts` |
+| 48 | Testes de fluxo principal e exceções | ✅ 53 casos de backend e 6 de frontend executados. Ver cobertura e limites no relatório | `docs/TESTES.md` |
 | 49 | Auditoria de código (domínio da equipe) | ⬜ cada integrante revisa e explica sua parte (Bloco Z) | — |
-| 50 | Ensaio de demonstração | ✅ roteiro passo a passo pronto para ensaio | `docs/ROTEIRO_DEMONSTRACAO.md` |
+| 50 | Ensaio de demonstração | 🟡 roteiro atualizado. Ensaio integral com o grupo no ambiente de avaliação continua pendente | `docs/ROTEIRO_DEMONSTRACAO.md` |
 
 ## 4. Divergências encontradas entre materiais (AGENTS.md §4)
 

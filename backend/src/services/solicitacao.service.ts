@@ -3,13 +3,14 @@
  * estimativa (RF15) → confirmação (RF16) → distribuição por proximidade/reputação (RF17)
  * → acompanhamento de status (RF18) → cancelamento com regras de prazo/taxa (RF19).
  */
-import { and, desc, eq, inArray, sql } from 'drizzle-orm';
+import { and, desc, eq, inArray, isNull, sql } from 'drizzle-orm';
 import { REGRAS } from '../config/regras.js';
 import { db, type Tx } from '../models/db.js';
 import {
   atendimentos,
   cotacoes,
   interpretes,
+  localizacoesCompartilhadas,
   ofertas,
   solicitacoes,
   usuarios,
@@ -171,8 +172,8 @@ export async function listarSolicitacoesDoCliente(clienteId: string, status?: St
 
 type SolicitacaoComRelacoes = NonNullable<Awaited<ReturnType<typeof carregarSolicitacaoCompleta>>>;
 
-async function carregarSolicitacaoCompleta(id: string) {
-  return db.query.solicitacoes.findFirst({
+async function carregarSolicitacaoCompleta(id: string, conexao: typeof db | Tx = db) {
+  return conexao.query.solicitacoes.findFirst({
     where: eq(solicitacoes.id, id),
     with: {
       cotacao: true,
@@ -292,13 +293,16 @@ function calcularTaxaCancelamento(s: { status: string; inicioPrevisto: Date; cot
 }
 
 export async function cancelarSolicitacao(id: string, clienteId: string, motivo?: string, ip?: string) {
-  const s = await carregarSolicitacaoCompleta(id);
-  if (!s) throw Erros.naoEncontrado('Solicitação');
-  if (s.clienteId !== clienteId) throw Erros.proibido();
-  const politica = calcularTaxaCancelamento(s);
-  if (!politica.permitido) throw Erros.regraNegocio(politica.motivo, 'CANCELAMENTO_NAO_PERMITIDO');
-
   await db.transaction(async (tx) => {
+    // Aceite, cancelamento e check-in serializam a mudança nesta solicitação.
+    const [travada] = await tx.select({ clienteId: solicitacoes.clienteId }).from(solicitacoes).where(eq(solicitacoes.id, id)).for('no key update');
+    if (!travada) throw Erros.naoEncontrado('Solicitação');
+    if (travada.clienteId !== clienteId) throw Erros.proibido();
+    const s = await carregarSolicitacaoCompleta(id, tx);
+    if (!s) throw Erros.naoEncontrado('Solicitação');
+    const politica = calcularTaxaCancelamento(s);
+    if (!politica.permitido) throw Erros.regraNegocio(politica.motivo, 'CANCELAMENTO_NAO_PERMITIDO');
+
     const agora = new Date();
     const [atualizada] = await tx
       .update(solicitacoes)
@@ -309,6 +313,10 @@ export async function cancelarSolicitacao(id: string, clienteId: string, motivo?
 
     if (s.atendimento) {
       await tx.update(atendimentos).set({ status: 'CANCELADO' }).where(eq(atendimentos.id, s.atendimento.id));
+      await tx.update(localizacoesCompartilhadas).set({ encerradaEm: agora }).where(and(
+        eq(localizacoesCompartilhadas.atendimentoId, s.atendimento.id),
+        isNull(localizacoesCompartilhadas.encerradaEm),
+      ));
       await notificar(
         {
           usuarioId: s.atendimento.interpreteId,

@@ -1,4 +1,34 @@
-# Víamos — Relatório de passagem de bastão para o Gustavo e o Claude (pós-Blocos F1, F2, F3 e F4)
+# Víamos — Passagem de bastão para Gustavo e Claude
+
+## Retomada de 15/11/2026
+
+O ponto de partida é a branch `codex/retomada-viamos-equipe` no repositório `lucio734/viamos`. A branch parte do commit `089774a` da `main` e reúne as correções do aplicativo e esta passagem de bastão. Para abrir a branch num clone do repositório com `origin` apontando para o GitHub:
+
+```bash
+git fetch origin
+git switch codex/retomada-viamos-equipe
+git pull --ff-only origin codex/retomada-viamos-equipe
+```
+
+### Estado do trabalho
+
+- **Aplicação** 33 rotas de tela, 65 operações de API e 27 tabelas conferidas. A contagem de 23 rotas no relatório histórico foi corrigida na auditoria atual.
+- **Jornada presencial** Acompanhamento da solicitação a cada 5 s, validação da agenda dentro da transação de aceite, cancelamento e check-in com bloqueios na mesma ordem e posição compartilhada por canal temporário na sala. O leitor de QR exige captura de posição. A simulação está disponível no servidor local de desenvolvimento para ensaio.
+- **Ambiente e deploy** Configure `DATABASE_URL_TEST` para uma base exclusiva e descartável antes de rodar a suíte. Use Node.js 22.12+ na série 22 e `npm ci` em `backend` e `frontend`. O Render instala as dependências de build explicitamente e a Vercel usa a origem da API em `VITE_API_URL`. Veja o [README](README.md) e o [guia de deploy](docs/DEPLOY.md).
+- **Evidência local** 53 testes de backend com PostgreSQL 18.6, 6 casos de frontend e builds concluídos. O teste no Chrome cobriu cotação, solicitação, aceite observado sem recarga, QR manual com GPS emulado, localização na sala, encerramento, Pix simulado e resposta PDF. Consulte o [relatório de testes](docs/TESTES.md).
+
+### Ajuste de CI pendente
+
+O workflow versionado vem da `main`. Antes de abrir o pull request, um integrante com permissão de escrita em workflows deve atualizar `.github/workflows/ci.yml`. No job `backend`, remova `DATABASE_URL` de `env`, mantenha `DATABASE_URL_TEST` apontando para o serviço PostgreSQL descartável e atualize o nome do job para `Backend (Typecheck, Vitest, Build)`. A suíte recusa URLs idênticas de teste e desenvolvimento.
+
+### Continuidade
+
+1. Leia [AGENTS.md](AGENTS.md) e o [registro da retomada](docs/REGISTRO_TRABALHO.md#retomada-em-15112026). A [matriz de verificações](docs/VERIFICACOES.md) e o [log de bugs](docs/BUGS.md) registram evidências e limites.
+2. Comece por **RF17 e RF20–RF25**. A grade semanal é persistida, mas a disponibilidade ainda não é aplicada à distribuição, à lista, ao detalhe e ao aceite. Uma demanda sem oferta registrada pode aparecer na lista e dar 403 no detalhe. Alinhe a elegibilidade nesses caminhos e registre com o grupo a política para agenda vazia e nova distribuição.
+3. Depois, revise saldo e repasse concorrente (RF26–RF27), pagamento simultâneo (RF36) e a divergência entre D-10 e a entrega de modelagem sobre o momento da emissão do PDF. D-01 e D-05 seguem para validação do grupo.
+4. Para a entrega acadêmica, faltam a consolidação da Produção Técnica, o link do Figma, a verificação nos domínios publicados com HTTPS e o ensaio em dispositivo físico. Siga o [roteiro atualizado](docs/ROTEIRO_DEMONSTRACAO.md).
+
+## Relatório histórico de 12/11/2026
 
 > Gerado em 12/11/2026 (noite) após a conclusão e verificação dos **Blocos F1, F2, F3 e F4 (100% das 23 rotas do SITEMAP + Hardening OWASP)** na branch `main`.
 

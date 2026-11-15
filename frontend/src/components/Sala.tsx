@@ -21,7 +21,11 @@ const TAMANHO_MAX_FOTO_BYTES = 1_048_576; // 1 MB (RF30)
 
 export function Sala() {
   const { id } = useParams<{ id: string }>();
+  if (!id) return <EstadoErro mensagem="Sala não encontrada." />;
+  return <SalaAtendimento key={id} id={id} />;
+}
 
+function SalaAtendimento({ id }: { id: string }) {
   const [atendimento, setAtendimento] = useState<DetalheAtendimento | null>(null);
   const [mensagens, setMensagens] = useState<MensagemSala[]>([]);
   const [localizacoes, setLocalizacoes] = useState<LocalizacaoCompartilhada[]>([]);
@@ -40,7 +44,6 @@ export function Sala() {
   const ultimaDataRef = useRef<string | undefined>(undefined);
 
   const carregarInicial = useCallback(() => {
-    if (!id) return;
     setCarregando(true);
     setErro('');
     Promise.all([
@@ -66,7 +69,7 @@ export function Sala() {
 
   // Polling incremental de novas mensagens e localizações a cada 4 segundos
   useEffect(() => {
-    if (!id || !atendimento) return;
+    if (!atendimento) return;
     let ativo = true;
     const timer = setInterval(() => {
       const query = ultimaDataRef.current ? `?apos=${encodeURIComponent(ultimaDataRef.current)}` : '';
@@ -84,11 +87,11 @@ export function Sala() {
         })
         .catch(() => undefined);
 
-      if (exibirMapa) {
+      if (atendimento.status === 'AGENDADO' || atendimento.status === 'EM_ANDAMENTO') {
         api
           .get<LocalizacaoCompartilhada[]>(`/atendimentos/${id}/localizacoes`)
           .then((locs) => ativo && setLocalizacoes(locs))
-          .catch(() => undefined);
+          .catch(() => { if (ativo) setLocalizacoes([]); });
       }
     }, 4000);
 
@@ -96,14 +99,13 @@ export function Sala() {
       ativo = false;
       clearInterval(timer);
     };
-  }, [id, atendimento, exibirMapa]);
+  }, [id, atendimento]);
 
   useEffect(() => {
     fimListaRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [mensagens.length]);
 
   async function recarregarMensagens() {
-    if (!id) return;
     const msgs = await api.get<MensagemSala[]>(`/atendimentos/${id}/mensagens`);
     setMensagens(msgs);
     if (msgs.length > 0) {
@@ -113,7 +115,7 @@ export function Sala() {
 
   async function enviarTexto(ev: FormEvent) {
     ev.preventDefault();
-    if (!id || !texto.trim() || enviando) return;
+    if (!texto.trim() || enviando) return;
     setEnviando(true);
     setErroAcao('');
     try {
@@ -133,7 +135,7 @@ export function Sala() {
   async function aoEscolherFoto(ev: ChangeEvent<HTMLInputElement>) {
     const arq = ev.target.files?.[0];
     ev.target.value = '';
-    if (!arq || !id) return;
+    if (!arq) return;
     setErroAcao('');
     setSucessoAcao('');
 
@@ -168,27 +170,25 @@ export function Sala() {
   }
 
   function compartilharMinhaLocalizacao() {
-    if (!id || !atendimento) return;
+    if (compartilhandoGeo) return;
     setErroAcao('');
     setSucessoAcao('');
+    if (!navigator.geolocation) {
+      setErroAcao('Seu navegador não oferece acesso à localização.');
+      return;
+    }
     setCompartilhandoGeo(true);
 
-    const enviarPosicao = async (latitude: number, longitude: number, precisaoM?: number) => {
+    const enviarPosicao = async ({ coords }: GeolocationPosition) => {
       try {
-        await api
-          .post(`/atendimentos/${id}/localizacoes`, { latitude, longitude, precisaoM })
-          .catch(() => undefined);
-        await api.post(`/atendimentos/${id}/mensagens`, {
-          tipo: 'LOCALIZACAO',
-          latitude,
-          longitude,
-          texto: 'Localização atual compartilhada para facilitar o encontro presencial.',
+        const posicao = await api.post<LocalizacaoCompartilhada>(`/atendimentos/${id}/localizacoes`, {
+          latitude: coords.latitude,
+          longitude: coords.longitude,
+          precisaoM: coords.accuracy,
         });
-        const locs = await api.get<LocalizacaoCompartilhada[]>(`/atendimentos/${id}/localizacoes`).catch(() => []);
-        setLocalizacoes(locs);
+        setLocalizacoes((anteriores) => [posicao, ...anteriores.filter((localizacao) => localizacao.usuarioId !== posicao.usuarioId)]);
         setExibirMapa(true);
-        setSucessoAcao('Sua localização temporária foi compartilhada na sala (RF29).');
-        await recarregarMensagens();
+        setSucessoAcao('Sua localização foi compartilhada temporariamente no mapa da sala.');
       } catch (e) {
         setErroAcao(e instanceof ErroApi ? e.mensagem : 'Não foi possível compartilhar a localização.');
       } finally {
@@ -196,21 +196,15 @@ export function Sala() {
       }
     };
 
-    if (!('geolocation' in navigator)) {
-      // Fallback para o ponto do atendimento em navegadores sem suporte a GPS
-      void enviarPosicao(atendimento.local.latitude, atendimento.local.longitude, 15);
-      return;
-    }
-
     navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        void enviarPosicao(pos.coords.latitude, pos.coords.longitude, pos.coords.accuracy);
+      (posicao) => { void enviarPosicao(posicao); },
+      (falha) => {
+        setCompartilhandoGeo(false);
+        setErroAcao(falha.code === falha.PERMISSION_DENIED
+          ? 'Permita o acesso à localização para compartilhar sua posição.'
+          : 'Não foi possível obter sua localização. Verifique se o GPS está ativo e tente novamente.');
       },
-      () => {
-        // Se o ambiente indoor/desktop bloquear o GPS, usa o ponto do atendimento como demonstração
-        void enviarPosicao(atendimento.local.latitude, atendimento.local.longitude, 20);
-      },
-      { enableHighAccuracy: true, timeout: 7000 },
+      { timeout: 7000 },
     );
   }
 
@@ -219,9 +213,11 @@ export function Sala() {
 
   const souCliente = atendimento.papelNoAtendimento === 'CLIENTE';
   const contraparteNome = souCliente ? atendimento.interprete.nome : atendimento.cliente.nome;
+  const contraparteId = souCliente ? atendimento.interprete.id : atendimento.cliente.id;
   const contrapartePapel = souCliente ? 'Intérprete de Libras' : 'Cliente Surdo(a)';
   const rotaVoltar = souCliente ? `/cliente/atendimentos/${atendimento.id}` : `/interprete/atendimentos/${atendimento.id}`;
   const salaEncerrada = atendimento.status === 'CANCELADO';
+  const contraparteCompartilhou = localizacoes.some((localizacao) => localizacao.usuarioId === contraparteId);
 
   const marcadoresMapa: MarcadorExtra[] = localizacoes.map((l) => ({
     id: l.usuarioId,
@@ -262,6 +258,7 @@ export function Sala() {
             type="button"
             variante="secundario"
             icone="map"
+            aria-expanded={exibirMapa}
             onClick={() => setExibirMapa((v) => !v)}
           >
             {exibirMapa ? 'Ocultar mapa' : 'Ver mapa'}
@@ -286,6 +283,9 @@ export function Sala() {
 
       {erroAcao && <Alerta tipo="erro">{erroAcao}</Alerta>}
       {sucessoAcao && <Alerta tipo="sucesso">{sucessoAcao}</Alerta>}
+      <div role="status" className={contraparteCompartilhou && !exibirMapa ? 'text-base text-on-surface-variant' : 'sr-only'}>
+        {contraparteCompartilhou && `${contraparteNome} compartilhou a localização temporária no mapa da sala.`}
+      </div>
 
       {/* Mapa expansível com o ponto de encontro e as localizações temporárias dos participantes (RF29) */}
       {exibirMapa && (
@@ -356,22 +356,6 @@ export function Sala() {
                         alt={m.texto ?? 'Foto do ponto de encontro'}
                         className="max-h-64 w-auto object-contain"
                       />
-                    </div>
-                  )}
-
-                  {m.tipo === 'LOCALIZACAO' && m.latitude != null && m.longitude != null && (
-                    <div className="mb-1 flex items-center gap-2 rounded-lg bg-black/10 px-3 py-2 text-sm font-medium">
-                      <Icone nome="location_on" />
-                      <span>
-                        Coordenadas: {m.latitude.toFixed(5)}, {m.longitude.toFixed(5)}
-                      </span>
-                      <button
-                        type="button"
-                        onClick={() => setExibirMapa(true)}
-                        className="ml-2 underline"
-                      >
-                        Ver no mapa
-                      </button>
                     </div>
                   )}
 

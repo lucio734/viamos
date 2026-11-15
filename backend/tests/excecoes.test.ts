@@ -127,6 +127,21 @@ describe('Distribuição e aceite (RF17, RF22, RF23, RNF27, RNF36)', () => {
     expect(conflito.status).toBe(409);
     expect(conflito.body.erro.codigo).toBe('AGENDA_CONFLITANTE');
   });
+
+  it('aceites simultâneos em horários sobrepostos ocupam a agenda só uma vez', async () => {
+    const inicioPrevisto = daquiAMinutos(60 * 24 * 6);
+    const primeira = await criarSolicitacao(joao, { inicioPrevisto });
+    const segunda = await criarSolicitacao(ana, { inicioPrevisto });
+    expect(primeira.status).toBe(201);
+    expect(segunda.status).toBe(201);
+
+    const respostas = await Promise.all([primeira.body.id, segunda.body.id].map((id) =>
+      request(app).post(`/api/demandas/${id}/aceitar`).set(auth(maria)).send({}),
+    ));
+
+    expect(respostas.map((r) => r.status).sort()).toEqual([201, 409]);
+    expect(respostas.find((r) => r.status === 409)?.body.erro.codigo).toBe('AGENDA_CONFLITANTE');
+  });
 });
 
 describe('Check-in geolocalizado (RF31, RF32, RNF26) e encerramento (RF33)', () => {
@@ -173,6 +188,53 @@ describe('Check-in geolocalizado (RF31, RF32, RNF26) e encerramento (RF33)', () 
     const det = await request(app).get(`/api/atendimentos/${atendimentoId}`).set(auth(joao));
     const cancel = await request(app).post(`/api/solicitacoes/${det.body.solicitacaoId}/cancelar`).set(auth(joao)).send({});
     expect(cancel.status).toBe(422);
+  });
+
+  it('cancelamento e check-in simultâneos mantêm os dois estados consistentes', async () => {
+    const sol = await criarSolicitacao(ana, { inicioPrevisto: daquiAMinutos(25) });
+    expect(sol.status).toBe(201);
+    const aceite = await request(app).post(`/api/demandas/${sol.body.id}/aceitar`).set(auth(carlos)).send({});
+    expect(aceite.status).toBe(201);
+    const sala = `/api/atendimentos/${aceite.body.atendimentoId}`;
+    const qr = await request(app).get(`${sala}/qrcode`).set(auth(ana));
+
+    const [cancelar, checkin] = await Promise.all([
+      request(app).post(`/api/solicitacoes/${sol.body.id}/cancelar`).set(auth(ana)).send({}),
+      request(app).post(`${sala}/checkin`).set(auth(carlos)).send({ ...LOCAL_HC, codigo: qr.body.codigo, precisaoM: 10 }),
+    ]);
+    expect([cancelar.status, checkin.status].sort()).toEqual([200, 422]);
+
+    const detalhe = await request(app).get(`/api/solicitacoes/${sol.body.id}`).set(auth(ana));
+    expect(detalhe.body.status).toBe(cancelar.ok ? 'CANCELADA' : 'EM_ANDAMENTO');
+    expect(detalhe.body.atendimento.status).toBe(cancelar.ok ? 'CANCELADO' : 'EM_ANDAMENTO');
+    if (checkin.ok) expect((await request(app).post(`${sala}/encerrar`).set(auth(carlos)).send({})).status).toBe(200);
+  });
+});
+
+describe('Localização temporária na sala (RF29, RNF44)', () => {
+  it('mostra a última posição ao participante e para de expor coordenadas após encerrar', async () => {
+    const sol = await criarSolicitacao(joao, { inicioPrevisto: daquiAMinutos(15) });
+    const { atendimentoId } = await aceitarEFazerCheckin(joao, maria, sol.body.id);
+    const sala = `/api/atendimentos/${atendimentoId}`;
+    const posicao = { latitude: LOCAL_HC.latitude, longitude: LOCAL_HC.longitude, precisaoM: 10 };
+
+    const geo = await request(app).post(`${sala}/localizacoes`).set(auth(maria)).send(posicao);
+    expect(geo.status).toBe(201);
+    const legado = await request(app).post(`${sala}/mensagens`).set(auth(maria))
+      .send({ tipo: 'LOCALIZACAO', latitude: posicao.latitude, longitude: posicao.longitude });
+    expect(legado.status).toBe(201);
+    expect(legado.body).toMatchObject({ tipo: 'LOCALIZACAO', latitude: null, longitude: null });
+
+    const antes = await request(app).get(`${sala}/localizacoes`).set(auth(joao));
+    expect(antes.body).toEqual([expect.objectContaining({ latitude: posicao.latitude, longitude: posicao.longitude })]);
+    expect((await request(app).post(`${sala}/encerrar`).set(auth(maria)).send({})).status).toBe(200);
+    const depois = await request(app).get(`${sala}/localizacoes`).set(auth(joao));
+    expect(depois.status).toBe(200);
+    expect(depois.body).toEqual([]);
+
+    const rejeitada = await request(app).post(`${sala}/localizacoes`).set(auth(maria)).send(posicao);
+    expect(rejeitada.status).toBe(422);
+    expect(rejeitada.body.erro.codigo).toBe('LOCALIZACAO_ENCERRADA');
   });
 });
 

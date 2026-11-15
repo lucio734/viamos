@@ -4,7 +4,7 @@
  * QR Code para check-in presencial e cancelamento com política/taxa transparente.
  */
 import { QRCodeSVG } from 'qrcode.react';
-import { useCallback, useEffect, useState, type FormEvent } from 'react';
+import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { api, ErroApi } from '../../api/cliente';
 import { ICONE_TIPO_SERVICO, ROTULO_TIPO_SERVICO, type DetalheSolicitacao as DadosSolicitacao } from '../../api/tipos';
@@ -24,16 +24,23 @@ const ETAPAS_LINHA_TEMPO = [
   { status: 'EM_ANDAMENTO', rotulo: 'Em atendimento', icone: 'sign_language' },
   { status: 'CONCLUIDA', rotulo: 'Concluída', icone: 'task_alt' },
 ] as const;
+const INTERVALO_ACOMPANHAMENTO_MS = 5000;
 
 export function DetalheSolicitacao() {
   const { id } = useParams<{ id: string }>();
   const [params] = useSearchParams();
-  const recemCriada = params.get('recemCriada') === '1';
+  if (!id) return <EstadoErro mensagem="Solicitação não encontrada." />;
+  return <AcompanhamentoSolicitacao key={id} id={id} recemCriada={params.get('recemCriada') === '1'} />;
+}
 
+function AcompanhamentoSolicitacao({ id, recemCriada }: { id: string; recemCriada: boolean }) {
   const [dados, setDados] = useState<DadosSolicitacao | null>(null);
   const [qr, setQr] = useState<QrCodeResposta | null>(null);
+  const [erroQr, setErroQr] = useState(false);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState('');
+  const [atualizacao, setAtualizacao] = useState(0);
+  const versaoDados = useRef(0);
 
   const [exibirCancelar, setExibirCancelar] = useState(false);
   const [motivoCancelamento, setMotivoCancelamento] = useState('');
@@ -44,41 +51,73 @@ export function DetalheSolicitacao() {
   const [erroAcao, setErroAcao] = useState('');
   const [copiado, setCopiado] = useState(false);
 
-  const carregar = useCallback(() => {
-    if (!id) return;
-    setCarregando(true);
-    setErro('');
-    api
-      .get<DadosSolicitacao>(`/solicitacoes/${id}`)
-      .then((s) => {
-        setDados(s);
-        if (s.atendimento && s.atendimento.status === 'AGENDADO') {
-          api
-            .get<QrCodeResposta>(`/atendimentos/${s.atendimento.id}/qrcode`)
-            .then(setQr)
-            .catch(() => setQr(null));
-        } else {
-          setQr(null);
-        }
-      })
-      .catch((e) => setErro(e instanceof ErroApi ? e.mensagem : 'Falha ao carregar solicitação.'))
-      .finally(() => setCarregando(false));
-  }, [id]);
+  function carregar() {
+    setAtualizacao((valor) => valor + 1);
+  }
 
   useEffect(() => {
-    carregar();
-  }, [carregar]);
+    let ativa = true;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+
+    async function consultar() {
+      const versao = versaoDados.current;
+      let continuar = true;
+      try {
+        const solicitacao = await api.get<DadosSolicitacao>(`/solicitacoes/${id}`);
+        if (ativa && versao === versaoDados.current) {
+          setDados(solicitacao);
+          setErro('');
+          continuar = solicitacao.status !== 'CONCLUIDA' && solicitacao.status !== 'CANCELADA';
+        }
+      } catch (e) {
+        if (ativa && versao === versaoDados.current) {
+          setErro(e instanceof ErroApi ? e.mensagem : 'Falha ao carregar solicitação.');
+          if (e instanceof ErroApi && [401, 403, 404].includes(e.status)) {
+            setDados(null);
+            continuar = false;
+          }
+        }
+      } finally {
+        if (ativa) {
+          setCarregando(false);
+          if (continuar) timer = setTimeout(consultar, INTERVALO_ACOMPANHAMENTO_MS);
+        }
+      }
+    }
+
+    void consultar();
+    return () => {
+      ativa = false;
+      clearTimeout(timer);
+    };
+  }, [id, atualizacao]);
+
+  const atendimentoAgendadoId = dados?.atendimento?.status === 'AGENDADO' ? dados.atendimento.id : undefined;
+  useEffect(() => {
+    if (!atendimentoAgendadoId) return;
+    let ativa = true;
+    api.get<QrCodeResposta>(`/atendimentos/${atendimentoAgendadoId}/qrcode`)
+      .then((codigo) => {
+        if (!ativa) return;
+        setQr(codigo);
+        setErroQr(false);
+      })
+      .catch(() => { if (ativa) setErroQr(true); });
+    return () => { ativa = false; };
+  }, [atendimentoAgendadoId, atualizacao]);
 
   async function confirmarCancelamento(ev: FormEvent) {
     ev.preventDefault();
-    if (!id) return;
+    if (cancelando) return;
     setCancelando(true);
     setErroAcao('');
     try {
       const atualizada = await api.post<DadosSolicitacao>(`/solicitacoes/${id}/cancelar`, {
         motivo: motivoCancelamento.trim() || undefined,
       });
+      versaoDados.current += 1;
       setDados(atualizada);
+      setErro('');
       setExibirCancelar(false);
       setMensagemSucesso('Solicitação cancelada com sucesso.');
     } catch (e) {
@@ -98,7 +137,7 @@ export function DetalheSolicitacao() {
   }
 
   if (carregando) return <Carregando texto="Carregando detalhes da solicitação…" />;
-  if (erro || !dados) return <EstadoErro mensagem={erro || 'Solicitação não encontrada.'} aoTentarNovamente={carregar} />;
+  if (!dados) return <EstadoErro mensagem={erro || 'Solicitação não encontrada.'} aoTentarNovamente={carregar} />;
 
   const ordemStatus = ['BUSCANDO', 'ACEITA', 'EM_ANDAMENTO', 'CONCLUIDA'];
   const indiceAtual = ordemStatus.indexOf(dados.status);
@@ -117,7 +156,7 @@ export function DetalheSolicitacao() {
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-2xl font-bold text-primary">{dados.tipoServicoRotulo}</h1>
-              <Chip status={dados.status}>{dados.statusRotulo}</Chip>
+              <span role="status"><Chip status={dados.status}>{dados.statusRotulo}</Chip></span>
             </div>
             <p className="text-base text-on-surface-variant">
               Solicitação #{dados.id.slice(0, 8)} · criada em {formato.dataHora(dados.criadaEm)}
@@ -130,10 +169,11 @@ export function DetalheSolicitacao() {
       </header>
 
       {mensagemSucesso && <Alerta tipo="sucesso">{mensagemSucesso}</Alerta>}
+      {erro && <Alerta tipo="erro">Não foi possível atualizar a solicitação. {erro}</Alerta>}
       {erroAcao && <Alerta tipo="erro">{erroAcao}</Alerta>}
 
       {/* Linha do tempo de status (RF18) */}
-      <Cartao titulo="Acompanhamento em Tempo Real">
+      <Cartao titulo="Acompanhamento da Solicitação">
         {dados.status === 'CANCELADA' ? (
           <Alerta tipo="erro">
             Solicitação cancelada em {formato.dataHora(dados.cancelamento?.em)}.
@@ -243,7 +283,14 @@ export function DetalheSolicitacao() {
       )}
 
       {/* QR Code de Check-in Presencial (RF31) */}
-      {qr && dados.atendimento && dados.atendimento.status === 'AGENDADO' && (
+      {atendimentoAgendadoId && !qr && (
+        <Cartao titulo="QR Code para Check-in Presencial">
+          {erroQr
+            ? <EstadoErro mensagem="Não foi possível obter o QR Code do atendimento." aoTentarNovamente={carregar} />
+            : <Carregando texto="Carregando QR Code…" />}
+        </Cartao>
+      )}
+      {qr && atendimentoAgendadoId && (
         <Cartao titulo="QR Code para Check-in Presencial (RF31)">
           <div className="flex flex-col items-center gap-4 sm:flex-row">
             <div className="rounded-xl border border-outline-variant bg-white p-4 shadow-xs">

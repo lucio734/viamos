@@ -3,7 +3,7 @@
  * - Anexa o token JWT guardado no sessionStorage (RF08: limpo no logout).
  * - Normaliza erros no formato { status, codigo, mensagem, detalhes } para as telas exibirem feedback (item #32).
  */
-const BASE_URL = (import.meta.env.VITE_API_URL as string | undefined)?.replace(/\/$/, '') ?? '';
+const BASE_URL = (import.meta.env.VITE_API_URL ?? '').trim().replace(/\/+$/, '').replace(/\/api$/, '');
 const CHAVE_TOKEN = 'viamos.token';
 
 export interface CampoInvalido {

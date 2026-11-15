@@ -15,8 +15,8 @@
 2. O arquivo [`render.yaml`](../render.yaml) provisionará automaticamente:
    - O banco PostgreSQL `viamos-db` (ou informe a string do Neon em `DATABASE_URL`).
    - O serviço web `viamos-api` (`rootDir: backend`), executando:
-     - **Build Command:** `npm install && npm run build`
-     - **Start Command:** `npm run db:migrate:prod && npm start`
+     - **Build Command:** `npm ci --include=dev && npm run build`
+     - **Start Command:** `npm run deploy` (aplica as migrações antes de subir a API)
    - **Health Check Path:** `/api/health`
 3. Nas variáveis de ambiente do serviço `viamos-api` no Render, confira:
    - `NODE_ENV=production`
@@ -24,9 +24,9 @@
    - `CORS_ORIGINS=https://viamos.vercel.app` (substitua pela URL final da Vercel)
    - `FRONTEND_URL=https://viamos.vercel.app`
    - `API_PUBLIC_URL=https://viamos-api.onrender.com`
-4. Para popular os dados de demonstração (6 contas de teste e cenários completos) uma única vez no banco de produção, execute no **Shell** do Render (ou localmente com a `DATABASE_URL` de produção):
+4. Para popular um banco isolado de demonstração, execute o comando abaixo no diretório `backend` depois do build. Confira a base apontada por `DATABASE_URL` antes de executar, pois o seed trunca as tabelas existentes.
    ```bash
-   cd backend && npm run db:seed:prod
+   npm run db:seed:prod
    ```
 
 ### Passo 2 — Publicar o Frontend na Vercel
@@ -35,13 +35,13 @@
    - **Framework Preset:** `Vite`
    - **Root Directory:** `frontend`
    - **Environment Variables:**
-     - `VITE_API_URL=https://viamos-api.onrender.com/api`
+     - `VITE_API_URL=https://viamos-api.onrender.com` (use a origem, pois o cliente acrescenta `/api`)
 3. Clique em **Deploy**. O arquivo [`frontend/vercel.json`](../frontend/vercel.json) já contém a regra `"rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]`, garantindo que o acesso direto ou *refresh* (F5) em qualquer rota interna (ex.: `/cliente/historico`, `/interprete/ganhos`, `/verificar/VM-2026-...`) funcione sem erro 404 (item #47 do Dossiê).
 
 ---
 
 ## 3. Checklist Pós-Deploy (Verificação de Produção)
-1. [ ] `GET https://viamos-api.onrender.com/api/health` responde `200 OK` com `{"status":"ok","banco":"conectado"}`.
+1. [ ] `GET https://viamos-api.onrender.com/api/health` responde `200 OK` com `status: "ok"` e `servico: "viamos-api"`. O login e o hub no passo 3 verificam o acesso aos dados.
 2. [ ] Cadeado HTTPS ativo tanto no domínio da Vercel quanto no domínio do Render (#46).
 3. [ ] Login com `joao@viamos.app` / `Viamos@2026` autentica e carrega o Hub do Cliente.
 4. [ ] Recarregar a página (F5) diretamente em `/cliente/historico` ou `/interprete/demandas` mantém a SPA ativa sem 404 (#47).

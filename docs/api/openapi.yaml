@@ -44,7 +44,7 @@ components:
 paths:
   /health:
     get:
-      summary: Healthcheck da API e conexão com PostgreSQL (RNF34)
+      summary: Verificação de que a API responde (RNF04)
       tags: [Público]
       responses:
         '200':
@@ -219,13 +219,13 @@ paths:
       responses:
         '200': { description: Detalhe da solicitação }
   /solicitacoes/{id}/cancelar:
-      post:
-        summary: Cancela solicitação aplicando política de antecedência/taxa (RF19)
-        tags: [Cliente]
-        security: [{ bearerAuth: [] }]
-        responses:
-          '200': { description: Solicitação cancelada com cálculo de taxa }
-          '422': { description: Cancelamento não permitido após check-in }
+    post:
+      summary: Cancela solicitação aplicando política de antecedência/taxa (RF19)
+      tags: [Cliente]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '200': { description: Solicitação cancelada com cálculo de taxa }
+        '422': { description: Cancelamento não permitido após check-in }
 
   /formas-pagamento:
     get:
@@ -411,24 +411,26 @@ paths:
       responses:
         '200': { description: Mensagens da sala }
     post:
-      summary: Envia mensagem de texto ou imagem do ponto de encontro na sala (RF28, RF29)
+      summary: Envia mensagem de texto ou imagem do ponto de encontro (RF28, RF30)
+      description: Clientes antigos podem enviar o tipo LOCALIZACAO. As coordenadas passam pelo compartilhamento temporário e a mensagem contém só o aviso.
       tags: [Atendimento & Sala]
       security: [{ bearerAuth: [] }]
       responses:
         '201': { description: Mensagem registrada }
   /atendimentos/{id}/localizacoes:
     get:
-      summary: Obtém últimas coordenadas compartilhadas pelos participantes na sala (RF30)
+      summary: Obtém últimas coordenadas compartilhadas pelos participantes na sala (RF29)
       tags: [Atendimento & Sala]
       security: [{ bearerAuth: [] }]
       responses:
-        '200': { description: Coordenadas recentes }
+        '200': { description: Coordenadas dos últimos 15 minutos. Lista vazia após encerramento ou cancelamento }
     post:
-      summary: Compartilha localização temporária durante a janela do atendimento (RF30)
+      summary: Compartilha localização temporária durante a janela do atendimento (RF29)
       tags: [Atendimento & Sala]
       security: [{ bearerAuth: [] }]
       responses:
         '201': { description: Localização registrada }
+        '422': { description: Fora da janela permitida ou atendimento encerrado }
   /atendimentos/{id}/comprovante.pdf:
     get:
       summary: Gera e baixa o comprovante oficial do atendimento em PDF (RF37)
@@ -453,6 +455,20 @@ paths:
       security: [{ bearerAuth: [] }]
       responses:
         '201': { description: Chamado aberto }
+  /atendimentos/{id}/suporte:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema: { type: string, format: uuid }
+    post:
+      summary: Abre chamado de suporte ou alerta SOS vinculado ao atendimento (RF34)
+      tags: [Atendimento & Sala]
+      security: [{ bearerAuth: [] }]
+      responses:
+        '201': { description: Chamado vinculado ao atendimento }
+        '403': { description: Usuário sem acesso ao atendimento }
+        '404': { description: Atendimento não encontrado }
 
   /backoffice/indicadores:
     get:

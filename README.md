@@ -22,7 +22,7 @@ pagamento e emissão do **Comprovante de Acessibilidade Garantida**.
 
 ## 1. Pré-requisitos
 
-- **Node.js 20 ou superior** (recomendado 22) e npm — <https://nodejs.org>
+- **Node.js 22.12+ na série 22** e npm — <https://nodejs.org>
 - **PostgreSQL** — uma das opções:
   - Docker Desktop (`docker compose up -d` sobe um Postgres local já configurado), **ou**
   - um banco gratuito no [Neon](https://neon.tech) (copie a *connection string*), **ou**
@@ -37,13 +37,13 @@ cd viamos
 
 # Backend
 cd backend
-npm install
+npm ci
 cp .env.example .env        # Windows (PowerShell): copy .env.example .env
 cd ..
 
 # Frontend
 cd frontend
-npm install
+npm ci
 cp .env.example .env
 cd ..
 ```
@@ -93,11 +93,11 @@ Teste rápido da API: <http://localhost:3333/api/health>.
 
 ```bash
 cd backend
-npm test            # 49 testes: fluxo principal, exceções e unidades (usa DATABASE_URL_TEST — banco separado)
+npm test            # fluxo principal, exceções e unidades (exige DATABASE_URL_TEST)
 npm run typecheck   # verificação de tipos
 ```
 
-Crie o banco de teste uma vez (Docker: `docker compose exec postgres createdb -U viamos viamos_test`; local: `createdb -U viamos viamos_test`).
+Crie o banco de teste uma vez (Docker: `docker compose exec postgres createdb -U viamos viamos_test`, local: `createdb -U viamos viamos_test`). Defina `DATABASE_URL_TEST` para essa base isolada. A suíte aplica migrações e limpa essa base antes de executar os cenários.
 
 ## 6. Build e deploy
 
@@ -108,7 +108,7 @@ cd frontend && npm run build                      # gera frontend/dist (estátic
 
 - **Render** (API): *New → Blueprint* apontando para este repositório; o [`render.yaml`](render.yaml) cria o serviço e o banco. Ajuste `CORS_ORIGINS`, `API_PUBLIC_URL` e `FRONTEND_URL`.
 - **Vercel** (frontend): importe o repositório com *Root Directory* = `frontend`, defina `VITE_API_URL` com a URL da API. O [`vercel.json`](frontend/vercel.json) já contém o *rewrite* para rotas SPA (`/cliente/...` recarregadas não dão 404).
-- O guia detalhado ficará em `docs/DEPLOY.md` (Bloco D do plano).
+- O passo a passo e as verificações pós-publicação estão no [guia de deploy](docs/DEPLOY.md).
 
 ## 7. Estrutura do repositório
 
@@ -144,7 +144,8 @@ viamos/
 │   ├── REGISTRO_TRABALHO.md  # estado real do trabalho: feito/verificado × pendente, contribuições, divergências
 │   ├── VERIFICACOES.md       # verificação dos prompts e processos contra labProt, Checklist 2026 e Dossiê
 │   └── producao-tecnica/     # capítulo final do documento (em construção)
-├── contexto_atual_chatgpt.md # passagem de bastão entre as duplas (Claude ↔ ChatGPT)
+├── contexto_atual_chatgpt.md # passagem de bastão para Lúcio e ChatGPT
+├── contexto_atual_claude.md  # passagem de bastão para Gustavo e Claude
 ├── docker-compose.yml        # PostgreSQL local
 └── render.yaml               # blueprint de deploy da API
 ```

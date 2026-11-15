@@ -77,38 +77,39 @@ export async function listarDemandas(usuarioId: string) {
  * o segundo concorrente recebe 409. A unicidade de `atendimentos.solicitacao_id` é a segunda trava.
  */
 export async function aceitarDemanda(usuarioId: string, solicitacaoId: string, ip?: string) {
-  const i = await carregarInterprete(usuarioId);
-  exigirHabilitado(i);
-
-  const s = await db.query.solicitacoes.findFirst({ where: eq(solicitacoes.id, solicitacaoId), with: { cliente: { with: { usuario: true } } } });
-  if (!s) throw Erros.naoEncontrado('Demanda');
-  if (s.status !== 'BUSCANDO') throw Erros.conflito('Esta demanda já foi aceita por outro intérprete ou foi cancelada.', 'DEMANDA_INDISPONIVEL');
-  if (s.inicioPrevisto.getTime() <= Date.now()) throw Erros.regraNegocio('O horário desta demanda já passou.', 'DEMANDA_EXPIRADA');
-
-  const distancia = distanciaKm({ latitude: i.latitudeBase, longitude: i.longitudeBase }, { latitude: s.latitude, longitude: s.longitude });
-  if (distancia > Math.min(i.raioKm, REGRAS.RAIO_MAXIMO_KM)) {
-    throw Erros.regraNegocio(`A demanda está a ${distancia} km, fora do seu raio de atuação (${i.raioKm} km).`, 'FORA_DO_RAIO');
-  }
-
-  // Conflito de agenda: outro atendimento do mesmo intérprete sobreposto no horário
-  const fimPrevisto = adicionarMinutos(s.inicioPrevisto, s.duracaoPrevistaMin);
-  const conflitos = await db
-    .select({ id: atendimentos.id })
-    .from(atendimentos)
-    .innerJoin(solicitacoes, eq(solicitacoes.id, atendimentos.solicitacaoId))
-    .where(
-      and(
-        eq(atendimentos.interpreteId, usuarioId),
-        inArray(atendimentos.status, ['AGENDADO', 'EM_ANDAMENTO']),
-        lt(solicitacoes.inicioPrevisto, fimPrevisto),
-        gt(sql`${solicitacoes.inicioPrevisto} + make_interval(mins => ${solicitacoes.duracaoPrevistaMin})`, s.inicioPrevisto),
-      ),
-    )
-    .limit(1);
-  if (conflitos.length) throw Erros.conflito('Você já tem um atendimento agendado neste horário.', 'AGENDA_CONFLITANTE');
-
   const atendimentoId = await db.transaction(async (tx) => {
+    // Serializa aceites de solicitações diferentes pelo mesmo intérprete.
+    const [i] = await tx.select().from(interpretes).where(eq(interpretes.usuarioId, usuarioId)).for('no key update');
+    if (!i) throw Erros.naoEncontrado('Perfil de intérprete');
+    exigirHabilitado(i);
+
+    const [s] = await tx.select().from(solicitacoes).where(eq(solicitacoes.id, solicitacaoId));
     const agora = new Date();
+    if (!s) throw Erros.naoEncontrado('Demanda');
+    if (s.status !== 'BUSCANDO') throw Erros.conflito('Esta demanda já foi aceita por outro intérprete ou foi cancelada.', 'DEMANDA_INDISPONIVEL');
+    if (s.inicioPrevisto <= agora) throw Erros.regraNegocio('O horário desta demanda já passou.', 'DEMANDA_EXPIRADA');
+
+    const distancia = distanciaKm({ latitude: i.latitudeBase, longitude: i.longitudeBase }, { latitude: s.latitude, longitude: s.longitude });
+    if (distancia > Math.min(i.raioKm, REGRAS.RAIO_MAXIMO_KM)) {
+      throw Erros.regraNegocio(`A demanda está a ${distancia} km, fora do seu raio de atuação (${i.raioKm} km).`, 'FORA_DO_RAIO');
+    }
+
+    const fimPrevisto = adicionarMinutos(s.inicioPrevisto, s.duracaoPrevistaMin);
+    const [conflito] = await tx
+      .select({ id: atendimentos.id })
+      .from(atendimentos)
+      .innerJoin(solicitacoes, eq(solicitacoes.id, atendimentos.solicitacaoId))
+      .where(
+        and(
+          eq(atendimentos.interpreteId, usuarioId),
+          inArray(atendimentos.status, ['AGENDADO', 'EM_ANDAMENTO']),
+          lt(solicitacoes.inicioPrevisto, fimPrevisto),
+          gt(sql`${solicitacoes.inicioPrevisto} + make_interval(mins => ${solicitacoes.duracaoPrevistaMin})`, s.inicioPrevisto),
+        ),
+      )
+      .limit(1);
+    if (conflito) throw Erros.conflito('Você já tem um atendimento agendado neste horário.', 'AGENDA_CONFLITANTE');
+
     const [travada] = await tx
       .update(solicitacoes)
       .set({ status: 'ACEITA', atualizadaEm: agora })
