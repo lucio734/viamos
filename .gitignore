@@ -11,6 +11,8 @@ node_modules/
 # ===== Builds e artefatos de compilação =====
 dist/
 build/
+# os scripts que geram o documento da Produção Técnica são código-fonte, não artefato de build
+!docs/producao-tecnica/build/
 coverage/
 *.tsbuildinfo
 .vite/
@@ -42,3 +44,5 @@ Thumbs.db
 docs/producao-tecnica/build/tmp/
 docs/**/*.bkp
 ~$*.docx
+__pycache__/
+*.pyc
