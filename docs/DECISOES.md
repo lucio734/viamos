@@ -30,7 +30,7 @@ Alterar uma decisão = alterar o parâmetro em `regras.ts`, atualizar este arqui
 
 ## Pendências que dependem do grupo
 
-- **P-01** Link do Figma (item #5): importar as telas do Stitch para o Figma (Stitch → *Copy to Figma*) ou usar o Figma Make e colar o link no documento.
+- **P-01** Link do Figma (item #5): importar as telas do Stitch para o Figma (Stitch → *Copy to Figma*) ou usar o Figma Make; colar o link em `FIGMA_URL` no topo de `docs/producao-tecnica/build/gerar_docx.py` e regerar o documento (passos 4 e 5 de `docs/producao-tecnica/README.md`).
 - **P-02** Validar os valores de D-01 (preços de referência) e D-05 (janela de 30 min).
 - **P-03** Criar as contas gratuitas Render, Vercel e Neon (um integrante) e registrar as URLs em `docs/DEPLOY.md`.
 - **P-04** Fotos de perfil: hoje `fotoUrl` aceita uma URL/data URL pequena; decidir se entra no MVP.

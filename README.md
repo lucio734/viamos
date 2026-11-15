@@ -109,6 +109,8 @@ cd frontend && npm run build                      # gera frontend/dist (estátic
 - **Render** (API): *New → Blueprint* apontando para este repositório; o [`render.yaml`](render.yaml) cria o serviço e o banco. Ajuste `CORS_ORIGINS`, `API_PUBLIC_URL` e `FRONTEND_URL`.
 - **Vercel** (frontend): importe o repositório com *Root Directory* = `frontend`, defina `VITE_API_URL` com a URL da API. O [`vercel.json`](frontend/vercel.json) já contém o *rewrite* para rotas SPA (`/cliente/...` recarregadas não dão 404).
 - O passo a passo e as verificações pós-publicação estão no [guia de deploy](docs/DEPLOY.md).
+- **Diagramas da documentação:** gerados do código em [`docs/diagramas/`](docs/diagramas/README.md) (`npm run figuras` gera; `npm run verificar` confere, também no CI).
+- **Documento "Produção Técnica"** (`.docx` e `.pdf`, itens #1–#28 do checklist): [`docs/producao-tecnica/`](docs/producao-tecnica/README.md), com o passo a passo para regerar.
 
 ## 7. Estrutura do repositório
 
@@ -143,7 +145,8 @@ viamos/
 │   ├── DECISOES.md           # decisões de regra de negócio (D-01…) referenciadas no código
 │   ├── REGISTRO_TRABALHO.md  # estado real do trabalho: feito/verificado × pendente, contribuições, divergências
 │   ├── VERIFICACOES.md       # verificação dos prompts e processos contra labProt, Checklist 2026 e Dossiê
-│   └── producao-tecnica/     # capítulo final do documento (em construção)
+│   ├── diagramas/            # gerador dos diagramas a partir do código (npm run figuras / npm run verificar)
+│   └── producao-tecnica/     # documento "Produção Técnica" (.docx e .pdf), figuras, telas e scripts que o geram
 ├── contexto_atual_chatgpt.md # passagem de bastão para Lúcio e ChatGPT
 ├── contexto_atual_claude.md  # passagem de bastão para Gustavo e Claude
 ├── docker-compose.yml        # PostgreSQL local

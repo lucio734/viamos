@@ -32,6 +32,7 @@ O **Víamos** conecta pessoas surdas (**Clientes**) a **Intérpretes de Libras**
    - Aguarde a aprovação pelo Backoffice. Caso seja solicitada correção, reenvie o documento em `/interprete/perfil`.
 2. **Disponibilidade e Raio (`/interprete`, `/interprete/agenda`):**
    - No Hub, ative a chave **Online** para receber ofertas imediatas dentro do seu raio e configure suas janelas semanais de horário em **Agenda e Raio**.
+   - Você recebe, vê e pode aceitar apenas as demandas cujo **início** caia numa das suas janelas semanais (sem nenhuma janela cadastrada, todos os horários valem) e que não colidam com outro atendimento já agendado. Ao ficar online, ampliar o raio ou salvar novas janelas, as demandas abertas que passarem a caber nessas condições aparecem na sua lista.
 3. **Aceitar ou Recusar Demandas (`/interprete/demandas`):**
    - Visualize a distância até o local, o contexto, a duração e o valor líquido estimado. O aceite é exclusivo do primeiro intérprete habilitado que confirmar.
 4. **Check-in Presencial e Encerramento (`/interprete/atendimentos/:id`):**

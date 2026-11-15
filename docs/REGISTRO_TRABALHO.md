@@ -3,6 +3,33 @@
 Documento de continuidade: o que foi **concluído e verificado**, o que está **pendente ou não testado**, quem fez
 (papel/agente), arquivos relevantes, decisões, riscos e próximos passos. Atualizar ao fim de cada bloco.
 
+## Continuação em 15/11/2026 — Gustavo + Claude (agente único)
+
+Partiu de `19ff39a` (retomada do Lúcio já na `main`) e seguiu a "Próxima etapa proposta" da seção seguinte. `Contexto/` e
+`Entregas/` foram só lidos.
+
+| Commit | O que mudou | Como foi verificado |
+|---|---|---|
+| `d824c3a` | **B-022** A recusa do pagamento (402) passou a usar o envelope padrão `{ erro: { codigo: 'PAGAMENTO_RECUSADO', mensagem } }`, e o cliente HTTP também lê a mensagem na raiz da resposta: o cliente vê o motivo da recusa. | caso em `excecoes.test.ts` |
+| `c5090f6` | **RF17, RF20–RF25 (D-20, B-025)** Regra única de elegibilidade (`backend/src/utils/elegibilidade.ts`) usada na distribuição, na lista, no detalhe e no aceite: habilitação aprovada → distância ≤ menor valor entre o raio do intérprete e 15 km → início dentro da disponibilidade semanal (fuso `America/Sao_Paulo`; sem janelas = disponível sempre) → sem sobreposição na agenda. **Nova distribuição:** ao ficar online, mudar o raio ou salvar janelas, o intérprete recebe as demandas abertas que passaram a caber. **RF26, RF27 e RF36 (B-026)** Saldo e "a receber da semana" somados no banco sobre todo o extrato; repasse e cobrança serializados por bloqueio de linha (sem saldo negativo nem crédito em dobro). **B-024** A agenda aceita HH:MM e a tela exibe HH:MM (o banco guarda HH:MM:SS). Seed: agenda da Maria cobre todos os dias, o dia inteiro; Carlos sem janelas. | 4 casos novos (57/57); os casos de cobrança e repasse falham no serviço anterior |
+| `7af32e9` | **Bloco P1** Gerador de diagramas a partir do código (`docs/diagramas/`): 34 diagramas (sitemap, DER de 27 tabelas, arquiteturas, MVC, macroprocesso, fluxograma, estados, operação, telas, contexto, CASE), com validação de funções, códigos de erro, RF e estados contra o código. Job `diagramas` no CI e `docs:modelo --verificar` no backend (Dossiê #38). **B-023** O DER manual foi substituído pelo gerado. | `npm run verificar` |
+| `f487b63` | **Bloco P2** Documento Produção Técnica (`docs/producao-tecnica/`) no formato de `Entregas/modelo_entrega.docx`: 107 páginas, 113 figuras e 52 tabelas, com as 30 telas capturadas do aplicativo, os 37 diagramas recortados das entregas de 30/09 e 11/11, a tabela de caso de uso de cada tela, os requisitos lidos da planilha e as divergências entre entregas e aplicativo. Pipeline reproduzível em `docs/producao-tecnica/README.md`. | páginas renderizadas e inspecionadas; numeração automática de figuras e tabelas |
+
+**Verificação final (15/11, 20:32, PostgreSQL 18 local):** backend `typecheck` ✅, `npm test` **57/57** ✅ e
+`docs:modelo -- --verificar` ✅; frontend `npm test` 6/6 ✅, `typecheck` ✅, `lint` com 0 erros (avisos
+`set-state-in-effect` já existentes) e `build` ✅ (aviso de bundle acima de 500 kB já existente); `docs/diagramas`
+`npm run verificar` ✅ (34 diagramas, 33 rotas, 65 endpoints, 27 tabelas). A agenda com HH:MM foi conferida no navegador.
+
+**Situação da "Próxima etapa proposta":** (1) ✅ feito, com D-20 aguardando validação do grupo (P-05); (2) ✅ feito;
+(3) registrado como P-06 e descrito no documento, decisão do grupo; (4) 🟡 documento consolidado; faltam o link do
+Figma (P-01), a publicação nas contas da equipe (P-03) e o ensaio com câmera e GPS em dispositivo físico.
+
+**Declaração honesta (AGENTS.md §3):** esta continuação foi feita por **um único agente (Claude)**, sob direção do
+Gustavo, acumulando em sequência os papéis de Back-end, Dados, QA, Documentação e DevOps (CI). **Não houve revisão
+independente por subagentes.** Os textos do documento que o plano atribuía ao Lúcio (introduções, tabelas de requisitos
+e de caso de uso, descrição das telas) também foram escritos por este agente; a leitura completa e a revisão do
+documento pelo grupo (Bloco P3) e a auditoria #49 continuam pendentes.
+
 ## Retomada em 15/11/2026
 
 A revisão começou em `089774a`, com `main` e `origin/main` iguais no clone e sem alterações locais. A etapa de estabilização e a passagem de bastão foram integradas à `main`. As pastas `Contexto/` e `Entregas/` foram preservadas.
@@ -48,6 +75,8 @@ A revisão começou em `089774a`, com `main` e `origin/main` iguais no clone e s
 | 12/11 | — | Lúcio | `CLAUDE/CLAUDE.md` e `CLAUDE/AGENTS.md` com regras obrigatórias; `PROMPT AGENTES.docx`; material extraído em `Contexto/` e `Entregas/` |
 | 12/11 (noite) | **Bloco F1** | Lúcio + Equipe de Agentes (Scrum Master/Front-end + subagentes `revisor_ux_ui`, `revisor_qa_security`, `revisor_po`) | Conferência do repositório (`main` já continha o Bloco 0), reprodução dos testes de backend em PostgreSQL 18.6 local (50/50), espelhamento de `AGENTS.md`/`CLAUDE.md` na raiz, implementação e revisão das 7 rotas do Bloco F1 + `Mapa.tsx` + `TelaPublica.tsx` + `validacao.ts` |
 | 12/11 (noite) | **Blocos F2, F3 e F4 (Telas + Hardening OWASP)** | Lúcio + Equipe de Agentes | Implementação integral da Jornada do Cliente (**Bloco F2**: 7 rotas + `Sala.tsx`, `AvaliarAtendimento.tsx`, `HistoricoAtendimentos.tsx`), Jornada do Intérprete (**Bloco F3**: 7 rotas + `LeitorQr.tsx`), Backoffice e Verificação Pública (**Bloco F4**: 5 rotas finais — **100% das 23 rotas de `rotas.tsx` implementadas, 0 placeholders**) e hardening OWASP no backend (magic bytes no upload, revogação de sessões em `alterarSenha`, validação de `fotoUrl`, limpeza LGPD de endereço/CEP e download seguro via Blob) |
+| 15/11 | Retomada e estabilização | Lúcio + Codex, com revisões independentes de Produto/UX, Backend/Dados/QA e CI/CD | Ver "Retomada em 15/11/2026" (`4bf2299`, `19ff39a`) |
+| 15/11 (noite) | Correções RF17–RF27/RF36, **P1** e **P2** | Gustavo + Claude (agente único) | Ver "Continuação em 15/11/2026" (`d824c3a`, `c5090f6`, `7af32e9`, `f487b63`) |
 
 ## 2. Bloco 0 — o que foi feito (concluído e verificado)
 
@@ -134,6 +163,7 @@ A revisão começou em `089774a`, com `main` e `origin/main` iguais no clone e s
 ## 3. Contribuições por papel/agente (AGENTS.md §3 — declaração honesta)
 
 - **Bloco 0 (11–12/11):** executado por **um único agente (Claude)**, sob direção do Gustavo, acumulando os papéis de Back-end, Dados, Front-end, QA e Security de forma sequencial, sem subagentes independentes.
+- **Continuação de 15/11 (correções RF17–RF27/RF36, Blocos P1 e P2):** executada por **um único agente (Claude)**, sob direção do Gustavo, acumulando em sequência Back-end, Dados, QA, Documentação e DevOps, sem subagentes independentes. Detalhes e verificações no início deste documento.
 - **Bloco F1 (12/11):** executado sob coordenação do agente principal (atuando como **Scrum Master / Front-end / Back-end**) com **revisão independente por 3 subagentes especializados** instanciados via `define_subagent` / `invoke_subagent` conforme `Contexto/Auxílio Vibecoding/PROMPT AGENTES.docx` e `docs/EQUIPE_AGENTES.md`:
   1. **`revisor_ux_ui` (UX/UI & Accessibility Reviewer):** conferiu todas as telas do Bloco F1 contra `DESIGN.md`, `code (7).html`, `code (17).html` e WCAG 2.2 AA (RNF11–RNF16, RNF19, RNF45). Parecer: **APROVADO** com 5 recomendações de refinamento (`min-h-touch` no slider e links secundários; `text-base` 16 px nos textos descritivos de notificações e suporte), todas aplicadas (`B-006`).
   2. **`revisor_qa_security` (QA & Security Reviewer):** auditou contratos Frontend ⇄ Zod, máscaras, estados de erro e segurança OWASP ASVS. Identificou 4 pontos de atenção imediatos (`B-002`: *rollover* de datas inválidas como `2000-02-31` gerando 500 no banco; `B-003`: ausência de `.max(72)` nas senhas de redefinição/alteração; `B-004`: chaves aninhadas `certificacao.arquivo.*` no erro de upload e `.max(7_000_000)` no Base64; `B-005`: ícone `SOLICITACAO` e `try/catch` em `JSON.parse`), todos corrigidos e cobertos por teste automatizado em `backend/tests/excecoes.test.ts`. Também listou melhorias adicionais de defesa em profundidade para o Bloco F4 (validação de *magic bytes* do certificado, revogação de demais sessões em `alterarSenha` e download de PDF via Blob para evitar token na query string).
@@ -149,7 +179,8 @@ A revisão começou em `089774a`, com `main` e `origin/main` iguais no clone e s
 | Classe `Carteira` (DC8) | Saldo calculado pela soma de `lancamentos_financeiros` | Evita inconsistência entre saldo armazenado e lançamentos |
 | `CheckIn/QRCode` (DC5) com `gerarQR()`/`validar()` | Tabela `checkins` (1:1 com atendimento) + regras em `atendimento.service.ts` | Mesmo conceito; métodos viraram serviços |
 | Entidade `Oferta` sem distância | `ofertas.distancia_km` | Necessária para ordenar por proximidade (RF17) |
-| Máquina de estados da solicitação (11/11) | Estados `BUSCANDO → ACEITA → EM_ANDAMENTO → CONCLUIDA` e `CANCELADA`; atendimento `AGENDADO → EM_ANDAMENTO → CONCLUIDO/CANCELADO` | Conferir nomes no documento final (#23) e ajustar a figura se necessário |
+| Máquina de estados da solicitação (11/11) | Estados `BUSCANDO → ACEITA → EM_ANDAMENTO → CONCLUIDA` e `CANCELADA`; atendimento `AGENDADO → EM_ANDAMENTO → CONCLUIDO/CANCELADO` | O documento (#23, seção 5.4) mostra a figura de 11/11 e as máquinas geradas dos enums do código, com a tabela de transições |
+| DFD P5 (11/11) libera o comprovante no encerramento | Comprovante emitido após a confirmação do pagamento (D-10) | Descrito no documento (seção 5.6); pendência P-06 do grupo |
 | Hub do intérprete (mockup) cita check-in 15 min antes | Parâmetro `CHECKIN_ANTECEDENCIA_MIN = 30` | Decisão D-05 — pendente de validação do grupo |
 
 ## 5. Pendências, riscos e próximos passos
@@ -157,14 +188,15 @@ A revisão começou em `089774a`, com `main` e `origin/main` iguais no clone e s
 | Tipo | Item | Responsável | Bloco |
 |---|---|---|---|
 | Resolvido | Push na `main` destravado e Blocos F1, F2, F3 e F4 (todas as 23 rotas do SITEMAP + hardening OWASP) publicados na `main` | Lúcio / Equipe de Agentes | F1–F4 (concluído) |
-| Pendência | Validar D-01 (preços de referência) e D-05 (janela de 30 min) | grupo | P1/P2 |
-| Pendência | Link do Figma (#5) | grupo | P2 |
+| Pendência | Validar D-01 (preços de referência), D-05 (janela de 30 min), D-20 (elegibilidade, P-05) e o momento do comprovante (P-06) | grupo | P3 |
+| Pendência | Link do Figma (#5): preencher `FIGMA_URL` em `docs/producao-tecnica/build/gerar_docx.py` e regerar o documento | grupo | P3 |
 | Pendência | Contas Render/Vercel/Neon | Lúcio | D |
 | Risco | Render free "dorme" (cold start ~50 s) — abrir `/api/health` antes da demonstração | QA/DevOps | Z |
 | Mitigado | Geolocalização em demonstração indoor: tela `/interprete/atendimentos/:id` inclui botão de 1 clique para preencher as coordenadas exatas do atendimento na demonstração | Front-end / QA | F3 (concluído) |
 | Risco | Google Fonts/Material Symbols dependem de internet na apresentação; alternativa: empacotar a fonte localmente | Front-end | D/Z |
 | Débito | Documentação OpenAPI (`docs/api/openapi.yaml`), plano de testes escrito (`docs/TESTES.md`), `docs/SEGURANCA.md`, manuais e SLA | QA/Security/DevOps | P1, D, Z |
-| Próximo passo | **Bloco P1/P2** (diagramas e documento de Produção Técnica) e **Bloco D** (deploy em Render + Vercel + Neon) conforme `docs/PLANO_BLOCOS.md` | ambos | 14–19/11 |
+| Resolvido | **Blocos P1 e P2**: diagramas gerados do código e documento Produção Técnica (`.docx` e `.pdf`) com pipeline reproduzível | Gustavo + Claude | P1/P2 (concluídos em 15/11) |
+| Próximo passo | **P3** leitura completa do documento pelo grupo, link do Figma e PDF final; **D** deploy em Render + Vercel + Neon; **Z** ensaio com dispositivo físico e auditoria #49, conforme `docs/PLANO_BLOCOS.md` | ambos | 16–20/11 |
 
 ## 6. Instruções reproduzíveis
 

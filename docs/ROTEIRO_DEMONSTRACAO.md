@@ -6,8 +6,8 @@
 |---|---|---|
 | **Cliente (Pessoa Surda)** | `joao@viamos.app` | Possui solicitação em busca, cartão salvo e dois atendimentos encerrados, um pago com comprovante e outro com pagamento pendente |
 | **Cliente (Pessoa Surda)** | `ana@viamos.app` | Possui atendimento agendado com Maria e QR Code disponível para exibição |
-| **Intérprete Habilitada** | `maria@viamos.app` | Habilitação `APROVADO`, online, com demanda no raio, atendimento agendado para check-in e saldo para repasse |
-| **Intérprete Habilitado** | `carlos@viamos.app` | Habilitação `APROVADO`, online em São Paulo |
+| **Intérprete Habilitada** | `maria@viamos.app` | Habilitação `APROVADO`, online, com demanda no raio, atendimento agendado para check-in e saldo para repasse. A agenda semanal cobre todos os dias, o dia inteiro, para que a demonstração funcione em qualquer horário (regra de elegibilidade D-20) |
+| **Intérprete Habilitado** | `carlos@viamos.app` | Habilitação `APROVADO`, online em São Paulo, sem janelas semanais cadastradas (disponível em qualquer horário) |
 | **Intérprete em Análise** | `pedro@viamos.app` | Habilitação `EM_ANALISE` com certificado Prolibras na fila do Backoffice |
 | **Operador Backoffice** | `operador@viamos.app` | Acesso às filas de certificações, chamados SOS/suporte e trilha de auditoria |
 

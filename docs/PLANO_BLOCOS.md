@@ -30,6 +30,18 @@ período mexem em pastas diferentes, para evitar conflito de merge.
 | Registros exigidos pelo `AGENTS.md` (verificações, equipe de agentes, registro de trabalho) | ✅ criados em 12/11 — manter a cada bloco |
 | Ensaio de demonstração e auditoria dos 50 itens | ⬜ Bloco Z |
 
+## Situação em 15/11 (noite)
+
+| Área | Estado |
+|---|---|
+| Backend | ✅ 57 testes; regra única de elegibilidade (D-20) com nova distribuição; saldo, repasse e cobrança serializados |
+| Frontend — 33 rotas | ✅ Blocos F1–F4 concluídos (Lúcio) e estabilizados na retomada de 15/11 |
+| Bloco P1 — diagramas gerados do código | ✅ `docs/diagramas/` (34 diagramas, verificação no CI) |
+| Bloco P2 — documento Produção Técnica | ✅ `docs/producao-tecnica/` (`.docx` e `.pdf` gerados por script, sem os `.md` por item previstos acima); falta o link do Figma (P-01) |
+| Bloco P3 — revisão final do documento | ⬜ grupo: leitura completa, validação de D-01/D-05/D-20/P-06, link do Figma, PDF final |
+| Bloco D — deploy com HTTPS | ⬜ contas da equipe (P-03) |
+| Bloco Z — ensaio e auditoria dos 50 itens | ⬜ ensaio com câmera e GPS em dispositivo físico; auditoria #49 |
+
 ## Cronograma sugerido
 
 | Período | G (Gustavo + Claude) | L (Lúcio + ChatGPT) |
