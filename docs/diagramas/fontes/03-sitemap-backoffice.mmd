@@ -1,0 +1,22 @@
+flowchart TD
+  classDef hub fill:#e6e6e6,stroke:#111,stroke-width:2px,color:#111;
+  classDef externo fill:#fff,stroke:#666,stroke-dasharray:4 3,color:#333;
+  classDef destaque fill:#f2f2f2,stroke:#111,stroke-width:1.5px,color:#111;
+  entrada(["/login — autenticação"]):::externo
+  subgraph sg_backoffice["Backoffice — papéis BACKOFFICE e SUPORTE"]
+    r_backoffice["<b>Fila de certificações</b><br/>/backoffice"]
+    r_backoffice_certificacoes_id["<b>Parecer da certificação</b><br/>/backoffice/certificacoes/:id"]
+    r_backoffice_chamados["<b>Chamados de suporte</b><br/>/backoffice/chamados"]
+    r_backoffice_auditoria["<b>Trilha de auditoria</b><br/>/backoffice/auditoria"]
+  end
+  r_backoffice --> r_backoffice_certificacoes_id
+  r_backoffice --> r_backoffice_chamados
+  r_backoffice --> r_backoffice_auditoria
+  class r_backoffice hub;
+  entrada ==>|"BACKOFFICE / SUPORTE"| r_backoffice
+  subgraph sg_comum["Telas comuns (qualquer papel autenticado)"]
+    r_notificacoes["<b>Notificações</b><br/>/notificacoes"]
+    r_suporte["<b>Suporte</b><br/>/suporte"]
+  end
+  r_backoffice -.-> r_notificacoes
+  r_backoffice -.-> r_suporte

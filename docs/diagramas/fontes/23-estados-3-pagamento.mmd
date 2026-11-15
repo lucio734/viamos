@@ -1,0 +1,8 @@
+stateDiagram-v2
+  direction LR
+  [*] --> PENDENTE : encerrarAtendimento
+  PENDENTE --> PAGO : processarPagamento<br/>gateway aprova
+  PENDENTE --> FALHOU : processarPagamento<br/>gateway recusa (402)
+  FALHOU --> PAGO : nova tentativa aprovada
+  FALHOU --> FALHOU : nova tentativa recusada
+  PAGO --> [*] : comprovante emitido

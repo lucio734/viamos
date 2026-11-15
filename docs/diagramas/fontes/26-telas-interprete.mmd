@@ -1,0 +1,42 @@
+flowchart TB
+  classDef hub fill:#e6e6e6,stroke:#111,stroke-width:2px,color:#111;
+  classDef externo fill:#fff,stroke:#666,stroke-dasharray:4 3,color:#333;
+  classDef destaque fill:#f2f2f2,stroke:#111,stroke-width:1.5px,color:#111;
+  r_interprete["<b>Hub do intérprete</b><br/>/interprete<br/>☰ Início"]
+  r_interprete_demandas["<b>Demandas próximas</b><br/>/interprete/demandas<br/>☰ Demandas"]
+  r_interprete_demandas_id["<b>Detalhe da demanda</b><br/>/interprete/demandas/:id"]
+  r_interprete_agenda["<b>Raio e disponibilidade</b><br/>/interprete/agenda"]
+  r_interprete_atendimentos_id["<b>Detalhe do atendimento (intérprete)</b><br/>/interprete/atendimentos/:id"]
+  r_interprete_atendimentos_id_sala["<b>Sala de atendimento (intérprete)</b><br/>/interprete/atendimentos/:id/sala"]
+  r_interprete_atendimentos_id_avaliar["<b>Avaliar cliente</b><br/>/interprete/atendimentos/:id/avaliar"]
+  r_interprete_ganhos["<b>Ganhos e repasse</b><br/>/interprete/ganhos<br/>☰ Ganhos"]
+  r_interprete_historico["<b>Histórico (intérprete)</b><br/>/interprete/historico"]
+  r_interprete_perfil["<b>Perfil e habilitação</b><br/>/interprete/perfil<br/>☰ Perfil"]
+  r_notificacoes["<b>Notificações</b><br/>/notificacoes<br/>☰ Notificações"]
+  r_suporte["<b>Suporte</b><br/>/suporte"]
+  r_login["<b>Login</b><br/>/login<br/>☰ Sair"]:::externo
+  nota_1{{"tela indicada pela<br/>notificação"}}:::externo
+  r_interprete ==>|"aceitarDemanda() /<br/>Gerenciar Atendimento"| r_interprete_atendimentos_id
+  r_interprete -->|"Ver documentação"| r_interprete_perfil
+  r_interprete <-->|"Raio: … km / Configurar… ⇄<br/>Voltar ao painel"| r_interprete_agenda
+  r_interprete -->|"Ver todas"| r_interprete_demandas
+  r_interprete -->|"Detalhes"| r_interprete_demandas_id
+  r_interprete -->|"Ver Extrato Completo"| r_interprete_ganhos
+  r_interprete -->|"Abrir Sala de…"| r_interprete_atendimentos_id_sala
+  r_interprete_demandas ==>|"aceitar() / Check-in /<br/>Detalhes"| r_interprete_atendimentos_id
+  r_interprete_demandas -->|"Ajustar Raio ( km)"| r_interprete_agenda
+  r_interprete_demandas -->|"Detalhes"| r_interprete_demandas_id
+  r_interprete_demandas -->|"Sala"| r_interprete_atendimentos_id_sala
+  r_interprete_demandas_id ==>|"aceitarDemanda() / Ir para<br/>o Atendimento…"| r_interprete_atendimentos_id
+  r_interprete_demandas_id ==>|"confirmarRecusa() / Voltar<br/>às demandas"| r_interprete_demandas
+  r_interprete_atendimentos_id -->|"Voltar ao painel do…"| r_interprete
+  r_interprete_atendimentos_id <-->|"Sala de Atendimento ⇄<br/>Voltar aos detalhes do…"| r_interprete_atendimentos_id_sala
+  r_interprete_atendimentos_id -->|"SOS / Suporte"| r_suporte
+  r_interprete_atendimentos_id <-->|"Avaliar Cliente ⇄ Voltar<br/>ao Atendimento / Pular"| r_interprete_atendimentos_id_avaliar
+  r_interprete_atendimentos_id -->|"Ver em Ganhos e Repasses"| r_interprete_ganhos
+  r_interprete_atendimentos_id_sala -->|"SOS"| r_suporte
+  r_interprete_ganhos -->|"Histórico de…"| r_interprete_historico
+  r_interprete_historico -->|"Ver Detalhes"| r_interprete_atendimentos_id
+  r_interprete_perfil ==>|"excluirConta()"| r_login
+  r_notificacoes ==>|"marcarUmaComoLida()"| nota_1
+  class r_interprete hub;

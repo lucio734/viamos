@@ -1,0 +1,34 @@
+flowchart TB
+  classDef hub fill:#e6e6e6,stroke:#111,stroke-width:2px,color:#111;
+  classDef externo fill:#fff,stroke:#666,stroke-dasharray:4 3,color:#333;
+  classDef destaque fill:#f2f2f2,stroke:#111,stroke-width:1.5px,color:#111;
+  subgraph sg_vercel["VIEW no cliente — SPA React hospedada na Vercel"]
+    paginas["<b>pages/</b> — 29 telas<br/>auth (7) · backoffice (4) · cliente (6) · comum (5) · interprete (7)"]
+    componentes["<b>components/</b><br/>AppShell · LeitorQr · Mapa · Sala · TelaPublica · ui"]
+    clienteHttp["<b>api/cliente.ts</b><br/>fetch + JWT + erros padronizados"]
+    paginas --> componentes
+    paginas --> clienteHttp
+  end
+  subgraph sg_render["Backend Express hospedado no Render (viamos-api)"]
+    rotas["<b>routes/index.ts</b><br/>65 endpoints sob /api"]
+    middlewares["<b>middlewares/</b><br/>auth · erros · validar<br/>JWT + sessão · papel · validação Zod · erros"]
+    subgraph sg_c["CONTROLLER"]
+      controllers["<b>controllers/</b> — 8 arquivos<br/>atendimento · auth · backoffice · cadastro · demanda · pagamento · perfil · solicitacao<br/>HTTP ⇄ serviço · esquemas Zod · status"]:::hub
+    end
+    servicos["<b>services/</b> — 14 arquivos<br/>regras de negócio e transações"]
+    subgraph sg_v["VIEW no servidor"]
+      views["<b>views/</b><br/>comprovante.pdf · presenters<br/>JSON de resposta e PDF do comprovante"]:::hub
+    end
+    subgraph sg_m["MODEL"]
+      models["<b>models/</b><br/>db · schema<br/>27 tabelas (Drizzle ORM)"]:::hub
+    end
+    rotas --> middlewares --> controllers --> servicos --> models
+    controllers --> views
+    servicos --> views
+  end
+  subgraph sg_banco["Banco gerenciado (Render Postgres ou Neon)"]
+    banco[("PostgreSQL<br/>2 migrações em backend/drizzle")]
+  end
+  clienteHttp -->|"HTTPS · REST/JSON"| rotas
+  views -.->|"JSON ou PDF"| clienteHttp
+  models -->|"SQL parametrizado"| banco

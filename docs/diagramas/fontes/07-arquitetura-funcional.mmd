@@ -1,0 +1,65 @@
+flowchart TB
+  classDef hub fill:#e6e6e6,stroke:#111,stroke-width:2px,color:#111;
+  classDef externo fill:#fff,stroke:#666,stroke-dasharray:4 3,color:#333;
+  classDef destaque fill:#f2f2f2,stroke:#111,stroke-width:1.5px,color:#111;
+  subgraph sg_interface["Interface e recursos do aparelho"]
+    spa["<b>Interface web (SPA)</b><br/>30 telas · 33 rotas · cliente, intérprete e operador"]:::hub
+    gps["GPS do aparelho<br/>check-in e localização"]:::externo
+    camera["Câmera<br/>leitura do QR Code"]:::externo
+    osm["OpenStreetMap e Nominatim<br/>mapa e busca de endereço"]:::externo
+    spa -.-> gps & camera & osm
+  end
+  subgraph sg_api["Backend — API REST · 65 endpoints · 14 módulos"]
+    subgraph sg_contratacao["Contratação"]
+      m_demanda["<b>Demandas, aceite exclusivo e<br/>agenda</b><br/>RF20–RF25, RNF36<br/>7 endpoints: 7 intérprete"]
+      m_solicitacao["<b>Solicitação, estimativa e<br/>distribuição</b><br/>RF10–RF19<br/>6 endpoints: 5 cliente · 1 qualquer papel"]
+      m_solicitacao -->|"interpreteElegivelParaDemanda"| m_demanda
+    end
+    subgraph sg_financeiro["Financeiro e comprovação"]
+      m_comprovante["<b>Comprovante e verificação<br/>pública</b><br/>RF37, RF38, RNF41<br/>2 endpoints: 1 qualquer papel · 1 público"]
+      m_pagamento["<b>Pagamento, ganhos e repasse</b><br/>RF26, RF27, RF35–RF37<br/>11 endpoints: 5 cliente · 5 intérprete<br/>1 qualquer papel"]
+    end
+    subgraph sg_execucao["Execução presencial"]
+      m_atendimento["<b>Atendimento presencial:<br/>sala, check-in, encerramento<br/>e suporte</b><br/>RF28–RF34, RF39<br/>11 endpoints: 1 cliente · 1 intérprete<br/>9 qualquer papel"]
+      m_avaliacao["<b>Avaliação bilateral e<br/>reputação</b><br/>RF40, RF41, RNF42<br/>1 endpoint: 1 qualquer papel"]
+      m_avaliacao -->|"exigirParticipante"| m_atendimento
+    end
+    subgraph sg_operacao["Operação (backoffice)"]
+      m_backoffice["<b>Habilitação de intérpretes,<br/>chamados e indicadores</b><br/>RF06, RNF36<br/>8 endpoints: 2 intérprete · 5 operador<br/>1 qualquer papel"]
+    end
+    subgraph sg_acesso["Acesso e cadastro"]
+      m_auth["<b>Autenticação e sessão</b><br/>RF01, RF07, RF08, RNF07, RNF35<br/>6 endpoints: 3 qualquer papel · 3 público"]
+      m_cadastro["<b>Cadastro e envio da<br/>certificação</b><br/>RF02–RF05, RNF09<br/>2 endpoints: 2 público"]
+      m_perfil["<b>Perfil, consentimentos e<br/>direitos LGPD</b><br/>RF43, RF45, RNF09<br/>6 endpoints: 6 qualquer papel"]
+      m_cadastro -->|"gerarHashSenha, login"| m_auth
+      m_perfil -->|"carregarPerfil"| m_auth
+    end
+    subgraph sg_transversal["Serviços transversais"]
+      m_auditoria["<b>Trilha de auditoria</b><br/>RF44, RNF33<br/>1 endpoint: 1 operador<br/>chamado por 9 módulos"]
+      m_notificacao["<b>Notificações</b><br/>RF42, RNF25<br/>3 endpoints: 3 qualquer papel<br/>chamado por 7 módulos"]
+    end
+    subgraph sg_adaptador["Adaptadores de serviços externos"]
+      m_email["<b>Adaptador de e-mail</b>"]
+      m_gateway["<b>Adaptador do gateway de<br/>pagamento</b><br/>RNF23, RNF37"]
+    end
+    sg_contratacao ~~~ sg_execucao
+    sg_contratacao ~~~ sg_operacao
+    sg_financeiro ~~~ sg_execucao
+    sg_financeiro ~~~ sg_operacao
+    sg_execucao ~~~ sg_acesso
+    sg_execucao ~~~ sg_transversal
+    sg_operacao ~~~ sg_acesso
+    sg_operacao ~~~ sg_transversal
+    sg_acesso ~~~ sg_adaptador
+    sg_transversal ~~~ sg_adaptador
+    sg_acesso -->|"auth → email<br/>enviarEmail"| sg_adaptador
+    sg_operacao -->|"backoffice → cadastro<br/>decodificarArquivo"| sg_acesso
+    sg_financeiro -->|"comprovante → atendimento<br/>exigirParticipante"| sg_execucao
+    sg_financeiro -->|"pagamento → gateway<br/>tokenizarCartao, cobrar,<br/>transferir"| sg_adaptador
+  end
+  subgraph sg_ext["Serviços externos"]
+    ext_gateway["Gateway de pagamento<br/>simulado no MVP (D-08)"]:::externo
+    ext_email["Provedor de e-mail<br/>console no MVP"]:::externo
+  end
+  sg_interface ==>|"HTTPS · REST/JSON"| sg_api
+  sg_adaptador -.-> sg_ext

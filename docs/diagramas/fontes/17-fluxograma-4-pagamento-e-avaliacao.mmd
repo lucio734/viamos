@@ -1,0 +1,21 @@
+flowchart TB
+  classDef inicio fill:#111,stroke:#111,color:#fff;
+  classDef erro fill:#fff,stroke:#666,stroke-dasharray:4 3,color:#333;
+  classDef destaque fill:#e6e6e6,stroke:#111,stroke-width:2px,color:#111;
+  ini(["Atendimento EM_ANDAMENTO<br/>(vem da parte 3)"]):::inicio
+  enc["Cliente ou intérprete encerra — RF33<br/>duração real apurada"]
+  valor["Valor final (D-03): cobra o maior entre<br/>a duração contratada e a real arredondada<br/>para cima em blocos de 30 min<br/>pagamento PENDENTE criado"]
+  pagar[/"Cliente escolhe Pix ou cartão salvo<br/>e confirma — RF35, RF36"/]
+  q1{"Já existe<br/>pagamento PAGO?"}
+  rep["200 — devolve o pagamento anterior<br/>sem cobrar de novo (idempotência;<br/>chamadas simultâneas são serializadas)"]
+  q2{"Gateway<br/>aprova?"}
+  e5["402 PAGAMENTO_RECUSADO<br/>pagamento FALHOU<br/>pode tentar outra forma"]:::erro
+  pago["Pagamento PAGO<br/>crédito ao intérprete = valor pago<br/>− taxa de 10% do serviço<br/>comprovante com código público — RF37, RF38"]:::destaque
+  aval["Avaliação bilateral de 1 a 5 — RF40<br/>recalcula a reputação do intérprete — RF41"]
+  repasse["Intérprete solicita o repasse<br/>do saldo inteiro — RF27<br/>(um por vez; saldo somado no banco)"]
+  fim(["Fim: atendimento comprovado<br/>e registrado na trilha de auditoria — RF44"]):::inicio
+  ini --> enc --> valor --> pagar --> q1
+  q1 -->|"sim"| rep --> aval
+  q1 -->|"não"| q2
+  q2 -->|"não"| e5 --> pagar
+  q2 -->|"sim"| pago --> aval --> repasse --> fim

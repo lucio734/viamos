@@ -1,0 +1,38 @@
+sequenceDiagram
+  autonumber
+  actor CL as Cliente
+  participant CT as pagamento.controller<br/>atendimento.controller
+  participant PG as pagamento.service<br/>processarPagamento
+  participant GW as gateway.service<br/>cobrar
+  participant CP as comprovante.service<br/>gerarComprovantePdf
+  participant DB as PostgreSQL
+  CL->>CT: POST /api/pagamentos/:id/processar<br/>{ formaPagamentoId ou meio }
+  CT->>PG: processarPagamento(pagamentoId,<br/>clienteId, entrada, ip)
+  PG->>DB: SELECT pagamentos + atendimento + solicitacao
+  Note over PG: não é o cliente do atendimento → 403<br/>não CONCLUIDO → 422 ATENDIMENTO_NAO_CONCLUIDO
+  rect rgb(235, 235, 235)
+  Note over PG,DB: db.transaction
+  PG->>DB: SELECT pagamentos WHERE atendimento_id = :id<br/>FOR UPDATE (serializa cobranças simultâneas)
+  PG->>DB: SELECT pagamentos WHERE atendimento_id = :id AND status = 'PAGO'
+  alt já existe pagamento PAGO
+  PG-->>CL: 200 { repetido: true } — nada é cobrado de novo
+  else ainda não pago
+  PG->>GW: cobrar({ valor, meio,<br/>tokenCartao, finalCartao })
+  GW-->>PG: { aprovado, referencia, mensagem }
+  PG->>DB: UPDATE pagamentos SET status = PAGO ou FALHOU WHERE status IN ('PENDENTE', 'FALHOU')
+  PG->>DB: registrarEvento(PAGAMENTO)
+  opt gateway aprovou
+  PG->>PG: creditoInterprete(valor pago,<br/>deslocamento)
+  PG->>DB: INSERT lancamentos_financeiros (CREDITO_ATENDIMENTO)
+  PG->>DB: INSERT comprovantes ON CONFLICT DO NOTHING
+  PG->>DB: notificar() para cliente e intérprete
+  end
+  PG-->>CL: 200 OK (PAGO) ou 402 PAGAMENTO_RECUSADO
+  end
+  end
+  CL->>CT: GET /api/atendimentos/:id/comprovante.pdf
+  CT->>CP: gerarComprovantePdf(atendimentoId,<br/>usuarioId, papel)
+  CP->>DB: exigirParticipante() · SELECT clientes (CPF a mascarar)
+  Note over CP: sem comprovante emitido → 422 COMPROVANTE_INDISPONIVEL
+  CP->>CP: gerarPdfComprovante(dados)<br/>views/comprovante.pdf.ts
+  CP-->>CL: 200 application/pdf

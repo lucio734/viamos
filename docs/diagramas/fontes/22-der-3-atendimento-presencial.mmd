@@ -1,0 +1,78 @@
+erDiagram
+  direction TB
+  solicitacoes ||..o| atendimentos : "solicitacao_id"
+  interpretes ||..o{ atendimentos : "interprete_id"
+  atendimentos ||..o| checkins : "atendimento_id"
+  atendimentos ||..o{ mensagens : "atendimento_id"
+  usuarios |o..o{ mensagens : "autor_id"
+  atendimentos ||..o{ localizacoes_compartilhadas : "atendimento_id"
+  usuarios ||..o{ localizacoes_compartilhadas : "usuario_id"
+  atendimentos |o..o{ chamados_suporte : "atendimento_id"
+  usuarios ||..o{ chamados_suporte : "solicitante_id"
+  usuarios |o..o{ chamados_suporte : "operador_id"
+  atendimentos {
+    uuid id PK
+    uuid solicitacao_id FK, UK
+    uuid interprete_id FK
+    timestamptz aceito_em
+    timestamptz inicio_real
+    timestamptz fim_real
+    integer duracao_real_min
+    numeric valor_final
+    status_atendimento status
+  }
+  checkins {
+    uuid id PK
+    uuid atendimento_id FK, UK
+    varchar(64) qr_hash UK
+    timestamptz emitido_em
+    timestamptz lido_em
+    float8 latitude
+    float8 longitude
+    float8 precisao_m
+    float8 distancia_m
+  }
+  mensagens {
+    uuid id PK
+    uuid atendimento_id FK
+    uuid autor_id FK
+    tipo_mensagem tipo
+    varchar(1000) texto
+    text arquivo_uri
+    float8 latitude
+    float8 longitude
+    timestamptz enviada_em
+    timestamptz lida_em
+  }
+  localizacoes_compartilhadas {
+    uuid id PK
+    uuid atendimento_id FK
+    uuid usuario_id FK
+    float8 latitude
+    float8 longitude
+    float8 precisao_m
+    timestamptz registrada_em
+    timestamptz encerrada_em
+  }
+  chamados_suporte {
+    uuid id PK
+    uuid atendimento_id FK
+    uuid solicitante_id FK
+    uuid operador_id FK
+    tipo_chamado tipo
+    varchar(500) descricao
+    float8 latitude
+    float8 longitude
+    status_chamado status
+    timestamptz aberto_em
+    timestamptz encerrado_em
+  }
+  solicitacoes {
+    uuid id PK
+  }
+  interpretes {
+    uuid usuario_id PK, FK
+  }
+  usuarios {
+    uuid id PK
+  }

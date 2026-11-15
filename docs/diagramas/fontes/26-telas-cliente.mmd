@@ -1,0 +1,40 @@
+flowchart TB
+  classDef hub fill:#e6e6e6,stroke:#111,stroke-width:2px,color:#111;
+  classDef externo fill:#fff,stroke:#666,stroke-dasharray:4 3,color:#333;
+  classDef destaque fill:#f2f2f2,stroke:#111,stroke-width:1.5px,color:#111;
+  r_cliente["<b>Hub do cliente</b><br/>/cliente<br/>☰ Início"]
+  r_cliente_solicitacoes_nova["<b>Nova solicitação</b><br/>/cliente/solicitacoes/nova"]
+  r_cliente_solicitacoes_id["<b>Acompanhamento da solicitação</b><br/>/cliente/solicitacoes/:id"]
+  r_cliente_atendimentos_id["<b>Detalhe do atendimento (cliente)</b><br/>/cliente/atendimentos/:id"]
+  r_cliente_atendimentos_id_sala["<b>Sala de atendimento (cliente)</b><br/>/cliente/atendimentos/:id/sala"]
+  r_cliente_atendimentos_id_pagamento["<b>Pagamento</b><br/>/cliente/atendimentos/:id/pagamento"]
+  r_cliente_atendimentos_id_avaliar["<b>Avaliar intérprete</b><br/>/cliente/atendimentos/:id/avaliar"]
+  r_cliente_historico["<b>Histórico (cliente)</b><br/>/cliente/historico<br/>☰ Atendimentos"]
+  r_cliente_perfil["<b>Perfil (cliente)</b><br/>/cliente/perfil<br/>☰ Perfil"]
+  r_notificacoes["<b>Notificações</b><br/>/notificacoes<br/>☰ Notificações"]
+  r_suporte["<b>Suporte</b><br/>/suporte"]
+  r_verificar_codigo["<b>Verificar comprovante</b><br/>/verificar/:codigo"]:::externo
+  r_login["<b>Login</b><br/>/login<br/>☰ Sair"]:::externo
+  nota_1{{"tela indicada pela<br/>notificação"}}:::externo
+  r_cliente <-->|"Solicitar intérprete… ⇄<br/>Voltar ao painel"| r_cliente_solicitacoes_nova
+  r_cliente -->|"Ver histórico"| r_cliente_historico
+  r_cliente -->|"Preciso de ajuda"| r_suporte
+  r_cliente <-->|"· ⇄ Voltar ao painel"| r_cliente_solicitacoes_id
+  r_cliente_solicitacoes_nova ==>|"confirmarSolicitacao()"| r_cliente_solicitacoes_id
+  r_cliente_solicitacoes_id <-->|"Ficha do atendimento ⇄<br/>Voltar para a…"| r_cliente_atendimentos_id
+  r_cliente_solicitacoes_id -->|"Sala de Atendimento"| r_cliente_atendimentos_id_sala
+  r_cliente_solicitacoes_id -->|"Pagar"| r_cliente_atendimentos_id_pagamento
+  r_cliente_solicitacoes_id -->|"Avaliar Intérprete"| r_cliente_atendimentos_id_avaliar
+  r_cliente_atendimentos_id <-->|"Abrir Sala ⇄ Voltar aos<br/>detalhes do…"| r_cliente_atendimentos_id_sala
+  r_cliente_atendimentos_id -->|"SOS / Suporte"| r_suporte
+  r_cliente_atendimentos_id <-->|"Realizar Pagamento Agora ⇄<br/>Voltar ao atendimento"| r_cliente_atendimentos_id_pagamento
+  r_cliente_atendimentos_id -->|"Verificar Autenticidade"| r_verificar_codigo
+  r_cliente_atendimentos_id <-->|"Avaliar Intérprete ⇄<br/>Voltar ao Atendimento /<br/>Pular"| r_cliente_atendimentos_id_avaliar
+  r_cliente_atendimentos_id_sala -->|"SOS"| r_suporte
+  r_cliente_atendimentos_id_pagamento -->|"Avaliar Intérprete"| r_cliente_atendimentos_id_avaliar
+  r_cliente_atendimentos_id_pagamento -->|"Ir para o Histórico"| r_cliente_historico
+  r_cliente_historico -->|"Solicitar Intérprete"| r_cliente_solicitacoes_nova
+  r_cliente_historico -->|"Ver Detalhes"| r_cliente_atendimentos_id
+  r_cliente_perfil ==>|"confirmarExclusaoConta()"| r_login
+  r_notificacoes ==>|"marcarUmaComoLida()"| nota_1
+  class r_cliente hub;

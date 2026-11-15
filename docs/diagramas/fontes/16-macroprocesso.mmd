@@ -1,0 +1,32 @@
+flowchart TB
+  classDef inicio fill:#111,stroke:#111,color:#fff;
+  classDef erro fill:#fff,stroke:#666,stroke-dasharray:4 3,color:#333;
+  classDef destaque fill:#e6e6e6,stroke:#111,stroke-width:2px,color:#111;
+  subgraph sg_gestao["Processos de gestão"]
+    direction LR
+    g1["<b>Habilitação de intérpretes</b><br/>análise documental pelo backoffice<br/>RF05, RF06 · condiciona a etapa 3"]
+    g2["<b>Auditoria e privacidade</b><br/>trilha imutável e direitos LGPD<br/>RF44, RF45 · todas as etapas"]
+  end
+  subgraph sg_primarios["Processos primários — cadeia de valor do atendimento presencial"]
+    direction LR
+    entrada(["Pessoa surda<br/>precisa de mediação<br/>presencial em Libras"]):::inicio
+    p1["<b>1. Cadastro<br/>e acesso</b><br/>RF01–RF04<br/>RF07–RF09"]:::destaque
+    p2["<b>2. Solicitação<br/>e estimativa</b><br/>RF10–RF16<br/>mínimo de 1 h"]:::destaque
+    p3["<b>3. Distribuição<br/>e aceite exclusivo</b><br/>RF17, RF20–RF25<br/>raio até 15 km e agenda"]:::destaque
+    p4["<b>4. Encontro<br/>e check-in</b><br/>RF28–RF32<br/>QR + GPS até 200 m"]:::destaque
+    p5["<b>5. Atendimento<br/>e encerramento</b><br/>RF33<br/>duração real"]:::destaque
+    p6["<b>6. Pagamento<br/>e comprovante</b><br/>RF35–RF38<br/>PDF verificável"]:::destaque
+    p7["<b>7. Avaliação<br/>e repasse</b><br/>RF26, RF27<br/>RF40, RF41"]:::destaque
+    saida(["Acessibilidade<br/>garantida, comprovada<br/>e auditável"]):::inicio
+    entrada --> p1 --> p2 --> p3 --> p4 --> p5 --> p6 --> p7 --> saida
+  end
+  subgraph sg_apoio["Processos de apoio"]
+    direction LR
+    a1["<b>Notificações</b><br/>RF42<br/>etapas 3, 4, 5 e 6"]
+    a2["<b>Suporte e emergência</b><br/>RF34<br/>etapas 4 e 5"]
+    a3["<b>Gateway de pagamento</b><br/>simulado no MVP<br/>etapas 6 e 7 · taxa de 10%"]
+    a4["<b>Mapa e geolocalização</b><br/>OpenStreetMap + GPS<br/>etapas 2, 3 e 4"]
+    a5["<b>Histórico e perfil</b><br/>RF39, RF43<br/>etapas 1 e 7"]
+  end
+  sg_gestao -->|"habilita e audita"| sg_primarios
+  sg_primarios -.-|"sustentada por"| sg_apoio

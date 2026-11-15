@@ -1,0 +1,33 @@
+flowchart TB
+  classDef hub fill:#e6e6e6,stroke:#111,stroke-width:2px,color:#111;
+  classDef externo fill:#fff,stroke:#666,stroke-dasharray:4 3,color:#333;
+  classDef destaque fill:#f2f2f2,stroke:#111,stroke-width:1.5px,color:#111;
+  subgraph sg_usuario["Aparelho do usuário (celular ou computador)"]
+    navegador["<b>Navegador</b><br/>SPA React 19 + React Router 7<br/>Tailwind CSS 4 · Leaflet 1.9.4<br/>token JWT em sessionStorage"]:::hub
+    sensores["APIs do navegador<br/>Geolocation · câmera (getUserMedia)"]
+  end
+  subgraph sg_vercel["Vercel — hospedagem estática com CDN"]
+    estatico["<b>Arquivos estáticos</b><br/>build do Vite 8 (frontend/dist)<br/>rewrite /((?!api/).*) → /index.html"]
+  end
+  subgraph sg_render["Render — web service node (plano free)"]
+    api["<b>API REST viamos-api</b><br/>Node.js >=20 · Express 5.3.0<br/>Helmet · CORS · rate limit · JWT + sessão<br/>Zod 4 · Drizzle ORM 0.45.4<br/>health check /api/health"]:::hub
+  end
+  subgraph sg_banco["PostgreSQL gerenciado (Render Postgres ou Neon)"]
+    banco[("<b>PostgreSQL</b><br/>27 tabelas · 20 enums<br/>migrações SQL versionadas")]
+  end
+  subgraph sg_externos["Serviços externos"]
+    osm["OpenStreetMap<br/>(blocos de mapa)"]:::externo
+    nominatim["Nominatim<br/>(busca de endereço)"]:::externo
+  end
+  subgraph sg_github["GitHub"]
+    repo["Repositório<br/>lucio734/viamos"]
+    ci["GitHub Actions (CI)<br/>Node 22 + postgres:16-alpine<br/>typecheck · lint · testes · build"]
+  end
+  navegador -->|"HTTPS 443<br/>HTML, JS e CSS"| estatico
+  navegador -->|"HTTPS 443 · REST/JSON<br/>Authorization: Bearer"| api
+  api -->|"TCP 5432 · TLS<br/>SQL parametrizado"| banco
+  navegador -->|"HTTPS 443"| osm & nominatim
+  navegador --- sensores
+  repo -->|"push na main"| ci
+  repo -.->|"deploy automático"| estatico
+  repo -.->|"deploy automático"| api

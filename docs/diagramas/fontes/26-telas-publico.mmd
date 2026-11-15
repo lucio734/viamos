@@ -1,0 +1,33 @@
+flowchart TB
+  classDef hub fill:#e6e6e6,stroke:#111,stroke-width:2px,color:#111;
+  classDef externo fill:#fff,stroke:#666,stroke-dasharray:4 3,color:#333;
+  classDef destaque fill:#f2f2f2,stroke:#111,stroke-width:1.5px,color:#111;
+  r_raiz["<b>Splash</b><br/>/"]
+  r_login["<b>Login</b><br/>/login"]
+  r_recuperar_senha["<b>Recuperar senha</b><br/>/recuperar-senha"]
+  r_redefinir_senha_token["<b>Redefinir senha</b><br/>/redefinir-senha/:token"]
+  r_cadastro["<b>Seleção de perfil</b><br/>/cadastro"]
+  r_cadastro_cliente["<b>Cadastro do cliente</b><br/>/cadastro/cliente"]
+  r_cadastro_interprete["<b>Cadastro do intérprete</b><br/>/cadastro/interprete"]
+  r_verificar_codigo["<b>Verificar comprovante</b><br/>/verificar/:codigo"]
+  r_cliente["<b>Hub do cliente</b><br/>/cliente"]:::externo
+  r_interprete["<b>Hub do intérprete</b><br/>/interprete"]:::externo
+  r_backoffice["<b>Fila de certificações</b><br/>/backoffice"]:::externo
+  r_raiz -.->|"sessão ativa"| r_cliente
+  r_raiz -.->|"sessão ativa"| r_interprete
+  r_raiz -.->|"sessão ativa"| r_backoffice
+  r_raiz -.-> r_login
+  r_login ==>|"login válido"| r_cliente
+  r_login ==>|"login válido"| r_interprete
+  r_login ==>|"login válido"| r_backoffice
+  r_login <-->|"Esqueci minha senha ⇄<br/>Voltar ao login"| r_recuperar_senha
+  r_login <-->|"Cadastre-se ⇄ Entrar"| r_cadastro
+  r_recuperar_senha <-->|"Abrir link de… ⇄ Solicitar<br/>um novo link…"| r_redefinir_senha_token
+  r_redefinir_senha_token -->|"Ir para o login"| r_login
+  r_cadastro -->|"Sou pessoa surda…"| r_cadastro_cliente
+  r_cadastro <-->|"Sou intérprete de Libras…<br/>⇄ Voltar"| r_cadastro_interprete
+  r_cadastro_cliente ==>|"enviar() / Ir para o<br/>início"| r_cliente
+  r_cadastro_cliente -->|"Já tem uma conta? Voltar…"| r_login
+  r_cadastro_interprete -->|"Ir para o painel do…"| r_interprete
+  r_verificar_codigo ==>|"consultarOutro()"| r_verificar_codigo
+  r_verificar_codigo -->|"Voltar ao acesso da…"| r_login

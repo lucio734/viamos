@@ -1,0 +1,27 @@
+flowchart TB
+  classDef hub fill:#e6e6e6,stroke:#111,stroke-width:2px,color:#111;
+  classDef externo fill:#fff,stroke:#666,stroke-dasharray:4 3,color:#333;
+  classDef destaque fill:#f2f2f2,stroke:#111,stroke-width:1.5px,color:#111;
+  subgraph sg_fontes["Código-fonte (fonte única da verdade)"]
+    schema["backend/src/models/schema.ts<br/>backend/src/config/regras.ts"]
+    rotasFront["frontend/src/rotas.tsx<br/>frontend/src/pages/**"]
+    rotasBack["backend/src/routes/index.ts<br/>backend/src/services/**"]
+    infra["package-lock.json · render.yaml<br/>vercel.json · ci.yml"]
+  end
+  subgraph sg_extracao["Extração automática"]
+    exportador["backend/src/db/exportar-modelo.ts<br/>(introspecção do Drizzle ORM)"]:::hub
+    extrator["docs/diagramas/lib/extrair.mjs<br/>(árvore sintática do TypeScript)"]:::hub
+  end
+  dados[("docs/diagramas/dados/*.json<br/>27 tabelas · 33 rotas<br/>65 endpoints · 90 transições")]
+  construtores["docs/diagramas/lib/diagramas-*.mjs<br/>(construtores Mermaid)"]:::hub
+  fontesMmd["docs/diagramas/fontes/*.mmd<br/>34 diagramas"]
+  mmdc["Mermaid CLI<br/>(renderização em navegador headless)"]:::hub
+  figuras["docs/producao-tecnica/figuras/*.png"]
+  tabelas["docs/producao-tecnica/tabelas/*.md<br/>dicionário de dados · rotas · API · tecnologias"]
+  verificar{"npm run verificar<br/>fontes em dia com o código?"}:::destaque
+  schema --> exportador --> dados
+  rotasFront & rotasBack & infra --> extrator --> dados
+  dados --> construtores --> fontesMmd --> mmdc --> figuras
+  dados --> tabelas
+  fontesMmd -.-> verificar
+  dados -.-> verificar

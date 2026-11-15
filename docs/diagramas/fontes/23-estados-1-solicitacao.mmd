@@ -1,0 +1,10 @@
+stateDiagram-v2
+  direction LR
+  [*] --> BUSCANDO : criarSolicitacao<br/>cotação + distribuição
+  BUSCANDO --> ACEITA : aceitarDemanda<br/>aceite exclusivo
+  BUSCANDO --> CANCELADA : cancelarSolicitacao<br/>sem custo
+  ACEITA --> CANCELADA : cancelarSolicitacao<br/>taxa se faltar menos de 24 h
+  ACEITA --> EM_ANDAMENTO : realizarCheckin<br/>QR + GPS
+  EM_ANDAMENTO --> CONCLUIDA : encerrarAtendimento
+  CONCLUIDA --> [*]
+  CANCELADA --> [*]

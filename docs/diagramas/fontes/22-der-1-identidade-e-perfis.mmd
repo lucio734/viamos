@@ -1,0 +1,72 @@
+erDiagram
+  direction LR
+  usuarios ||--o| clientes : "usuario_id"
+  usuarios ||--o| interpretes : "usuario_id"
+  interpretes ||..o{ certificacoes : "interprete_id"
+  certificacoes ||..o{ analises_documentais : "certificacao_id"
+  usuarios ||..o{ analises_documentais : "operador_id"
+  interpretes ||..o{ disponibilidades : "interprete_id"
+  usuarios {
+    uuid id PK
+    varchar(120) nome
+    varchar(160) email
+    varchar(100) senha_hash
+    varchar(20) telefone
+    papel_usuario papel
+    text foto_url
+    boolean ativo
+    integer tentativas_falhas
+    timestamptz bloqueado_ate
+    boolean dois_fatores_ativo
+    timestamptz criado_em
+    timestamptz atualizado_em
+  }
+  clientes {
+    uuid usuario_id PK, FK
+    varchar(11) cpf UK
+    date data_nascimento
+    varchar(8) cep
+    text endereco
+    text preferencias_acessibilidade
+  }
+  interpretes {
+    uuid usuario_id PK, FK
+    varchar(14) documento UK
+    text endereco_base
+    float8 latitude_base
+    float8 longitude_base
+    text[] especialidades
+    numeric preco_hora
+    integer raio_km
+    boolean disponivel_agora
+    status_habilitacao status_habilitacao
+    numeric reputacao
+    integer total_avaliacoes
+  }
+  certificacoes {
+    uuid id PK
+    uuid interprete_id FK
+    tipo_certificacao tipo
+    varchar(60) numero
+    varchar(200) nome_arquivo
+    varchar(80) mime_arquivo
+    bytea arquivo
+    integer tamanho_bytes
+    status_certificacao status
+    timestamptz enviada_em
+  }
+  analises_documentais {
+    uuid id PK
+    uuid certificacao_id FK
+    uuid operador_id FK
+    resultado_analise resultado
+    text justificativa
+    timestamptz data
+  }
+  disponibilidades {
+    uuid id PK
+    uuid interprete_id FK
+    smallint dia_semana
+    time inicio
+    time fim
+  }

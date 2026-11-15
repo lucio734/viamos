@@ -1,0 +1,32 @@
+flowchart TD
+  classDef hub fill:#e6e6e6,stroke:#111,stroke-width:2px,color:#111;
+  classDef externo fill:#fff,stroke:#666,stroke-dasharray:4 3,color:#333;
+  classDef destaque fill:#f2f2f2,stroke:#111,stroke-width:1.5px,color:#111;
+  entrada(["/login — autenticação"]):::externo
+  subgraph sg_cliente["Área do cliente — papel CLIENTE"]
+    r_cliente["<b>Hub do cliente</b><br/>/cliente"]
+    r_cliente_solicitacoes_nova["<b>Nova solicitação</b><br/>/cliente/solicitacoes/nova"]
+    r_cliente_solicitacoes_id["<b>Acompanhamento da solicitação</b><br/>/cliente/solicitacoes/:id"]
+    r_cliente_atendimentos_id["<b>Detalhe do atendimento (cliente)</b><br/>/cliente/atendimentos/:id"]
+    r_cliente_atendimentos_id_sala["<b>Sala de atendimento (cliente)</b><br/>/cliente/atendimentos/:id/sala"]
+    r_cliente_atendimentos_id_pagamento["<b>Pagamento</b><br/>/cliente/atendimentos/:id/pagamento"]
+    r_cliente_atendimentos_id_avaliar["<b>Avaliar intérprete</b><br/>/cliente/atendimentos/:id/avaliar"]
+    r_cliente_historico["<b>Histórico (cliente)</b><br/>/cliente/historico"]
+    r_cliente_perfil["<b>Perfil (cliente)</b><br/>/cliente/perfil"]
+  end
+  r_cliente --> r_cliente_solicitacoes_nova
+  r_cliente --> r_cliente_solicitacoes_id
+  r_cliente --> r_cliente_atendimentos_id
+  r_cliente_atendimentos_id --> r_cliente_atendimentos_id_sala
+  r_cliente_atendimentos_id --> r_cliente_atendimentos_id_pagamento
+  r_cliente_atendimentos_id --> r_cliente_atendimentos_id_avaliar
+  r_cliente --> r_cliente_historico
+  r_cliente --> r_cliente_perfil
+  class r_cliente hub;
+  entrada ==>|"CLIENTE"| r_cliente
+  subgraph sg_comum["Telas comuns (qualquer papel autenticado)"]
+    r_notificacoes["<b>Notificações</b><br/>/notificacoes"]
+    r_suporte["<b>Suporte</b><br/>/suporte"]
+  end
+  r_cliente -.-> r_notificacoes
+  r_cliente -.-> r_suporte

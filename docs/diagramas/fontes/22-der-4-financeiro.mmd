@@ -1,0 +1,75 @@
+erDiagram
+  direction TB
+  clientes ||..o{ formas_pagamento : "cliente_id"
+  atendimentos ||..o{ pagamentos : "atendimento_id"
+  formas_pagamento |o..o{ pagamentos : "forma_pagamento_id"
+  interpretes ||..o{ contas_bancarias : "interprete_id"
+  interpretes ||..o{ repasses : "interprete_id"
+  contas_bancarias |o..o{ repasses : "conta_bancaria_id"
+  interpretes ||..o{ lancamentos_financeiros : "interprete_id"
+  pagamentos |o..o{ lancamentos_financeiros : "pagamento_id"
+  repasses |o..o{ lancamentos_financeiros : "repasse_id"
+  formas_pagamento {
+    uuid id PK
+    uuid cliente_id FK
+    tipo_forma_pagamento tipo
+    varchar(120) chave_pix
+    varchar(120) token_gateway
+    varchar(30) bandeira
+    varchar(4) final_cartao
+    boolean principal
+    boolean ativa
+    timestamptz criada_em
+  }
+  pagamentos {
+    uuid id PK
+    uuid atendimento_id FK
+    uuid forma_pagamento_id FK
+    numeric valor
+    tipo_forma_pagamento meio
+    status_pagamento status
+    varchar(80) referencia_gateway UK
+    varchar(200) mensagem_gateway
+    integer tentativas
+    timestamptz criado_em
+    timestamptz confirmado_em
+  }
+  contas_bancarias {
+    uuid id PK
+    uuid interprete_id FK
+    varchar(60) banco
+    varchar(10) agencia
+    varchar(20) conta
+    varchar(120) titular
+    varchar(120) chave_pix
+    boolean principal
+  }
+  repasses {
+    uuid id PK
+    uuid interprete_id FK
+    uuid conta_bancaria_id FK
+    numeric valor
+    status_repasse status
+    varchar(80) referencia_gateway
+    timestamptz solicitado_em
+    timestamptz concluido_em
+  }
+  lancamentos_financeiros {
+    uuid id PK
+    uuid interprete_id FK
+    uuid pagamento_id FK
+    uuid repasse_id FK
+    tipo_lancamento tipo
+    numeric valor
+    varchar(200) descricao
+    timestamptz data
+  }
+  clientes {
+    uuid usuario_id PK, FK
+  }
+  atendimentos {
+    uuid id PK
+  }
+  interpretes {
+    uuid usuario_id PK, FK
+  }

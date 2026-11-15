@@ -1,0 +1,19 @@
+{
+  "name": "viamos-diagramas",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Gerador dos diagramas da Produção Técnica do Víamos a partir do código-fonte (Bloco P1)",
+  "scripts": {
+    "gerar": "node gerar.mjs",
+    "figuras": "node gerar.mjs --figuras",
+    "verificar": "node gerar.mjs --verificar"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@mermaid-js/mermaid-cli": "^12.2.0",
+    "typescript": "^5.9.3"
+  }
+}

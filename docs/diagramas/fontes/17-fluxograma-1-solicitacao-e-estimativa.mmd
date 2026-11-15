@@ -1,0 +1,22 @@
+flowchart TB
+  classDef inicio fill:#111,stroke:#111,color:#fff;
+  classDef erro fill:#fff,stroke:#666,stroke-dasharray:4 3,color:#333;
+  classDef destaque fill:#e6e6e6,stroke:#111,stroke-width:2px,color:#111;
+  ini(["Início: cliente autenticado<br/>abre #quot;Nova solicitação#quot;"]):::inicio
+  dados[/"Informa tipo de serviço, data e horário,<br/>duração (1 h a 12 h, em blocos de 30 min)<br/>e o local marcado no mapa"/]
+  val{"Dados válidos<br/>e horário futuro?"}
+  errVal["400 VALIDACAO<br/>422 DURACAO_BLOCO<br/>422 DATA_PASSADA"]:::erro
+  est["Sistema calcula a estimativa — RF15<br/>preço/hora do tipo × horas<br/>+ deslocamento R$ 15,00<br/>+ taxa da plataforma 10%"]
+  conf{"Cliente<br/>confirma?"}
+  grava["Grava a solicitação BUSCANDO<br/>e a cotação (regra v1) — RF16"]:::destaque
+  dist["Distribuição — RF17 e D-20<br/>intérpretes APROVADOS e online, com o local<br/>a até min(raio do intérprete, 15 km),<br/>início dentro da grade semanal e agenda livre;<br/>por proximidade e reputação, uma oferta e um aviso para cada"]
+  nenhum{"Algum intérprete<br/>elegível?"}
+  espera["Continua BUSCANDO: quem ficar elegível<br/>depois (online, novo raio ou nova grade)<br/>recebe a oferta — nova distribuição"]
+  cont(["Continua na parte 2:<br/>resposta dos intérpretes"]):::inicio
+  ini --> dados --> val
+  val -->|"não"| errVal --> dados
+  val -->|"sim"| est --> conf
+  conf -->|"não, ajusta"| dados
+  conf -->|"sim"| grava --> dist --> nenhum
+  nenhum -->|"sim"| cont
+  nenhum -->|"não"| espera --> cont

@@ -1,0 +1,30 @@
+flowchart LR
+  classDef hub fill:#e6e6e6,stroke:#111,stroke-width:2px,color:#111;
+  classDef externo fill:#fff,stroke:#666,stroke-dasharray:4 3,color:#333;
+  classDef destaque fill:#f2f2f2,stroke:#111,stroke-width:1.5px,color:#111;
+  subgraph sg_atores["Pessoas"]
+    cliente(["<b>Cliente surdo</b>"])
+    interprete(["<b>Intérprete de Libras</b>"])
+    operador(["<b>Operador</b><br/>backoffice e suporte"])
+    publico(["<b>Qualquer pessoa</b><br/>com o código do comprovante"])
+  end
+  viamos["<b>Plataforma Víamos</b><br/>SPA + API REST + PostgreSQL<br/>65 endpoints"]:::hub
+  subgraph sg_externos["Serviços e recursos externos"]
+    gateway["<b>Gateway de pagamento</b><br/>simulado no MVP (D-08)"]:::externo
+    email["<b>Provedor de e-mail</b><br/>console no MVP"]:::externo
+    mapa["<b>OpenStreetMap e Nominatim</b><br/>mapa e busca de endereço"]:::externo
+    aparelho["<b>Aparelho do usuário</b><br/>GPS e câmera"]:::externo
+  end
+  cliente -->|"cadastro, solicitação, QR do check-in,<br/>sala, pagamento e avaliação"| viamos
+  viamos -->|"estimativa, andamento, avisos<br/>e comprovante em PDF"| cliente
+  interprete -->|"cadastro e certificado, aceite ou recusa,<br/>check-in com GPS, encerramento, repasse"| viamos
+  viamos -->|"demandas no raio e na agenda,<br/>avisos e ganhos"| interprete
+  operador -->|"parecer da certificação,<br/>atendimento de chamados"| viamos
+  viamos -->|"fila de certificações, emergências,<br/>indicadores e trilha de auditoria"| operador
+  publico -->|"código de verificação"| viamos
+  viamos -->|"dados essenciais do atendimento (RF38)"| publico
+  viamos -->|"cobrança Pix ou cartão,<br/>transferência do repasse"| gateway
+  gateway -->|"aprovação ou recusa"| viamos
+  viamos -->|"link de recuperação de senha"| email
+  viamos -->|"blocos do mapa e<br/>busca de endereço"| mapa
+  aparelho -->|"posição (check-in, sala)<br/>e leitura do QR"| viamos

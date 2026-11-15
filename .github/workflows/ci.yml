@@ -8,7 +8,7 @@ on:
 
 jobs:
   backend:
-    name: Backend (Typecheck, Migrate, Vitest 50 tests, Build)
+    name: Backend (Typecheck, modelo do DER, Vitest, Build)
     runs-on: ubuntu-latest
     services:
       postgres:
@@ -41,8 +41,28 @@ jobs:
           cache-dependency-path: backend/package-lock.json
       - run: npm ci
       - run: npm run typecheck
+      # item #38: o modelo versionado do DER precisa ser igual ao que o schema.ts gera
+      - run: npm run docs:modelo -- --verificar
       - run: npm test
       - run: npm run build
+
+  diagramas:
+    name: Diagramas da Produção Técnica em dia com o código
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: docs/diagramas
+    env:
+      PUPPETEER_SKIP_DOWNLOAD: 'true' # a verificação não desenha figuras; não precisa baixar navegador
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: docs/diagramas/package-lock.json
+      - run: npm ci
+      - run: npm run verificar
 
   frontend:
     name: Frontend (Typecheck, Lint, Unit Tests, Vite Build)

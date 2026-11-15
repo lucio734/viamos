@@ -1,0 +1,63 @@
+erDiagram
+  direction TB
+  usuarios ||..o{ consentimentos : "usuario_id"
+  usuarios ||..o{ solicitacoes_dados : "usuario_id"
+  usuarios ||..o{ notificacoes : "usuario_id"
+  usuarios ||..o{ sessoes : "usuario_id"
+  usuarios ||..o{ tokens_recuperacao : "usuario_id"
+  usuarios |o..o{ eventos_auditoria : "usuario_id"
+  consentimentos {
+    uuid id PK
+    uuid usuario_id FK
+    finalidade_consentimento finalidade
+    varchar(20) versao_termo
+    timestamptz concedido_em
+    timestamptz revogado_em
+  }
+  solicitacoes_dados {
+    uuid id PK
+    uuid usuario_id FK
+    tipo_solicitacao_dados tipo
+    status_solicitacao_dados status
+    timestamptz criada_em
+    timestamptz concluida_em
+  }
+  notificacoes {
+    uuid id PK
+    uuid usuario_id FK
+    tipo_notificacao tipo
+    varchar(120) titulo
+    varchar(500) conteudo
+    varchar(200) referencia_recurso
+    boolean lida
+    timestamptz criada_em
+  }
+  sessoes {
+    uuid id PK
+    uuid usuario_id FK
+    varchar(64) token_hash UK
+    varchar(200) dispositivo
+    timestamptz expira_em
+    boolean revogada
+    timestamptz criada_em
+  }
+  tokens_recuperacao {
+    uuid id PK
+    uuid usuario_id FK
+    varchar(64) hash UK
+    timestamptz expira_em
+    timestamptz usado_em
+  }
+  eventos_auditoria {
+    uuid id PK
+    uuid usuario_id FK
+    varchar(60) tipo
+    varchar(60) entidade
+    uuid entidade_id
+    jsonb detalhes
+    varchar(45) ip
+    timestamptz data
+  }
+  usuarios {
+    uuid id PK
+  }

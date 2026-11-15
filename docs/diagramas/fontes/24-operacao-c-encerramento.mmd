@@ -1,0 +1,23 @@
+sequenceDiagram
+  autonumber
+  actor US as Intérprete<br/>ou cliente
+  participant CT as atendimento.controller<br/>encerrar
+  participant AT as atendimento.service<br/>encerrarAtendimento
+  participant DB as PostgreSQL
+  participant AP as notificacao.service<br/>auditoria.service
+  US->>CT: POST /api/atendimentos/:id/encerrar
+  CT->>AT: encerrarAtendimento(atendimentoId,<br/>usuarioId, papel, ip)
+  AT->>DB: exigirParticipante()<br/>SELECT atendimento completo
+  Note over AT: não participa do atendimento → 403<br/>já CONCLUIDO → 409 ENCERRAMENTO_DUPLICADO<br/>não está EM_ANDAMENTO → 422 ESTADO_INVALIDO
+  AT->>AT: calcularValorFinal(cotação, previsto, real)<br/>cobra o maior entre o contratado e o real<br/>arredondado em blocos de 30 min (D-03)
+  rect rgb(235, 235, 235)
+  Note over AT,DB: db.transaction
+  AT->>DB: UPDATE atendimentos SET status = 'CONCLUIDO',<br/>fim_real, duracao_real_min, valor_final<br/>WHERE status = 'EM_ANDAMENTO'
+  AT->>DB: UPDATE solicitacoes<br/>SET status = 'CONCLUIDA'
+  AT->>DB: UPDATE localizacoes_compartilhadas<br/>SET encerrada_em = agora
+  AT->>DB: INSERT pagamentos<br/>(status PENDENTE, valor final)
+  AT->>DB: INSERT mensagens (tipo SISTEMA)
+  AT->>AP: notificar() para cliente e intérprete<br/>registrarEvento(ENCERRAMENTO)
+  end
+  AT-->>CT: { status, duracaoRealMin,<br/>valorFinal, pagamentoId }
+  CT-->>US: 200 OK

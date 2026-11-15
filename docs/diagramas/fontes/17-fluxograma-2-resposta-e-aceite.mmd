@@ -1,0 +1,26 @@
+flowchart TB
+  classDef inicio fill:#111,stroke:#111,color:#fff;
+  classDef erro fill:#fff,stroke:#666,stroke-dasharray:4 3,color:#333;
+  classDef destaque fill:#e6e6e6,stroke:#111,stroke-width:2px,color:#111;
+  ini(["Solicitação BUSCANDO<br/>(vem da parte 1)"]):::inicio
+  resp{"O que acontece<br/>com a demanda?"}
+  rec["Oferta RECUSADA só para<br/>esse intérprete — RF23<br/>segue BUSCANDO para os demais"]
+  bloq["Solicitação bloqueada na transação;<br/>vínculo e estado relidos depois do bloqueio"]
+  canc{"Já ACEITA e faltam<br/>menos de 24 h?"}
+  taxa["Taxa de 20%<br/>do valor estimado"]
+  semTaxa["Sem custo"]
+  fimCanc(["Fim: solicitação CANCELADA<br/>ofertas pendentes EXPIRADAS — RF19"]):::inicio
+  verif["Aceite — RF22: com o intérprete bloqueado,<br/>o serviço confere habilitação, demanda BUSCANDO,<br/>horário futuro, raio, grade semanal e agenda livre"]
+  ace{"Tudo<br/>confere?"}
+  errAce["403 · 409 DEMANDA_INDISPONIVEL<br/>422 DEMANDA_EXPIRADA · 422 FORA_DO_RAIO<br/>422 FORA_DA_DISPONIBILIDADE<br/>409 AGENDA_CONFLITANTE"]:::erro
+  trava["Transação atômica:<br/>UPDATE … WHERE status = 'BUSCANDO'<br/>só o primeiro intérprete altera a linha"]:::destaque
+  agendado["Solicitação ACEITA · atendimento AGENDADO<br/>QR Code do check-in gerado<br/>demais ofertas EXPIRADAS · cliente avisado"]
+  cont(["Continua na parte 3:<br/>encontro presencial"]):::inicio
+  ini --> resp
+  resp -->|"um intérprete recusa"| rec --> resp
+  resp -->|"o cliente cancela"| bloq --> canc
+  canc -->|"sim"| taxa --> fimCanc
+  canc -->|"não"| semTaxa --> fimCanc
+  resp -->|"um intérprete aceita"| verif --> ace
+  ace -->|"não"| errAce --> resp
+  ace -->|"sim"| trava --> agendado --> cont

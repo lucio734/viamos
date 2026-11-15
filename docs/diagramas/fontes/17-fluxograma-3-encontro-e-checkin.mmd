@@ -1,0 +1,27 @@
+flowchart TB
+  classDef inicio fill:#111,stroke:#111,color:#fff;
+  classDef erro fill:#fff,stroke:#666,stroke-dasharray:4 3,color:#333;
+  classDef destaque fill:#e6e6e6,stroke:#111,stroke-width:2px,color:#111;
+  ini(["Atendimento AGENDADO<br/>(vem da parte 2)"]):::inicio
+  sala["Sala de atendimento — RF28 a RF30<br/>mensagens, foto do ponto de encontro<br/>e localização temporária no mapa"]
+  gps[/"No local, o intérprete captura a posição do GPS<br/>(obrigatória para liberar a leitura do QR)"/]
+  qr[/"O cliente exibe o QR Code — RF31<br/>o intérprete lê o código"/]
+  c1{"Código<br/>confere?"}
+  c2{"Faltam 30 min<br/>ou menos?"}
+  c3{"Precisão do GPS<br/>até 50 m?"}
+  c4{"Distância<br/>até 200 m?"}
+  e1["422 QR_INVALIDO"]:::erro
+  e2["422 FORA_DA_JANELA"]:::erro
+  e3["422 PRECISAO_INSUFICIENTE"]:::erro
+  e4["422 FORA_DO_LOCAL — RF32"]:::erro
+  and["Com a solicitação bloqueada: check-in registrado,<br/>atendimento e solicitação EM_ANDAMENTO,<br/>início real gravado · cliente avisado"]:::destaque
+  cont(["Continua na parte 4:<br/>encerramento e pagamento"]):::inicio
+  ini --> sala --> gps --> qr --> c1
+  c1 -->|"não"| e1 --> gps
+  c1 -->|"sim"| c2
+  c2 -->|"não"| e2 --> gps
+  c2 -->|"sim"| c3
+  c3 -->|"não"| e3 --> gps
+  c3 -->|"sim"| c4
+  c4 -->|"não"| e4 --> gps
+  c4 -->|"sim"| and --> cont

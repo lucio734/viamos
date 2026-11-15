@@ -16,7 +16,8 @@
     "db:studio": "drizzle-kit studio",
     "db:reset": "npm run db:migrate && npm run db:seed",
     "deploy": "node dist/src/db/migrate.js && node dist/src/server.js",
-    "db:seed:prod": "node dist/src/db/seed.js --force"
+    "db:seed:prod": "node dist/src/db/seed.js --force",
+    "docs:modelo": "tsx src/db/exportar-modelo.ts"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,9 @@
+stateDiagram-v2
+  direction LR
+  [*] --> EM_ANALISE : cadastrarInterprete<br/>certificado enviado
+  EM_ANALISE --> APROVADO : registrarParecer<br/>APROVADO
+  EM_ANALISE --> CORRECAO_SOLICITADA : registrarParecer<br/>CORRECAO
+  EM_ANALISE --> REPROVADO : registrarParecer<br/>REPROVADO
+  CORRECAO_SOLICITADA --> EM_ANALISE : reenviarCertificacao
+  REPROVADO --> EM_ANALISE : reenviarCertificacao
+  APROVADO --> [*] : recebe e aceita demandas

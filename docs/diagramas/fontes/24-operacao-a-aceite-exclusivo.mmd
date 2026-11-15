@@ -1,0 +1,36 @@
+sequenceDiagram
+  autonumber
+  actor IA as Intérprete A
+  actor IB as Intérprete B
+  participant RT as routes/index.ts<br/>autenticar · exigirPapel
+  participant CT as demanda.controller<br/>aceitar
+  participant SV as demanda.service<br/>aceitarDemanda
+  participant DB as PostgreSQL
+  participant AP as notificacao.service<br/>auditoria.service
+  IA->>RT: POST /api/demandas/:id/aceitar<br/>Authorization: Bearer JWT
+  RT->>RT: autenticar() — JWT e sessão válidos<br/>exigirPapel(INTERPRETE)
+  RT->>CT: aceitar(req, res)
+  CT->>SV: aceitarDemanda(usuarioId,<br/>solicitacaoId, ip)
+  rect rgb(235, 235, 235)
+  Note over SV,DB: db.transaction — tudo ou nada
+  SV->>DB: SELECT interpretes WHERE usuario_id = :eu<br/>FOR NO KEY UPDATE (serializa meus aceites)
+  Note over SV: exigirHabilitado()<br/>não APROVADO → 403
+  SV->>DB: SELECT solicitacoes WHERE id = :id
+  Note over SV: status ≠ BUSCANDO → 409 DEMANDA_INDISPONIVEL<br/>horário já passou → 422 DEMANDA_EXPIRADA
+  SV->>DB: carregarContextoElegibilidade()<br/>grade semanal + atendimentos ativos
+  SV->>SV: avaliarElegibilidade() — raio ≤ min(raio_km, 15),<br/>início na grade semanal, agenda livre
+  Note over SV: 422 FORA_DO_RAIO · 422 FORA_DA_DISPONIBILIDADE<br/>409 AGENDA_CONFLITANTE
+  SV->>DB: UPDATE solicitacoes SET status = 'ACEITA'<br/>WHERE id = :id AND status = 'BUSCANDO'
+  DB-->>SV: 1 linha — a trava é deste intérprete
+  SV->>DB: INSERT atendimentos (solicitacao_id UNIQUE)<br/>INSERT checkins (qr_hash aleatório)
+  SV->>DB: UPDATE ofertas — a minha ACEITA,<br/>as demais EXPIRADA
+  SV->>AP: notificar(cliente, ACEITE)<br/>registrarEvento(ACEITE)
+  end
+  SV-->>CT: { atendimentoId, solicitacaoId, mensagem }
+  CT-->>IA: 201 Created
+  IB->>RT: POST /api/demandas/:id/aceitar<br/>(mesma demanda, logo depois)
+  RT->>CT: aceitar(req, res)
+  CT->>SV: aceitarDemanda(...)
+  SV->>DB: SELECT solicitacoes WHERE id = :id
+  DB-->>SV: status = ACEITA
+  SV-->>IB: 409 Conflict — DEMANDA_INDISPONIVEL<br/>(resposta montada por tratarErros)

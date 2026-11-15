@@ -1,0 +1,83 @@
+flowchart LR
+  classDef hub fill:#e6e6e6,stroke:#111,stroke-width:2px,color:#111;
+  classDef externo fill:#fff,stroke:#666,stroke-dasharray:4 3,color:#333;
+  classDef destaque fill:#f2f2f2,stroke:#111,stroke-width:1.5px,color:#111;
+  subgraph sg_publico["Área pública (sem login) · 8 rotas"]
+    r_raiz["<b>Splash</b><br/>/"]
+    r_login["<b>Login</b><br/>/login"]
+    r_recuperar_senha["<b>Recuperar senha</b><br/>/recuperar-senha"]
+    r_redefinir_senha_token["<b>Redefinir senha</b><br/>/redefinir-senha/:token"]
+    r_cadastro["<b>Seleção de perfil</b><br/>/cadastro"]
+    r_cadastro_cliente["<b>Cadastro do cliente</b><br/>…/cliente"]
+    r_cadastro_interprete["<b>Cadastro do intérprete</b><br/>…/interprete"]
+    r_verificar_codigo["<b>Verificar comprovante</b><br/>/verificar/:codigo"]
+  end
+  subgraph sg_cliente["Área do cliente · 9 rotas"]
+    r_cliente["<b>Hub do cliente</b><br/>/cliente"]
+    r_cliente_solicitacoes_nova["<b>Nova solicitação</b><br/>…/solicitacoes/nova"]
+    r_cliente_solicitacoes_id["<b>Acompanhamento da solicitação</b><br/>…/solicitacoes/:id"]
+    r_cliente_atendimentos_id["<b>Detalhe do atendimento (cliente)</b><br/>…/atendimentos/:id"]
+    r_cliente_atendimentos_id_sala["<b>Sala de atendimento (cliente)</b><br/>…/sala"]
+    r_cliente_atendimentos_id_pagamento["<b>Pagamento</b><br/>…/pagamento"]
+    r_cliente_atendimentos_id_avaliar["<b>Avaliar intérprete</b><br/>…/avaliar"]
+    r_cliente_historico["<b>Histórico (cliente)</b><br/>…/historico"]
+    r_cliente_perfil["<b>Perfil (cliente)</b><br/>…/perfil"]
+  end
+  subgraph sg_interprete["Área do intérprete · 10 rotas"]
+    r_interprete["<b>Hub do intérprete</b><br/>/interprete"]
+    r_interprete_demandas["<b>Demandas próximas</b><br/>…/demandas"]
+    r_interprete_demandas_id["<b>Detalhe da demanda</b><br/>…/:id"]
+    r_interprete_agenda["<b>Raio e disponibilidade</b><br/>…/agenda"]
+    r_interprete_atendimentos_id["<b>Detalhe do atendimento (intérprete)</b><br/>…/atendimentos/:id"]
+    r_interprete_atendimentos_id_sala["<b>Sala de atendimento (intérprete)</b><br/>…/sala"]
+    r_interprete_atendimentos_id_avaliar["<b>Avaliar cliente</b><br/>…/avaliar"]
+    r_interprete_ganhos["<b>Ganhos e repasse</b><br/>…/ganhos"]
+    r_interprete_historico["<b>Histórico (intérprete)</b><br/>…/historico"]
+    r_interprete_perfil["<b>Perfil e habilitação</b><br/>…/perfil"]
+  end
+  subgraph sg_backoffice["Backoffice · 4 rotas"]
+    r_backoffice["<b>Fila de certificações</b><br/>/backoffice"]
+    r_backoffice_certificacoes_id["<b>Parecer da certificação</b><br/>…/certificacoes/:id"]
+    r_backoffice_chamados["<b>Chamados de suporte</b><br/>…/chamados"]
+    r_backoffice_auditoria["<b>Trilha de auditoria</b><br/>…/auditoria"]
+  end
+  subgraph sg_comum["Telas comuns · 2 rotas"]
+    r_notificacoes["<b>Notificações</b><br/>/notificacoes"]
+    r_suporte["<b>Suporte</b><br/>/suporte"]
+  end
+  r_raiz --> r_login
+  r_raiz --> r_recuperar_senha
+  r_raiz --> r_redefinir_senha_token
+  r_raiz --> r_cadastro
+  r_cadastro --> r_cadastro_cliente
+  r_cadastro --> r_cadastro_interprete
+  r_raiz --> r_verificar_codigo
+  r_cliente --> r_cliente_solicitacoes_nova
+  r_cliente --> r_cliente_solicitacoes_id
+  r_cliente --> r_cliente_atendimentos_id
+  r_cliente_atendimentos_id --> r_cliente_atendimentos_id_sala
+  r_cliente_atendimentos_id --> r_cliente_atendimentos_id_pagamento
+  r_cliente_atendimentos_id --> r_cliente_atendimentos_id_avaliar
+  r_cliente --> r_cliente_historico
+  r_cliente --> r_cliente_perfil
+  r_interprete --> r_interprete_demandas
+  r_interprete_demandas --> r_interprete_demandas_id
+  r_interprete --> r_interprete_agenda
+  r_interprete --> r_interprete_atendimentos_id
+  r_interprete_atendimentos_id --> r_interprete_atendimentos_id_sala
+  r_interprete_atendimentos_id --> r_interprete_atendimentos_id_avaliar
+  r_interprete --> r_interprete_ganhos
+  r_interprete --> r_interprete_historico
+  r_interprete --> r_interprete_perfil
+  r_backoffice --> r_backoffice_certificacoes_id
+  r_backoffice --> r_backoffice_chamados
+  r_backoffice --> r_backoffice_auditoria
+  r_login ==>|"login · CLIENTE"| r_cliente
+  class r_cliente hub;
+  r_login ==>|"login · INTERPRETE"| r_interprete
+  class r_interprete hub;
+  r_login ==>|"login · BACKOFFICE / SUPORTE"| r_backoffice
+  class r_backoffice hub;
+  r_login -.->|"sessão ativa"| r_notificacoes
+  r_login -.->|"sessão ativa"| r_suporte
+  class r_raiz hub;

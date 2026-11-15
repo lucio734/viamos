@@ -1,0 +1,8 @@
+stateDiagram-v2
+  direction LR
+  [*] --> AGENDADO : aceitarDemanda<br/>QR do check-in gerado
+  AGENDADO --> EM_ANDAMENTO : realizarCheckin<br/>início real gravado
+  AGENDADO --> CANCELADO : cancelarSolicitacao<br/>localização encerrada
+  EM_ANDAMENTO --> CONCLUIDO : encerrarAtendimento<br/>duração real e valor final
+  CONCLUIDO --> [*]
+  CANCELADO --> [*]

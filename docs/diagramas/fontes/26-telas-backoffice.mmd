@@ -1,0 +1,18 @@
+flowchart LR
+  classDef hub fill:#e6e6e6,stroke:#111,stroke-width:2px,color:#111;
+  classDef externo fill:#fff,stroke:#666,stroke-dasharray:4 3,color:#333;
+  classDef destaque fill:#f2f2f2,stroke:#111,stroke-width:1.5px,color:#111;
+  r_backoffice["<b>Fila de certificações</b><br/>/backoffice<br/>☰ Certificações"]
+  r_backoffice_certificacoes_id["<b>Parecer da certificação</b><br/>/backoffice/certificacoes/:id"]
+  r_backoffice_chamados["<b>Chamados de suporte</b><br/>/backoffice/chamados<br/>☰ Chamados"]
+  r_backoffice_auditoria["<b>Trilha de auditoria</b><br/>/backoffice/auditoria<br/>☰ Auditoria"]
+  r_notificacoes["<b>Notificações</b><br/>/notificacoes<br/>☰ Notificações"]
+  r_suporte["<b>Suporte</b><br/>/suporte"]
+  r_login["<b>Login</b><br/>/login<br/>☰ Sair"]:::externo
+  nota_1{{"tela indicada pela<br/>notificação"}}:::externo
+  r_backoffice <-->|"Chamados / Gerenciar ⇄<br/>Voltar para Fila de…"| r_backoffice_chamados
+  r_backoffice <-->|"Auditoria ⇄ Voltar para<br/>Fila de…"| r_backoffice_auditoria
+  r_backoffice -->|"Emitir parecer"| r_backoffice_certificacoes_id
+  r_backoffice_certificacoes_id ==>|"registrarParecer() /<br/>Voltar para a fila de…"| r_backoffice
+  r_notificacoes ==>|"marcarUmaComoLida()"| nota_1
+  class r_backoffice hub;

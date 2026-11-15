@@ -1,0 +1,22 @@
+flowchart TD
+  classDef hub fill:#e6e6e6,stroke:#111,stroke-width:2px,color:#111;
+  classDef externo fill:#fff,stroke:#666,stroke-dasharray:4 3,color:#333;
+  classDef destaque fill:#f2f2f2,stroke:#111,stroke-width:1.5px,color:#111;
+  subgraph sg_publico["Área pública (sem login) — qualquer visitante"]
+    r_raiz["<b>Splash</b><br/>/"]
+    r_login["<b>Login</b><br/>/login"]
+    r_recuperar_senha["<b>Recuperar senha</b><br/>/recuperar-senha"]
+    r_redefinir_senha_token["<b>Redefinir senha</b><br/>/redefinir-senha/:token"]
+    r_cadastro["<b>Seleção de perfil</b><br/>/cadastro"]
+    r_cadastro_cliente["<b>Cadastro do cliente</b><br/>/cadastro/cliente"]
+    r_cadastro_interprete["<b>Cadastro do intérprete</b><br/>/cadastro/interprete"]
+    r_verificar_codigo["<b>Verificar comprovante</b><br/>/verificar/:codigo"]
+  end
+  r_raiz --> r_login
+  r_raiz --> r_recuperar_senha
+  r_raiz --> r_redefinir_senha_token
+  r_raiz --> r_cadastro
+  r_cadastro --> r_cadastro_cliente
+  r_cadastro --> r_cadastro_interprete
+  r_raiz --> r_verificar_codigo
+  class r_raiz hub;

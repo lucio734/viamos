@@ -1,0 +1,3234 @@
+{
+  "origem": "gerado por docs/diagramas/gerar.mjs a partir do código-fonte",
+  "totais": {
+    "tabelas": 27,
+    "rotas": 33,
+    "telas": 30,
+    "endpoints": 65,
+    "transicoes": 90,
+    "diagramas": 34
+  },
+  "rotas": [
+    {
+      "area": "publico",
+      "path": "/",
+      "nome": "Splash",
+      "componente": "Splash",
+      "arquivo": "frontend/src/pages/auth/Splash.tsx",
+      "papeis": []
+    },
+    {
+      "area": "publico",
+      "path": "/login",
+      "nome": "Login",
+      "componente": "Login",
+      "arquivo": "frontend/src/pages/auth/Login.tsx",
+      "papeis": []
+    },
+    {
+      "area": "publico",
+      "path": "/recuperar-senha",
+      "nome": "Recuperar senha",
+      "componente": "RecuperarSenha",
+      "arquivo": "frontend/src/pages/auth/RecuperarSenha.tsx",
+      "papeis": []
+    },
+    {
+      "area": "publico",
+      "path": "/redefinir-senha/:token",
+      "nome": "Redefinir senha",
+      "componente": "RedefinirSenha",
+      "arquivo": "frontend/src/pages/auth/RedefinirSenha.tsx",
+      "papeis": []
+    },
+    {
+      "area": "publico",
+      "path": "/cadastro",
+      "nome": "Seleção de perfil",
+      "componente": "SelecaoPerfil",
+      "arquivo": "frontend/src/pages/auth/SelecaoPerfil.tsx",
+      "papeis": []
+    },
+    {
+      "area": "publico",
+      "path": "/cadastro/cliente",
+      "nome": "Cadastro do cliente",
+      "componente": "CadastroCliente",
+      "arquivo": "frontend/src/pages/auth/CadastroCliente.tsx",
+      "papeis": []
+    },
+    {
+      "area": "publico",
+      "path": "/cadastro/interprete",
+      "nome": "Cadastro do intérprete",
+      "componente": "CadastroInterprete",
+      "arquivo": "frontend/src/pages/auth/CadastroInterprete.tsx",
+      "papeis": []
+    },
+    {
+      "area": "publico",
+      "path": "/verificar/:codigo",
+      "nome": "Verificar comprovante",
+      "componente": "VerificarComprovante",
+      "arquivo": "frontend/src/pages/comum/VerificarComprovante.tsx",
+      "papeis": []
+    },
+    {
+      "area": "cliente",
+      "path": "/cliente",
+      "nome": "Hub do cliente",
+      "componente": "HubCliente",
+      "arquivo": "frontend/src/pages/cliente/Hub.tsx",
+      "papeis": [
+        "CLIENTE"
+      ]
+    },
+    {
+      "area": "cliente",
+      "path": "/cliente/solicitacoes/nova",
+      "nome": "Nova solicitação",
+      "componente": "NovaSolicitacao",
+      "arquivo": "frontend/src/pages/cliente/NovaSolicitacao.tsx",
+      "papeis": [
+        "CLIENTE"
+      ]
+    },
+    {
+      "area": "cliente",
+      "path": "/cliente/solicitacoes/:id",
+      "nome": "Acompanhamento da solicitação",
+      "componente": "DetalheSolicitacao",
+      "arquivo": "frontend/src/pages/cliente/DetalheSolicitacao.tsx",
+      "papeis": [
+        "CLIENTE"
+      ]
+    },
+    {
+      "area": "cliente",
+      "path": "/cliente/atendimentos/:id",
+      "nome": "Detalhe do atendimento (cliente)",
+      "componente": "DetalheAtendimentoCliente",
+      "arquivo": "frontend/src/pages/cliente/DetalheAtendimentoCliente.tsx",
+      "papeis": [
+        "CLIENTE"
+      ]
+    },
+    {
+      "area": "cliente",
+      "path": "/cliente/atendimentos/:id/sala",
+      "nome": "Sala de atendimento (cliente)",
+      "componente": "Sala",
+      "arquivo": "frontend/src/components/Sala.tsx",
+      "papeis": [
+        "CLIENTE"
+      ]
+    },
+    {
+      "area": "cliente",
+      "path": "/cliente/atendimentos/:id/pagamento",
+      "nome": "Pagamento",
+      "componente": "PagamentoAtendimento",
+      "arquivo": "frontend/src/pages/cliente/PagamentoAtendimento.tsx",
+      "papeis": [
+        "CLIENTE"
+      ]
+    },
+    {
+      "area": "cliente",
+      "path": "/cliente/atendimentos/:id/avaliar",
+      "nome": "Avaliar intérprete",
+      "componente": "AvaliarAtendimento",
+      "arquivo": "frontend/src/pages/comum/AvaliarAtendimento.tsx",
+      "papeis": [
+        "CLIENTE"
+      ]
+    },
+    {
+      "area": "cliente",
+      "path": "/cliente/historico",
+      "nome": "Histórico (cliente)",
+      "componente": "HistoricoAtendimentos",
+      "arquivo": "frontend/src/pages/comum/HistoricoAtendimentos.tsx",
+      "papeis": [
+        "CLIENTE"
+      ]
+    },
+    {
+      "area": "cliente",
+      "path": "/cliente/perfil",
+      "nome": "Perfil (cliente)",
+      "componente": "PerfilCliente",
+      "arquivo": "frontend/src/pages/cliente/PerfilCliente.tsx",
+      "papeis": [
+        "CLIENTE"
+      ]
+    },
+    {
+      "area": "interprete",
+      "path": "/interprete",
+      "nome": "Hub do intérprete",
+      "componente": "HubInterprete",
+      "arquivo": "frontend/src/pages/interprete/HubInterprete.tsx",
+      "papeis": [
+        "INTERPRETE"
+      ]
+    },
+    {
+      "area": "interprete",
+      "path": "/interprete/demandas",
+      "nome": "Demandas próximas",
+      "componente": "DemandasInterprete",
+      "arquivo": "frontend/src/pages/interprete/DemandasInterprete.tsx",
+      "papeis": [
+        "INTERPRETE"
+      ]
+    },
+    {
+      "area": "interprete",
+      "path": "/interprete/demandas/:id",
+      "nome": "Detalhe da demanda",
+      "componente": "DetalheDemanda",
+      "arquivo": "frontend/src/pages/interprete/DetalheDemanda.tsx",
+      "papeis": [
+        "INTERPRETE"
+      ]
+    },
+    {
+      "area": "interprete",
+      "path": "/interprete/agenda",
+      "nome": "Raio e disponibilidade",
+      "componente": "AgendaInterprete",
+      "arquivo": "frontend/src/pages/interprete/AgendaInterprete.tsx",
+      "papeis": [
+        "INTERPRETE"
+      ]
+    },
+    {
+      "area": "interprete",
+      "path": "/interprete/atendimentos/:id",
+      "nome": "Detalhe do atendimento (intérprete)",
+      "componente": "DetalheAtendimentoInterprete",
+      "arquivo": "frontend/src/pages/interprete/DetalheAtendimentoInterprete.tsx",
+      "papeis": [
+        "INTERPRETE"
+      ]
+    },
+    {
+      "area": "interprete",
+      "path": "/interprete/atendimentos/:id/sala",
+      "nome": "Sala de atendimento (intérprete)",
+      "componente": "Sala",
+      "arquivo": "frontend/src/components/Sala.tsx",
+      "papeis": [
+        "INTERPRETE"
+      ]
+    },
+    {
+      "area": "interprete",
+      "path": "/interprete/atendimentos/:id/avaliar",
+      "nome": "Avaliar cliente",
+      "componente": "AvaliarAtendimento",
+      "arquivo": "frontend/src/pages/comum/AvaliarAtendimento.tsx",
+      "papeis": [
+        "INTERPRETE"
+      ]
+    },
+    {
+      "area": "interprete",
+      "path": "/interprete/ganhos",
+      "nome": "Ganhos e repasse",
+      "componente": "GanhosInterprete",
+      "arquivo": "frontend/src/pages/interprete/GanhosInterprete.tsx",
+      "papeis": [
+        "INTERPRETE"
+      ]
+    },
+    {
+      "area": "interprete",
+      "path": "/interprete/historico",
+      "nome": "Histórico (intérprete)",
+      "componente": "HistoricoAtendimentos",
+      "arquivo": "frontend/src/pages/comum/HistoricoAtendimentos.tsx",
+      "papeis": [
+        "INTERPRETE"
+      ]
+    },
+    {
+      "area": "interprete",
+      "path": "/interprete/perfil",
+      "nome": "Perfil e habilitação",
+      "componente": "PerfilInterprete",
+      "arquivo": "frontend/src/pages/interprete/PerfilInterprete.tsx",
+      "papeis": [
+        "INTERPRETE"
+      ]
+    },
+    {
+      "area": "backoffice",
+      "path": "/backoffice",
+      "nome": "Fila de certificações",
+      "componente": "FilaCertificacoes",
+      "arquivo": "frontend/src/pages/backoffice/FilaCertificacoes.tsx",
+      "papeis": [
+        "BACKOFFICE",
+        "SUPORTE"
+      ]
+    },
+    {
+      "area": "backoffice",
+      "path": "/backoffice/certificacoes/:id",
+      "nome": "Parecer da certificação",
+      "componente": "ParecerCertificacao",
+      "arquivo": "frontend/src/pages/backoffice/ParecerCertificacao.tsx",
+      "papeis": [
+        "BACKOFFICE",
+        "SUPORTE"
+      ]
+    },
+    {
+      "area": "backoffice",
+      "path": "/backoffice/chamados",
+      "nome": "Chamados de suporte",
+      "componente": "ChamadosSuporte",
+      "arquivo": "frontend/src/pages/backoffice/ChamadosSuporte.tsx",
+      "papeis": [
+        "BACKOFFICE",
+        "SUPORTE"
+      ]
+    },
+    {
+      "area": "backoffice",
+      "path": "/backoffice/auditoria",
+      "nome": "Trilha de auditoria",
+      "componente": "TrilhaAuditoria",
+      "arquivo": "frontend/src/pages/backoffice/TrilhaAuditoria.tsx",
+      "papeis": [
+        "BACKOFFICE",
+        "SUPORTE"
+      ]
+    },
+    {
+      "area": "comum",
+      "path": "/notificacoes",
+      "nome": "Notificações",
+      "componente": "Notificacoes",
+      "arquivo": "frontend/src/pages/comum/Notificacoes.tsx",
+      "papeis": [
+        "CLIENTE",
+        "INTERPRETE",
+        "BACKOFFICE",
+        "SUPORTE"
+      ]
+    },
+    {
+      "area": "comum",
+      "path": "/suporte",
+      "nome": "Suporte",
+      "componente": "Suporte",
+      "arquivo": "frontend/src/pages/comum/Suporte.tsx",
+      "papeis": [
+        "CLIENTE",
+        "INTERPRETE",
+        "BACKOFFICE",
+        "SUPORTE"
+      ]
+    }
+  ],
+  "menu": {
+    "arquivo": "frontend/src/components/AppShell.tsx",
+    "porPapel": {
+      "CLIENTE": [
+        {
+          "para": "/cliente",
+          "rotulo": "Início"
+        },
+        {
+          "para": "/cliente/historico",
+          "rotulo": "Atendimentos"
+        },
+        {
+          "para": "/cliente/perfil",
+          "rotulo": "Perfil"
+        }
+      ],
+      "INTERPRETE": [
+        {
+          "para": "/interprete",
+          "rotulo": "Início"
+        },
+        {
+          "para": "/interprete/demandas",
+          "rotulo": "Demandas"
+        },
+        {
+          "para": "/interprete/ganhos",
+          "rotulo": "Ganhos"
+        },
+        {
+          "para": "/interprete/perfil",
+          "rotulo": "Perfil"
+        }
+      ],
+      "BACKOFFICE": [
+        {
+          "para": "/backoffice",
+          "rotulo": "Certificações"
+        },
+        {
+          "para": "/backoffice/chamados",
+          "rotulo": "Chamados"
+        },
+        {
+          "para": "/backoffice/auditoria",
+          "rotulo": "Auditoria"
+        }
+      ]
+    },
+    "fixos": [
+      {
+        "para": "/notificacoes",
+        "rotulo": "Notificações",
+        "gatilho": "clique"
+      },
+      {
+        "para": "/login",
+        "rotulo": "Sair",
+        "gatilho": "clique"
+      },
+      {
+        "para": "/notificacoes",
+        "rotulo": "Notificações",
+        "gatilho": "clique"
+      }
+    ]
+  },
+  "navegacao": {
+    "transicoes": [
+      {
+        "de": "/",
+        "gatilho": "redirecionamento",
+        "rotulo": "",
+        "arquivo": "frontend/src/pages/auth/Splash.tsx",
+        "linha": 15,
+        "para": "(hub do papel)"
+      },
+      {
+        "de": "/",
+        "gatilho": "redirecionamento",
+        "rotulo": "",
+        "arquivo": "frontend/src/pages/auth/Splash.tsx",
+        "linha": 15,
+        "para": "/login"
+      },
+      {
+        "de": "/login",
+        "gatilho": "acao",
+        "rotulo": "enviar()",
+        "arquivo": "frontend/src/pages/auth/Login.tsx",
+        "linha": 33,
+        "para": "(dinâmico)",
+        "expressao": "sessao.destino"
+      },
+      {
+        "de": "/login",
+        "gatilho": "clique",
+        "rotulo": "Esqueci minha senha",
+        "arquivo": "frontend/src/pages/auth/Login.tsx",
+        "linha": 61,
+        "para": "/recuperar-senha"
+      },
+      {
+        "de": "/login",
+        "gatilho": "clique",
+        "rotulo": "Cadastre-se",
+        "arquivo": "frontend/src/pages/auth/Login.tsx",
+        "linha": 73,
+        "para": "/cadastro"
+      },
+      {
+        "de": "/recuperar-senha",
+        "gatilho": "clique",
+        "rotulo": "Abrir link de redefinição",
+        "arquivo": "frontend/src/pages/auth/RecuperarSenha.tsx",
+        "linha": 63,
+        "para": "/redefinir-senha/:token"
+      },
+      {
+        "de": "/recuperar-senha",
+        "gatilho": "clique",
+        "rotulo": "Voltar ao login",
+        "arquivo": "frontend/src/pages/auth/RecuperarSenha.tsx",
+        "linha": 70,
+        "para": "/login"
+      },
+      {
+        "de": "/recuperar-senha",
+        "gatilho": "clique",
+        "rotulo": "Voltar ao login",
+        "arquivo": "frontend/src/pages/auth/RecuperarSenha.tsx",
+        "linha": 97,
+        "para": "/login"
+      },
+      {
+        "de": "/redefinir-senha/:token",
+        "gatilho": "clique",
+        "rotulo": "Ir para o login",
+        "arquivo": "frontend/src/pages/auth/RedefinirSenha.tsx",
+        "linha": 59,
+        "para": "/login"
+      },
+      {
+        "de": "/redefinir-senha/:token",
+        "gatilho": "clique",
+        "rotulo": "Solicitar um novo link de recuperação",
+        "arquivo": "frontend/src/pages/auth/RedefinirSenha.tsx",
+        "linha": 70,
+        "para": "/recuperar-senha"
+      },
+      {
+        "de": "/cadastro",
+        "gatilho": "clique",
+        "rotulo": "Sou pessoa surda (cliente) Quero solicitar in…",
+        "arquivo": "frontend/src/pages/auth/SelecaoPerfil.tsx",
+        "linha": 17,
+        "para": "/cadastro/cliente"
+      },
+      {
+        "de": "/cadastro",
+        "gatilho": "clique",
+        "rotulo": "Sou intérprete de Libras Possuo certificação…",
+        "arquivo": "frontend/src/pages/auth/SelecaoPerfil.tsx",
+        "linha": 40,
+        "para": "/cadastro/interprete"
+      },
+      {
+        "de": "/cadastro",
+        "gatilho": "clique",
+        "rotulo": "Entrar",
+        "arquivo": "frontend/src/pages/auth/SelecaoPerfil.tsx",
+        "linha": 66,
+        "para": "/login"
+      },
+      {
+        "de": "/cadastro/cliente",
+        "gatilho": "acao",
+        "rotulo": "enviar()",
+        "arquivo": "frontend/src/pages/auth/CadastroCliente.tsx",
+        "linha": 78,
+        "para": "/cliente"
+      },
+      {
+        "de": "/cadastro/cliente",
+        "gatilho": "clique",
+        "rotulo": "Ir para o início",
+        "arquivo": "frontend/src/pages/auth/CadastroCliente.tsx",
+        "linha": 100,
+        "para": "/cliente"
+      },
+      {
+        "de": "/cadastro/cliente",
+        "gatilho": "clique",
+        "rotulo": "Já tem uma conta? Voltar ao login",
+        "arquivo": "frontend/src/pages/auth/CadastroCliente.tsx",
+        "linha": 255,
+        "para": "/login"
+      },
+      {
+        "de": "/cadastro/interprete",
+        "gatilho": "clique",
+        "rotulo": "Ir para o painel do intérprete",
+        "arquivo": "frontend/src/pages/auth/CadastroInterprete.tsx",
+        "linha": 199,
+        "para": "/interprete"
+      },
+      {
+        "de": "/cadastro/interprete",
+        "gatilho": "clique",
+        "rotulo": "Voltar",
+        "arquivo": "frontend/src/pages/auth/CadastroInterprete.tsx",
+        "linha": 501,
+        "para": "/cadastro"
+      },
+      {
+        "de": "/verificar/:codigo",
+        "gatilho": "acao",
+        "rotulo": "consultarOutro()",
+        "arquivo": "frontend/src/pages/comum/VerificarComprovante.tsx",
+        "linha": 55,
+        "para": "/verificar/:codigo"
+      },
+      {
+        "de": "/verificar/:codigo",
+        "gatilho": "clique",
+        "rotulo": "Voltar ao acesso da plataforma",
+        "arquivo": "frontend/src/pages/comum/VerificarComprovante.tsx",
+        "linha": 187,
+        "para": "/login"
+      },
+      {
+        "de": "/cliente",
+        "gatilho": "clique",
+        "rotulo": "Solicitar intérprete agora Atendimento presen…",
+        "arquivo": "frontend/src/pages/cliente/Hub.tsx",
+        "linha": 39,
+        "para": "/cliente/solicitacoes/nova"
+      },
+      {
+        "de": "/cliente",
+        "gatilho": "clique",
+        "rotulo": "Ver histórico",
+        "arquivo": "frontend/src/pages/cliente/Hub.tsx",
+        "linha": 82,
+        "para": "/cliente/historico"
+      },
+      {
+        "de": "/cliente",
+        "gatilho": "clique",
+        "rotulo": "Preciso de ajuda",
+        "arquivo": "frontend/src/pages/cliente/Hub.tsx",
+        "linha": 96,
+        "para": "/suporte"
+      },
+      {
+        "de": "/cliente",
+        "gatilho": "clique",
+        "rotulo": "",
+        "arquivo": "frontend/src/pages/cliente/Hub.tsx",
+        "linha": 107,
+        "para": "/cliente/solicitacoes/:id"
+      },
+      {
+        "de": "/cliente/solicitacoes/nova",
+        "gatilho": "acao",
+        "rotulo": "confirmarSolicitacao()",
+        "arquivo": "frontend/src/pages/cliente/NovaSolicitacao.tsx",
+        "linha": 159,
+        "para": "/cliente/solicitacoes/:id"
+      },
+      {
+        "de": "/cliente/solicitacoes/nova",
+        "gatilho": "clique",
+        "rotulo": "Voltar ao painel",
+        "arquivo": "frontend/src/pages/cliente/NovaSolicitacao.tsx",
+        "linha": 176,
+        "para": "/cliente"
+      },
+      {
+        "de": "/cliente/solicitacoes/:id",
+        "gatilho": "clique",
+        "rotulo": "Voltar ao painel",
+        "arquivo": "frontend/src/pages/cliente/DetalheSolicitacao.tsx",
+        "linha": 149,
+        "para": "/cliente"
+      },
+      {
+        "de": "/cliente/solicitacoes/:id",
+        "gatilho": "clique",
+        "rotulo": "Ficha do atendimento",
+        "arquivo": "frontend/src/pages/cliente/DetalheSolicitacao.tsx",
+        "linha": 221,
+        "para": "/cliente/atendimentos/:id"
+      },
+      {
+        "de": "/cliente/solicitacoes/:id",
+        "gatilho": "clique",
+        "rotulo": "Sala de Atendimento",
+        "arquivo": "frontend/src/pages/cliente/DetalheSolicitacao.tsx",
+        "linha": 260,
+        "para": "/cliente/atendimentos/:id/sala"
+      },
+      {
+        "de": "/cliente/solicitacoes/:id",
+        "gatilho": "clique",
+        "rotulo": "Pagar",
+        "arquivo": "frontend/src/pages/cliente/DetalheSolicitacao.tsx",
+        "linha": 264,
+        "para": "/cliente/atendimentos/:id/pagamento"
+      },
+      {
+        "de": "/cliente/solicitacoes/:id",
+        "gatilho": "clique",
+        "rotulo": "Avaliar Intérprete",
+        "arquivo": "frontend/src/pages/cliente/DetalheSolicitacao.tsx",
+        "linha": 274,
+        "para": "/cliente/atendimentos/:id/avaliar"
+      },
+      {
+        "de": "/cliente/atendimentos/:id",
+        "gatilho": "clique",
+        "rotulo": "Voltar para a solicitação",
+        "arquivo": "frontend/src/pages/cliente/DetalheAtendimentoCliente.tsx",
+        "linha": 76,
+        "para": "/cliente/solicitacoes/:id"
+      },
+      {
+        "de": "/cliente/atendimentos/:id",
+        "gatilho": "clique",
+        "rotulo": "Abrir Sala",
+        "arquivo": "frontend/src/pages/cliente/DetalheAtendimentoCliente.tsx",
+        "linha": 94,
+        "para": "/cliente/atendimentos/:id/sala"
+      },
+      {
+        "de": "/cliente/atendimentos/:id",
+        "gatilho": "clique",
+        "rotulo": "SOS / Suporte",
+        "arquivo": "frontend/src/pages/cliente/DetalheAtendimentoCliente.tsx",
+        "linha": 97,
+        "para": "/suporte"
+      },
+      {
+        "de": "/cliente/atendimentos/:id",
+        "gatilho": "clique",
+        "rotulo": "Realizar Pagamento Agora",
+        "arquivo": "frontend/src/pages/cliente/DetalheAtendimentoCliente.tsx",
+        "linha": 187,
+        "para": "/cliente/atendimentos/:id/pagamento"
+      },
+      {
+        "de": "/cliente/atendimentos/:id",
+        "gatilho": "clique",
+        "rotulo": "Verificar Autenticidade",
+        "arquivo": "frontend/src/pages/cliente/DetalheAtendimentoCliente.tsx",
+        "linha": 197,
+        "para": "/verificar/:codigo"
+      },
+      {
+        "de": "/cliente/atendimentos/:id",
+        "gatilho": "clique",
+        "rotulo": "Avaliar Intérprete",
+        "arquivo": "frontend/src/pages/cliente/DetalheAtendimentoCliente.tsx",
+        "linha": 205,
+        "para": "/cliente/atendimentos/:id/avaliar"
+      },
+      {
+        "de": "/cliente/atendimentos/:id/sala",
+        "gatilho": "clique",
+        "rotulo": "Voltar aos detalhes do atendimento",
+        "arquivo": "frontend/src/components/Sala.tsx",
+        "linha": 234,
+        "para": "/cliente/atendimentos/:id"
+      },
+      {
+        "de": "/cliente/atendimentos/:id/sala",
+        "gatilho": "clique",
+        "rotulo": "SOS",
+        "arquivo": "frontend/src/components/Sala.tsx",
+        "linha": 276,
+        "para": "/suporte"
+      },
+      {
+        "de": "/cliente/atendimentos/:id/pagamento",
+        "gatilho": "clique",
+        "rotulo": "Voltar ao atendimento",
+        "arquivo": "frontend/src/pages/cliente/PagamentoAtendimento.tsx",
+        "linha": 150,
+        "para": "/cliente/atendimentos/:id"
+      },
+      {
+        "de": "/cliente/atendimentos/:id/pagamento",
+        "gatilho": "clique",
+        "rotulo": "Voltar ao Atendimento",
+        "arquivo": "frontend/src/pages/cliente/PagamentoAtendimento.tsx",
+        "linha": 200,
+        "para": "/cliente/atendimentos/:id"
+      },
+      {
+        "de": "/cliente/atendimentos/:id/pagamento",
+        "gatilho": "clique",
+        "rotulo": "Avaliar Intérprete",
+        "arquivo": "frontend/src/pages/cliente/PagamentoAtendimento.tsx",
+        "linha": 218,
+        "para": "/cliente/atendimentos/:id/avaliar"
+      },
+      {
+        "de": "/cliente/atendimentos/:id/pagamento",
+        "gatilho": "clique",
+        "rotulo": "Ir para o Histórico",
+        "arquivo": "frontend/src/pages/cliente/PagamentoAtendimento.tsx",
+        "linha": 224,
+        "para": "/cliente/historico"
+      },
+      {
+        "de": "/cliente/atendimentos/:id/avaliar",
+        "gatilho": "clique",
+        "rotulo": "Voltar ao Atendimento",
+        "arquivo": "frontend/src/pages/comum/AvaliarAtendimento.tsx",
+        "linha": 125,
+        "para": "/cliente/atendimentos/:id"
+      },
+      {
+        "de": "/cliente/atendimentos/:id/avaliar",
+        "gatilho": "clique",
+        "rotulo": "Voltar ao Atendimento",
+        "arquivo": "frontend/src/pages/comum/AvaliarAtendimento.tsx",
+        "linha": 136,
+        "para": "/cliente/atendimentos/:id"
+      },
+      {
+        "de": "/cliente/atendimentos/:id/avaliar",
+        "gatilho": "clique",
+        "rotulo": "Pular",
+        "arquivo": "frontend/src/pages/comum/AvaliarAtendimento.tsx",
+        "linha": 188,
+        "para": "/cliente/atendimentos/:id"
+      },
+      {
+        "de": "/cliente/historico",
+        "gatilho": "clique",
+        "rotulo": "Solicitar Intérprete",
+        "arquivo": "frontend/src/pages/comum/HistoricoAtendimentos.tsx",
+        "linha": 176,
+        "para": "/cliente/solicitacoes/nova"
+      },
+      {
+        "de": "/cliente/historico",
+        "gatilho": "clique",
+        "rotulo": "Ver Detalhes",
+        "arquivo": "frontend/src/pages/comum/HistoricoAtendimentos.tsx",
+        "linha": 230,
+        "para": "/cliente/atendimentos/:id"
+      },
+      {
+        "de": "/cliente/perfil",
+        "gatilho": "acao",
+        "rotulo": "confirmarExclusaoConta()",
+        "arquivo": "frontend/src/pages/cliente/PerfilCliente.tsx",
+        "linha": 254,
+        "para": "/login"
+      },
+      {
+        "de": "/interprete",
+        "gatilho": "acao",
+        "rotulo": "aceitarDemanda()",
+        "arquivo": "frontend/src/pages/interprete/HubInterprete.tsx",
+        "linha": 73,
+        "para": "/interprete/atendimentos/:id"
+      },
+      {
+        "de": "/interprete",
+        "gatilho": "clique",
+        "rotulo": "Ver documentação",
+        "arquivo": "frontend/src/pages/interprete/HubInterprete.tsx",
+        "linha": 167,
+        "para": "/interprete/perfil"
+      },
+      {
+        "de": "/interprete",
+        "gatilho": "clique",
+        "rotulo": "Raio: … km",
+        "arquivo": "frontend/src/pages/interprete/HubInterprete.tsx",
+        "linha": 184,
+        "para": "/interprete/agenda"
+      },
+      {
+        "de": "/interprete",
+        "gatilho": "clique",
+        "rotulo": "Ver todas",
+        "arquivo": "frontend/src/pages/interprete/HubInterprete.tsx",
+        "linha": 206,
+        "para": "/interprete/demandas"
+      },
+      {
+        "de": "/interprete",
+        "gatilho": "clique",
+        "rotulo": "Detalhes",
+        "arquivo": "frontend/src/pages/interprete/HubInterprete.tsx",
+        "linha": 247,
+        "para": "/interprete/demandas/:id"
+      },
+      {
+        "de": "/interprete",
+        "gatilho": "clique",
+        "rotulo": "Ver Extrato Completo",
+        "arquivo": "frontend/src/pages/interprete/HubInterprete.tsx",
+        "linha": 296,
+        "para": "/interprete/ganhos"
+      },
+      {
+        "de": "/interprete",
+        "gatilho": "clique",
+        "rotulo": "Configurar Disponibilidade",
+        "arquivo": "frontend/src/pages/interprete/HubInterprete.tsx",
+        "linha": 314,
+        "para": "/interprete/agenda"
+      },
+      {
+        "de": "/interprete",
+        "gatilho": "clique",
+        "rotulo": "Gerenciar Atendimento",
+        "arquivo": "frontend/src/pages/interprete/HubInterprete.tsx",
+        "linha": 339,
+        "para": "/interprete/atendimentos/:id"
+      },
+      {
+        "de": "/interprete",
+        "gatilho": "clique",
+        "rotulo": "Abrir Sala de Atendimento",
+        "arquivo": "frontend/src/pages/interprete/HubInterprete.tsx",
+        "linha": 344,
+        "para": "/interprete/atendimentos/:id/sala"
+      },
+      {
+        "de": "/interprete/demandas",
+        "gatilho": "acao",
+        "rotulo": "aceitar()",
+        "arquivo": "frontend/src/pages/interprete/DemandasInterprete.tsx",
+        "linha": 61,
+        "para": "/interprete/atendimentos/:id"
+      },
+      {
+        "de": "/interprete/demandas",
+        "gatilho": "clique",
+        "rotulo": "Ajustar Raio ( km)",
+        "arquivo": "frontend/src/pages/interprete/DemandasInterprete.tsx",
+        "linha": 165,
+        "para": "/interprete/agenda"
+      },
+      {
+        "de": "/interprete/demandas",
+        "gatilho": "clique",
+        "rotulo": "Detalhes",
+        "arquivo": "frontend/src/pages/interprete/DemandasInterprete.tsx",
+        "linha": 243,
+        "para": "/interprete/demandas/:id"
+      },
+      {
+        "de": "/interprete/demandas",
+        "gatilho": "clique",
+        "rotulo": "Check-in / Detalhes",
+        "arquivo": "frontend/src/pages/interprete/DemandasInterprete.tsx",
+        "linha": 308,
+        "para": "/interprete/atendimentos/:id"
+      },
+      {
+        "de": "/interprete/demandas",
+        "gatilho": "clique",
+        "rotulo": "Sala",
+        "arquivo": "frontend/src/pages/interprete/DemandasInterprete.tsx",
+        "linha": 313,
+        "para": "/interprete/atendimentos/:id/sala"
+      },
+      {
+        "de": "/interprete/demandas/:id",
+        "gatilho": "acao",
+        "rotulo": "aceitarDemanda()",
+        "arquivo": "frontend/src/pages/interprete/DetalheDemanda.tsx",
+        "linha": 49,
+        "para": "/interprete/atendimentos/:id"
+      },
+      {
+        "de": "/interprete/demandas/:id",
+        "gatilho": "acao",
+        "rotulo": "confirmarRecusa()",
+        "arquivo": "frontend/src/pages/interprete/DetalheDemanda.tsx",
+        "linha": 64,
+        "para": "/interprete/demandas"
+      },
+      {
+        "de": "/interprete/demandas/:id",
+        "gatilho": "clique",
+        "rotulo": "Voltar às demandas",
+        "arquivo": "frontend/src/pages/interprete/DetalheDemanda.tsx",
+        "linha": 77,
+        "para": "/interprete/demandas"
+      },
+      {
+        "de": "/interprete/demandas/:id",
+        "gatilho": "clique",
+        "rotulo": "Ir para o Atendimento Confirmado",
+        "arquivo": "frontend/src/pages/interprete/DetalheDemanda.tsx",
+        "linha": 199,
+        "para": "/interprete/atendimentos/:id"
+      },
+      {
+        "de": "/interprete/agenda",
+        "gatilho": "clique",
+        "rotulo": "Voltar ao painel",
+        "arquivo": "frontend/src/pages/interprete/AgendaInterprete.tsx",
+        "linha": 138,
+        "para": "/interprete"
+      },
+      {
+        "de": "/interprete/atendimentos/:id",
+        "gatilho": "clique",
+        "rotulo": "Voltar ao painel do intérprete",
+        "arquivo": "frontend/src/pages/interprete/DetalheAtendimentoInterprete.tsx",
+        "linha": 152,
+        "para": "/interprete"
+      },
+      {
+        "de": "/interprete/atendimentos/:id",
+        "gatilho": "clique",
+        "rotulo": "Sala de Atendimento",
+        "arquivo": "frontend/src/pages/interprete/DetalheAtendimentoInterprete.tsx",
+        "linha": 170,
+        "para": "/interprete/atendimentos/:id/sala"
+      },
+      {
+        "de": "/interprete/atendimentos/:id",
+        "gatilho": "clique",
+        "rotulo": "SOS / Suporte",
+        "arquivo": "frontend/src/pages/interprete/DetalheAtendimentoInterprete.tsx",
+        "linha": 173,
+        "para": "/suporte"
+      },
+      {
+        "de": "/interprete/atendimentos/:id",
+        "gatilho": "clique",
+        "rotulo": "Avaliar Cliente",
+        "arquivo": "frontend/src/pages/interprete/DetalheAtendimentoInterprete.tsx",
+        "linha": 272,
+        "para": "/interprete/atendimentos/:id/avaliar"
+      },
+      {
+        "de": "/interprete/atendimentos/:id",
+        "gatilho": "clique",
+        "rotulo": "Ver em Ganhos e Repasses",
+        "arquivo": "frontend/src/pages/interprete/DetalheAtendimentoInterprete.tsx",
+        "linha": 281,
+        "para": "/interprete/ganhos"
+      },
+      {
+        "de": "/interprete/atendimentos/:id/sala",
+        "gatilho": "clique",
+        "rotulo": "Voltar aos detalhes do atendimento",
+        "arquivo": "frontend/src/components/Sala.tsx",
+        "linha": 234,
+        "para": "/interprete/atendimentos/:id"
+      },
+      {
+        "de": "/interprete/atendimentos/:id/sala",
+        "gatilho": "clique",
+        "rotulo": "SOS",
+        "arquivo": "frontend/src/components/Sala.tsx",
+        "linha": 276,
+        "para": "/suporte"
+      },
+      {
+        "de": "/interprete/atendimentos/:id/avaliar",
+        "gatilho": "clique",
+        "rotulo": "Voltar ao Atendimento",
+        "arquivo": "frontend/src/pages/comum/AvaliarAtendimento.tsx",
+        "linha": 125,
+        "para": "/interprete/atendimentos/:id"
+      },
+      {
+        "de": "/interprete/atendimentos/:id/avaliar",
+        "gatilho": "clique",
+        "rotulo": "Voltar ao Atendimento",
+        "arquivo": "frontend/src/pages/comum/AvaliarAtendimento.tsx",
+        "linha": 136,
+        "para": "/interprete/atendimentos/:id"
+      },
+      {
+        "de": "/interprete/atendimentos/:id/avaliar",
+        "gatilho": "clique",
+        "rotulo": "Pular",
+        "arquivo": "frontend/src/pages/comum/AvaliarAtendimento.tsx",
+        "linha": 188,
+        "para": "/interprete/atendimentos/:id"
+      },
+      {
+        "de": "/interprete/ganhos",
+        "gatilho": "clique",
+        "rotulo": "Histórico de Atendimentos",
+        "arquivo": "frontend/src/pages/interprete/GanhosInterprete.tsx",
+        "linha": 108,
+        "para": "/interprete/historico"
+      },
+      {
+        "de": "/interprete/historico",
+        "gatilho": "clique",
+        "rotulo": "Ver Detalhes",
+        "arquivo": "frontend/src/pages/comum/HistoricoAtendimentos.tsx",
+        "linha": 230,
+        "para": "/interprete/atendimentos/:id"
+      },
+      {
+        "de": "/interprete/perfil",
+        "gatilho": "acao",
+        "rotulo": "excluirConta()",
+        "arquivo": "frontend/src/pages/interprete/PerfilInterprete.tsx",
+        "linha": 273,
+        "para": "/login"
+      },
+      {
+        "de": "/backoffice",
+        "gatilho": "clique",
+        "rotulo": "Chamados",
+        "arquivo": "frontend/src/pages/backoffice/FilaCertificacoes.tsx",
+        "linha": 61,
+        "para": "/backoffice/chamados"
+      },
+      {
+        "de": "/backoffice",
+        "gatilho": "clique",
+        "rotulo": "Auditoria",
+        "arquivo": "frontend/src/pages/backoffice/FilaCertificacoes.tsx",
+        "linha": 66,
+        "para": "/backoffice/auditoria"
+      },
+      {
+        "de": "/backoffice",
+        "gatilho": "clique",
+        "rotulo": "Gerenciar",
+        "arquivo": "frontend/src/pages/backoffice/FilaCertificacoes.tsx",
+        "linha": 114,
+        "para": "/backoffice/chamados"
+      },
+      {
+        "de": "/backoffice",
+        "gatilho": "clique",
+        "rotulo": "Emitir parecer",
+        "arquivo": "frontend/src/pages/backoffice/FilaCertificacoes.tsx",
+        "linha": 215,
+        "para": "/backoffice/certificacoes/:id"
+      },
+      {
+        "de": "/backoffice/certificacoes/:id",
+        "gatilho": "acao",
+        "rotulo": "registrarParecer()",
+        "arquivo": "frontend/src/pages/backoffice/ParecerCertificacao.tsx",
+        "linha": 73,
+        "para": "/backoffice"
+      },
+      {
+        "de": "/backoffice/certificacoes/:id",
+        "gatilho": "clique",
+        "rotulo": "Voltar para a fila de certificações",
+        "arquivo": "frontend/src/pages/backoffice/ParecerCertificacao.tsx",
+        "linha": 89,
+        "para": "/backoffice"
+      },
+      {
+        "de": "/backoffice/chamados",
+        "gatilho": "clique",
+        "rotulo": "Voltar para Fila de Certificações",
+        "arquivo": "frontend/src/pages/backoffice/ChamadosSuporte.tsx",
+        "linha": 54,
+        "para": "/backoffice"
+      },
+      {
+        "de": "/backoffice/auditoria",
+        "gatilho": "clique",
+        "rotulo": "Voltar para Fila de Certificações",
+        "arquivo": "frontend/src/pages/backoffice/TrilhaAuditoria.tsx",
+        "linha": 51,
+        "para": "/backoffice"
+      },
+      {
+        "de": "/notificacoes",
+        "gatilho": "acao",
+        "rotulo": "marcarUmaComoLida()",
+        "arquivo": "frontend/src/pages/comum/Notificacoes.tsx",
+        "linha": 59,
+        "para": "(dinâmico)",
+        "expressao": "n.referenciaRecurso"
+      }
+    ],
+    "naoResolvidos": [],
+    "descartadas": [
+      {
+        "de": "/cliente/atendimentos/:id/sala",
+        "gatilho": "clique",
+        "rotulo": "Voltar aos detalhes do atendimento",
+        "arquivo": "frontend/src/components/Sala.tsx",
+        "linha": 234,
+        "para": "/interprete/atendimentos/:id",
+        "motivo": "destino de outro papel (ramo condicional do componente compartilhado)"
+      },
+      {
+        "de": "/cliente/atendimentos/:id/avaliar",
+        "gatilho": "clique",
+        "rotulo": "Voltar ao Atendimento",
+        "arquivo": "frontend/src/pages/comum/AvaliarAtendimento.tsx",
+        "linha": 125,
+        "para": "/interprete/atendimentos/:id",
+        "motivo": "destino de outro papel (ramo condicional do componente compartilhado)"
+      },
+      {
+        "de": "/cliente/atendimentos/:id/avaliar",
+        "gatilho": "clique",
+        "rotulo": "Voltar ao Atendimento",
+        "arquivo": "frontend/src/pages/comum/AvaliarAtendimento.tsx",
+        "linha": 136,
+        "para": "/interprete/atendimentos/:id",
+        "motivo": "destino de outro papel (ramo condicional do componente compartilhado)"
+      },
+      {
+        "de": "/cliente/atendimentos/:id/avaliar",
+        "gatilho": "clique",
+        "rotulo": "Pular",
+        "arquivo": "frontend/src/pages/comum/AvaliarAtendimento.tsx",
+        "linha": 188,
+        "para": "/interprete/atendimentos/:id",
+        "motivo": "destino de outro papel (ramo condicional do componente compartilhado)"
+      },
+      {
+        "de": "/cliente/historico",
+        "gatilho": "clique",
+        "rotulo": "Ver Detalhes",
+        "arquivo": "frontend/src/pages/comum/HistoricoAtendimentos.tsx",
+        "linha": 230,
+        "para": "/interprete/atendimentos/:id",
+        "motivo": "destino de outro papel (ramo condicional do componente compartilhado)"
+      },
+      {
+        "de": "/interprete/atendimentos/:id/sala",
+        "gatilho": "clique",
+        "rotulo": "Voltar aos detalhes do atendimento",
+        "arquivo": "frontend/src/components/Sala.tsx",
+        "linha": 234,
+        "para": "/cliente/atendimentos/:id",
+        "motivo": "destino de outro papel (ramo condicional do componente compartilhado)"
+      },
+      {
+        "de": "/interprete/atendimentos/:id/avaliar",
+        "gatilho": "clique",
+        "rotulo": "Voltar ao Atendimento",
+        "arquivo": "frontend/src/pages/comum/AvaliarAtendimento.tsx",
+        "linha": 125,
+        "para": "/cliente/atendimentos/:id",
+        "motivo": "destino de outro papel (ramo condicional do componente compartilhado)"
+      },
+      {
+        "de": "/interprete/atendimentos/:id/avaliar",
+        "gatilho": "clique",
+        "rotulo": "Voltar ao Atendimento",
+        "arquivo": "frontend/src/pages/comum/AvaliarAtendimento.tsx",
+        "linha": 136,
+        "para": "/cliente/atendimentos/:id",
+        "motivo": "destino de outro papel (ramo condicional do componente compartilhado)"
+      },
+      {
+        "de": "/interprete/atendimentos/:id/avaliar",
+        "gatilho": "clique",
+        "rotulo": "Pular",
+        "arquivo": "frontend/src/pages/comum/AvaliarAtendimento.tsx",
+        "linha": 188,
+        "para": "/cliente/atendimentos/:id",
+        "motivo": "destino de outro papel (ramo condicional do componente compartilhado)"
+      },
+      {
+        "de": "/interprete/historico",
+        "gatilho": "clique",
+        "rotulo": "Solicitar Intérprete",
+        "arquivo": "frontend/src/pages/comum/HistoricoAtendimentos.tsx",
+        "linha": 176,
+        "para": "/cliente/solicitacoes/nova",
+        "motivo": "destino de outro papel (ramo condicional do componente compartilhado)"
+      },
+      {
+        "de": "/interprete/historico",
+        "gatilho": "clique",
+        "rotulo": "Ver Detalhes",
+        "arquivo": "frontend/src/pages/comum/HistoricoAtendimentos.tsx",
+        "linha": 230,
+        "para": "/cliente/atendimentos/:id",
+        "motivo": "destino de outro papel (ramo condicional do componente compartilhado)"
+      }
+    ]
+  },
+  "api": [
+    {
+      "metodo": "GET",
+      "caminho": "/api/health",
+      "secao": "Público",
+      "acesso": "público",
+      "controller": null,
+      "funcao": "(inline)",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [],
+      "linha": 33
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/comprovantes/:codigo/verificar",
+      "secao": "Público",
+      "acesso": "público",
+      "controller": "atendimento",
+      "funcao": "verificarComprovante",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF38"
+      ],
+      "linha": 34
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/auth/login",
+      "secao": "Autenticação e cadastro",
+      "acesso": "público",
+      "controller": "auth",
+      "funcao": "login",
+      "validacao": "auth.esquemaLogin",
+      "limiteTentativas": true,
+      "requisitos": [
+        "RF01"
+      ],
+      "linha": 39
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/auth/logout",
+      "secao": "Autenticação e cadastro",
+      "acesso": "autenticado",
+      "controller": "auth",
+      "funcao": "logout",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF08"
+      ],
+      "linha": 40
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/auth/me",
+      "secao": "Autenticação e cadastro",
+      "acesso": "autenticado",
+      "controller": "auth",
+      "funcao": "sessaoAtual",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF09"
+      ],
+      "linha": 41
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/auth/recuperar-senha",
+      "secao": "Autenticação e cadastro",
+      "acesso": "público",
+      "controller": "auth",
+      "funcao": "recuperarSenha",
+      "validacao": "auth.esquemaRecuperar",
+      "limiteTentativas": true,
+      "requisitos": [
+        "RF07"
+      ],
+      "linha": 42
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/auth/redefinir-senha",
+      "secao": "Autenticação e cadastro",
+      "acesso": "público",
+      "controller": "auth",
+      "funcao": "redefinirSenha",
+      "validacao": "auth.esquemaRedefinir",
+      "limiteTentativas": true,
+      "requisitos": [
+        "RF07"
+      ],
+      "linha": 43
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/auth/alterar-senha",
+      "secao": "Autenticação e cadastro",
+      "acesso": "autenticado",
+      "controller": "auth",
+      "funcao": "alterarSenha",
+      "validacao": "auth.esquemaAlterarSenha",
+      "limiteTentativas": false,
+      "requisitos": [],
+      "linha": 44
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/cadastro/cliente",
+      "secao": "Autenticação e cadastro",
+      "acesso": "público",
+      "controller": "cadastro",
+      "funcao": "cadastrarCliente",
+      "validacao": "cadastro.esquemaCadastroCliente",
+      "limiteTentativas": true,
+      "requisitos": [
+        "RF02",
+        "RF03"
+      ],
+      "linha": 46
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/cadastro/interprete",
+      "secao": "Autenticação e cadastro",
+      "acesso": "público",
+      "controller": "cadastro",
+      "funcao": "cadastrarInterprete",
+      "validacao": "cadastro.esquemaCadastroInterprete",
+      "limiteTentativas": true,
+      "requisitos": [
+        "RF02",
+        "RF04",
+        "RF05"
+      ],
+      "linha": 47
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/perfil",
+      "secao": "Perfil, consentimentos, LGPD e notificações (todos os papéis)",
+      "acesso": "autenticado",
+      "controller": "perfil",
+      "funcao": "obter",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF43"
+      ],
+      "linha": 52
+    },
+    {
+      "metodo": "PUT",
+      "caminho": "/api/perfil",
+      "secao": "Perfil, consentimentos, LGPD e notificações (todos os papéis)",
+      "acesso": "autenticado",
+      "controller": "perfil",
+      "funcao": "atualizar",
+      "validacao": "perfil.esquemaAtualizarPerfil",
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF43"
+      ],
+      "linha": 53
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/perfil/consentimentos",
+      "secao": "Perfil, consentimentos, LGPD e notificações (todos os papéis)",
+      "acesso": "autenticado",
+      "controller": "perfil",
+      "funcao": "listarConsentimentos",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF45"
+      ],
+      "linha": 54
+    },
+    {
+      "metodo": "PUT",
+      "caminho": "/api/perfil/consentimentos",
+      "secao": "Perfil, consentimentos, LGPD e notificações (todos os papéis)",
+      "acesso": "autenticado",
+      "controller": "perfil",
+      "funcao": "alterarConsentimento",
+      "validacao": "perfil.esquemaConsentimento",
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF45"
+      ],
+      "linha": 55
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/perfil/dados/exportar",
+      "secao": "Perfil, consentimentos, LGPD e notificações (todos os papéis)",
+      "acesso": "autenticado",
+      "controller": "perfil",
+      "funcao": "exportarDados",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF45"
+      ],
+      "linha": 56
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/perfil/dados/excluir",
+      "secao": "Perfil, consentimentos, LGPD e notificações (todos os papéis)",
+      "acesso": "autenticado",
+      "controller": "perfil",
+      "funcao": "solicitarExclusao",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF45"
+      ],
+      "linha": 57
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/notificacoes",
+      "secao": "Perfil, consentimentos, LGPD e notificações (todos os papéis)",
+      "acesso": "autenticado",
+      "controller": "perfil",
+      "funcao": "listarNotificacoes",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF42"
+      ],
+      "linha": 58
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/notificacoes/ler-todas",
+      "secao": "Perfil, consentimentos, LGPD e notificações (todos os papéis)",
+      "acesso": "autenticado",
+      "controller": "perfil",
+      "funcao": "marcarTodasLidas",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [],
+      "linha": 59
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/notificacoes/:id/lida",
+      "secao": "Perfil, consentimentos, LGPD e notificações (todos os papéis)",
+      "acesso": "autenticado",
+      "controller": "perfil",
+      "funcao": "marcarLida",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [],
+      "linha": 60
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/cliente/hub",
+      "secao": "Cliente: hub, solicitações, formas de pagamento, pagamentos",
+      "acesso": "CLIENTE",
+      "controller": "solicitacao",
+      "funcao": "hub",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [],
+      "linha": 65
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/solicitacoes/estimativa",
+      "secao": "Cliente: hub, solicitações, formas de pagamento, pagamentos",
+      "acesso": "CLIENTE",
+      "controller": "solicitacao",
+      "funcao": "estimar",
+      "validacao": "solicitacao.esquemaEstimativa",
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF15"
+      ],
+      "linha": 66
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/solicitacoes",
+      "secao": "Cliente: hub, solicitações, formas de pagamento, pagamentos",
+      "acesso": "CLIENTE",
+      "controller": "solicitacao",
+      "funcao": "criar",
+      "validacao": "solicitacao.esquemaSolicitacao",
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF10–RF16"
+      ],
+      "linha": 67
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/solicitacoes",
+      "secao": "Cliente: hub, solicitações, formas de pagamento, pagamentos",
+      "acesso": "CLIENTE",
+      "controller": "solicitacao",
+      "funcao": "listar",
+      "validacao": "solicitacao.esquemaListar",
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF18"
+      ],
+      "linha": 68
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/solicitacoes/:id",
+      "secao": "Cliente: hub, solicitações, formas de pagamento, pagamentos",
+      "acesso": "autenticado",
+      "controller": "solicitacao",
+      "funcao": "obter",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF18"
+      ],
+      "linha": 69
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/solicitacoes/:id/cancelar",
+      "secao": "Cliente: hub, solicitações, formas de pagamento, pagamentos",
+      "acesso": "CLIENTE",
+      "controller": "solicitacao",
+      "funcao": "cancelar",
+      "validacao": "solicitacao.esquemaCancelar",
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF19"
+      ],
+      "linha": 70
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/formas-pagamento",
+      "secao": "Cliente: hub, solicitações, formas de pagamento, pagamentos",
+      "acesso": "CLIENTE",
+      "controller": "pagamento",
+      "funcao": "listarFormas",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF35"
+      ],
+      "linha": 72
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/formas-pagamento",
+      "secao": "Cliente: hub, solicitações, formas de pagamento, pagamentos",
+      "acesso": "CLIENTE",
+      "controller": "pagamento",
+      "funcao": "adicionarForma",
+      "validacao": "pagamento.esquemaFormaPagamento",
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF35"
+      ],
+      "linha": 73
+    },
+    {
+      "metodo": "DELETE",
+      "caminho": "/api/formas-pagamento/:id",
+      "secao": "Cliente: hub, solicitações, formas de pagamento, pagamentos",
+      "acesso": "CLIENTE",
+      "controller": "pagamento",
+      "funcao": "removerForma",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF35"
+      ],
+      "linha": 74
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/pagamentos/pendentes",
+      "secao": "Cliente: hub, solicitações, formas de pagamento, pagamentos",
+      "acesso": "CLIENTE",
+      "controller": "pagamento",
+      "funcao": "pendentes",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [],
+      "linha": 75
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/pagamentos/:id",
+      "secao": "Cliente: hub, solicitações, formas de pagamento, pagamentos",
+      "acesso": "autenticado",
+      "controller": "pagamento",
+      "funcao": "obter",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [],
+      "linha": 76
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/pagamentos/:id/processar",
+      "secao": "Cliente: hub, solicitações, formas de pagamento, pagamentos",
+      "acesso": "CLIENTE",
+      "controller": "pagamento",
+      "funcao": "processar",
+      "validacao": "pagamento.esquemaProcessar",
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF36"
+      ],
+      "linha": 77
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/interprete/hub",
+      "secao": "Intérprete: hub, demandas, configuração, disponibilidade, certificações, ganhos, repasses",
+      "acesso": "INTERPRETE",
+      "controller": "demanda",
+      "funcao": "hub",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [],
+      "linha": 82
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/demandas",
+      "secao": "Intérprete: hub, demandas, configuração, disponibilidade, certificações, ganhos, repasses",
+      "acesso": "INTERPRETE",
+      "controller": "demanda",
+      "funcao": "listar",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF20",
+        "RF21"
+      ],
+      "linha": 83
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/demandas/:id/aceitar",
+      "secao": "Intérprete: hub, demandas, configuração, disponibilidade, certificações, ganhos, repasses",
+      "acesso": "INTERPRETE",
+      "controller": "demanda",
+      "funcao": "aceitar",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF22"
+      ],
+      "linha": 84
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/demandas/:id/recusar",
+      "secao": "Intérprete: hub, demandas, configuração, disponibilidade, certificações, ganhos, repasses",
+      "acesso": "INTERPRETE",
+      "controller": "demanda",
+      "funcao": "recusar",
+      "validacao": "demanda.esquemaRecusa",
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF23"
+      ],
+      "linha": 85
+    },
+    {
+      "metodo": "PUT",
+      "caminho": "/api/interprete/configuracao",
+      "secao": "Intérprete: hub, demandas, configuração, disponibilidade, certificações, ganhos, repasses",
+      "acesso": "INTERPRETE",
+      "controller": "demanda",
+      "funcao": "configuracao",
+      "validacao": "demanda.esquemaConfiguracao",
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF24"
+      ],
+      "linha": 86
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/interprete/disponibilidades",
+      "secao": "Intérprete: hub, demandas, configuração, disponibilidade, certificações, ganhos, repasses",
+      "acesso": "INTERPRETE",
+      "controller": "demanda",
+      "funcao": "listarDisponibilidades",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF25"
+      ],
+      "linha": 87
+    },
+    {
+      "metodo": "PUT",
+      "caminho": "/api/interprete/disponibilidades",
+      "secao": "Intérprete: hub, demandas, configuração, disponibilidade, certificações, ganhos, repasses",
+      "acesso": "INTERPRETE",
+      "controller": "demanda",
+      "funcao": "salvarDisponibilidades",
+      "validacao": "demanda.esquemaDisponibilidades",
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF25"
+      ],
+      "linha": 88
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/interprete/certificacoes",
+      "secao": "Intérprete: hub, demandas, configuração, disponibilidade, certificações, ganhos, repasses",
+      "acesso": "INTERPRETE",
+      "controller": "demanda",
+      "funcao": "minhasCertificacoes",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF05"
+      ],
+      "linha": 89
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/interprete/certificacoes",
+      "secao": "Intérprete: hub, demandas, configuração, disponibilidade, certificações, ganhos, repasses",
+      "acesso": "INTERPRETE",
+      "controller": "demanda",
+      "funcao": "reenviarCertificacao",
+      "validacao": "demanda.esquemaReenvioCertificacao",
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF05"
+      ],
+      "linha": 90
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/interprete/ganhos",
+      "secao": "Intérprete: hub, demandas, configuração, disponibilidade, certificações, ganhos, repasses",
+      "acesso": "INTERPRETE",
+      "controller": "pagamento",
+      "funcao": "ganhos",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF26"
+      ],
+      "linha": 91
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/interprete/contas-bancarias",
+      "secao": "Intérprete: hub, demandas, configuração, disponibilidade, certificações, ganhos, repasses",
+      "acesso": "INTERPRETE",
+      "controller": "pagamento",
+      "funcao": "listarContas",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [],
+      "linha": 92
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/interprete/contas-bancarias",
+      "secao": "Intérprete: hub, demandas, configuração, disponibilidade, certificações, ganhos, repasses",
+      "acesso": "INTERPRETE",
+      "controller": "pagamento",
+      "funcao": "salvarConta",
+      "validacao": "pagamento.esquemaContaBancaria",
+      "limiteTentativas": false,
+      "requisitos": [],
+      "linha": 93
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/interprete/repasses",
+      "secao": "Intérprete: hub, demandas, configuração, disponibilidade, certificações, ganhos, repasses",
+      "acesso": "INTERPRETE",
+      "controller": "pagamento",
+      "funcao": "listarRepasses",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF27"
+      ],
+      "linha": 94
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/interprete/repasses",
+      "secao": "Intérprete: hub, demandas, configuração, disponibilidade, certificações, ganhos, repasses",
+      "acesso": "INTERPRETE",
+      "controller": "pagamento",
+      "funcao": "solicitarRepasse",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF27"
+      ],
+      "linha": 95
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/atendimentos",
+      "secao": "Atendimentos (participantes: cliente e intérprete)",
+      "acesso": "autenticado",
+      "controller": "atendimento",
+      "funcao": "historico",
+      "validacao": "atendimento.esquemaHistorico",
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF39"
+      ],
+      "linha": 100
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/atendimentos/:id",
+      "secao": "Atendimentos (participantes: cliente e intérprete)",
+      "acesso": "autenticado",
+      "controller": "atendimento",
+      "funcao": "obter",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [],
+      "linha": 101
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/atendimentos/:id/mensagens",
+      "secao": "Atendimentos (participantes: cliente e intérprete)",
+      "acesso": "autenticado",
+      "controller": "atendimento",
+      "funcao": "listarMensagens",
+      "validacao": "atendimento.esquemaMensagensQuery",
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF28"
+      ],
+      "linha": 102
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/atendimentos/:id/mensagens",
+      "secao": "Atendimentos (participantes: cliente e intérprete)",
+      "acesso": "autenticado",
+      "controller": "atendimento",
+      "funcao": "enviarMensagem",
+      "validacao": "atendimento.esquemaMensagem",
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF28",
+        "RF30"
+      ],
+      "linha": 103
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/atendimentos/:id/localizacoes",
+      "secao": "Atendimentos (participantes: cliente e intérprete)",
+      "acesso": "autenticado",
+      "controller": "atendimento",
+      "funcao": "localizacoes",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF29"
+      ],
+      "linha": 104
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/atendimentos/:id/localizacoes",
+      "secao": "Atendimentos (participantes: cliente e intérprete)",
+      "acesso": "autenticado",
+      "controller": "atendimento",
+      "funcao": "compartilharLocalizacao",
+      "validacao": "atendimento.esquemaLocalizacao",
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF29"
+      ],
+      "linha": 105
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/atendimentos/:id/qrcode",
+      "secao": "Atendimentos (participantes: cliente e intérprete)",
+      "acesso": "CLIENTE",
+      "controller": "atendimento",
+      "funcao": "qrcode",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF31"
+      ],
+      "linha": 106
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/atendimentos/:id/checkin",
+      "secao": "Atendimentos (participantes: cliente e intérprete)",
+      "acesso": "INTERPRETE",
+      "controller": "atendimento",
+      "funcao": "checkin",
+      "validacao": "atendimento.esquemaCheckin",
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF31",
+        "RF32"
+      ],
+      "linha": 107
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/atendimentos/:id/encerrar",
+      "secao": "Atendimentos (participantes: cliente e intérprete)",
+      "acesso": "autenticado",
+      "controller": "atendimento",
+      "funcao": "encerrar",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF33"
+      ],
+      "linha": 108
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/atendimentos/:id/suporte",
+      "secao": "Atendimentos (participantes: cliente e intérprete)",
+      "acesso": "autenticado",
+      "controller": "atendimento",
+      "funcao": "suporte",
+      "validacao": "atendimento.esquemaSuporte",
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF34"
+      ],
+      "linha": 109
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/suporte",
+      "secao": "Atendimentos (participantes: cliente e intérprete)",
+      "acesso": "autenticado",
+      "controller": "atendimento",
+      "funcao": "suporte",
+      "validacao": "atendimento.esquemaSuporte",
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF34"
+      ],
+      "linha": 110
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/atendimentos/:id/comprovante.pdf",
+      "secao": "Atendimentos (participantes: cliente e intérprete)",
+      "acesso": "autenticado",
+      "controller": "atendimento",
+      "funcao": "comprovantePdf",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF37",
+        "RF38"
+      ],
+      "linha": 111
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/atendimentos/:id/avaliacoes",
+      "secao": "Atendimentos (participantes: cliente e intérprete)",
+      "acesso": "autenticado",
+      "controller": "atendimento",
+      "funcao": "avaliar",
+      "validacao": "atendimento.esquemaAvaliacao",
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF40"
+      ],
+      "linha": 112
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/backoffice/indicadores",
+      "secao": "Backoffice / Suporte",
+      "acesso": "BACKOFFICE/SUPORTE",
+      "controller": "backoffice",
+      "funcao": "indicadores",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [],
+      "linha": 117
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/backoffice/certificacoes",
+      "secao": "Backoffice / Suporte",
+      "acesso": "BACKOFFICE/SUPORTE",
+      "controller": "backoffice",
+      "funcao": "listarCertificacoes",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF06"
+      ],
+      "linha": 118
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/backoffice/certificacoes/:id/arquivo",
+      "secao": "Backoffice / Suporte",
+      "acesso": "autenticado",
+      "controller": "backoffice",
+      "funcao": "arquivoCertificacao",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF06"
+      ],
+      "linha": 119
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/backoffice/certificacoes/:id/parecer",
+      "secao": "Backoffice / Suporte",
+      "acesso": "BACKOFFICE/SUPORTE",
+      "controller": "backoffice",
+      "funcao": "parecer",
+      "validacao": "backoffice.esquemaParecer",
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF06"
+      ],
+      "linha": 120
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/backoffice/chamados",
+      "secao": "Backoffice / Suporte",
+      "acesso": "BACKOFFICE/SUPORTE",
+      "controller": "backoffice",
+      "funcao": "listarChamados",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF34"
+      ],
+      "linha": 121
+    },
+    {
+      "metodo": "POST",
+      "caminho": "/api/backoffice/chamados/:id/status",
+      "secao": "Backoffice / Suporte",
+      "acesso": "BACKOFFICE/SUPORTE",
+      "controller": "backoffice",
+      "funcao": "atualizarChamado",
+      "validacao": "backoffice.esquemaChamadoStatus",
+      "limiteTentativas": false,
+      "requisitos": [],
+      "linha": 122
+    },
+    {
+      "metodo": "GET",
+      "caminho": "/api/backoffice/auditoria",
+      "secao": "Backoffice / Suporte",
+      "acesso": "BACKOFFICE/SUPORTE",
+      "controller": "backoffice",
+      "funcao": "auditoria",
+      "validacao": null,
+      "limiteTentativas": false,
+      "requisitos": [
+        "RF44"
+      ],
+      "linha": 123
+    }
+  ],
+  "backend": {
+    "camadas": {
+      "routes": [
+        "index.ts"
+      ],
+      "middlewares": [
+        "auth.ts",
+        "erros.ts",
+        "validar.ts"
+      ],
+      "controllers": [
+        "atendimento.controller.ts",
+        "auth.controller.ts",
+        "backoffice.controller.ts",
+        "cadastro.controller.ts",
+        "demanda.controller.ts",
+        "pagamento.controller.ts",
+        "perfil.controller.ts",
+        "solicitacao.controller.ts"
+      ],
+      "services": [
+        "atendimento.service.ts",
+        "auditoria.service.ts",
+        "auth.service.ts",
+        "avaliacao.service.ts",
+        "backoffice.service.ts",
+        "cadastro.service.ts",
+        "comprovante.service.ts",
+        "demanda.service.ts",
+        "email.service.ts",
+        "gateway.service.ts",
+        "notificacao.service.ts",
+        "pagamento.service.ts",
+        "perfil.service.ts",
+        "solicitacao.service.ts"
+      ],
+      "models": [
+        "db.ts",
+        "schema.ts"
+      ],
+      "views": [
+        "comprovante.pdf.ts",
+        "presenters.ts"
+      ],
+      "utils": [
+        "datas.ts",
+        "documentos.ts",
+        "elegibilidade.ts",
+        "erros.ts",
+        "geo.ts"
+      ],
+      "config": [
+        "env.ts",
+        "regras.ts"
+      ],
+      "db": [
+        "exportar-modelo.ts",
+        "migrate.ts",
+        "seed.ts"
+      ]
+    },
+    "servicos": [
+      {
+        "nome": "atendimento",
+        "arquivo": "backend/src/services/atendimento.service.ts",
+        "requisitos": [
+          "RF28–RF34",
+          "RF39"
+        ],
+        "dependeDe": [
+          "auditoria",
+          "notificacao"
+        ],
+        "importa": {
+          "auditoria": [
+            "registrarEvento"
+          ],
+          "notificacao": [
+            "notificar"
+          ]
+        },
+        "usaTabelas": [
+          "atendimentos",
+          "chamadosSuporte",
+          "checkins",
+          "localizacoesCompartilhadas",
+          "mensagens",
+          "pagamentos",
+          "solicitacoes",
+          "usuarios"
+        ],
+        "funcoes": [
+          "carregarAtendimento",
+          "exigirParticipante",
+          "apresentarAtendimento",
+          "obterAtendimento",
+          "listarHistorico",
+          "listarMensagens",
+          "enviarMensagem",
+          "compartilharLocalizacao",
+          "obterLocalizacoes",
+          "obterQrCode",
+          "realizarCheckin",
+          "calcularValorFinal",
+          "encerrarAtendimento",
+          "acionarSuporte"
+        ],
+        "funcoesInternas": [
+          "registrarLocalizacao"
+        ]
+      },
+      {
+        "nome": "auditoria",
+        "arquivo": "backend/src/services/auditoria.service.ts",
+        "requisitos": [
+          "RF44",
+          "RNF33"
+        ],
+        "dependeDe": [],
+        "importa": {},
+        "usaTabelas": [
+          "eventosAuditoria"
+        ],
+        "funcoes": [
+          "registrarEvento",
+          "listarEventos"
+        ],
+        "funcoesInternas": []
+      },
+      {
+        "nome": "auth",
+        "arquivo": "backend/src/services/auth.service.ts",
+        "requisitos": [
+          "RF01",
+          "RF07",
+          "RF08",
+          "RNF07",
+          "RNF35"
+        ],
+        "dependeDe": [
+          "auditoria",
+          "email"
+        ],
+        "importa": {
+          "auditoria": [
+            "registrarEvento"
+          ],
+          "email": [
+            "enviarEmail"
+          ]
+        },
+        "usaTabelas": [
+          "clientes",
+          "interpretes",
+          "sessoes",
+          "tokensRecuperacao",
+          "usuarios"
+        ],
+        "funcoes": [
+          "gerarHashSenha",
+          "login",
+          "logout",
+          "obterSessaoAtual",
+          "carregarPerfil",
+          "solicitarRecuperacaoSenha",
+          "redefinirSenha",
+          "alterarSenha"
+        ],
+        "funcoesInternas": [
+          "destinoPorPapel"
+        ]
+      },
+      {
+        "nome": "avaliacao",
+        "arquivo": "backend/src/services/avaliacao.service.ts",
+        "requisitos": [
+          "RF40",
+          "RF41",
+          "RNF42"
+        ],
+        "dependeDe": [
+          "auditoria",
+          "atendimento",
+          "notificacao"
+        ],
+        "importa": {
+          "auditoria": [
+            "registrarEvento"
+          ],
+          "atendimento": [
+            "exigirParticipante"
+          ],
+          "notificacao": [
+            "notificar"
+          ]
+        },
+        "usaTabelas": [
+          "atendimentos",
+          "avaliacoes",
+          "interpretes"
+        ],
+        "funcoes": [
+          "avaliarAtendimento",
+          "avaliacoesPublicasDoInterprete"
+        ],
+        "funcoesInternas": []
+      },
+      {
+        "nome": "backoffice",
+        "arquivo": "backend/src/services/backoffice.service.ts",
+        "requisitos": [
+          "RF06",
+          "RNF36"
+        ],
+        "dependeDe": [
+          "auditoria",
+          "notificacao",
+          "cadastro"
+        ],
+        "importa": {
+          "auditoria": [
+            "registrarEvento"
+          ],
+          "notificacao": [
+            "notificar"
+          ],
+          "cadastro": [
+            "decodificarArquivo"
+          ]
+        },
+        "usaTabelas": [
+          "analisesDocumentais",
+          "certificacoes",
+          "chamadosSuporte",
+          "interpretes",
+          "usuarios"
+        ],
+        "funcoes": [
+          "listarCertificacoes",
+          "obterArquivoCertificacao",
+          "registrarParecer",
+          "reenviarCertificacao",
+          "minhasCertificacoes",
+          "listarChamados",
+          "atualizarChamado",
+          "indicadoresBackoffice"
+        ],
+        "funcoesInternas": []
+      },
+      {
+        "nome": "cadastro",
+        "arquivo": "backend/src/services/cadastro.service.ts",
+        "requisitos": [
+          "RF02–RF05",
+          "RNF09"
+        ],
+        "dependeDe": [
+          "auditoria",
+          "auth",
+          "notificacao"
+        ],
+        "importa": {
+          "auditoria": [
+            "registrarEvento"
+          ],
+          "auth": [
+            "gerarHashSenha",
+            "login"
+          ],
+          "notificacao": [
+            "notificar"
+          ]
+        },
+        "usaTabelas": [
+          "certificacoes",
+          "clientes",
+          "consentimentos",
+          "interpretes",
+          "usuarios"
+        ],
+        "funcoes": [
+          "decodificarArquivo",
+          "cadastrarCliente",
+          "cadastrarInterprete"
+        ],
+        "funcoesInternas": [
+          "emailJaUsado",
+          "assinaturaBinariaValida",
+          "consentimentosIniciais"
+        ]
+      },
+      {
+        "nome": "comprovante",
+        "arquivo": "backend/src/services/comprovante.service.ts",
+        "requisitos": [
+          "RF37",
+          "RF38",
+          "RNF41"
+        ],
+        "dependeDe": [
+          "atendimento"
+        ],
+        "importa": {
+          "atendimento": [
+            "exigirParticipante"
+          ]
+        },
+        "usaTabelas": [
+          "clientes",
+          "comprovantes"
+        ],
+        "funcoes": [
+          "gerarComprovantePdf",
+          "verificarComprovante"
+        ],
+        "funcoesInternas": []
+      },
+      {
+        "nome": "demanda",
+        "arquivo": "backend/src/services/demanda.service.ts",
+        "requisitos": [
+          "RF20–RF25",
+          "RNF36"
+        ],
+        "dependeDe": [
+          "auditoria",
+          "notificacao"
+        ],
+        "importa": {
+          "auditoria": [
+            "registrarEvento"
+          ],
+          "notificacao": [
+            "notificar"
+          ]
+        },
+        "usaTabelas": [
+          "atendimentos",
+          "checkins",
+          "disponibilidades",
+          "interpretes",
+          "ofertas",
+          "solicitacoes",
+          "usuarios"
+        ],
+        "funcoes": [
+          "carregarContextoElegibilidade",
+          "interpreteElegivelParaDemanda",
+          "listarDemandas",
+          "aceitarDemanda",
+          "recusarDemanda",
+          "atualizarConfiguracao",
+          "ofertarDemandasAbertas",
+          "listarDisponibilidades",
+          "salvarDisponibilidades",
+          "resumoHubInterprete"
+        ],
+        "funcoesInternas": [
+          "carregarInterprete",
+          "exigirHabilitado"
+        ]
+      },
+      {
+        "nome": "email",
+        "arquivo": "backend/src/services/email.service.ts",
+        "requisitos": [],
+        "dependeDe": [],
+        "importa": {},
+        "usaTabelas": [],
+        "funcoes": [
+          "enviarEmail"
+        ],
+        "funcoesInternas": []
+      },
+      {
+        "nome": "gateway",
+        "arquivo": "backend/src/services/gateway.service.ts",
+        "requisitos": [
+          "RNF23",
+          "RNF37"
+        ],
+        "dependeDe": [],
+        "importa": {},
+        "usaTabelas": [],
+        "funcoes": [
+          "tokenizarCartao",
+          "cobrar",
+          "transferir"
+        ],
+        "funcoesInternas": []
+      },
+      {
+        "nome": "notificacao",
+        "arquivo": "backend/src/services/notificacao.service.ts",
+        "requisitos": [
+          "RF42",
+          "RNF25"
+        ],
+        "dependeDe": [],
+        "importa": {},
+        "usaTabelas": [
+          "notificacoes",
+          "tipoNotificacaoEnum"
+        ],
+        "funcoes": [
+          "notificar",
+          "listarNotificacoes",
+          "marcarComoLida",
+          "marcarTodasComoLidas"
+        ],
+        "funcoesInternas": []
+      },
+      {
+        "nome": "pagamento",
+        "arquivo": "backend/src/services/pagamento.service.ts",
+        "requisitos": [
+          "RF26",
+          "RF27",
+          "RF35",
+          "RF36",
+          "RF37"
+        ],
+        "dependeDe": [
+          "auditoria",
+          "gateway",
+          "notificacao"
+        ],
+        "importa": {
+          "auditoria": [
+            "registrarEvento"
+          ],
+          "notificacao": [
+            "notificar"
+          ],
+          "gateway": [
+            "tokenizarCartao",
+            "cobrar",
+            "transferir"
+          ]
+        },
+        "usaTabelas": [
+          "atendimentos",
+          "comprovantes",
+          "contasBancarias",
+          "cotacoes",
+          "formasPagamento",
+          "interpretes",
+          "lancamentosFinanceiros",
+          "pagamentos",
+          "repasses",
+          "solicitacoes"
+        ],
+        "funcoes": [
+          "listarFormasPagamento",
+          "adicionarFormaPagamento",
+          "removerFormaPagamento",
+          "creditoInterprete",
+          "obterPagamento",
+          "processarPagamento",
+          "resumoGanhos",
+          "listarContasBancarias",
+          "salvarContaBancaria",
+          "solicitarRepasse",
+          "listarRepasses",
+          "listarPagamentosPendentes"
+        ],
+        "funcoesInternas": [
+          "saldoDoInterprete"
+        ]
+      },
+      {
+        "nome": "perfil",
+        "arquivo": "backend/src/services/perfil.service.ts",
+        "requisitos": [
+          "RF43",
+          "RF45",
+          "RNF09"
+        ],
+        "dependeDe": [
+          "auditoria",
+          "auth"
+        ],
+        "importa": {
+          "auditoria": [
+            "registrarEvento"
+          ],
+          "auth": [
+            "carregarPerfil"
+          ]
+        },
+        "usaTabelas": [
+          "atendimentos",
+          "avaliacoes",
+          "clientes",
+          "consentimentos",
+          "interpretes",
+          "mensagens",
+          "pagamentos",
+          "sessoes",
+          "solicitacoes",
+          "solicitacoesDados",
+          "usuarios"
+        ],
+        "funcoes": [
+          "obterPerfil",
+          "atualizarPerfil",
+          "listarConsentimentos",
+          "alterarConsentimento",
+          "exportarDados",
+          "solicitarExclusao"
+        ],
+        "funcoesInternas": []
+      },
+      {
+        "nome": "solicitacao",
+        "arquivo": "backend/src/services/solicitacao.service.ts",
+        "requisitos": [
+          "RF10–RF19",
+          "RF15",
+          "RF16",
+          "RF17",
+          "RF18",
+          "RF19"
+        ],
+        "dependeDe": [
+          "auditoria",
+          "demanda",
+          "notificacao"
+        ],
+        "importa": {
+          "auditoria": [
+            "registrarEvento"
+          ],
+          "demanda": [
+            "interpreteElegivelParaDemanda"
+          ],
+          "notificacao": [
+            "notificar"
+          ]
+        },
+        "usaTabelas": [
+          "atendimentos",
+          "cotacoes",
+          "disponibilidades",
+          "interpretes",
+          "localizacoesCompartilhadas",
+          "ofertas",
+          "solicitacoes",
+          "usuarios"
+        ],
+        "funcoes": [
+          "calcularEstimativa",
+          "criarSolicitacao",
+          "listarSolicitacoesDoCliente",
+          "obterSolicitacao",
+          "cancelarSolicitacao",
+          "resumoHubCliente"
+        ],
+        "funcoesInternas": [
+          "validarDuracao",
+          "distribuir",
+          "carregarSolicitacaoCompleta",
+          "resumoSolicitacao",
+          "apresentarSolicitacao",
+          "calcularTaxaCancelamento"
+        ]
+      }
+    ],
+    "controllers": [
+      {
+        "nome": "atendimento",
+        "arquivo": "backend/src/controllers/atendimento.controller.ts",
+        "chamadas": {
+          "historico": [
+            "atendimento.listarHistorico"
+          ],
+          "obter": [
+            "atendimento.obterAtendimento"
+          ],
+          "listarMensagens": [
+            "atendimento.listarMensagens"
+          ],
+          "enviarMensagem": [
+            "atendimento.enviarMensagem"
+          ],
+          "compartilharLocalizacao": [
+            "atendimento.compartilharLocalizacao"
+          ],
+          "localizacoes": [
+            "atendimento.obterLocalizacoes"
+          ],
+          "qrcode": [
+            "atendimento.obterQrCode"
+          ],
+          "checkin": [
+            "atendimento.realizarCheckin"
+          ],
+          "encerrar": [
+            "atendimento.encerrarAtendimento"
+          ],
+          "suporte": [
+            "atendimento.acionarSuporte"
+          ],
+          "comprovantePdf": [
+            "comprovante.gerarComprovantePdf"
+          ],
+          "verificarComprovante": [
+            "comprovante.verificarComprovante"
+          ],
+          "avaliar": [
+            "avaliacao.avaliarAtendimento"
+          ]
+        },
+        "usaServicos": [
+          "atendimento",
+          "avaliacao",
+          "comprovante"
+        ],
+        "funcoes": [
+          "historico",
+          "obter",
+          "listarMensagens",
+          "enviarMensagem",
+          "compartilharLocalizacao",
+          "localizacoes",
+          "qrcode",
+          "checkin",
+          "encerrar",
+          "suporte",
+          "comprovantePdf",
+          "verificarComprovante",
+          "avaliar"
+        ],
+        "esquemas": [
+          "esquemaHistorico",
+          "esquemaMensagem",
+          "esquemaLocalizacao",
+          "esquemaCheckin",
+          "esquemaSuporte",
+          "esquemaAvaliacao",
+          "esquemaMensagensQuery"
+        ]
+      },
+      {
+        "nome": "auth",
+        "arquivo": "backend/src/controllers/auth.controller.ts",
+        "chamadas": {
+          "login": [
+            "auth.login"
+          ],
+          "logout": [
+            "auth.logout"
+          ],
+          "sessaoAtual": [
+            "auth.obterSessaoAtual"
+          ],
+          "recuperarSenha": [
+            "auth.solicitarRecuperacaoSenha"
+          ],
+          "redefinirSenha": [
+            "auth.redefinirSenha"
+          ],
+          "alterarSenha": [
+            "auth.alterarSenha"
+          ]
+        },
+        "usaServicos": [
+          "auth"
+        ],
+        "funcoes": [
+          "login",
+          "logout",
+          "sessaoAtual",
+          "recuperarSenha",
+          "redefinirSenha",
+          "alterarSenha"
+        ],
+        "esquemas": [
+          "esquemaLogin",
+          "esquemaRecuperar",
+          "esquemaRedefinir",
+          "esquemaAlterarSenha"
+        ]
+      },
+      {
+        "nome": "backoffice",
+        "arquivo": "backend/src/controllers/backoffice.controller.ts",
+        "chamadas": {
+          "indicadores": [
+            "backoffice.indicadoresBackoffice"
+          ],
+          "listarCertificacoes": [
+            "backoffice.listarCertificacoes"
+          ],
+          "arquivoCertificacao": [
+            "backoffice.obterArquivoCertificacao"
+          ],
+          "parecer": [
+            "backoffice.registrarParecer"
+          ],
+          "listarChamados": [
+            "backoffice.listarChamados"
+          ],
+          "atualizarChamado": [
+            "backoffice.atualizarChamado"
+          ],
+          "auditoria": [
+            "auditoria.listarEventos"
+          ]
+        },
+        "usaServicos": [
+          "auditoria",
+          "backoffice"
+        ],
+        "funcoes": [
+          "indicadores",
+          "listarCertificacoes",
+          "arquivoCertificacao",
+          "parecer",
+          "listarChamados",
+          "atualizarChamado",
+          "auditoria"
+        ],
+        "esquemas": [
+          "esquemaParecer",
+          "esquemaChamadoStatus"
+        ]
+      },
+      {
+        "nome": "cadastro",
+        "arquivo": "backend/src/controllers/cadastro.controller.ts",
+        "chamadas": {
+          "cadastrarCliente": [
+            "cadastro.cadastrarCliente"
+          ],
+          "cadastrarInterprete": [
+            "cadastro.cadastrarInterprete"
+          ]
+        },
+        "usaServicos": [
+          "cadastro"
+        ],
+        "funcoes": [
+          "cadastrarCliente",
+          "cadastrarInterprete"
+        ],
+        "esquemas": [
+          "esquemaCadastroCliente",
+          "esquemaArquivoBase64",
+          "esquemaCadastroInterprete"
+        ]
+      },
+      {
+        "nome": "demanda",
+        "arquivo": "backend/src/controllers/demanda.controller.ts",
+        "chamadas": {
+          "listar": [
+            "demanda.listarDemandas"
+          ],
+          "aceitar": [
+            "demanda.aceitarDemanda"
+          ],
+          "recusar": [
+            "demanda.recusarDemanda"
+          ],
+          "configuracao": [
+            "demanda.atualizarConfiguracao"
+          ],
+          "listarDisponibilidades": [
+            "demanda.listarDisponibilidades"
+          ],
+          "salvarDisponibilidades": [
+            "demanda.salvarDisponibilidades"
+          ],
+          "hub": [
+            "demanda.resumoHubInterprete"
+          ],
+          "minhasCertificacoes": [
+            "backoffice.minhasCertificacoes"
+          ],
+          "reenviarCertificacao": [
+            "backoffice.reenviarCertificacao"
+          ]
+        },
+        "usaServicos": [
+          "backoffice",
+          "demanda"
+        ],
+        "funcoes": [
+          "listar",
+          "aceitar",
+          "recusar",
+          "configuracao",
+          "listarDisponibilidades",
+          "salvarDisponibilidades",
+          "hub",
+          "minhasCertificacoes",
+          "reenviarCertificacao"
+        ],
+        "esquemas": [
+          "esquemaRecusa",
+          "esquemaConfiguracao",
+          "esquemaDisponibilidades",
+          "esquemaReenvioCertificacao"
+        ]
+      },
+      {
+        "nome": "pagamento",
+        "arquivo": "backend/src/controllers/pagamento.controller.ts",
+        "chamadas": {
+          "listarFormas": [
+            "pagamento.listarFormasPagamento"
+          ],
+          "adicionarForma": [
+            "pagamento.adicionarFormaPagamento"
+          ],
+          "removerForma": [
+            "pagamento.removerFormaPagamento"
+          ],
+          "pendentes": [
+            "pagamento.listarPagamentosPendentes"
+          ],
+          "obter": [
+            "pagamento.obterPagamento"
+          ],
+          "processar": [
+            "pagamento.processarPagamento"
+          ],
+          "ganhos": [
+            "pagamento.resumoGanhos"
+          ],
+          "listarContas": [
+            "pagamento.listarContasBancarias"
+          ],
+          "salvarConta": [
+            "pagamento.salvarContaBancaria"
+          ],
+          "solicitarRepasse": [
+            "pagamento.solicitarRepasse"
+          ],
+          "listarRepasses": [
+            "pagamento.listarRepasses"
+          ]
+        },
+        "usaServicos": [
+          "pagamento"
+        ],
+        "funcoes": [
+          "listarFormas",
+          "adicionarForma",
+          "removerForma",
+          "pendentes",
+          "obter",
+          "processar",
+          "ganhos",
+          "listarContas",
+          "salvarConta",
+          "solicitarRepasse",
+          "listarRepasses"
+        ],
+        "esquemas": [
+          "esquemaFormaPagamento",
+          "esquemaProcessar",
+          "esquemaContaBancaria"
+        ]
+      },
+      {
+        "nome": "perfil",
+        "arquivo": "backend/src/controllers/perfil.controller.ts",
+        "chamadas": {
+          "obter": [
+            "perfil.obterPerfil"
+          ],
+          "atualizar": [
+            "perfil.atualizarPerfil"
+          ],
+          "listarConsentimentos": [
+            "perfil.listarConsentimentos"
+          ],
+          "alterarConsentimento": [
+            "perfil.alterarConsentimento"
+          ],
+          "exportarDados": [
+            "perfil.exportarDados"
+          ],
+          "solicitarExclusao": [
+            "perfil.solicitarExclusao"
+          ],
+          "listarNotificacoes": [
+            "notificacao.listarNotificacoes"
+          ],
+          "marcarLida": [
+            "notificacao.marcarComoLida"
+          ],
+          "marcarTodasLidas": [
+            "notificacao.marcarTodasComoLidas"
+          ]
+        },
+        "usaServicos": [
+          "notificacao",
+          "perfil"
+        ],
+        "funcoes": [
+          "obter",
+          "atualizar",
+          "listarConsentimentos",
+          "alterarConsentimento",
+          "exportarDados",
+          "solicitarExclusao",
+          "listarNotificacoes",
+          "marcarLida",
+          "marcarTodasLidas"
+        ],
+        "esquemas": [
+          "esquemaAtualizarPerfil",
+          "esquemaConsentimento"
+        ]
+      },
+      {
+        "nome": "solicitacao",
+        "arquivo": "backend/src/controllers/solicitacao.controller.ts",
+        "chamadas": {
+          "estimar": [
+            "solicitacao.calcularEstimativa"
+          ],
+          "criar": [
+            "solicitacao.criarSolicitacao"
+          ],
+          "listar": [
+            "solicitacao.listarSolicitacoesDoCliente"
+          ],
+          "obter": [
+            "solicitacao.obterSolicitacao"
+          ],
+          "cancelar": [
+            "solicitacao.cancelarSolicitacao"
+          ],
+          "hub": [
+            "solicitacao.resumoHubCliente"
+          ]
+        },
+        "usaServicos": [
+          "solicitacao"
+        ],
+        "funcoes": [
+          "estimar",
+          "criar",
+          "listar",
+          "obter",
+          "cancelar",
+          "hub"
+        ],
+        "esquemas": [
+          "esquemaEstimativa",
+          "esquemaSolicitacao",
+          "esquemaCancelar",
+          "esquemaListar"
+        ]
+      }
+    ],
+    "migracoes": [
+      "0000_esquema_inicial.sql",
+      "0001_auditoria_imutavel.sql"
+    ]
+  },
+  "frontend": {
+    "paginas": {
+      "auth": [
+        "CadastroCliente.tsx",
+        "CadastroInterprete.tsx",
+        "Login.tsx",
+        "RecuperarSenha.tsx",
+        "RedefinirSenha.tsx",
+        "SelecaoPerfil.tsx",
+        "Splash.tsx"
+      ],
+      "backoffice": [
+        "ChamadosSuporte.tsx",
+        "FilaCertificacoes.tsx",
+        "ParecerCertificacao.tsx",
+        "TrilhaAuditoria.tsx"
+      ],
+      "cliente": [
+        "DetalheAtendimentoCliente.tsx",
+        "DetalheSolicitacao.tsx",
+        "Hub.tsx",
+        "NovaSolicitacao.tsx",
+        "PagamentoAtendimento.tsx",
+        "PerfilCliente.tsx"
+      ],
+      "comum": [
+        "AvaliarAtendimento.tsx",
+        "HistoricoAtendimentos.tsx",
+        "Notificacoes.tsx",
+        "Suporte.tsx",
+        "VerificarComprovante.tsx"
+      ],
+      "interprete": [
+        "AgendaInterprete.tsx",
+        "DemandasInterprete.tsx",
+        "DetalheAtendimentoInterprete.tsx",
+        "DetalheDemanda.tsx",
+        "GanhosInterprete.tsx",
+        "HubInterprete.tsx",
+        "PerfilInterprete.tsx"
+      ]
+    },
+    "componentes": [
+      "AppShell.tsx",
+      "LeitorQr.tsx",
+      "Mapa.tsx",
+      "Sala.tsx",
+      "TelaPublica.tsx",
+      "ui.tsx"
+    ],
+    "api": [
+      "cliente.ts",
+      "tipos.ts"
+    ],
+    "utils": [
+      "formato.ts",
+      "validacao.ts"
+    ],
+    "auth": [
+      "AuthContext.tsx"
+    ]
+  },
+  "versoes": {
+    "backend": {
+      "express": "5.3.0",
+      "drizzle-orm": "0.45.4",
+      "pg": "8.23.1",
+      "zod": "4.6.7",
+      "jsonwebtoken": "9.0.3",
+      "bcryptjs": "3.0.3",
+      "helmet": "8.3.0",
+      "cors": "2.8.6",
+      "express-rate-limit": "8.7.4",
+      "pdfkit": "0.20.2",
+      "typescript": "5.9.3",
+      "vitest": "5.1.0",
+      "supertest": "7.3.2",
+      "drizzle-kit": "0.31.11",
+      "tsx": "4.23.15"
+    },
+    "frontend": {
+      "react": "19.3.1",
+      "react-dom": "19.3.1",
+      "react-router-dom": "7.18.5",
+      "vite": "8.3.8",
+      "tailwindcss": "4.3.5",
+      "typescript": "5.9.3",
+      "leaflet": "1.9.4",
+      "react-leaflet": "5.0.0",
+      "qrcode.react": "4.2.0",
+      "html5-qrcode": "2.3.8",
+      "oxlint": "1.93.0"
+    },
+    "node": ">=20"
+  },
+  "hospedagem": {
+    "render": {
+      "servico": "viamos-api",
+      "runtime": "node",
+      "plano": "free",
+      "regiao": "oregon",
+      "build": "npm ci --include=dev && npm run build",
+      "start": "npm run deploy",
+      "health": "/api/health",
+      "banco": "viamos-db"
+    },
+    "vercel": {
+      "rewrite": {
+        "source": "/((?!api/).*)",
+        "destination": "/index.html"
+      },
+      "cabecalhos": [
+        "X-Content-Type-Options",
+        "X-Frame-Options",
+        "Referrer-Policy"
+      ]
+    },
+    "ci": {
+      "imagemPostgres": "postgres:16-alpine",
+      "node": "22",
+      "passos": [
+        "npm ci",
+        "npm run typecheck",
+        "npm run docs:modelo -- --verificar",
+        "npm test",
+        "npm run build",
+        "npm ci",
+        "npm run verificar",
+        "npm ci",
+        "npm run typecheck",
+        "npm run lint",
+        "npm test",
+        "npm run build"
+      ]
+    },
+    "local": {
+      "imagemPostgres": "postgres:16-alpine",
+      "portaBanco": "5432",
+      "portaVite": "5173",
+      "proxy": "http://localhost:3333",
+      "portaApi": "3333"
+    }
+  }
+}

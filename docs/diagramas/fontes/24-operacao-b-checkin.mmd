@@ -1,0 +1,38 @@
+sequenceDiagram
+  autonumber
+  actor CL as Cliente
+  actor IN as Intérprete
+  participant RT as routes/index.ts<br/>autenticar · exigirPapel · validar
+  participant CT as atendimento.controller<br/>qrcode · checkin
+  participant SV as atendimento.service<br/>obterQrCode · realizarCheckin
+  participant DB as PostgreSQL
+  participant AP as notificacao.service<br/>auditoria.service
+  CL->>RT: GET /api/atendimentos/:id/qrcode
+  RT->>CT: qrcode(req, res) — só CLIENTE
+  CT->>SV: obterQrCode(atendimentoId, usuarioId)
+  SV->>DB: carregarAtendimento()<br/>SELECT atendimentos + checkin
+  SV-->>CL: 200 { codigo, conteudo VIAMOS:id:codigo,<br/>disponivelApartirDe = início − 30 min }
+  Note over CL,IN: no local, o intérprete captura a posição do GPS<br/>(a tela só libera a leitura depois disso) e lê o QR do cliente
+  IN->>RT: POST /api/atendimentos/:id/checkin<br/>{ codigo, latitude, longitude, precisaoM }
+  RT->>RT: validar(esquemaCheckin)<br/>corpo inválido → 400
+  RT->>CT: checkin(req, res) — só INTERPRETE
+  CT->>SV: realizarCheckin(atendimentoId,<br/>interpreteId, entrada, ip)
+  SV->>DB: carregarAtendimento()
+  Note over SV: não é o intérprete alocado → 403<br/>já EM_ANDAMENTO → 409 CHECKIN_DUPLICADO<br/>não está AGENDADO → 422 ESTADO_INVALIDO
+  Note over SV: código ≠ checkins.qr_hash → 422 QR_INVALIDO
+  Note over SV: agora < início − 30 min → 422 FORA_DA_JANELA
+  Note over SV: precisaoM > 50 → 422 PRECISAO_INSUFICIENTE
+  SV->>SV: distanciaMetros(posição enviada,<br/>local da solicitação)
+  Note over SV: distância > 200 m → 422 FORA_DO_LOCAL
+  rect rgb(235, 235, 235)
+  Note over SV,DB: db.transaction
+  SV->>DB: SELECT solicitacoes FOR NO KEY UPDATE<br/>(mesma ordem de bloqueio do cancelamento)
+  Note over SV: já EM_ANDAMENTO → 409 · não ACEITA (cancelada) → 422
+  SV->>DB: UPDATE atendimentos SET status = 'EM_ANDAMENTO',<br/>inicio_real = agora WHERE status = 'AGENDADO'
+  SV->>DB: UPDATE checkins SET lido_em, latitude,<br/>longitude, precisao_m, distancia_m
+  SV->>DB: UPDATE solicitacoes<br/>SET status = 'EM_ANDAMENTO'
+  SV->>DB: INSERT mensagens (tipo SISTEMA)
+  SV->>AP: notificar(cliente, LEMBRETE)<br/>registrarEvento(CHECKIN)
+  end
+  SV-->>CT: { atendimentoId, status,<br/>inicioReal, distanciaM }
+  CT-->>IN: 200 OK

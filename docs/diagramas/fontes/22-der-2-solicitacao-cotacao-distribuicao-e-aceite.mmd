@@ -1,0 +1,51 @@
+erDiagram
+  direction LR
+  clientes ||..o{ solicitacoes : "cliente_id"
+  solicitacoes ||..o| cotacoes : "solicitacao_id"
+  solicitacoes ||..o{ ofertas : "solicitacao_id"
+  interpretes ||..o{ ofertas : "interprete_id"
+  solicitacoes {
+    uuid id PK
+    uuid cliente_id FK
+    tipo_servico tipo_servico
+    timestamptz inicio_previsto
+    integer duracao_prevista_min
+    text endereco
+    varchar(120) complemento
+    varchar(200) ponto_referencia
+    float8 latitude
+    float8 longitude
+    varchar(300) observacoes
+    status_solicitacao status
+    timestamptz cancelada_em
+    varchar(300) motivo_cancelamento
+    numeric taxa_cancelamento
+    timestamptz criada_em
+    timestamptz atualizada_em
+  }
+  cotacoes {
+    uuid id PK
+    uuid solicitacao_id FK, UK
+    numeric valor_servico
+    numeric valor_deslocamento
+    numeric taxa_plataforma
+    numeric valor_total
+    varchar(20) versao_regra
+    timestamptz calculada_em
+  }
+  ofertas {
+    uuid id PK
+    uuid solicitacao_id FK
+    uuid interprete_id FK
+    numeric distancia_km
+    status_oferta status
+    timestamptz enviada_em
+    timestamptz respondida_em
+    varchar(300) motivo_recusa
+  }
+  clientes {
+    uuid usuario_id PK, FK
+  }
+  interpretes {
+    uuid usuario_id PK, FK
+  }

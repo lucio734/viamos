@@ -1,0 +1,3576 @@
+{
+  "origem": "backend/src/models/schema.ts + backend/src/config/regras.ts",
+  "geradoPor": "backend/src/db/exportar-modelo.ts (npm run docs:modelo)",
+  "totais": {
+    "tabelas": 27,
+    "colunas": 230,
+    "chavesEstrangeiras": 39,
+    "enums": 20
+  },
+  "tabelas": [
+    {
+      "nome": "usuarios",
+      "secao": "Identidade e perfis (DC1, DC11)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "nome",
+          "tipo": "varchar(120)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "email",
+          "tipo": "varchar(160)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "senha_hash",
+          "tipo": "varchar(100)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": "bcrypt (RNF07)"
+        },
+        {
+          "nome": "telefone",
+          "tipo": "varchar(20)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "papel",
+          "tipo": "papel_usuario",
+          "enum": true,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "foto_url",
+          "tipo": "text",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "ativo",
+          "tipo": "boolean",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "true",
+          "comentario": null
+        },
+        {
+          "nome": "tentativas_falhas",
+          "tipo": "integer",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "0",
+          "comentario": null
+        },
+        {
+          "nome": "bloqueado_ate",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "dois_fatores_ativo",
+          "tipo": "boolean",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "false",
+          "comentario": null
+        },
+        {
+          "nome": "criado_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        },
+        {
+          "nome": "atualizado_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [],
+      "indices": [
+        {
+          "nome": "usuarios_email_unique",
+          "unico": true,
+          "colunas": [
+            "lower(email)"
+          ],
+          "condicao": null
+        }
+      ],
+      "restricoesUnicas": [],
+      "checks": []
+    },
+    {
+      "nome": "clientes",
+      "secao": "Identidade e perfis (DC1, DC11)",
+      "colunas": [
+        {
+          "nome": "usuario_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "cpf",
+          "tipo": "varchar(11)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": true,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "data_nascimento",
+          "tipo": "date",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "cep",
+          "tipo": "varchar(8)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "endereco",
+          "tipo": "text",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "preferencias_acessibilidade",
+          "tipo": "text",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "usuario_id"
+          ],
+          "tabelaReferenciada": "usuarios",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "cascade"
+        }
+      ],
+      "indices": [],
+      "restricoesUnicas": [],
+      "checks": []
+    },
+    {
+      "nome": "interpretes",
+      "secao": "Identidade e perfis (DC1, DC11)",
+      "colunas": [
+        {
+          "nome": "usuario_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "documento",
+          "tipo": "varchar(14)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": true,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": "CPF ou CNPJ"
+        },
+        {
+          "nome": "endereco_base",
+          "tipo": "text",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "latitude_base",
+          "tipo": "double precision",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "longitude_base",
+          "tipo": "double precision",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "especialidades",
+          "tipo": "text[]",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "'{}'::text[]",
+          "comentario": null
+        },
+        {
+          "nome": "preco_hora",
+          "tipo": "numeric(10, 2)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "raio_km",
+          "tipo": "integer",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "15",
+          "comentario": "RF24 / RNF27: máximo 15 km"
+        },
+        {
+          "nome": "disponivel_agora",
+          "tipo": "boolean",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "false",
+          "comentario": "toggle \"Ficar Online\""
+        },
+        {
+          "nome": "status_habilitacao",
+          "tipo": "status_habilitacao",
+          "enum": true,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "'PENDENTE'",
+          "comentario": "RF06 / RNF36"
+        },
+        {
+          "nome": "reputacao",
+          "tipo": "numeric(3, 2)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": "RF41 (média das avaliações)"
+        },
+        {
+          "nome": "total_avaliacoes",
+          "tipo": "integer",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "0",
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "usuario_id"
+          ],
+          "tabelaReferenciada": "usuarios",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "cascade"
+        }
+      ],
+      "indices": [],
+      "restricoesUnicas": [],
+      "checks": [
+        {
+          "nome": "interpretes_raio_km_check",
+          "expressao": "raio_km BETWEEN 1 AND 15"
+        }
+      ]
+    },
+    {
+      "nome": "certificacoes",
+      "secao": "Identidade e perfis (DC1, DC11)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "interprete_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "tipo",
+          "tipo": "tipo_certificacao",
+          "enum": true,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "numero",
+          "tipo": "varchar(60)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "nome_arquivo",
+          "tipo": "varchar(200)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "mime_arquivo",
+          "tipo": "varchar(80)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "arquivo",
+          "tipo": "bytea",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "tamanho_bytes",
+          "tipo": "integer",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "status",
+          "tipo": "status_certificacao",
+          "enum": true,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "'EM_ANALISE'",
+          "comentario": null
+        },
+        {
+          "nome": "enviada_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "interprete_id"
+          ],
+          "tabelaReferenciada": "interpretes",
+          "colunasReferenciadas": [
+            "usuario_id"
+          ],
+          "aoExcluir": "cascade"
+        }
+      ],
+      "indices": [],
+      "restricoesUnicas": [],
+      "checks": []
+    },
+    {
+      "nome": "analises_documentais",
+      "secao": "Identidade e perfis (DC1, DC11)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "certificacao_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "operador_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "resultado",
+          "tipo": "resultado_analise",
+          "enum": true,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "justificativa",
+          "tipo": "text",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "data",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "certificacao_id"
+          ],
+          "tabelaReferenciada": "certificacoes",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "cascade"
+        },
+        {
+          "colunas": [
+            "operador_id"
+          ],
+          "tabelaReferenciada": "usuarios",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "no action"
+        }
+      ],
+      "indices": [],
+      "restricoesUnicas": [],
+      "checks": []
+    },
+    {
+      "nome": "disponibilidades",
+      "secao": "Identidade e perfis (DC1, DC11)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "interprete_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "dia_semana",
+          "tipo": "smallint",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": "0 = domingo ... 6 = sábado"
+        },
+        {
+          "nome": "inicio",
+          "tipo": "time",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "fim",
+          "tipo": "time",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "interprete_id"
+          ],
+          "tabelaReferenciada": "interpretes",
+          "colunasReferenciadas": [
+            "usuario_id"
+          ],
+          "aoExcluir": "cascade"
+        }
+      ],
+      "indices": [],
+      "restricoesUnicas": [],
+      "checks": [
+        {
+          "nome": "disponibilidades_dia_semana_check",
+          "expressao": "dia_semana BETWEEN 0 AND 6"
+        }
+      ]
+    },
+    {
+      "nome": "solicitacoes",
+      "secao": "Solicitação, cotação, distribuição e aceite (DC3, DC4)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "cliente_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "tipo_servico",
+          "tipo": "tipo_servico",
+          "enum": true,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "inicio_previsto",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "duracao_prevista_min",
+          "tipo": "integer",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": "RF13: mínimo 60"
+        },
+        {
+          "nome": "endereco",
+          "tipo": "text",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "complemento",
+          "tipo": "varchar(120)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "ponto_referencia",
+          "tipo": "varchar(200)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "latitude",
+          "tipo": "double precision",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "longitude",
+          "tipo": "double precision",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "observacoes",
+          "tipo": "varchar(300)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "status",
+          "tipo": "status_solicitacao",
+          "enum": true,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "'BUSCANDO'",
+          "comentario": null
+        },
+        {
+          "nome": "cancelada_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "motivo_cancelamento",
+          "tipo": "varchar(300)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "taxa_cancelamento",
+          "tipo": "numeric(10, 2)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "criada_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        },
+        {
+          "nome": "atualizada_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "cliente_id"
+          ],
+          "tabelaReferenciada": "clientes",
+          "colunasReferenciadas": [
+            "usuario_id"
+          ],
+          "aoExcluir": "no action"
+        }
+      ],
+      "indices": [
+        {
+          "nome": "solicitacoes_status_idx",
+          "unico": false,
+          "colunas": [
+            "status"
+          ],
+          "condicao": null
+        },
+        {
+          "nome": "solicitacoes_cliente_idx",
+          "unico": false,
+          "colunas": [
+            "cliente_id"
+          ],
+          "condicao": null
+        }
+      ],
+      "restricoesUnicas": [],
+      "checks": [
+        {
+          "nome": "solicitacoes_duracao_min_check",
+          "expressao": "duracao_prevista_min >= 60"
+        }
+      ]
+    },
+    {
+      "nome": "cotacoes",
+      "secao": "Solicitação, cotação, distribuição e aceite (DC3, DC4)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "solicitacao_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": true,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "valor_servico",
+          "tipo": "numeric(10, 2)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "valor_deslocamento",
+          "tipo": "numeric(10, 2)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "taxa_plataforma",
+          "tipo": "numeric(10, 2)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "valor_total",
+          "tipo": "numeric(10, 2)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "versao_regra",
+          "tipo": "varchar(20)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "calculada_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "solicitacao_id"
+          ],
+          "tabelaReferenciada": "solicitacoes",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "cascade"
+        }
+      ],
+      "indices": [],
+      "restricoesUnicas": [],
+      "checks": []
+    },
+    {
+      "nome": "ofertas",
+      "secao": "Solicitação, cotação, distribuição e aceite (DC3, DC4)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "solicitacao_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "interprete_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "distancia_km",
+          "tipo": "numeric(6, 2)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "status",
+          "tipo": "status_oferta",
+          "enum": true,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "'ENVIADA'",
+          "comentario": null
+        },
+        {
+          "nome": "enviada_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        },
+        {
+          "nome": "respondida_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "motivo_recusa",
+          "tipo": "varchar(300)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "solicitacao_id"
+          ],
+          "tabelaReferenciada": "solicitacoes",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "cascade"
+        },
+        {
+          "colunas": [
+            "interprete_id"
+          ],
+          "tabelaReferenciada": "interpretes",
+          "colunasReferenciadas": [
+            "usuario_id"
+          ],
+          "aoExcluir": "cascade"
+        }
+      ],
+      "indices": [
+        {
+          "nome": "ofertas_solicitacao_interprete_unique",
+          "unico": true,
+          "colunas": [
+            "solicitacao_id",
+            "interprete_id"
+          ],
+          "condicao": null
+        }
+      ],
+      "restricoesUnicas": [],
+      "checks": []
+    },
+    {
+      "nome": "atendimentos",
+      "secao": "Atendimento presencial (DC4, DC5, DC6)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "solicitacao_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": true,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "interprete_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "aceito_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        },
+        {
+          "nome": "inicio_real",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "fim_real",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "duracao_real_min",
+          "tipo": "integer",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "valor_final",
+          "tipo": "numeric(10, 2)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "status",
+          "tipo": "status_atendimento",
+          "enum": true,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "'AGENDADO'",
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "solicitacao_id"
+          ],
+          "tabelaReferenciada": "solicitacoes",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "no action"
+        },
+        {
+          "colunas": [
+            "interprete_id"
+          ],
+          "tabelaReferenciada": "interpretes",
+          "colunasReferenciadas": [
+            "usuario_id"
+          ],
+          "aoExcluir": "no action"
+        }
+      ],
+      "indices": [
+        {
+          "nome": "atendimentos_interprete_idx",
+          "unico": false,
+          "colunas": [
+            "interprete_id"
+          ],
+          "condicao": null
+        }
+      ],
+      "restricoesUnicas": [],
+      "checks": []
+    },
+    {
+      "nome": "checkins",
+      "secao": "Atendimento presencial (DC4, DC5, DC6)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "atendimento_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": true,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "qr_hash",
+          "tipo": "varchar(64)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": true,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": "conteúdo do QR exibido pelo cliente"
+        },
+        {
+          "nome": "emitido_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        },
+        {
+          "nome": "lido_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "latitude",
+          "tipo": "double precision",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "longitude",
+          "tipo": "double precision",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "precisao_m",
+          "tipo": "double precision",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "distancia_m",
+          "tipo": "double precision",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "atendimento_id"
+          ],
+          "tabelaReferenciada": "atendimentos",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "cascade"
+        }
+      ],
+      "indices": [],
+      "restricoesUnicas": [],
+      "checks": []
+    },
+    {
+      "nome": "mensagens",
+      "secao": "Atendimento presencial (DC4, DC5, DC6)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "atendimento_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "autor_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": "null = mensagem do sistema"
+        },
+        {
+          "nome": "tipo",
+          "tipo": "tipo_mensagem",
+          "enum": true,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "'TEXTO'",
+          "comentario": null
+        },
+        {
+          "nome": "texto",
+          "tipo": "varchar(1000)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "arquivo_uri",
+          "tipo": "text",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": "foto do ponto de referência (data URL pequena) — RF30"
+        },
+        {
+          "nome": "latitude",
+          "tipo": "double precision",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "longitude",
+          "tipo": "double precision",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "enviada_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        },
+        {
+          "nome": "lida_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "atendimento_id"
+          ],
+          "tabelaReferenciada": "atendimentos",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "cascade"
+        },
+        {
+          "colunas": [
+            "autor_id"
+          ],
+          "tabelaReferenciada": "usuarios",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "no action"
+        }
+      ],
+      "indices": [
+        {
+          "nome": "mensagens_atendimento_idx",
+          "unico": false,
+          "colunas": [
+            "atendimento_id",
+            "enviada_em"
+          ],
+          "condicao": null
+        }
+      ],
+      "restricoesUnicas": [],
+      "checks": []
+    },
+    {
+      "nome": "localizacoes_compartilhadas",
+      "secao": "Atendimento presencial (DC4, DC5, DC6)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "atendimento_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "usuario_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "latitude",
+          "tipo": "double precision",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "longitude",
+          "tipo": "double precision",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "precisao_m",
+          "tipo": "double precision",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "registrada_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        },
+        {
+          "nome": "encerrada_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "atendimento_id"
+          ],
+          "tabelaReferenciada": "atendimentos",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "cascade"
+        },
+        {
+          "colunas": [
+            "usuario_id"
+          ],
+          "tabelaReferenciada": "usuarios",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "no action"
+        }
+      ],
+      "indices": [],
+      "restricoesUnicas": [],
+      "checks": []
+    },
+    {
+      "nome": "chamados_suporte",
+      "secao": "Atendimento presencial (DC4, DC5, DC6)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "atendimento_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "solicitante_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "operador_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "tipo",
+          "tipo": "tipo_chamado",
+          "enum": true,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "descricao",
+          "tipo": "varchar(500)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "latitude",
+          "tipo": "double precision",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "longitude",
+          "tipo": "double precision",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "status",
+          "tipo": "status_chamado",
+          "enum": true,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "'ABERTO'",
+          "comentario": null
+        },
+        {
+          "nome": "aberto_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        },
+        {
+          "nome": "encerrado_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "atendimento_id"
+          ],
+          "tabelaReferenciada": "atendimentos",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "no action"
+        },
+        {
+          "colunas": [
+            "solicitante_id"
+          ],
+          "tabelaReferenciada": "usuarios",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "no action"
+        },
+        {
+          "colunas": [
+            "operador_id"
+          ],
+          "tabelaReferenciada": "usuarios",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "no action"
+        }
+      ],
+      "indices": [],
+      "restricoesUnicas": [],
+      "checks": []
+    },
+    {
+      "nome": "formas_pagamento",
+      "secao": "Financeiro (DC7, DC8)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "cliente_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "tipo",
+          "tipo": "tipo_forma_pagamento",
+          "enum": true,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "chave_pix",
+          "tipo": "varchar(120)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "token_gateway",
+          "tipo": "varchar(120)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": "RNF37: nunca o número do cartão"
+        },
+        {
+          "nome": "bandeira",
+          "tipo": "varchar(30)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "final_cartao",
+          "tipo": "varchar(4)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "principal",
+          "tipo": "boolean",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "false",
+          "comentario": null
+        },
+        {
+          "nome": "ativa",
+          "tipo": "boolean",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "true",
+          "comentario": null
+        },
+        {
+          "nome": "criada_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "cliente_id"
+          ],
+          "tabelaReferenciada": "clientes",
+          "colunasReferenciadas": [
+            "usuario_id"
+          ],
+          "aoExcluir": "cascade"
+        }
+      ],
+      "indices": [],
+      "restricoesUnicas": [],
+      "checks": []
+    },
+    {
+      "nome": "pagamentos",
+      "secao": "Financeiro (DC7, DC8)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "atendimento_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "forma_pagamento_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "valor",
+          "tipo": "numeric(10, 2)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "meio",
+          "tipo": "tipo_forma_pagamento",
+          "enum": true,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "status",
+          "tipo": "status_pagamento",
+          "enum": true,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "'PENDENTE'",
+          "comentario": null
+        },
+        {
+          "nome": "referencia_gateway",
+          "tipo": "varchar(80)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": true,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "mensagem_gateway",
+          "tipo": "varchar(200)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "tentativas",
+          "tipo": "integer",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "0",
+          "comentario": null
+        },
+        {
+          "nome": "criado_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        },
+        {
+          "nome": "confirmado_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "atendimento_id"
+          ],
+          "tabelaReferenciada": "atendimentos",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "no action"
+        },
+        {
+          "colunas": [
+            "forma_pagamento_id"
+          ],
+          "tabelaReferenciada": "formas_pagamento",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "no action"
+        }
+      ],
+      "indices": [
+        {
+          "nome": "pagamentos_um_pago_por_atendimento",
+          "unico": true,
+          "colunas": [
+            "atendimento_id"
+          ],
+          "condicao": "status = 'PAGO'"
+        }
+      ],
+      "restricoesUnicas": [],
+      "checks": []
+    },
+    {
+      "nome": "contas_bancarias",
+      "secao": "Financeiro (DC7, DC8)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "interprete_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "banco",
+          "tipo": "varchar(60)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "agencia",
+          "tipo": "varchar(10)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "conta",
+          "tipo": "varchar(20)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "titular",
+          "tipo": "varchar(120)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "chave_pix",
+          "tipo": "varchar(120)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "principal",
+          "tipo": "boolean",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "true",
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "interprete_id"
+          ],
+          "tabelaReferenciada": "interpretes",
+          "colunasReferenciadas": [
+            "usuario_id"
+          ],
+          "aoExcluir": "cascade"
+        }
+      ],
+      "indices": [],
+      "restricoesUnicas": [],
+      "checks": []
+    },
+    {
+      "nome": "repasses",
+      "secao": "Financeiro (DC7, DC8)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "interprete_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "conta_bancaria_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "valor",
+          "tipo": "numeric(10, 2)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "status",
+          "tipo": "status_repasse",
+          "enum": true,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "'SOLICITADO'",
+          "comentario": null
+        },
+        {
+          "nome": "referencia_gateway",
+          "tipo": "varchar(80)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "solicitado_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        },
+        {
+          "nome": "concluido_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "interprete_id"
+          ],
+          "tabelaReferenciada": "interpretes",
+          "colunasReferenciadas": [
+            "usuario_id"
+          ],
+          "aoExcluir": "no action"
+        },
+        {
+          "colunas": [
+            "conta_bancaria_id"
+          ],
+          "tabelaReferenciada": "contas_bancarias",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "no action"
+        }
+      ],
+      "indices": [],
+      "restricoesUnicas": [],
+      "checks": []
+    },
+    {
+      "nome": "lancamentos_financeiros",
+      "secao": "Financeiro (DC7, DC8)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "interprete_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "pagamento_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "repasse_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "tipo",
+          "tipo": "tipo_lancamento",
+          "enum": true,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "valor",
+          "tipo": "numeric(10, 2)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": "positivo = crédito, negativo = débito"
+        },
+        {
+          "nome": "descricao",
+          "tipo": "varchar(200)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "data",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "interprete_id"
+          ],
+          "tabelaReferenciada": "interpretes",
+          "colunasReferenciadas": [
+            "usuario_id"
+          ],
+          "aoExcluir": "no action"
+        },
+        {
+          "colunas": [
+            "pagamento_id"
+          ],
+          "tabelaReferenciada": "pagamentos",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "no action"
+        },
+        {
+          "colunas": [
+            "repasse_id"
+          ],
+          "tabelaReferenciada": "repasses",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "no action"
+        }
+      ],
+      "indices": [
+        {
+          "nome": "lancamentos_interprete_idx",
+          "unico": false,
+          "colunas": [
+            "interprete_id",
+            "data"
+          ],
+          "condicao": null
+        }
+      ],
+      "restricoesUnicas": [],
+      "checks": [
+        {
+          "nome": "lancamentos_origem_check",
+          "expressao": "(pagamento_id IS NOT NULL AND repasse_id IS NULL) OR (pagamento_id IS NULL AND repasse_id IS NOT NULL)"
+        }
+      ]
+    },
+    {
+      "nome": "avaliacoes",
+      "secao": "Pós-atendimento (DC9)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "atendimento_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "autor_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "avaliado_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "nota",
+          "tipo": "smallint",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "comentario",
+          "tipo": "varchar(500)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "data",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "atendimento_id"
+          ],
+          "tabelaReferenciada": "atendimentos",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "cascade"
+        },
+        {
+          "colunas": [
+            "autor_id"
+          ],
+          "tabelaReferenciada": "usuarios",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "no action"
+        },
+        {
+          "colunas": [
+            "avaliado_id"
+          ],
+          "tabelaReferenciada": "usuarios",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "no action"
+        }
+      ],
+      "indices": [
+        {
+          "nome": "avaliacoes_autor_por_atendimento_unique",
+          "unico": true,
+          "colunas": [
+            "atendimento_id",
+            "autor_id"
+          ],
+          "condicao": null
+        }
+      ],
+      "restricoesUnicas": [],
+      "checks": [
+        {
+          "nome": "avaliacoes_nota_check",
+          "expressao": "nota BETWEEN 1 AND 5"
+        },
+        {
+          "nome": "avaliacoes_autor_diferente_check",
+          "expressao": "autor_id <> avaliado_id"
+        }
+      ]
+    },
+    {
+      "nome": "comprovantes",
+      "secao": "Pós-atendimento (DC9)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "atendimento_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": true,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "codigo_verificacao",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": true,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": "RNF41"
+        },
+        {
+          "nome": "data_atendimento",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "url_pdf",
+          "tipo": "text",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "emitido_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "atendimento_id"
+          ],
+          "tabelaReferenciada": "atendimentos",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "no action"
+        }
+      ],
+      "indices": [],
+      "restricoesUnicas": [],
+      "checks": []
+    },
+    {
+      "nome": "consentimentos",
+      "secao": "Privacidade, notificações, sessões e auditoria (DC10, DC11)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "usuario_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "finalidade",
+          "tipo": "finalidade_consentimento",
+          "enum": true,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "versao_termo",
+          "tipo": "varchar(20)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "concedido_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        },
+        {
+          "nome": "revogado_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "usuario_id"
+          ],
+          "tabelaReferenciada": "usuarios",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "cascade"
+        }
+      ],
+      "indices": [],
+      "restricoesUnicas": [],
+      "checks": []
+    },
+    {
+      "nome": "solicitacoes_dados",
+      "secao": "Privacidade, notificações, sessões e auditoria (DC10, DC11)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "usuario_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "tipo",
+          "tipo": "tipo_solicitacao_dados",
+          "enum": true,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "status",
+          "tipo": "status_solicitacao_dados",
+          "enum": true,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "'ABERTA'",
+          "comentario": null
+        },
+        {
+          "nome": "criada_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        },
+        {
+          "nome": "concluida_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "usuario_id"
+          ],
+          "tabelaReferenciada": "usuarios",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "cascade"
+        }
+      ],
+      "indices": [],
+      "restricoesUnicas": [],
+      "checks": []
+    },
+    {
+      "nome": "notificacoes",
+      "secao": "Privacidade, notificações, sessões e auditoria (DC10, DC11)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "usuario_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "tipo",
+          "tipo": "tipo_notificacao",
+          "enum": true,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "titulo",
+          "tipo": "varchar(120)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "conteudo",
+          "tipo": "varchar(500)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "referencia_recurso",
+          "tipo": "varchar(200)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": "ex.: /cliente/solicitacoes/<id>"
+        },
+        {
+          "nome": "lida",
+          "tipo": "boolean",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "false",
+          "comentario": null
+        },
+        {
+          "nome": "criada_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "usuario_id"
+          ],
+          "tabelaReferenciada": "usuarios",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "cascade"
+        }
+      ],
+      "indices": [
+        {
+          "nome": "notificacoes_usuario_idx",
+          "unico": false,
+          "colunas": [
+            "usuario_id",
+            "lida"
+          ],
+          "condicao": null
+        }
+      ],
+      "restricoesUnicas": [],
+      "checks": []
+    },
+    {
+      "nome": "sessoes",
+      "secao": "Privacidade, notificações, sessões e auditoria (DC10, DC11)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "usuario_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "token_hash",
+          "tipo": "varchar(64)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": true,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "dispositivo",
+          "tipo": "varchar(200)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "expira_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "revogada",
+          "tipo": "boolean",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "false",
+          "comentario": null
+        },
+        {
+          "nome": "criada_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "usuario_id"
+          ],
+          "tabelaReferenciada": "usuarios",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "cascade"
+        }
+      ],
+      "indices": [],
+      "restricoesUnicas": [],
+      "checks": []
+    },
+    {
+      "nome": "tokens_recuperacao",
+      "secao": "Privacidade, notificações, sessões e auditoria (DC10, DC11)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "usuario_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "hash",
+          "tipo": "varchar(64)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": true,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "expira_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "usado_em",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "usuario_id"
+          ],
+          "tabelaReferenciada": "usuarios",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "cascade"
+        }
+      ],
+      "indices": [],
+      "restricoesUnicas": [],
+      "checks": []
+    },
+    {
+      "nome": "eventos_auditoria",
+      "secao": "Privacidade, notificações, sessões e auditoria (DC10, DC11)",
+      "colunas": [
+        {
+          "nome": "id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": true,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "gen_random_uuid()",
+          "comentario": null
+        },
+        {
+          "nome": "usuario_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": true,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": "null = agente automático"
+        },
+        {
+          "nome": "tipo",
+          "tipo": "varchar(60)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": null,
+          "comentario": "ex.: LOGIN, CADASTRO, ACEITE, CHECKIN, PAGAMENTO, CANCELAMENTO"
+        },
+        {
+          "nome": "entidade",
+          "tipo": "varchar(60)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "entidade_id",
+          "tipo": "uuid",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "detalhes",
+          "tipo": "jsonb",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "ip",
+          "tipo": "varchar(45)",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": false,
+          "padrao": null,
+          "comentario": null
+        },
+        {
+          "nome": "data",
+          "tipo": "timestamp with time zone",
+          "enum": false,
+          "chavePrimaria": false,
+          "chaveEstrangeira": false,
+          "unica": false,
+          "obrigatoria": true,
+          "padrao": "now()",
+          "comentario": null
+        }
+      ],
+      "chavesEstrangeiras": [
+        {
+          "colunas": [
+            "usuario_id"
+          ],
+          "tabelaReferenciada": "usuarios",
+          "colunasReferenciadas": [
+            "id"
+          ],
+          "aoExcluir": "set null"
+        }
+      ],
+      "indices": [
+        {
+          "nome": "eventos_auditoria_data_idx",
+          "unico": false,
+          "colunas": [
+            "data"
+          ],
+          "condicao": null
+        }
+      ],
+      "restricoesUnicas": [],
+      "checks": []
+    }
+  ],
+  "enums": [
+    {
+      "nome": "finalidade_consentimento",
+      "valores": [
+        "TERMOS_USO",
+        "PRIVACIDADE",
+        "LOCALIZACAO",
+        "NOTIFICACOES"
+      ]
+    },
+    {
+      "nome": "papel_usuario",
+      "valores": [
+        "CLIENTE",
+        "INTERPRETE",
+        "BACKOFFICE",
+        "SUPORTE"
+      ]
+    },
+    {
+      "nome": "resultado_analise",
+      "valores": [
+        "APROVADO",
+        "REPROVADO",
+        "CORRECAO"
+      ]
+    },
+    {
+      "nome": "status_atendimento",
+      "valores": [
+        "AGENDADO",
+        "EM_ANDAMENTO",
+        "CONCLUIDO",
+        "CANCELADO"
+      ]
+    },
+    {
+      "nome": "status_certificacao",
+      "valores": [
+        "EM_ANALISE",
+        "APROVADA",
+        "REPROVADA",
+        "CORRECAO_SOLICITADA"
+      ]
+    },
+    {
+      "nome": "status_chamado",
+      "valores": [
+        "ABERTO",
+        "EM_ATENDIMENTO",
+        "ENCERRADO"
+      ]
+    },
+    {
+      "nome": "status_habilitacao",
+      "valores": [
+        "PENDENTE",
+        "EM_ANALISE",
+        "APROVADO",
+        "REPROVADO",
+        "CORRECAO_SOLICITADA"
+      ]
+    },
+    {
+      "nome": "status_oferta",
+      "valores": [
+        "ENVIADA",
+        "ACEITA",
+        "RECUSADA",
+        "EXPIRADA"
+      ]
+    },
+    {
+      "nome": "status_pagamento",
+      "valores": [
+        "PENDENTE",
+        "PAGO",
+        "FALHOU",
+        "ESTORNADO"
+      ]
+    },
+    {
+      "nome": "status_repasse",
+      "valores": [
+        "SOLICITADO",
+        "PROCESSANDO",
+        "PAGO",
+        "FALHOU"
+      ]
+    },
+    {
+      "nome": "status_solicitacao",
+      "valores": [
+        "BUSCANDO",
+        "ACEITA",
+        "EM_ANDAMENTO",
+        "CONCLUIDA",
+        "CANCELADA"
+      ]
+    },
+    {
+      "nome": "status_solicitacao_dados",
+      "valores": [
+        "ABERTA",
+        "CONCLUIDA",
+        "NEGADA"
+      ]
+    },
+    {
+      "nome": "tipo_certificacao",
+      "valores": [
+        "PROLIBRAS",
+        "EQUIVALENTE"
+      ]
+    },
+    {
+      "nome": "tipo_chamado",
+      "valores": [
+        "SUPORTE",
+        "EMERGENCIA"
+      ]
+    },
+    {
+      "nome": "tipo_forma_pagamento",
+      "valores": [
+        "PIX",
+        "CARTAO"
+      ]
+    },
+    {
+      "nome": "tipo_lancamento",
+      "valores": [
+        "CREDITO_ATENDIMENTO",
+        "DEBITO_REPASSE",
+        "ESTORNO"
+      ]
+    },
+    {
+      "nome": "tipo_mensagem",
+      "valores": [
+        "TEXTO",
+        "IMAGEM",
+        "LOCALIZACAO",
+        "SISTEMA"
+      ]
+    },
+    {
+      "nome": "tipo_notificacao",
+      "valores": [
+        "ACEITE",
+        "LEMBRETE",
+        "MENSAGEM",
+        "PAGAMENTO",
+        "CERTIFICACAO",
+        "SOLICITACAO",
+        "SISTEMA"
+      ]
+    },
+    {
+      "nome": "tipo_servico",
+      "valores": [
+        "SAUDE",
+        "JURIDICO",
+        "EDUCACAO",
+        "EVENTO",
+        "OUTRO"
+      ]
+    },
+    {
+      "nome": "tipo_solicitacao_dados",
+      "valores": [
+        "EXPORTACAO",
+        "EXCLUSAO"
+      ]
+    }
+  ],
+  "regras": {
+    "DURACAO_MINIMA_MIN": 60,
+    "DURACAO_BLOCO_MIN": 30,
+    "DURACAO_MAXIMA_MIN": 720,
+    "RAIO_MAXIMO_KM": 15,
+    "CHECKIN_DISTANCIA_MAXIMA_M": 200,
+    "CHECKIN_PRECISAO_MAXIMA_M": 50,
+    "CHECKIN_ANTECEDENCIA_MIN": 30,
+    "LOGIN_MAX_TENTATIVAS": 5,
+    "LOGIN_BLOQUEIO_MIN": 15,
+    "RECUPERACAO_SENHA_VALIDADE_MIN": 30,
+    "CERTIFICADO_TAMANHO_MAX_BYTES": 5242880,
+    "CERTIFICADO_MIMES": [
+      "application/pdf",
+      "image/jpeg",
+      "image/png"
+    ],
+    "FOTO_CHAT_TAMANHO_MAX_BYTES": 1048576,
+    "PRECO": {
+      "VERSAO_REGRA": "v1",
+      "HORA_REFERENCIA": {
+        "SAUDE": 95,
+        "JURIDICO": 110,
+        "EDUCACAO": 80,
+        "EVENTO": 100,
+        "OUTRO": 85
+      },
+      "DESLOCAMENTO_FIXO": 15,
+      "TAXA_PLATAFORMA_PERCENTUAL": 0.1
+    },
+    "CANCELAMENTO": {
+      "JANELA_SEM_TAXA_HORAS": 24,
+      "PERCENTUAL_TAXA": 0.2
+    },
+    "COBRANCA": {
+      "BLOCO_EXCEDENTE_MIN": 30
+    },
+    "SEMANA_INICIA_SEGUNDA": true,
+    "VERSAO_TERMOS": "2026-11"
+  }
+}
