@@ -73,7 +73,7 @@ Pré-requisitos: Node.js 22, Python 3.10+ e Google Chrome ou Microsoft Edge. Par
 
    Se usar LibreOffice Writer, abra o DOCX e exporte o PDF para a mesma pasta em `Entregas/`. Confira as legendas, tabelas e orientação das páginas na edição exportada.
 
-6. **Exportação pelo GitHub Actions.** Na aba **Actions**, abra **Gerar Produção Técnica** e execute o workflow na `main`. O campo `figma_url` recebe a URL pública do protótipo quando estiver disponível. O artefato `viamos-producao-tecnica` contém o DOCX e o PDF, e `viamos-producao-tecnica-revisao` guarda as páginas renderizadas durante sete dias. Depois da conferência, publique a edição em `Entregas/Produção Técnica/`.
+6. **Exportação pelo GitHub Actions.** Na aba **Actions**, abra **Gerar Produção Técnica** e execute o workflow na `main`. A geração usa a URL versionada do protótipo. O campo `figma_url` permite substituí-la para uma edição. O artefato `viamos-producao-tecnica` contém o DOCX e o PDF, e `viamos-producao-tecnica-revisao` guarda as páginas renderizadas durante sete dias. Depois da conferência, publique a edição em `Entregas/Produção Técnica/`.
 
 As imagens são reduzidas para 250 dpi no tamanho em que aparecem na página (diagramas em tons de cinza, capturas em
 256 cores) e ficam em cache em `build/tmp/`, que não é versionado.
@@ -83,7 +83,6 @@ As imagens são reduzidas para 250 dpi no tamanho em que aparecem na página (di
 - **Não edite o `.docx` à mão**: a próxima geração sobrescreve. O texto das seções está em `build/gerar_docx.py` e a
   ficha de cada tela (descrição, componentes, requisitos, caso de uso, fluxo e exceções) em `build/telas.py`. Os
   códigos de erro citados nas fichas foram conferidos no código do backend.
-- **Link do Figma (P-01)**: preencha `FIGMA_URL` no topo de `build/gerar_docx.py` (ou a variável de ambiente
-  `VIAMOS_FIGMA_URL`) e rode os passos 4 e 5. Enquanto estiver vazio, o documento mostra um aviso no lugar do link.
+- **Protótipo do Figma.** `prototipo-figma/url.txt` guarda o link de apresentação. A pasta contém as quatro capturas lidas na seção 1.3. Ao trocar o protótipo, atualize o link, as capturas e a explicação antes de gerar o capítulo.
 - **Linhas "Fonte:"** seguem o modelo: "Autoria própria apoiado por IA generativa (…)" para o que foi produzido com
   IA e "Autoria própria (…)" para capturas do aplicativo e para a planilha de requisitos.

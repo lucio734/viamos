@@ -2,7 +2,7 @@
 
 Antes de encerrar o projeto, siga a [regra de limpeza final](README.md#regra-de-limpeza-final) após a implementação, os testes, o deploy e a conferência das entregas.
 
-> Atualizado em 16/11/2026. O B-031 passou na regressão e na suíte completa. A última publicação verificada no Render é a de `2710e91`. O PostgreSQL hospedado está migrado. [Registro da retomada](../docs/REGISTRO_TRABALHO.md#correção-e-revisão-do-protótipo-em-16112026) · [Guia de deploy e evidências](../docs/DEPLOY.md#publicação-de-15112026)
+> Atualizado em 16/11/2026. O B-031 passou na regressão e na suíte completa. O Render confirmou `4848335` como ativo, com migrações aplicadas, sonda 200 e preflight de login 204 para a origem da Vercel. [Registro da retomada](../docs/REGISTRO_TRABALHO.md#correção-e-revisão-do-protótipo-em-16112026) · [Guia de deploy e evidências](../docs/DEPLOY.md#publicação-de-15112026)
 
 ## Retomada de 15/11/2026
 
@@ -27,7 +27,7 @@ git pull --ff-only origin main
 1. Leia [AGENTS.md](../AGENTS.md) e o [registro da retomada](../docs/REGISTRO_TRABALHO.md#retomada-em-15112026). A [matriz de verificações](../docs/VERIFICACOES.md) e o [log de bugs](../docs/BUGS.md) registram evidências e limites.
 2. A regressão **B-031** garante uma oferta e um aviso quando a criação coincide com a mudança para online. A janela pelo horário de início e a interpretação de grade vazia seguem para validação do grupo (P-05).
 3. Resolva com o grupo a divergência entre D-10 e a entrega de modelagem sobre o momento da emissão do PDF (P-06). D-01 e D-05 também seguem para validação do grupo.
-4. O Stitch tem novos quadros da jornada presencial. Exporte a seleção revisada para um arquivo no Figma, vincule os botões das jornadas e capture a navegação no modo de apresentação. Para fechar P-01, acrescente o link, as capturas e a explicação à seção 1.3 e gere novamente o DOCX e o PDF. No ensaio em aparelho físico, verifique o login, a leitura de QR com GPS e o download do comprovante. [Projeto Stitch](https://stitch.google.com/projects/15659746409633817631) · [Índice de entregas](../Entregas/README.md) · [Roteiro](../docs/ROTEIRO_DEMONSTRACAO.md)
+4. A seção 1.3 inclui o protótipo navegável no Figma, as quatro capturas e a explicação das jornadas (P-01). No ensaio do aplicativo em aparelho físico, verifique o login, a leitura de QR com GPS e o download do comprovante. [Índice de entregas](../Entregas/README.md) · [Roteiro](../docs/ROTEIRO_DEMONSTRACAO.md)
 
 ## Relatório histórico de 12/11/2026
 

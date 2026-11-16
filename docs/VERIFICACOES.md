@@ -31,7 +31,7 @@ Legenda: ✅ atendido e verificado · 🟡 parcialmente atendido · ⬜ pendente
 | 1 | Wireframes de baixa fidelidade | ✅ o documento apresenta as 30 telas (capturas do aplicativo com dados fictícios) com ficha por tela: descrição, componentes, requisitos e caso de uso; os protótipos Stitch aparecem na prototipação | `docs/producao-tecnica/` (seções 1.2 e 1.3) |
 | 1 | Estimativa de orçamento | ➖ projeto acadêmico sem custo; o documento registra que toda a pilha usa planos gratuitos com HTTPS | `docs/producao-tecnica/` (seção 2.2) |
 | 2 Design & Prototyping | Mockups de alta fidelidade | ✅ 12 telas Stitch (HTML + PNG) | `docs/producao-tecnica/fontes/stitch/` |
-| 2 | Protótipo interativo (clicável) | ⬜ link do Figma pendente (importar do Stitch) | Pendência P-01 em `docs/DECISOES.md` |
+| 2 | Protótipo interativo (clicável) | ✅ 14 quadros do Stitch e 13 transições conferidas em modo de apresentação no Figma | `docs/producao-tecnica/prototipo-figma/` |
 | 2 | Design system / style guide | ✅ `DESIGN.md` aplicado como tokens do Tailwind | `frontend/src/index.css` |
 | 3 Core Development | Acesso ao repositório de código | ✅ repositório público no GitHub com commits publicados na `main` | `README.md` §8 |
 | 3 | MVP funcional / builds incrementais | ✅ 33 rotas de tela implementadas e compiladas. Cobertura de comportamento e lacunas registradas por fluxo | `frontend/src/rotas.tsx`, `docs/REGISTRO_TRABALHO.md` |
@@ -43,7 +43,7 @@ Legenda: ✅ atendido e verificado · 🟡 parcialmente atendido · ⬜ pendente
 | 5 | Manuais de usuário e administrador | ✅ manual completo por perfil (Cliente, Intérprete, Backoffice) e roteiro de demonstração | `docs/MANUAL.md`, `docs/ROTEIRO_DEMONSTRACAO.md` |
 | 5 | SLA | ✅ documento com indicadores de disponibilidade, tempos de resposta e plano de contingência | `docs/SLA.md` |
 | 5 | Entrega do código-fonte | ✅ o repositório é a entrega | GitHub |
-| Red flags | SRS, protótipo interativo, acesso ao repo, plano de testes, SLA | 🟡 SRS, repositório, testes e SLA presentes. O link do protótipo interativo segue pendente | `docs/`, `Entregas/`, `docs/DECISOES.md` P-01 |
+| Red flags | SRS, protótipo interativo, acesso ao repo, plano de testes, SLA | ✅ SRS, protótipo navegável, repositório, testes e SLA presentes | `docs/`, `Entregas/`, `docs/DECISOES.md` P-01 |
 
 ## 3. Dossiê — checklist de 50 critérios (auditoria da reta final)
 
@@ -54,7 +54,7 @@ Estado por item, com a evidência atual. Itens 1–28 são o documento "Produç�
 | 1–2 | Texto introdutório e modelagem do produto | ✅ introdução do capítulo e seção 1 do documento | [Produção Técnica em Entregas](../Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/README.md) |
 | 3 | Sitemap | ✅ figura completa e uma por área (pública, cliente, intérprete, backoffice), tabela de rotas e explicação, geradas de `rotas.tsx` | `docs/producao-tecnica/` (1.1), `docs/diagramas/` |
 | 4 | Wireframes tela a tela com tabela | ✅ 30 telas capturadas do aplicativo + tabela de componentes por tela | `docs/producao-tecnica/` (1.2), `docs/producao-tecnica/telas/` |
-| 5 | Prototipação (link Figma) | 🟡 telas Stitch no capítulo. A equipe ainda não criou um protótipo no Figma. O link navegável e os registros do fluxo exigidos no roteiro seguem pendentes | Pendência P-01, `docs/producao-tecnica/README.md` |
+| 5 | Prototipação (link Figma) | ✅ link navegável, quatro capturas da apresentação e explicação da navegação | Produção Técnica, seção 1.3 |
 | 6–9 | Arquitetura (texto, funcional, técnica, MVC) | ✅ texto, diagramas e tabelas de tecnologias e camadas no documento | `docs/producao-tecnica/` (2.1–2.3), `backend/src/` |
 | 10–14 | Requisitos (texto, RF, RNF, associação, projeto linear) | ✅ 45 RF, 45 RNF, associação RF × RNF e projeto linear lidos da planilha e tabelados no documento | `docs/producao-tecnica/` (3.1–3.4), `Entregas/Engenharia de Requisitos/` |
 | 15–18 | Processos (texto, macroprocesso, fluxograma, BPMN) | ✅ macroprocesso e fluxograma (4 partes) gerados do código + os 6 BPMN da entrega de 11/11 | `docs/producao-tecnica/` (4.1–4.3) |
@@ -63,7 +63,7 @@ Estado por item, com a evidência atual. Itens 1–28 são o documento "Produç�
 | 23, 25, 28 | Estados, DFD, contexto | ✅ figuras da entrega de 11/11 + máquinas de estado geradas dos enums (solicitação, atendimento, pagamento, habilitação) e diagrama de contexto gerado; divergência do DFD P5 registrada (P-06) | `docs/producao-tecnica/` (5.4, 5.6, 5.9) |
 | 24, 26, 27 | Operação, processos de telas, ferramenta CASE | ✅ 4 diagramas de operação (aceite, check-in, encerramento, pagamento/comprovante), transições de telas e ferramentas CASE com o gerador do próprio repositório | `docs/producao-tecnica/` (5.5, 5.7, 5.8) |
 | 29 | Rotas = sitemap | ✅ 33 rotas com componentes reais conferidas no código e no Mermaid. A rota coringa redireciona para o splash | `frontend/src/rotas.tsx`, `docs/diagramas/DIAGRAMAS_PRODUCAO_TECNICA.md` |
-| 30 | Componentes fiéis aos wireframes | 🟡 telas implementadas. A evidência de aderência ao protótipo final depende dos wireframes e do link do Figma | `frontend/src/pages/`, `docs/producao-tecnica/fontes/stitch/` |
+| 30 | Componentes fiéis aos wireframes | 🟡 telas implementadas, com os passos principais da jornada presencial conferidos no Figma. A comparação de todas as telas fica no ensaio final | Produção Técnica, seções 1.2 e 1.3 |
 | 31 | Responsividade | 🟡 pagamento conferido a 320, 768 e 1280 px no Chrome. Falta evidência sistemática das demais telas e de dispositivos físicos | `docs/TESTES.md` |
 | 32 | Estados visuais (carregando/sucesso/erro/vazio) | 🟡 componentes disponíveis e fluxos principais exercitados. Falta cobertura por tela | `frontend/src/components/ui.tsx`, `pages/*` |
 | 33 | Validação e máscaras | ✅ máscaras (`formato.ts`) + validação no cliente (`validacao.ts`) + validação Zod no servidor | `frontend/src/utils/{formato,validacao}.ts`, `backend/src/controllers/*` |
@@ -78,7 +78,7 @@ Estado por item, com a evidência atual. Itens 1–28 são o documento "Produç�
 | 42 | `.gitignore` | ✅ testado (sem `.env`/`node_modules` nos commits) | `.gitignore` |
 | 43 | Branches e commits organizados | ✅ commits organizados por escopo na `main` | histórico git |
 | 44 | README com clonagem/instalação/execução | ✅ | `README.md` |
-| 45–47 | Deploy, HTTPS, rotas SPA | ✅ API pública com banco conectado, origem da API confirmada no bundle da Vercel, CORS da Vercel confirmado, HTTPS nos dois domínios e acesso direto à rota SPA com HTTP 200 | `docs/DEPLOY.md`, `docs/TESTES.md` |
+| 45–47 | Deploy, HTTPS, rotas SPA | ✅ `4848335` ativo no Render. Sonda HTTP 200 com PostgreSQL conectado, CORS de login HTTP 204 para a Vercel e acesso direto à rota SPA HTTP 200 | `docs/DEPLOY.md`, `docs/TESTES.md` |
 | 48 | Testes de fluxo principal e exceções | ✅ 63 casos de backend e 6 de frontend. A nova regressão verifica a criação simultânea à entrada do intérprete online (B-031) | `docs/TESTES.md` |
 | 49 | Auditoria de código (domínio da equipe) | ⬜ cada integrante revisa e explica sua parte (Bloco Z) | — |
 | 50 | Ensaio de demonstração | 🟡 roteiro atualizado. Ensaio integral com o grupo no ambiente de avaliação continua pendente | `docs/ROTEIRO_DEMONSTRACAO.md` |

@@ -5,11 +5,11 @@ Este capítulo apresenta a modelagem, a arquitetura e os requisitos do Víamos, 
 - [Versão editável em Word](Viamos_Producao_Tecnica.docx)
 - [Versão em PDF](Viamos_Producao_Tecnica.pdf)
 
-A edição de 16/11 tem 116 páginas no PDF. Ela incorpora a [captura de Ganhos e Repasses](../../docs/producao-tecnica/telas/25-ganhos.png), o [diagrama de processos do intérprete](../../docs/producao-tecnica/figuras/26-telas-interprete.png) e o [diagrama da ferramenta CASE](../../docs/producao-tecnica/figuras/27-ferramenta-case.png). Os arquivos foram gerados do commit `32c623e`. [Execução da exportação](https://github.com/lucio734/viamos/actions/runs/43920289435)
+A edição de 16/11 inclui o link navegável do Figma, quatro capturas da apresentação e a explicação das duas jornadas. [Abrir protótipo](https://www.figma.com/proto/zBuQC5GjLzW9ReazQqo5aH/V%C3%ADamos-%E2%80%94-Prot%C3%B3tipo-naveg%C3%A1vel?node-id=1-1640&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A1640&show-proto-sidebar=1)
 
 | Seção | Conteúdo solicitado em `DOC.txt` |
 |---|---|
-| [1. Modelagem do Produto](01%20Modelagem%20do%20Produto/README.md) | Sitemap completo com link e recortes, fichas de wireframe com capturas e tabelas, prototipação a partir do Stitch |
+| [1. Modelagem do Produto](01%20Modelagem%20do%20Produto/README.md) | Sitemap completo com link e recortes, fichas de wireframe com capturas e tabelas, protótipo navegável no Figma com capturas e explicação |
 | [2. Arquitetura de Software](02%20Arquitetura%20de%20Software/README.md) | Arquiteturas funcional, técnica e MVC, diagramas e explicações |
 | [3. Engenharia de Requisitos](03%20Engenharia%20de%20Requisitos/README.md) | Tabelas de requisitos funcionais e não funcionais, associações e Projeto Linear |
 | [4. Modelagem de Processos e Fluxos](04%20Modelagem%20de%20Processos%20e%20Fluxos/README.md) | Macroprocesso, fluxogramas e BPMN com explicação |
@@ -17,4 +17,4 @@ A edição de 16/11 tem 116 páginas no PDF. Ela incorpora a [captura de Ganhos 
 
 O capítulo usa o [modelo da disciplina](../modelo_entrega.docx). Consulte o [roteiro original](DOC.txt), as [fontes e instruções de geração](../../docs/producao-tecnica/README.md) e a [matriz de verificação](../../docs/VERIFICACOES.md#3-dossiê--checklist-de-50-critérios-auditoria-da-reta-final).
 
-A prototipação incluída no capítulo usa as telas exportadas do Stitch. O link navegável no Figma solicitado no roteiro e a decisão sobre o momento de emissão do comprovante constam nas [pendências do grupo](../../docs/DECISOES.md#pendências-que-dependem-do-grupo).
+A divergência da modelagem sobre o momento de emissão do comprovante está descrita nas [decisões de produto](../../docs/DECISOES.md#pendências-que-dependem-do-grupo).

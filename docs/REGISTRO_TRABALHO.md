@@ -3,6 +3,12 @@
 Documento de continuidade: o que foi **concluído e verificado**, o que está **pendente ou não testado**, quem fez
 (papel/agente), arquivos relevantes, decisões, riscos e próximos passos. Atualizar ao fim de cada bloco.
 
+## Prototipação e publicação no Render em 16/11/2026
+
+Foram importados 14 quadros revisados pelo menu **Export → Figma** do Stitch. As 13 transições das jornadas do cliente e do intérprete foram percorridas no modo de apresentação. O link de visualização foi reaberto e as quatro capturas passaram a integrar a seção 1.3. [Modelagem do Produto](../Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/01%20Modelagem%20do%20Produto/README.md)
+
+O Render confirmou `4848335` como ativo, com a correção B-031 e as migrações aplicadas. A sonda HTTPS retornou 200 com banco conectado e o preflight de login retornou 204 para a origem da Vercel. [Guia de deploy](DEPLOY.md)
+
 ## Correção e revisão do protótipo em 16/11/2026
 
 O Codex corrigiu a corrida B-031: a criação e a alteração de disponibilidade, raio ou agenda passam por um bloqueio transacional comum. O PostgreSQL permite criações simultâneas e serializa a redistribuição com elas. A nova configuração e suas ofertas são confirmadas juntas. A revisão `revisao_redistribuicao` analisou a ordem dos bloqueios e `backend_qa` implementou a regressão com duas requisições simultâneas. Ela reprovou no código anterior e passou na correção. O modelo do banco, os 34 diagramas, os builds, 63 testes de backend e seis de frontend passaram. A revisão foi registrada conforme as fases de implementação e testes do Checklist 2026 e o item 48 do Dossiê. [Log de bugs](BUGS.md) · [Relatório de testes](TESTES.md)

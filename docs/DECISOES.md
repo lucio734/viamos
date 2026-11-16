@@ -30,7 +30,7 @@ Alterar uma decisão = alterar o parâmetro em `regras.ts`, atualizar este arqui
 
 ## Pendências que dependem do grupo
 
-- **P-01** Prototipação (item #5). A equipe produziu telas no Stitch, registradas na Produção Técnica. O `DOC.txt` pede um link navegável no Figma e imagens do fluxo. Para fechar o item, quando o protótipo estiver disponível, informe `figma_url` no workflow de geração e confira a seção 1.3. [Como gerar o capítulo](producao-tecnica/README.md)
+- **P-01 — concluída** Prototipação (item #5). Foram exportados 14 quadros do Stitch para o Figma e verificadas as 13 transições das duas jornadas na apresentação. A seção 1.3 inclui acesso de visualização, capturas e a explicação da navegação. [Modelagem do Produto](../Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/01%20Modelagem%20do%20Produto/README.md)
 - **P-02** Validar os valores de D-01 (preços de referência) e D-05 (janela de 30 min).
 - **P-03 — hospedagem provisionada** A equipe usa Vercel, Render Web Service e Render PostgreSQL. Os domínios e as verificações estão em [DEPLOY.md](DEPLOY.md).
 - **P-04 — implementada** O intérprete pode enviar foto pelo perfil (RF04). A interface usa JPG, PNG ou WebP de até 350 KB. [Perfil do intérprete](../frontend/src/pages/interprete/PerfilInterprete.tsx)

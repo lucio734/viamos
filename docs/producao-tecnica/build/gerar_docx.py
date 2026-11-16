@@ -6,6 +6,7 @@ Fontes de conteúdo (todas no repositório):
   - diagramas das entregas anteriores .... docs/producao-tecnica/figuras-entregas/ (extrair_figuras_entregas.py)
   - capturas das telas ................... docs/producao-tecnica/telas/           (capturar_telas.mjs)
   - protótipos Stitch .................... docs/producao-tecnica/fontes/stitch/            (somente leitura)
+  - link e capturas do Figma ............. docs/producao-tecnica/prototipo-figma/
   - requisitos ........................... Entregas/Engenharia de Requisitos/ENTREGA VIAMOS COMPLETA.xlsx (somente leitura)
   - dados extraídos do código ............ docs/diagramas/dados/{modelo,extracao}.json
 
@@ -30,16 +31,16 @@ FIG = PT / 'figuras'
 FIG_ENT = PT / 'figuras-entregas'
 TELAS = PT / 'telas'
 STITCH = PT / 'fontes' / 'stitch'
+FIGMA = PT / 'prototipo-figma'
 PLANILHA = RAIZ / 'Entregas' / 'Engenharia de Requisitos' / 'ENTREGA VIAMOS COMPLETA.xlsx'
 REPO = 'https://github.com/lucio734/viamos'
-# P-01 (docs/DECISOES.md): link público do protótipo navegável no Figma. Preencha aqui ou na variável de ambiente
-# VIAMOS_FIGMA_URL e gere o documento de novo; vazio, o documento mostra um aviso no lugar do link.
-FIGMA_URL = os.environ.get('VIAMOS_FIGMA_URL', '').strip()
+FIGMA_URL = os.environ.get('VIAMOS_FIGMA_URL', '').strip() or (FIGMA / 'url.txt').read_text(encoding='utf8').strip()
 
 FONTE_IA = 'Fonte: Autoria própria apoiado por IA generativa (Claude e ChatGPT).'
 FONTE_CODIGO = 'Fonte: Autoria própria apoiado por IA generativa (Claude), gerado a partir do código-fonte do Víamos.'
 FONTE_TELA = 'Fonte: Autoria própria (aplicativo Víamos em execução, dados fictícios do seed).'
 FONTE_STITCH = 'Fonte: Autoria própria apoiado por IA generativa (Google Stitch).'
+FONTE_FIGMA = 'Fonte: Autoria própria (captura do protótipo em modo de apresentação no Figma).'
 FONTE_UML = 'Fonte: Autoria própria apoiado por IA generativa (entrega de Arquitetura e UML, revisão de 07/10/2026).'
 FONTE_MODELAGEM = 'Fonte: Autoria própria apoiado por IA generativa (entrega de Modelagem de Sistemas, 11/11/2026).'
 FONTE_REQ = 'Fonte: Autoria própria (planilha de Engenharia de Requisitos, entrega de 02/09/2026).'
@@ -190,13 +191,22 @@ def modelagem_produto(d, ctx):
     d.subsecao('1.3 Prototipação.')
     d.paragrafo(
         'O protótipo de alta fidelidade foi desenhado no Google Stitch a partir do design system do Víamos e serviu de referência '
-        'visual para a implementação. As fichas das telas registram as referências aos protótipos correspondentes. '
-        'As imagens a seguir mostram as telas prototipadas no Stitch.'
+        'visual para a implementação. A equipe exportou 14 quadros revisados do Stitch para o Figma e vinculou as telas '
+        'com 13 interações de clique, organizadas em dois fluxos de apresentação.'
     )
-    if FIGMA_URL:
-        d.link('Abrir o protótipo navegável no Figma', FIGMA_URL)
-    else:
-        d.paragrafo('A publicação do link do protótipo navegável no Figma está registrada na pendência P-01.', italico=True)
+    d.link('Abrir o protótipo navegável no Figma', FIGMA_URL)
+    d.paragrafo('Use o menu de fluxos à esquerda para alternar entre a jornada do cliente e a do intérprete. Os dados e as mudanças de estado são demonstrativos.')
+    d.itens([
+        'Jornada do cliente. Em Entrar, abra o painel e clique em Solicitar intérprete agora. Avance pela definição do atendimento, pelo endereço e pela revisão do preço. Confirme para ver a busca. O cartão do acompanhamento leva ao atendimento confirmado e simula a mudança de estado após o aceite. Abra a sala pela ficha e use a seta da sala para voltar.',
+        'Jornada do intérprete. No painel, abra a demanda e clique em Aceitar Atendimento Presencial para abrir o check-in. A tela ilustra a captura de GPS e a leitura do QR ou a entrada manual. Avance pelo início e pelo encerramento do atendimento. O trecho final encadeia a tela de pagamento do cliente, em modo simulado, e a tela do comprovante.',
+    ])
+    d.grade([
+        (FIGMA / '01-hub-cliente.png', 'Painel após clicar em Entrar'),
+        (FIGMA / '02-atendimento-aceito.png', 'Atendimento confirmado após a busca'),
+        (FIGMA / '03-checkin.png', 'Validação de GPS e presença após o aceite'),
+        (FIGMA / '04-comprovante.png', 'Comprovante após o pagamento simulado'),
+    ], FONTE_FIGMA, colunas=2, largura_cm=6.9)
+    d.paragrafo('As imagens a seguir registram os desenhos iniciais do Stitch e sua correspondência com as telas implementadas.')
     prototipos = [t for t in lista_telas if t['prototipo']]
     vistos, figuras_prototipo = set(), []
     for t in prototipos:
