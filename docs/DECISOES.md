@@ -28,7 +28,7 @@ Alterar uma decisão = alterar o parâmetro em `regras.ts`, atualizar este arqui
 
 > D-19 não é usada: a numeração foi reservada numa proposta que acabou substituída pela correção B-021 (simulação de GPS restrita ao servidor de desenvolvimento).
 
-## Pendências que dependem do grupo
+## Validação e fechamento do MVP
 
 - **P-01 — concluída** Prototipação (item #5). Foram exportados 14 quadros do Stitch para o Figma e verificadas as 13 transições das duas jornadas na apresentação. A seção 1.3 inclui acesso de visualização, capturas e a explicação da navegação. [Modelagem do Produto](../Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/01%20Modelagem%20do%20Produto/README.md)
 - **P-02 — confirmada em 16/11** Lúcio confirmou os preços de referência vigentes (D-01) e a janela de check-in a partir de 30 minutos antes do horário (D-05).

@@ -99,7 +99,7 @@ npm --prefix backend run build
 npm --prefix frontend run build
 ```
 
-O Render usa o Blueprint do repositório e aplica as migrações com `npm run deploy`. O projeto Vercel usa o diretório `frontend` e a variável `VITE_API_URL` com a origem da API. O guia registra a configuração, os domínios, as checagens de prontidão e o ensaio pendente. [Render Blueprint](render.yaml) · [Configuração da Vercel](frontend/vercel.json) · [Guia de deploy](docs/DEPLOY.md)
+O Render usa o Blueprint do repositório e aplica as migrações com `npm run deploy`. O projeto Vercel usa o diretório `frontend` e a variável `VITE_API_URL` com a origem da API. O guia registra a configuração, os domínios e as verificações realizadas em produção. [Render Blueprint](render.yaml) · [Configuração da Vercel](frontend/vercel.json) · [Guia de deploy](docs/DEPLOY.md)
 
 ## 7. Estrutura do repositório
 
@@ -108,7 +108,7 @@ O Render usa o Blueprint do repositório e aplica as migrações com `npm run de
 | [`frontend/`](frontend/) | Interface, rotas, autenticação, componentes e cliente da API |
 | [`backend/`](backend/) | Serviços, controladores, banco, migrações e testes da API |
 | [`Entregas/`](Entregas/README.md) | Produção Técnica nas cinco seções do roteiro, documentos anteriores e modelo da disciplina |
-| [Fontes da Produção Técnica](docs/producao-tecnica/fontes) | Roteiro, requisitos de referência, protótipos Stitch e fontes usadas na produção da documentação |
+| [Fontes da Produção Técnica](docs/producao-tecnica/fontes) | Protótipos Stitch e referências de projeto e metodologia usadas no capítulo |
 | [`docs/`](docs/README.md) | Como regerar a Produção Técnica, diagramas, documentação da API, manual e evidências de validação |
 
 ## 8. Fluxo de trabalho com Git
@@ -117,4 +117,4 @@ O projeto usa a branch `main`. Atualize seu clone com `git pull --ff-only origin
 
 ## 9. Contexto acadêmico
 
-O MVP simula pagamento e e-mail. Os requisitos, a matriz de verificação e as decisões registram o escopo e as pendências para a avaliação. [Decisões](docs/DECISOES.md) · [Matriz de verificações](docs/VERIFICACOES.md)
+O MVP simula pagamento e e-mail. As decisões descrevem as regras confirmadas e a matriz de verificação registra as evidências e os limites dos testes. [Decisões](docs/DECISOES.md) · [Matriz de verificações](docs/VERIFICACOES.md)

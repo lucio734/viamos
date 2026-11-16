@@ -5,7 +5,7 @@ Este capítulo apresenta a modelagem, a arquitetura e os requisitos do Víamos, 
 - [Versão editável em Word](Viamos_Producao_Tecnica.docx)
 - [Versão em PDF](Viamos_Producao_Tecnica.pdf)
 
-A edição de 16/11 tem 117 páginas. A seção 1.3 inclui o link navegável do Figma, quatro capturas da apresentação e a explicação das duas jornadas. [Abrir protótipo](https://www.figma.com/proto/zBuQC5GjLzW9ReazQqo5aH/V%C3%ADamos-%E2%80%94-Prot%C3%B3tipo-naveg%C3%A1vel?node-id=1-1640&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A1640&show-proto-sidebar=1) · [Execução da exportação](https://github.com/lucio734/viamos/actions/runs/43969441373)
+A edição de 16/11 tem 117 páginas. A seção 1.3 inclui o link navegável do Figma, quatro capturas da apresentação e a explicação das duas jornadas. [Abrir protótipo](https://www.figma.com/proto/zBuQC5GjLzW9ReazQqo5aH/V%C3%ADamos-%E2%80%94-Prot%C3%B3tipo-naveg%C3%A1vel?node-id=1-1640&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A1640&show-proto-sidebar=1) · [Execução da exportação](https://github.com/lucio734/viamos/actions/runs/43971829849)
 
 | Seção | Conteúdo solicitado em `DOC.txt` |
 |---|---|
@@ -17,4 +17,4 @@ A edição de 16/11 tem 117 páginas. A seção 1.3 inclui o link navegável do 
 
 O capítulo usa o [modelo da disciplina](../modelo_entrega.docx). Consulte o [roteiro original](DOC.txt), as [fontes e instruções de geração](../../docs/producao-tecnica/README.md) e a [matriz de verificação](../../docs/VERIFICACOES.md#3-dossiê--checklist-de-50-critérios-auditoria-da-reta-final).
 
-As seções 4.3 e 5.6 registram a regra confirmada para a emissão do comprovante após o pagamento simulado. [Decisões de produto](../../docs/DECISOES.md#pendências-que-dependem-do-grupo) · [Exportação verificada](https://github.com/lucio734/viamos/actions/runs/43971829849)
+As seções 4.3 e 5.6 registram a regra confirmada para a emissão do comprovante após o pagamento simulado. [Decisões de produto](../../docs/DECISOES.md#validação-e-fechamento-do-mvp)

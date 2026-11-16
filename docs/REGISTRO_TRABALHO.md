@@ -9,6 +9,8 @@ O README recebeu o símbolo do Víamos, o título centralizado e as capturas dos
 
 A pasta de passagem de bastão foi retirada após preservar neste registro os resultados e as decisões, no roteiro os passos da demonstração e no guia os dados de publicação. [Guia de deploy](DEPLOY.md) · [Produção Técnica](../Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/README.md)
 
+A conferência final encontrou as cinco seções e as 22 subseções do DOC.txt no índice e no capítulo. Foram verificados os caminhos locais ligados pelo README e pelos índices e o link do Figma nas versões Word e PDF. Uma cópia idêntica do PDF de Modelagem de Sistemas foi retirada. O `CLAUDE.md` raiz permanece como instrução do repositório. As entregas anteriores referenciadas e as fontes usadas para regerar o capítulo foram preservadas.
+
 ## Regras do MVP confirmadas em 16/11/2026
 
 Lúcio confirmou os preços de referência, a janela de check-in de 30 minutos, a disponibilidade por horário de início e o comprovante após o pagamento simulado. A seção 4.3 e a seção 5.6 descrevem a regra atual e a diferença para a modelagem de 11/11. A agenda do intérprete informa a regra e o fuso de Brasília. O aviso de contas do seed passou a aparecer no login apenas no servidor de desenvolvimento. [Decisões](DECISOES.md)

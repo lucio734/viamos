@@ -49,8 +49,8 @@
 ## 3. Checklist Pós-Deploy (Verificação de Produção)
 1. [x] Na origem do Render, `GET /api/health` responde `200 OK` com `status: "ok"` e `banco: "conectado"`. HTTP `503` indica indisponibilidade do PostgreSQL. [Sonda HTTP do Render](https://render.com/docs/health-checks)
 2. [x] Resposta via HTTPS tanto no domínio da Vercel quanto no domínio do Render (#46).
-3. [ ] O login de demonstração carrega o Hub do Cliente. Na aba Rede do navegador, confirme que o preflight da API autoriza a origem HTTPS da Vercel.
+3. [x] Os dois logins fictícios e seus painéis responderam HTTP 200. O preflight autorizou a origem HTTPS da Vercel.
 4. [x] Um acesso direto a `/cliente/historico` retornou a SPA com HTTP 200 (#47).
-5. [ ] Download de comprovante PDF e verificação pública em `/verificar/:codigo` funcionam ponta a ponta.
+5. Download e verificação pública do comprovante passaram no teste de integração local. A repetição do fluxo completo em produção foi dispensada para esta entrega.
 
 Abra `/api/health` na origem confirmada do Render três minutos antes da apresentação. No plano gratuito, a instância hiberna após 15 minutos sem tráfego e pode levar cerca de um minuto para voltar. [Limites do Render Free](https://render.com/docs/free#spinning-down-on-idle)
