@@ -5,7 +5,7 @@
     "rotas": 33,
     "telas": 30,
     "endpoints": 65,
-    "transicoes": 90,
+    "transicoes": 91,
     "diagramas": 34
   },
   "rotas": [
@@ -1034,8 +1034,16 @@
         "gatilho": "clique",
         "rotulo": "Histórico de Atendimentos",
         "arquivo": "frontend/src/pages/interprete/GanhosInterprete.tsx",
-        "linha": 108,
+        "linha": 111,
         "para": "/interprete/historico"
+      },
+      {
+        "de": "/interprete/ganhos",
+        "gatilho": "clique",
+        "rotulo": "",
+        "arquivo": "frontend/src/pages/interprete/GanhosInterprete.tsx",
+        "linha": 172,
+        "para": "/interprete/atendimentos/:id"
       },
       {
         "de": "/interprete/historico",

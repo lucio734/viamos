@@ -33,7 +33,7 @@ flowchart TB
   r_interprete_atendimentos_id <-->|"Sala de Atendimento ⇄<br/>Voltar aos detalhes do…"| r_interprete_atendimentos_id_sala
   r_interprete_atendimentos_id -->|"SOS / Suporte"| r_suporte
   r_interprete_atendimentos_id <-->|"Avaliar Cliente ⇄ Voltar<br/>ao Atendimento / Pular"| r_interprete_atendimentos_id_avaliar
-  r_interprete_atendimentos_id -->|"Ver em Ganhos e Repasses"| r_interprete_ganhos
+  r_interprete_atendimentos_id <-->|"Ver em Ganhos e Repasses ⇄<br/>·"| r_interprete_ganhos
   r_interprete_atendimentos_id_sala -->|"SOS"| r_suporte
   r_interprete_ganhos -->|"Histórico de…"| r_interprete_historico
   r_interprete_historico -->|"Ver Detalhes"| r_interprete_atendimentos_id

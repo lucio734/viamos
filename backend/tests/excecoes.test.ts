@@ -4,11 +4,12 @@
  * dois aceites simultâneos, QR de outro atendimento, localização imprecisa/distante, mensagem de não
  * participante, encerramento repetido, confirmação de pagamento repetida, comprovante alheio, bloqueio de login.
  */
-import { eq } from 'drizzle-orm';
+import { and, eq, sql } from 'drizzle-orm';
 import request from 'supertest';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 import { db, pool } from '../src/models/db.js';
-import { lancamentosFinanceiros, pagamentos } from '../src/models/schema.js';
+import { atendimentos, lancamentosFinanceiros, notificacoes, ofertas, pagamentos, solicitacoes } from '../src/models/schema.js';
+import * as datas from '../src/utils/datas.js';
 import { aceitarEFazerCheckin, app, auth, criarSolicitacao, daquiAMinutos, login, LOCAL_HC } from './helpers.js';
 
 let joao = '';
@@ -243,6 +244,37 @@ describe('Elegibilidade única e nova distribuição (RF17, RF20–RF25, D-20)',
     expect(deNovo.body.novasOfertas).toBe(0);
     expect(avisosDepois.filter((n) => n.referenciaRecurso === `/interprete/demandas/${sol.body.id}`)).toHaveLength(1);
   });
+
+  it('ficar online durante um cancelamento não cria oferta nem notificação após o fechamento', async () => {
+    const carlosId = (await request(app).get('/api/auth/me').set(auth(carlos))).body.usuario.id as string;
+    expect((await request(app).put('/api/interprete/configuracao').set(auth(carlos)).send({ disponivelAgora: false })).status).toBe(200);
+    const sol = await criarSolicitacao(joao, { inicioPrevisto: daquiAMinutos(5 * 24 * 60) });
+    expect(sol.status).toBe(201);
+    const id = sol.body.id as string;
+
+    let redistribuicao: Promise<{ status: number }> | undefined;
+    try {
+      await db.transaction(async (tx) => {
+        await tx.select({ id: solicitacoes.id }).from(solicitacoes).where(eq(solicitacoes.id, id)).for('update');
+        await tx.update(solicitacoes).set({ status: 'CANCELADA', canceladaEm: new Date() }).where(eq(solicitacoes.id, id));
+        redistribuicao = request(app).put('/api/interprete/configuracao').set(auth(carlos)).send({ disponivelAgora: true }).then((r) => r);
+        void redistribuicao.catch(() => {});
+
+        // A transação só termina depois de a redistribuição chegar ao bloqueio da solicitação.
+        await vi.waitFor(async () => {
+          const { rows } = await tx.execute<{ aguardando: boolean }>(sql`
+            select exists (select from pg_stat_activity a where pg_backend_pid() = any(pg_blocking_pids(a.pid))) as aguardando
+          `);
+          expect(rows[0].aguardando).toBe(true);
+        }, { timeout: 5000 });
+      });
+    } finally {
+      await redistribuicao;
+    }
+    expect((await redistribuicao)?.status).toBe(200);
+    expect(await db.select().from(ofertas).where(and(eq(ofertas.interpreteId, carlosId), eq(ofertas.solicitacaoId, id)))).toHaveLength(0);
+    expect(await db.select().from(notificacoes).where(and(eq(notificacoes.usuarioId, carlosId), eq(notificacoes.referenciaRecurso, `/interprete/demandas/${id}`)))).toHaveLength(0);
+  });
 });
 
 describe('Check-in geolocalizado (RF31, RF32, RNF26) e encerramento (RF33)', () => {
@@ -387,6 +419,45 @@ describe('Pagamento (RF36) e comprovante (RF37/RF38)', () => {
     expect(respostas.map((r) => Boolean(r.body.repetido)).sort()).toEqual([false, true]);
     const creditos = await db.select().from(lancamentosFinanceiros).where(eq(lancamentosFinanceiros.pagamentoId, pagamentoId));
     expect(creditos).toHaveLength(1);
+  });
+
+  it('os ganhos detalham somente créditos e pendências da semana, com fim exclusivo (RF26)', async () => {
+    const joaoId = (await request(app).get('/api/auth/me').set(auth(joao))).body.usuario.id as string;
+    const carlosId = (await request(app).get('/api/auth/me').set(auth(carlos))).body.usuario.id as string;
+    const inicio = new Date('2040-01-02T03:00:00Z'); // segunda-feira
+    const fim = new Date('2040-01-09T03:00:00Z');
+    const anterior = new Date(inicio.getTime() - 1);
+    const semana = vi.spyOn(datas, 'semanaCorrente').mockReturnValue({ inicio, fim });
+    try {
+      async function inserirAtendimento(concluidoEm: Date, creditadoEm?: Date) {
+        const [s] = await db.insert(solicitacoes).values({ clienteId: joaoId, status: 'CONCLUIDA', tipoServico: 'SAUDE', inicioPrevisto: new Date(concluidoEm.getTime() - 60 * 60_000), duracaoPrevistaMin: 60, ...LOCAL_HC }).returning({ id: solicitacoes.id });
+        const [a] = await db.insert(atendimentos).values({ solicitacaoId: s.id, interpreteId: carlosId, fimReal: concluidoEm, duracaoRealMin: 60, valorFinal: 110, status: 'CONCLUIDO' }).returning({ id: atendimentos.id });
+        if (creditadoEm) {
+          const [p] = await db.insert(pagamentos).values({ atendimentoId: a.id, valor: 110, status: 'PAGO', confirmadoEm: creditadoEm }).returning({ id: pagamentos.id });
+          await db.insert(lancamentosFinanceiros).values({ interpreteId: carlosId, pagamentoId: p.id, tipo: 'CREDITO_ATENDIMENTO', valor: 100, data: creditadoEm });
+        }
+        return a.id;
+      }
+
+      const pendente = await inserirAtendimento(inicio);
+      const recebido = await inserirAtendimento(anterior, inicio);
+      await inserirAtendimento(anterior);
+      await inserirAtendimento(fim);
+      await inserirAtendimento(anterior, anterior);
+      await inserirAtendimento(inicio, fim);
+
+      const ganhos = await request(app).get('/api/interprete/ganhos').set(auth(carlos));
+      expect(ganhos.status).toBe(200);
+      expect(ganhos.body.aReceber).toBe(100);
+      expect(ganhos.body.semana).toMatchObject({ recebido: 100, atendimentos: 2, horas: 2 });
+      expect(ganhos.body.semana.detalhes).toEqual(expect.arrayContaining([
+        { atendimentoId: pendente, tipoServico: 'SAUDE', data: inicio.toISOString(), valor: 100, situacao: 'A_RECEBER' },
+        { atendimentoId: recebido, tipoServico: 'SAUDE', data: inicio.toISOString(), valor: 100, situacao: 'RECEBIDO' },
+      ]));
+      expect(ganhos.body.semana.detalhes).toHaveLength(2);
+    } finally {
+      semana.mockRestore();
+    }
   });
 
   it('o saldo soma todo o extrato, além dos 100 lançamentos exibidos, e repasses simultâneos pagam uma vez só (RF26, RF27)', async () => {

@@ -1,5 +1,12 @@
 # Guia de Deploy em Produção — Víamos (Bloco D & Dossiê #45–#47)
 
+## Publicação de 15/11/2026
+
+- O Blueprint da `main` publicou a API do commit `297b214` e provisionou o PostgreSQL `viamos-db` no Render. O comando de inicialização executou as migrações. A sonda retornou HTTP 200 com `status: "ok"` e `banco: "conectado"`. [Deploy da API](https://dashboard.render.com/web/srv-dbt6a8u7bikc73d61gng/deploys/dep-dbt6a967bikc73d61h9g) · [Sonda pública](https://viamos-api.onrender.com/api/health)
+- A API usa `https://viamos-eight.vercel.app` em `CORS_ORIGINS` e `FRONTEND_URL`. O preflight de `POST /api/auth/login` respondeu HTTP 204 e autorizou esse domínio. A Vercel salvou `VITE_API_URL=https://viamos-api.onrender.com` em Production. [Frontend público](https://viamos-eight.vercel.app)
+- A republicação do frontend está aguardando a verificação de identidade na Vercel. O build público inicial serviu a SPA em `/cliente/historico` com HTTP 200 por HTTPS. A confirmação da integração depende do novo build com `VITE_API_URL`.
+- O painel do Render informa que o banco gratuito expira em **15/12/2026**. A base recebeu as migrações e segue sem a carga de dados de demonstração. [Painel do banco](https://dashboard.render.com/d/dpg-dbt69um7bikc73d60h3g-a)
+
 ## 1. Arquitetura de Hospedagem Gratuita com HTTPS
 
 - **Banco de Dados PostgreSQL:** **Neon** (Serverless Postgres gratuito) ou **Render PostgreSQL** (definido em [`render.yaml`](../render.yaml)).
@@ -36,10 +43,10 @@
 ---
 
 ## 3. Checklist Pós-Deploy (Verificação de Produção)
-1. [ ] Na origem do Render, `GET /api/health` responde `200 OK` com `status: "ok"` e `banco: "conectado"`. HTTP `503` indica indisponibilidade do PostgreSQL. [Sonda HTTP do Render](https://render.com/docs/health-checks)
-2. [ ] Cadeado HTTPS ativo tanto no domínio da Vercel quanto no domínio do Render (#46).
+1. [x] Na origem do Render, `GET /api/health` responde `200 OK` com `status: "ok"` e `banco: "conectado"`. HTTP `503` indica indisponibilidade do PostgreSQL. [Sonda HTTP do Render](https://render.com/docs/health-checks)
+2. [x] Resposta via HTTPS tanto no domínio da Vercel quanto no domínio do Render (#46).
 3. [ ] O login de demonstração carrega o Hub do Cliente. Na aba Rede do navegador, confirme que o preflight da API autoriza a origem HTTPS da Vercel.
-4. [ ] Recarregar a página (F5) diretamente em `/cliente/historico` ou `/interprete/demandas` mantém a SPA ativa sem 404 (#47).
+4. [x] Um acesso direto a `/cliente/historico` retornou a SPA com HTTP 200 (#47).
 5. [ ] Download de comprovante PDF e verificação pública em `/verificar/:codigo` funcionam ponta a ponta.
 
 Abra `/api/health` na origem confirmada do Render três minutos antes da apresentação. No plano gratuito, a instância hiberna após 15 minutos sem tráfego e pode levar cerca de um minuto para voltar. [Limites do Render Free](https://render.com/docs/free#spinning-down-on-idle)

@@ -4,9 +4,11 @@
 import { useCallback, useEffect, useState, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { api, ErroApi } from '../../api/cliente';
-import type { ContaBancaria, RepasseItem, ResumoGanhos } from '../../api/tipos';
+import { ROTULO_TIPO_SERVICO, type ContaBancaria, type RepasseItem, type ResumoGanhos } from '../../api/tipos';
 import { Alerta, Botao, Campo, Carregando, Cartao, Chip, EstadoErro, EstadoVazio, Icone } from '../../components/ui';
 import { formato } from '../../utils/formato';
+
+const dataHoraBrasilia = new Intl.DateTimeFormat('pt-BR', { dateStyle: 'short', timeStyle: 'short', timeZone: 'America/Sao_Paulo' });
 
 export function GanhosInterprete() {
   const [ganhos, setGanhos] = useState<ResumoGanhos | null>(null);
@@ -95,6 +97,7 @@ export function GanhosInterprete() {
   if (erro || !ganhos) return <EstadoErro mensagem={erro || 'Falha ao carregar ganhos.'} aoTentarNovamente={carregar} />;
 
   const contaPrincipal = contas.find((c) => c.principal) ?? contas[0] ?? null;
+  const detalhesDaSemana = ganhos.semana.detalhes;
 
   return (
     <div className="flex flex-col gap-5">
@@ -118,7 +121,7 @@ export function GanhosInterprete() {
       {/* Indicadores Financeiros (RF26) */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         <section className="rounded-xl bg-primary-container p-5 text-on-primary shadow-sm">
-          <p className="text-xs font-semibold uppercase tracking-wider text-on-primary-container">Ganhos na Semana</p>
+          <p className="text-xs font-semibold uppercase tracking-wider text-on-primary-container">Recebido na Semana</p>
           <p className="mt-1 text-3xl font-bold">{formato.moeda(ganhos.semana.recebido)}</p>
           <p className="mt-2 text-sm text-on-primary-container">
             {ganhos.semana.atendimentos} atendimento(s) · {ganhos.semana.horas}h realizadas
@@ -148,14 +151,39 @@ export function GanhosInterprete() {
 
         <Cartao>
           <p className="text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
-            A Receber (Aguardando Pagamento)
+            A Receber na Semana
           </p>
           <p className="mt-1 text-3xl font-bold text-primary">{formato.moeda(ganhos.aReceber)}</p>
           <p className="mt-2 text-sm text-on-surface-variant">
-            Atendimentos concluídos cujo pagamento pelo cliente está pendente.
+            Atendimentos concluídos nesta semana que ainda aguardam pagamento.
           </p>
         </Cartao>
       </div>
+
+      {detalhesDaSemana && (
+        <Cartao titulo="Ganhos por Atendimento na Semana">
+          {detalhesDaSemana.length === 0 ? (
+            <EstadoVazio icone="receipt_long" titulo="Nenhum valor nesta semana" />
+          ) : (
+            <ul className="divide-y divide-outline-variant/50">
+              {detalhesDaSemana.map((item) => (
+                <li key={`${item.atendimentoId}-${item.situacao}`} className="flex flex-wrap items-center justify-between gap-3 py-3">
+                  <div>
+                    <Link to={`/interprete/atendimentos/${item.atendimentoId}`} className="inline-flex min-h-touch items-center font-semibold text-primary underline">
+                      {ROTULO_TIPO_SERVICO[item.tipoServico]}
+                    </Link>
+                    <p className="text-sm text-on-surface-variant">{dataHoraBrasilia.format(new Date(item.data))}</p>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Chip status={item.situacao === 'RECEBIDO' ? 'PAGO' : 'PENDENTE'}>{item.situacao === 'RECEBIDO' ? 'Recebido' : 'A receber'}</Chip>
+                    <span className="font-bold text-on-surface">{formato.moeda(item.valor)}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+        </Cartao>
+      )}
 
       {/* Conta Bancária / Pix para Repasse (RF27) */}
       <Cartao
@@ -262,7 +290,7 @@ export function GanhosInterprete() {
       )}
 
       {/* Extrato de Lançamentos Financeiros */}
-      <Cartao titulo="Extrato Completo de Lançamentos">
+      <Cartao titulo="Lançamentos Recentes">
         {ganhos.extrato.length === 0 ? (
           <EstadoVazio
             icone="receipt_long"

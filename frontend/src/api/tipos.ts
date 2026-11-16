@@ -309,6 +309,13 @@ export interface ResumoGanhos {
     recebido: number;
     atendimentos: number;
     horas: number;
+    detalhes?: {
+      atendimentoId: string;
+      tipoServico: TipoServico;
+      data: string;
+      valor: number;
+      situacao: 'RECEBIDO' | 'A_RECEBER';
+    }[];
   };
   saldoDisponivel: number;
   aReceber: number;

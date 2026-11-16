@@ -155,48 +155,77 @@ async function saldoDoInterprete(conexao: typeof db | Tx, interpreteId: string):
 
 export async function resumoGanhos(interpreteId: string) {
   const { inicio, fim } = semanaCorrente();
-  // O extrato exibe os 100 lançamentos mais recentes; saldo e recebido na semana somam o histórico inteiro no banco.
-  const lancamentos = await db.query.lancamentosFinanceiros.findMany({
-    where: eq(lancamentosFinanceiros.interpreteId, interpreteId),
-    with: { pagamento: { with: { atendimento: { with: { solicitacao: true } } } }, repasse: true },
-    orderBy: [desc(lancamentosFinanceiros.data)],
-    limit: 100,
-  });
-  const saldoDisponivel = await saldoDoInterprete(db, interpreteId);
-  const [semanaCreditos] = await db
-    .select({ total: sql<string>`coalesce(sum(${lancamentosFinanceiros.valor}), 0)` })
-    .from(lancamentosFinanceiros)
-    .where(and(eq(lancamentosFinanceiros.interpreteId, interpreteId), eq(lancamentosFinanceiros.tipo, 'CREDITO_ATENDIMENTO'), gte(lancamentosFinanceiros.data, inicio), lt(lancamentosFinanceiros.data, fim)));
-  const recebidoSemana = arredondar2(Number(semanaCreditos?.total ?? 0));
+  // Um pagamento concorrente precisa aparecer no mesmo estado em todas as consultas do painel.
+  return db.transaction(async (tx) => {
+    const concluidosNaSemana = and(
+      eq(atendimentos.interpreteId, interpreteId), eq(atendimentos.status, 'CONCLUIDO'),
+      gte(atendimentos.fimReal, inicio), lt(atendimentos.fimReal, fim),
+    );
+    const recebidos = await tx
+      .select({
+        atendimentoId: pagamentos.atendimentoId,
+        tipoServico: solicitacoes.tipoServico,
+        data: sql`max(${lancamentosFinanceiros.data})`.mapWith(lancamentosFinanceiros.data),
+        valor: sql`sum(${lancamentosFinanceiros.valor})`.mapWith(Number),
+      })
+      .from(lancamentosFinanceiros)
+      .innerJoin(pagamentos, eq(pagamentos.id, lancamentosFinanceiros.pagamentoId))
+      .innerJoin(atendimentos, eq(atendimentos.id, pagamentos.atendimentoId))
+      .innerJoin(solicitacoes, eq(solicitacoes.id, atendimentos.solicitacaoId))
+      .where(and(
+        eq(lancamentosFinanceiros.interpreteId, interpreteId), eq(atendimentos.interpreteId, interpreteId),
+        eq(lancamentosFinanceiros.tipo, 'CREDITO_ATENDIMENTO'),
+        gte(lancamentosFinanceiros.data, inicio), lt(lancamentosFinanceiros.data, fim),
+      ))
+      .groupBy(pagamentos.atendimentoId, solicitacoes.tipoServico);
+    const pendentes = await tx
+      .select({
+        atendimentoId: atendimentos.id, tipoServico: solicitacoes.tipoServico, data: atendimentos.fimReal,
+        valorFinal: atendimentos.valorFinal, deslocamento: cotacoes.valorDeslocamento,
+      })
+      .from(atendimentos)
+      .innerJoin(solicitacoes, eq(solicitacoes.id, atendimentos.solicitacaoId))
+      .leftJoin(cotacoes, eq(cotacoes.solicitacaoId, atendimentos.solicitacaoId))
+      .where(and(concluidosNaSemana, sql`not exists (select 1 from ${pagamentos} p where p.atendimento_id = ${atendimentos.id} and p.status = 'PAGO')`));
+    const aReceber = pendentes.map(({ atendimentoId, tipoServico, data, valorFinal, deslocamento }) => ({
+      atendimentoId, tipoServico, data: data!, valor: creditoInterprete(valorFinal ?? 0, deslocamento ?? 0),
+      situacao: 'A_RECEBER' as const,
+    }));
+    const detalhes = [...recebidos.map((item) => ({ ...item, situacao: 'RECEBIDO' as const })), ...aReceber]
+      .sort((a, b) => b.data.getTime() - a.data.getTime());
 
-  // A receber: atendimentos concluídos ainda sem pagamento confirmado
-  const pendentes = await db
-    .select({ valor: atendimentos.valorFinal, deslocamento: cotacoes.valorDeslocamento })
-    .from(atendimentos)
-    .leftJoin(cotacoes, eq(cotacoes.solicitacaoId, atendimentos.solicitacaoId))
-    .where(and(eq(atendimentos.interpreteId, interpreteId), eq(atendimentos.status, 'CONCLUIDO'), sql`not exists (select 1 from ${pagamentos} p where p.atendimento_id = ${atendimentos.id} and p.status = 'PAGO')`));
-  const aReceber = arredondar2(pendentes.reduce((acc, p) => acc + creditoInterprete(p.valor ?? 0, p.deslocamento ?? 0), 0));
-
-  const [semana] = await db
-    .select({ atendimentos: sql<number>`count(*)::int`, minutos: sql<number>`coalesce(sum(${atendimentos.duracaoRealMin}),0)::int` })
-    .from(atendimentos)
-    .where(and(eq(atendimentos.interpreteId, interpreteId), eq(atendimentos.status, 'CONCLUIDO'), gte(atendimentos.fimReal, inicio), lt(atendimentos.fimReal, fim)));
-
-  return {
-    semana: { inicio, fim, recebido: recebidoSemana, atendimentos: semana?.atendimentos ?? 0, horas: Math.round(((semana?.minutos ?? 0) / 60) * 10) / 10 },
-    saldoDisponivel,
-    aReceber,
-    extrato: lancamentos.map((l) => ({
-      id: l.id,
-      tipo: l.tipo,
-      valor: l.valor,
-      data: l.data,
-      descricao: l.descricao,
-      atendimentoId: l.pagamento?.atendimentoId ?? null,
-      tipoServico: l.pagamento?.atendimento.solicitacao.tipoServico ?? null,
-      repasseStatus: l.repasse?.status ?? null,
-    })),
-  };
+    const [semana] = await tx
+      .select({ atendimentos: sql<number>`count(*)::int`, minutos: sql<number>`coalesce(sum(${atendimentos.duracaoRealMin}),0)::int` })
+      .from(atendimentos)
+      .where(concluidosNaSemana);
+    const saldoDisponivel = await saldoDoInterprete(tx, interpreteId);
+    const lancamentos = await tx.query.lancamentosFinanceiros.findMany({
+      where: eq(lancamentosFinanceiros.interpreteId, interpreteId),
+      with: { pagamento: { with: { atendimento: { with: { solicitacao: true } } } }, repasse: true },
+      orderBy: [desc(lancamentosFinanceiros.data)],
+      limit: 100,
+    });
+    return {
+      semana: {
+        inicio, fim, detalhes,
+        recebido: arredondar2(recebidos.reduce((total, item) => total + item.valor, 0)),
+        atendimentos: semana.atendimentos,
+        horas: Math.round((semana.minutos / 60) * 10) / 10,
+      },
+      saldoDisponivel,
+      aReceber: arredondar2(aReceber.reduce((total, item) => total + item.valor, 0)),
+      extrato: lancamentos.map((l) => ({
+        id: l.id,
+        tipo: l.tipo,
+        valor: l.valor,
+        data: l.data,
+        descricao: l.descricao,
+        atendimentoId: l.pagamento?.atendimentoId ?? null,
+        tipoServico: l.pagamento?.atendimento.solicitacao.tipoServico ?? null,
+        repasseStatus: l.repasse?.status ?? null,
+      })),
+    };
+  }, { isolationLevel: 'repeatable read', accessMode: 'read only' });
 }
 
 export async function listarContasBancarias(interpreteId: string) {

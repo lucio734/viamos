@@ -223,7 +223,7 @@ export async function atualizarConfiguracao(usuarioId: string, dados: { raioKm?:
  */
 export async function ofertarDemandasAbertas(interpreteId: string): Promise<number> {
   return db.transaction(async (tx) => {
-    const [i] = await tx.select().from(interpretes).where(eq(interpretes.usuarioId, interpreteId)).limit(1);
+    const [i] = await tx.select().from(interpretes).where(eq(interpretes.usuarioId, interpreteId)).for('no key update');
     if (!i || i.statusHabilitacao !== 'APROVADO' || !i.disponivelAgora) return 0;
     const ctx = await carregarContextoElegibilidade(tx, i);
     const abertas = await tx
@@ -235,11 +235,16 @@ export async function ofertarDemandasAbertas(interpreteId: string): Promise<numb
           gt(solicitacoes.inicioPrevisto, new Date()),
           notExists(tx.select({ id: ofertas.id }).from(ofertas).where(and(eq(ofertas.solicitacaoId, solicitacoes.id), eq(ofertas.interpreteId, interpreteId)))),
         ),
-      );
+      )
+      .orderBy(solicitacoes.id);
     let novas = 0;
     for (const s of abertas) {
       const avaliacao = avaliarElegibilidade(ctx, s);
       if (!avaliacao.elegivel) continue;
+      // Aceite e cancelamento expiram as ofertas sob o mesmo bloqueio da solicitação.
+      const [aberta] = await tx.select({ inicioPrevisto: solicitacoes.inicioPrevisto }).from(solicitacoes)
+        .where(and(eq(solicitacoes.id, s.id), eq(solicitacoes.status, 'BUSCANDO'))).for('no key update');
+      if (!aberta || aberta.inicioPrevisto.getTime() <= Date.now()) continue;
       const [oferta] = await tx.insert(ofertas).values({ solicitacaoId: s.id, interpreteId, distanciaKm: avaliacao.distanciaKm }).onConflictDoNothing().returning({ id: ofertas.id });
       if (!oferta) continue;
       novas += 1;

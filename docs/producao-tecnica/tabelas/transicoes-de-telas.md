@@ -2,7 +2,7 @@
 
 # Transições entre telas
 
-Extraídas de `<Link>`, `<NavLink>`, `<Navigate>` e `navigate()` nos componentes de cada rota: 90 transições. A coluna "Evento" traz o texto do link ou botão, ou a função que navega depois da ação.
+Extraídas de `<Link>`, `<NavLink>`, `<Navigate>` e `navigate()` nos componentes de cada rota: 91 transições. A coluna "Evento" traz o texto do link ou botão, ou a função que navega depois da ação.
 
 | Tela de origem | Rota de origem | Gatilho | Evento | Destino | Onde no código |
 |---|---|---|---|---|---|
@@ -84,7 +84,8 @@ Extraídas de `<Link>`, `<NavLink>`, `<Navigate>` e `navigate()` nos componentes
 | Avaliar cliente | `/interprete/atendimentos/:id/avaliar` | clique | Voltar ao Atendimento | `/interprete/atendimentos/:id` | `pages/comum/AvaliarAtendimento.tsx:125` |
 | Avaliar cliente | `/interprete/atendimentos/:id/avaliar` | clique | Voltar ao Atendimento | `/interprete/atendimentos/:id` | `pages/comum/AvaliarAtendimento.tsx:136` |
 | Avaliar cliente | `/interprete/atendimentos/:id/avaliar` | clique | Pular | `/interprete/atendimentos/:id` | `pages/comum/AvaliarAtendimento.tsx:188` |
-| Ganhos e repasse | `/interprete/ganhos` | clique | Histórico de Atendimentos | `/interprete/historico` | `pages/interprete/GanhosInterprete.tsx:108` |
+| Ganhos e repasse | `/interprete/ganhos` | clique | Histórico de Atendimentos | `/interprete/historico` | `pages/interprete/GanhosInterprete.tsx:111` |
+| Ganhos e repasse | `/interprete/ganhos` | clique |  | `/interprete/atendimentos/:id` | `pages/interprete/GanhosInterprete.tsx:172` |
 | Histórico (intérprete) | `/interprete/historico` | clique | Ver Detalhes | `/interprete/atendimentos/:id` | `pages/comum/HistoricoAtendimentos.tsx:230` |
 | Perfil e habilitação | `/interprete/perfil` | ação concluída | excluirConta() | `/login` | `pages/interprete/PerfilInterprete.tsx:273` |
 | Fila de certificações | `/backoffice` | clique | Chamados | `/backoffice/chamados` | `pages/backoffice/FilaCertificacoes.tsx:61` |

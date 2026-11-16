@@ -4,7 +4,7 @@
 
 Este índice reúne 34 diagramas dos itens #3, #7, #8, #9, #16, #17, #22, #23, #24, #26, #27, #28 do checklist. Todos são gerados por `docs/diagramas/gerar.mjs` a partir do código-fonte; as figuras em PNG ficam em `docs/producao-tecnica/figuras/` e as fontes Mermaid em `docs/diagramas/fontes/`.
 
-Base da geração: 27 tabelas, 33 rotas (30 telas distintas), 65 endpoints e 90 transições entre telas lidas do código.
+Base da geração: 27 tabelas, 33 rotas (30 telas distintas), 65 endpoints e 91 transições entre telas lidas do código.
 
 ## Como regenerar
 
@@ -1695,7 +1695,7 @@ flowchart TB
 
 Fonte: Autoria própria apoiado por IA generativa (gerado a partir do código-fonte).
 
-Transições entre telas extraídas do código de cada tela (`<Link>`, `<Navigate>` e `navigate()`): 26 transições a partir de 12 telas, das quais 3 pares de ida e volta. Seta simples: clique em um link ou botão, rotulada com o texto do elemento. Seta de duas pontas (⇄): ida e volta por cliques entre as mesmas telas. Seta grossa: navegação feita pelo código depois que a ação é concluída, rotulada com a função. Seta tracejada: redirecionamento automático. Caixas tracejadas são telas de outra área. A marca "☰" indica as telas abertas pelo menu principal, a barra de navegação presente em todas as telas da área (lida de `frontend/src/components/AppShell.tsx`). A lista completa, com arquivo e linha de cada transição, está em `docs/producao-tecnica/tabelas/transicoes-de-telas.md`.
+Transições entre telas extraídas do código de cada tela (`<Link>`, `<Navigate>` e `navigate()`): 27 transições a partir de 12 telas, das quais 4 pares de ida e volta. Seta simples: clique em um link ou botão, rotulada com o texto do elemento. Seta de duas pontas (⇄): ida e volta por cliques entre as mesmas telas. Seta grossa: navegação feita pelo código depois que a ação é concluída, rotulada com a função. Seta tracejada: redirecionamento automático. Caixas tracejadas são telas de outra área. A marca "☰" indica as telas abertas pelo menu principal, a barra de navegação presente em todas as telas da área (lida de `frontend/src/components/AppShell.tsx`). A lista completa, com arquivo e linha de cada transição, está em `docs/producao-tecnica/tabelas/transicoes-de-telas.md`.
 
 <details>
 <summary>Fonte Mermaid (<code>docs/diagramas/fontes/26-telas-interprete.mmd</code>)</summary>
@@ -1736,7 +1736,7 @@ flowchart TB
   r_interprete_atendimentos_id <-->|"Sala de Atendimento ⇄<br/>Voltar aos detalhes do…"| r_interprete_atendimentos_id_sala
   r_interprete_atendimentos_id -->|"SOS / Suporte"| r_suporte
   r_interprete_atendimentos_id <-->|"Avaliar Cliente ⇄ Voltar<br/>ao Atendimento / Pular"| r_interprete_atendimentos_id_avaliar
-  r_interprete_atendimentos_id -->|"Ver em Ganhos e Repasses"| r_interprete_ganhos
+  r_interprete_atendimentos_id <-->|"Ver em Ganhos e Repasses ⇄<br/>·"| r_interprete_ganhos
   r_interprete_atendimentos_id_sala -->|"SOS"| r_suporte
   r_interprete_ganhos -->|"Histórico de…"| r_interprete_historico
   r_interprete_historico -->|"Ver Detalhes"| r_interprete_atendimentos_id
@@ -1828,7 +1828,7 @@ flowchart TB
     exportador["backend/src/db/exportar-modelo.ts<br/>(introspecção do Drizzle ORM)"]:::hub
     extrator["docs/diagramas/lib/extrair.mjs<br/>(árvore sintática do TypeScript)"]:::hub
   end
-  dados[("docs/diagramas/dados/*.json<br/>27 tabelas · 33 rotas<br/>65 endpoints · 90 transições")]
+  dados[("docs/diagramas/dados/*.json<br/>27 tabelas · 33 rotas<br/>65 endpoints · 91 transições")]
   construtores["docs/diagramas/lib/diagramas-*.mjs<br/>(construtores Mermaid)"]:::hub
   fontesMmd["docs/diagramas/fontes/*.mmd<br/>34 diagramas"]
   mmdc["Mermaid CLI<br/>(renderização em navegador headless)"]:::hub

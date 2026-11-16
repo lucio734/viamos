@@ -1,8 +1,10 @@
 # Víamos — Passagem de bastão para Gustavo e Claude
 
-> Após `c2ce8f1`, a preparação do Bloco D avançou na `main`. A sonda passou a verificar o PostgreSQL e a revisão restringiu o acesso à ficha após o aceite. Para continuar, configure os projetos da equipe e execute o checklist de publicação. [Registro da retomada](docs/REGISTRO_TRABALHO.md#retomada-após-o-push-do-gustavo-em-15112026) · [Guia de deploy](docs/DEPLOY.md)
+> A API e o PostgreSQL do Bloco D estão ativos no Render. A Vercel já serve o frontend por HTTPS e aguarda verificação de identidade para republicar o build com a origem da API. A base hospedada foi migrada e segue sem a carga de demonstração. [Guia de deploy e evidências](docs/DEPLOY.md#publicação-de-15112026)
 
 ## Retomada de 15/11/2026
+
+O painel do intérprete já detalha valores recebidos e a receber por atendimento na semana de Brasília (RF26). A redistribuição revalida o estado sob bloqueio e deixa de criar oferta e aviso quando o cancelamento ou aceite chegou primeiro. A referência atual são 62 testes de backend e 6 de frontend aprovados. O próximo defeito de distribuição é a corrida entre a criação e a entrada do intérprete online (B-031). [Registro e pendências](docs/REGISTRO_TRABALHO.md#retomada-do-desenvolvimento-em-15112026)
 
 As correções do aplicativo e esta passagem de bastão estão na `main` do repositório `lucio734/viamos`. Para atualizar seu clone:
 
@@ -21,9 +23,9 @@ git pull --ff-only origin main
 ### Continuidade
 
 1. Leia [AGENTS.md](AGENTS.md) e o [registro da retomada](docs/REGISTRO_TRABALHO.md#retomada-em-15112026). A [matriz de verificações](docs/VERIFICACOES.md) e o [log de bugs](docs/BUGS.md) registram evidências e limites.
-2. Comece por **RF17 e RF20–RF25**. A grade semanal é persistida, mas a disponibilidade ainda não é aplicada à distribuição, à lista, ao detalhe e ao aceite. Uma demanda sem oferta registrada pode aparecer na lista e dar 403 no detalhe. Alinhe a elegibilidade nesses caminhos e registre com o grupo a política para agenda vazia e nova distribuição.
-3. Depois, revise saldo e repasse concorrente (RF26–RF27), pagamento simultâneo (RF36) e a divergência entre D-10 e a entrega de modelagem sobre o momento da emissão do PDF. D-01 e D-05 seguem para validação do grupo.
-4. Para a entrega acadêmica, faltam a consolidação da Produção Técnica, o link do Figma, a verificação nos domínios publicados com HTTPS e o ensaio em dispositivo físico. Siga o [roteiro atualizado](docs/ROTEIRO_DEMONSTRACAO.md).
+2. Reproduza a corrida **B-031** entre criação da solicitação e mudança de elegibilidade. A distribuição, a lista, o detalhe e o aceite já compartilham a regra D-20. A janela pelo horário de início e a interpretação de grade vazia seguem para validação do grupo (P-05).
+3. Resolva com o grupo a divergência entre D-10 e a entrega de modelagem sobre o momento da emissão do PDF (P-06). D-01 e D-05 também seguem para validação do grupo.
+4. Para a entrega acadêmica, faltam a consolidação da Produção Técnica, o link do Figma e o ensaio em dispositivo físico. Após a republicação na Vercel, verifique o login e a emissão do PDF na hospedagem. Siga o [roteiro atualizado](docs/ROTEIRO_DEMONSTRACAO.md).
 
 ## Relatório histórico de 12/11/2026
 

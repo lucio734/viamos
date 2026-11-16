@@ -1,6 +1,6 @@
 # Víamos — Relatório de contexto atual para o Lúcio e o ChatGPT
 
-> Atualização de 15/11/2026. A `main` inclui as correções e a Produção Técnica do Gustavo, a preparação do deploy e as novas verificações de prontidão e acesso à ficha. A publicação nas contas da equipe é o próximo passo do Bloco D. [Registro da retomada](docs/REGISTRO_TRABALHO.md#retomada-após-o-push-do-gustavo-em-15112026) · [Passagem de bastão](contexto_atual_claude.md)
+> Atualização de 15/11/2026. A retomada corrigiu ganhos semanais por atendimento e redistribuição concorrente. A API e o PostgreSQL do Bloco D estão ativos no Render. A Vercel responde por HTTPS e a republicação com a origem da API ainda precisa ser verificada. [Registro da retomada](docs/REGISTRO_TRABALHO.md#retomada-do-desenvolvimento-em-15112026) · [Guia de deploy](docs/DEPLOY.md) · [Passagem de bastão](contexto_atual_claude.md)
 
 > Gerado em 12/11/2026 (18h) por Gustavo + Claude. Este é o documento de passagem de bastão previsto no nosso
 > protocolo de revezamento. Ele descreve **o que já existe**, **o que falta**, **o passo a passo até a entrega

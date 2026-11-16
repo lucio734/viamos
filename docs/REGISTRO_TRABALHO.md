@@ -3,6 +3,20 @@
 Documento de continuidade: o que foi **concluído e verificado**, o que está **pendente ou não testado**, quem fez
 (papel/agente), arquivos relevantes, decisões, riscos e próximos passos. Atualizar ao fim de cada bloco.
 
+## Retomada do desenvolvimento em 15/11/2026
+
+O Codex implementou e testou o detalhamento semanal dos ganhos (RF26, US22, B-029) e a proteção da redistribuição contra o fechamento concorrente da demanda (RF17/RF19/RF22, B-030). A referência foi a planilha `ENTREGA VIAMOS COMPLETA.xlsx`, além do briefing e das decisões D-09 e D-20. O painel usa datas de Brasília, distingue recebido e a receber por atendimento e mantém o saldo de repasse de todo o período. A API lê o painel com um snapshot único. A redistribuição revalida a demanda sob o mesmo bloqueio usado no aceite e cancelamento.
+
+Os subagentes `revisao_dados_financeiros` (Back-end/DBA) e `revisao_redistribuicao` (Back-end/QA) revisaram os cenários e as propostas de regressão de forma independente. Os prompts delimitaram contexto, entrada, regras e formato conforme o **labProt** e os papéis seguiram o **PROMPT AGENTES**. Logs de resolução e resultados foram conferidos contra as fases 3/4 do **Checklist 2026** e os itens #38 e #48 do **Dossiê**. Passaram 62 testes de backend, 6 de frontend, ambos os builds, a verificação do DER e a conferência dos 34 diagramas. [Relatório de teste](TESTES.md#3-matriz-resumida-de-casos-de-teste-automatizados) · [Log de bugs](BUGS.md)
+
+Continuam pendentes a corrida entre criação da solicitação e entrada do intérprete online (B-031), a escolha do momento do comprovante (P-06) e a revisão por dispositivo físico. As fontes Mermaid e a tabela de transições incluem o link de ganhos para o atendimento. Falta regerar os PNGs `26-telas-interprete` e `27-ferramenta-case`, pois a instalação do Mermaid CLI falhou por falta de espaço. O DOCX e o PDF da Produção Técnica entregues pela equipe ainda correspondem à versão anterior.
+
+## Publicação em nuvem em 15/11/2026
+
+O Codex executou a publicação no Render a partir da `main` e configurou a origem da API na Vercel. A API confirmou a conexão ao PostgreSQL (HTTP 200) e autorizou a origem da Vercel no preflight de login (HTTP 204). O frontend inicial serviu a SPA por HTTPS em uma rota interna. A Vercel solicitou verificação de identidade para a republicação que incorpora `VITE_API_URL`.
+
+As evidências dos itens #45–47 do Dossiê e da Fase 5 do Checklist 2026 estão no [guia de deploy](DEPLOY.md#publicação-de-15112026). A fase foi registrada com contexto, evidências, restrições e pendências conforme o labProt. O banco está migrado e segue sem a carga de demonstração. O ensaio autenticado, o PDF e o teste com câmera e GPS físicos permanecem pendentes.
+
 ## Retomada após o push do Gustavo em 15/11/2026
 
 A `main` local foi atualizada por fast-forward até `c2ce8f1`. A etapa priorizou a preparação do Bloco D e a revisão dos fluxos que serão apresentados. A Produção Técnica em DOCX e PDF continua disponível na versão entregue pelo Gustavo.

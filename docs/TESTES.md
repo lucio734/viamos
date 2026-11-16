@@ -44,15 +44,17 @@ Em 15/11/2026, duas sessões isoladas do Chrome com Playwright usaram o build de
 
 Para repetir, prepare um banco de demonstração local e siga o [roteiro de demonstração](ROTEIRO_DEMONSTRACAO.md). Use um dispositivo no ponto escolhido para verificar câmera e GPS físicos. A validação de 15/11 usou o código alfanumérico do QR e emulação do navegador. HTTPS e comportamento nos domínios hospedados dependem do deploy.
 
-Na retomada após `c2ce8f1`, a API também foi exercitada em `NODE_ENV=production`, com base descartável e proxy HTTPS simulado. Foram verificados o retorno 200 para a sonda HTTP interna, o redirecionamento de uma rota da aplicação, o preflight com a origem configurada, o fallback de `API_PUBLIC_URL` a partir de `RENDER_EXTERNAL_URL` e o login. O retorno 503 foi testado com falha simulada do pool. A publicação em Render e Vercel ainda depende dos projetos da equipe.
+Na retomada após `c2ce8f1`, a API também foi exercitada em `NODE_ENV=production`, com base descartável e proxy HTTPS simulado. Foram verificados o retorno 200 para a sonda HTTP interna, o redirecionamento de uma rota da aplicação, o preflight com a origem configurada, o fallback de `API_PUBLIC_URL` a partir de `RENDER_EXTERNAL_URL` e o login. O retorno 503 foi testado com falha simulada do pool. As evidências nos domínios publicados estão no [guia de deploy](DEPLOY.md#publicação-de-15112026).
 
 ---
 
 ## 3. Matriz Resumida de Casos de Teste Automatizados
 
+Na retomada de desenvolvimento, passaram **62 casos de backend** com PostgreSQL 18.6 descartável e **6 casos de frontend**. Os novos casos cobrem a virada semanal em Brasília e o horário de verão histórico, a inclusão e exclusão de créditos e pendências nos limites da semana, e a tentativa de redistribuição durante um cancelamento. O teste concorrente usa `pg_blocking_pids` como barreira e verifica que não há nova oferta nem notificação após o commit do cancelamento. Os builds e a verificação do DER passaram. Para reproduzir, configure `DATABASE_URL_TEST` para uma base descartável e execute `npm test` em cada projeto, conforme o [README](../README.md).
+
 | Suíte / Arquivo | Casos | Requisitos Cobertos | Status |
 |---|---|---|---|
-| `backend/tests/unidades.test.ts` | 9 | RF03, RF04, RF15, RF17, RF19, RF33 (Haversine, CPF/CNPJ, estimativa, cobrança, taxa de cancelamento) | ✅ 9/9 Passando |
+| `backend/tests/unidades.test.ts` | 10 | RF03, RF04, RF15, RF17, RF19, RF26, RF33 (Haversine, CPF/CNPJ, estimativa, virada semanal, cobrança, taxa de cancelamento) | ✅ 10/10 passando |
 | `backend/tests/fluxo-principal.test.ts` | 18 | Cadastros, backoffice, solicitação, aceite, sala, check-in QR/GPS, encerramento, pagamento, PDF, verificação pública, avaliação, repasse e LGPD | ✅ 18/18 Passando |
-| `backend/tests/excecoes.test.ts` | 32 | Concorrência, elegibilidade e recusa (RF17/RF20–RF25), acesso à ficha (RF18), localização temporária (RF29/RNF44), check-in (RF31–RF32), pagamento/repasse (RF26/RF27/RF36), prontidão do PostgreSQL (RNF04) e demais casos da seção 1 | ✅ 32/32 passando |
+| `backend/tests/excecoes.test.ts` | 34 | Concorrência na redistribuição e no aceite (RF17/RF19/RF22), elegibilidade e recusa (RF20–RF25), acesso à ficha (RF18), localização temporária (RF29/RNF44), check-in (RF31–RF32), ganhos semanais, pagamento e repasse (RF26/RF27/RF36), prontidão do PostgreSQL (RNF04) | ✅ 34/34 passando |
 | `frontend/tests/validacao-formato.test.ts` | 6 | Item #33 do Dossiê (máscaras CPF/CNPJ/telefone/CEP/cartão/validade, formatadores pt-BR, validação de CPF/CNPJ/idade/senha/certificado) | ✅ 6/6 Passando |

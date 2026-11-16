@@ -341,11 +341,12 @@ paths:
         '201': { description: Certificação enviada para análise }
   /interprete/ganhos:
     get:
-      summary: Resumo financeiro semanal, saldo disponível, a receber e extrato (RF26)
+      summary: Recebido e a receber na semana com detalhamento por atendimento, saldo e extrato (RF26)
+      description: A semana começa à meia-noite de segunda-feira no horário de Brasília. Valores recebidos usam a data do crédito e valores a receber usam a data de conclusão do atendimento sem pagamento confirmado.
       tags: [Intérprete]
       security: [{ bearerAuth: [] }]
       responses:
-        '200': { description: Resumo de ganhos }
+        '200': { description: Resumo com semana.detalhes (RECEBIDO ou A_RECEBER) e os 100 lançamentos mais recentes }
   /interprete/contas-bancarias:
     get:
       summary: Lista contas bancárias/Pix do intérprete para repasse (RF27)

@@ -66,9 +66,18 @@ describe('Estimativa (RF15) e cobrança final (RF33 / D-03)', () => {
     expect(creditoInterprete(119.5, 15)).toBe(110); // 95 + 15
     expect(creditoInterprete(171.75, 15)).toBe(157.5);
   });
-  it('semana financeira começa na segunda-feira', () => {
-    const { inicio, fim } = semanaCorrente(new Date('2026-11-12T15:00:00Z')); // quinta-feira
-    expect(inicio.toISOString()).toBe('2026-11-09T00:00:00.000Z');
-    expect(fim.toISOString()).toBe('2026-11-16T00:00:00.000Z');
+  it('a semana financeira vira à meia-noite de segunda em Brasília', () => {
+    const domingo = semanaCorrente(new Date('2026-11-16T02:59:59.999Z'));
+    expect(domingo.inicio.toISOString()).toBe('2026-11-09T03:00:00.000Z');
+    expect(domingo.fim.toISOString()).toBe('2026-11-16T03:00:00.000Z');
+    const segunda = semanaCorrente(new Date('2026-11-16T03:00:00.000Z'));
+    expect(segunda.inicio).toEqual(domingo.fim);
+    expect(segunda.fim.toISOString()).toBe('2026-11-23T03:00:00.000Z');
+  });
+
+  it('cada limite semanal usa o deslocamento do fuso vigente na data', () => {
+    const { inicio, fim } = semanaCorrente(new Date('2018-11-01T15:00:00Z'));
+    expect(inicio.toISOString()).toBe('2018-10-29T03:00:00.000Z');
+    expect(fim.toISOString()).toBe('2018-11-05T02:00:00.000Z');
   });
 });
