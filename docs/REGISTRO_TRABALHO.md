@@ -17,6 +17,8 @@ O Codex executou a publicação no Render a partir da `main` e configurou a orig
 
 As evidências dos itens #45–47 do Dossiê e da Fase 5 do Checklist 2026 estão no [guia de deploy](DEPLOY.md#publicação-de-15112026). A fase foi registrada com contexto, evidências, restrições e pendências conforme o labProt. O banco está migrado e segue sem a carga de demonstração. O ensaio autenticado, o PDF e o teste com câmera e GPS físicos permanecem pendentes.
 
+Em 16/11, a Vercel publicou o commit `2710e91` a partir da `main`. O Render publicou o mesmo commit pelo painel. Foram conferidos o CI verde, a origem da API no bundle público, a resposta HTTP da rota de login sem conta cadastrada e a nova sonda de prontidão. O ensaio autenticado permanece pendente.
+
 ## Retomada após o push do Gustavo em 15/11/2026
 
 A `main` local foi atualizada por fast-forward até `c2ce8f1`. A etapa priorizou a preparação do Bloco D e a revisão dos fluxos que serão apresentados. A Produção Técnica em DOCX e PDF continua disponível na versão entregue pelo Gustavo.

@@ -1,6 +1,6 @@
 # Víamos — Passagem de bastão para Gustavo e Claude
 
-> A API e o PostgreSQL do Bloco D estão ativos no Render. A Vercel já serve o frontend por HTTPS e aguarda verificação de identidade para republicar o build com a origem da API. A base hospedada foi migrada e segue sem a carga de demonstração. [Guia de deploy e evidências](docs/DEPLOY.md#publicação-de-15112026)
+> A API e o PostgreSQL do Bloco D estão ativos no Render. A Vercel serve por HTTPS o build com a origem da API e o painel financeiro corrigido. A base hospedada foi migrada e segue sem a carga de demonstração. [Guia de deploy e evidências](docs/DEPLOY.md#publicação-de-15112026)
 
 ## Retomada de 15/11/2026
 
@@ -25,7 +25,7 @@ git pull --ff-only origin main
 1. Leia [AGENTS.md](AGENTS.md) e o [registro da retomada](docs/REGISTRO_TRABALHO.md#retomada-em-15112026). A [matriz de verificações](docs/VERIFICACOES.md) e o [log de bugs](docs/BUGS.md) registram evidências e limites.
 2. Reproduza a corrida **B-031** entre criação da solicitação e mudança de elegibilidade. A distribuição, a lista, o detalhe e o aceite já compartilham a regra D-20. A janela pelo horário de início e a interpretação de grade vazia seguem para validação do grupo (P-05).
 3. Resolva com o grupo a divergência entre D-10 e a entrega de modelagem sobre o momento da emissão do PDF (P-06). D-01 e D-05 também seguem para validação do grupo.
-4. Para a entrega acadêmica, faltam a consolidação da Produção Técnica, o link do Figma e o ensaio em dispositivo físico. Após a republicação na Vercel, verifique o login e a emissão do PDF na hospedagem. Siga o [roteiro atualizado](docs/ROTEIRO_DEMONSTRACAO.md).
+4. Para a entrega acadêmica, faltam a consolidação da Produção Técnica, o link do Figma e o ensaio em dispositivo físico. No ensaio em hospedagem, verifique o login e a emissão do PDF com contas de teste. Siga o [roteiro atualizado](docs/ROTEIRO_DEMONSTRACAO.md).
 
 ## Relatório histórico de 12/11/2026
 

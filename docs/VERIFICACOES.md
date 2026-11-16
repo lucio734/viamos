@@ -39,7 +39,7 @@ Legenda: ✅ atendido e verificado · 🟡 parcialmente atendido · ⬜ pendente
 | 4 QA & Testing | Plano e casos de teste | ✅ 59 casos no backend, 6 no frontend e validação local em modo produção | `backend/tests/`, `frontend/tests/`, `docs/TESTES.md` |
 | 4 | Relatório de bugs e resoluções | ✅ log atualizado com as correções da retomada e da continuação (B-022 a B-026) | `docs/BUGS.md` |
 | 4 | Auditoria de performance e segurança | 🟡 revisão de código e controles registrados. Faltam as medições de carga e as evidências operacionais de segurança e privacidade | `docs/SEGURANCA.md`, `docs/SLA.md` |
-| 5 Deployment & SLA | Ambiente de produção ativo | 🟡 API e PostgreSQL ativos no Render e domínio público na Vercel. Republicação do build da Vercel com a origem da API aguardando verificação | `docs/DEPLOY.md`, `.github/workflows/ci.yml` |
+| 5 Deployment & SLA | Ambiente de produção ativo | ✅ API e PostgreSQL no Render, frontend integrado ao endereço da API, HTTPS e teste HTTP de login com credenciais fictícias. Login autenticado e ensaio documentados como pendências | `docs/DEPLOY.md`, `.github/workflows/ci.yml` |
 | 5 | Manuais de usuário e administrador | ✅ manual completo por perfil (Cliente, Intérprete, Backoffice) e roteiro de demonstração | `docs/MANUAL.md`, `docs/ROTEIRO_DEMONSTRACAO.md` |
 | 5 | SLA | ✅ documento com indicadores de disponibilidade, tempos de resposta e plano de contingência | `docs/SLA.md` |
 | 5 | Entrega do código-fonte | ✅ o repositório é a entrega | GitHub |
@@ -78,7 +78,7 @@ Estado por item, com a evidência atual. Itens 1–28 são o documento "Produç�
 | 42 | `.gitignore` | ✅ testado (sem `.env`/`node_modules` nos commits) | `.gitignore` |
 | 43 | Branches e commits organizados | ✅ commits organizados por escopo na `main` | histórico git |
 | 44 | README com clonagem/instalação/execução | ✅ | `README.md` |
-| 45–47 | Deploy, HTTPS, rotas SPA | 🟡 API pública com banco conectado, CORS da Vercel confirmado, HTTPS nos dois domínios e acesso direto à rota SPA com HTTP 200. Falta republicar o frontend com a origem da API | `docs/DEPLOY.md`, `docs/TESTES.md` |
+| 45–47 | Deploy, HTTPS, rotas SPA | ✅ API pública com banco conectado, origem da API confirmada no bundle da Vercel, CORS da Vercel confirmado, HTTPS nos dois domínios e acesso direto à rota SPA com HTTP 200 | `docs/DEPLOY.md`, `docs/TESTES.md` |
 | 48 | Testes de fluxo principal e exceções | ✅ 62 casos de backend e 6 de frontend. A retomada inclui a virada semanal, os totais e detalhes financeiros e o cancelamento simultâneo à redistribuição | `docs/TESTES.md` |
 | 49 | Auditoria de código (domínio da equipe) | ⬜ cada integrante revisa e explica sua parte (Bloco Z) | — |
 | 50 | Ensaio de demonstração | 🟡 roteiro atualizado. Ensaio integral com o grupo no ambiente de avaliação continua pendente | `docs/ROTEIRO_DEMONSTRACAO.md` |
