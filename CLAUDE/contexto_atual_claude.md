@@ -1,5 +1,7 @@
 # Víamos — Passagem de bastão para Gustavo e Claude
 
+Antes de encerrar o projeto, siga a [regra de limpeza final](README.md#regra-de-limpeza-final) após a implementação, os testes, o deploy e a conferência das entregas.
+
 > Atualizado em 16/11/2026. A aplicação do commit `2710e91` foi verificada no Render e na Vercel. O PostgreSQL hospedado está migrado e segue sem os dados de demonstração. [Guia de deploy e evidências](../docs/DEPLOY.md#publicação-de-15112026)
 
 ## Retomada de 15/11/2026

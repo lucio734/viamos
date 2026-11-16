@@ -1,5 +1,7 @@
 # Víamos — Relatório de contexto atual para o Lúcio e o ChatGPT
 
+Antes de encerrar o projeto, siga a [regra de limpeza final](README.md#regra-de-limpeza-final) após a implementação, os testes, o deploy e a conferência das entregas.
+
 > Atualização de 16/11/2026. A retomada corrigiu ganhos semanais por atendimento e redistribuição concorrente. A API e o PostgreSQL do Bloco D estão ativos no Render, e a Vercel serve o novo build por HTTPS com a origem da API configurada. [Registro da retomada](../docs/REGISTRO_TRABALHO.md#retomada-do-desenvolvimento-em-15112026) · [Guia de deploy](../docs/DEPLOY.md) · [Passagem de bastão](contexto_atual_claude.md)
 
 > Gerado em 12/11/2026 (18h) por Gustavo + Claude. Este é o documento de passagem de bastão previsto no nosso
