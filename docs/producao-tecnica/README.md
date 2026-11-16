@@ -28,7 +28,7 @@ Os scripts leem os protótipos, a planilha, os PDFs históricos e o modelo de `d
 | 5 Diagramas e Modelagem de Software — 5.1 Caso de Uso (com tabela por tela), 5.2 Classe, 5.3 DER, 5.4 Estados, 5.5 Operação, 5.6 DFD, 5.7 Processos (telas), 5.8 Ferramenta CASE, 5.9 Contexto | #19 a #28 |
 
 As divergências entre as entregas anteriores e o aplicativo implementado estão escritas no próprio documento
-(tabela de divergências do diagrama de classes e nota do DFD sobre o momento do comprovante, pendência P-06).
+(tabela de divergências do diagrama de classes e regra de emissão do comprovante após o pagamento).
 
 ## Como regerar (na raiz do repositório)
 
