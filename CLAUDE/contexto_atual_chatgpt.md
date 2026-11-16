@@ -1,6 +1,6 @@
 # Víamos — Relatório de contexto atual para o Lúcio e o ChatGPT
 
-> Atualização de 16/11/2026. A retomada corrigiu ganhos semanais por atendimento e redistribuição concorrente. A API e o PostgreSQL do Bloco D estão ativos no Render, e a Vercel serve o novo build por HTTPS com a origem da API configurada. [Registro da retomada](docs/REGISTRO_TRABALHO.md#retomada-do-desenvolvimento-em-15112026) · [Guia de deploy](docs/DEPLOY.md) · [Passagem de bastão](contexto_atual_claude.md)
+> Atualização de 16/11/2026. A retomada corrigiu ganhos semanais por atendimento e redistribuição concorrente. A API e o PostgreSQL do Bloco D estão ativos no Render, e a Vercel serve o novo build por HTTPS com a origem da API configurada. [Registro da retomada](../docs/REGISTRO_TRABALHO.md#retomada-do-desenvolvimento-em-15112026) · [Guia de deploy](../docs/DEPLOY.md) · [Passagem de bastão](contexto_atual_claude.md)
 
 > Gerado em 12/11/2026 (18h) por Gustavo + Claude. Este é o documento de passagem de bastão previsto no nosso
 > protocolo de revezamento. Ele descreve **o que já existe**, **o que falta**, **o passo a passo até a entrega
@@ -52,7 +52,7 @@ Fontes de verdade (todas no repositório, pasta `Contexto/` e `Entregas/`, **que
 - `Contexto/Arquivos Stitch/` — 12 telas prototipadas (HTML + PNG) e `DESIGN.md` (design system).
 - `Contexto/DOCUMENTAÇÃO REPOSITÓRIO/DOC.txt` — os 28 itens do capítulo "Produção Técnica".
 - `Contexto/Auxílio Vibecoding/` — `Dossie_Checklist_Vibe_Coding.html` (50 critérios do professor),
-  `PROMPT AGENTES.docx`, `labProt.html`, `Software Development Checklist 2026…html`. Os resultados da avaliação estão na [matriz de verificações](docs/VERIFICACOES.md).
+  `PROMPT AGENTES.docx`, `labProt.html`, `Software Development Checklist 2026…html`. Os resultados da avaliação estão na [matriz de verificações](../docs/VERIFICACOES.md).
 - `CLAUDE/AGENTS.md` e `CLAUDE/CLAUDE.md` — **regras obrigatórias para qualquer IA** (leia antes de começar).
 - `Entregas/` — entregas de 02/09 (requisitos), 07/10 (casos de uso e classes) e 11/11 (contexto, BPMN, DFD, estados) + `modelo_entrega.docx`.
 
@@ -284,4 +284,4 @@ Códigos     200/201/202/204 · 400 validação · 401 · 402 pagamento recusado
 - **Bloco F3 (Jornada do Intérprete):** implementadas todas as rotas de `SITEMAP.interprete` (`/interprete`, `/interprete/demandas`, `/interprete/demandas/:id`, `/interprete/agenda`, `/interprete/atendimentos/:id`, `/interprete/atendimentos/:id/sala`, `/interprete/atendimentos/:id/avaliar`, `/interprete/ganhos`, `/interprete/historico`, `/interprete/perfil`) + leitor de QR Code (`LeitorQr.tsx`).
 - **Bloco F4 (Backoffice e Verificação Pública):** implementadas todas as rotas finais (`/verificar/:codigo`, `/backoffice`, `/backoffice/certificacoes/:id`, `/backoffice/chamados`, `/backoffice/auditoria`).
 - **Resultado:** **23/23 rotas do `SITEMAP` em `frontend/src/rotas.tsx` estão 100% funcionais (0 placeholders `<EmConstrucao />` restantes)**, com `backend` passando em **50/50 testes** e `frontend` compilando sem erros (`tsc -b && vite build`).
-- **Próximos blocos:** **Bloco P1/P2** (diagramas e Produção Técnica), **Bloco D** (deploy em Render + Vercel + Neon) e **Bloco Z** (ensaio final). Ver detalhes em [`contexto_atual_claude.md`](contexto_atual_claude.md) e [`docs/REGISTRO_TRABALHO.md`](docs/REGISTRO_TRABALHO.md).
+- **Próximos blocos:** **Bloco P1/P2** (diagramas e Produção Técnica), **Bloco D** (deploy em Render + Vercel + Neon) e **Bloco Z** (ensaio final). Ver detalhes em [`contexto_atual_claude.md`](contexto_atual_claude.md) e [`docs/REGISTRO_TRABALHO.md`](../docs/REGISTRO_TRABALHO.md).

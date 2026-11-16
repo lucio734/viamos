@@ -4,8 +4,6 @@ Estas instruções se aplicam a qualquer agente de IA que trabalhe neste
 repositório. Elas devem ser lidas antes de planejar, alterar ou implementar
 qualquer parte do projeto.
 
-> Nota: este arquivo espelha integralmente [`CLAUDE/AGENTS.md`](CLAUDE/AGENTS.md) na raiz do repositório para compatibilidade automática com ferramentas de IA que buscam `AGENTS.md` na raiz. Preserve ambos sincronizados.
-
 ## 1. Conhecer o projeto
 
 Antes de iniciar uma tarefa:

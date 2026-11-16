@@ -30,7 +30,7 @@ Alterar uma decisão = alterar o parâmetro em `regras.ts`, atualizar este arqui
 
 ## Pendências que dependem do grupo
 
-- **P-01** Link do Figma (item #5): importar as telas do Stitch para o Figma (Stitch → *Copy to Figma*) ou usar o Figma Make; colar o link em `FIGMA_URL` no topo de `docs/producao-tecnica/build/gerar_docx.py` e regerar o documento (passos 4 e 5 de `docs/producao-tecnica/README.md`).
+- **P-01** Prototipação (item #5). A equipe produziu telas no Stitch, registradas na Produção Técnica. O `DOC.txt` pede um link navegável no Figma e imagens do fluxo. Para fechar o item, quando o protótipo estiver disponível, informe `figma_url` no workflow de geração e confira a seção 1.3. [Como gerar o capítulo](producao-tecnica/README.md)
 - **P-02** Validar os valores de D-01 (preços de referência) e D-05 (janela de 30 min).
 - **P-03 — hospedagem provisionada** A equipe usa Vercel, Render Web Service e Render PostgreSQL. Os domínios e as verificações estão em [DEPLOY.md](DEPLOY.md).
 - **P-04** Fotos de perfil: hoje `fotoUrl` aceita uma URL/data URL pequena; decidir se entra no MVP.

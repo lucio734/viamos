@@ -1,10 +1,10 @@
 # Víamos — Passagem de bastão para Gustavo e Claude
 
-> Atualizado em 16/11/2026. A aplicação do commit `2710e91` foi verificada no Render e na Vercel. O PostgreSQL hospedado está migrado e segue sem os dados de demonstração. [Guia de deploy e evidências](docs/DEPLOY.md#publicação-de-15112026)
+> Atualizado em 16/11/2026. A aplicação do commit `2710e91` foi verificada no Render e na Vercel. O PostgreSQL hospedado está migrado e segue sem os dados de demonstração. [Guia de deploy e evidências](../docs/DEPLOY.md#publicação-de-15112026)
 
 ## Retomada de 15/11/2026
 
-O painel do intérprete já detalha valores recebidos e a receber por atendimento na semana de Brasília (RF26). A redistribuição revalida o estado sob bloqueio e deixa de criar oferta e aviso quando o cancelamento ou aceite chegou primeiro. [Registro da retomada](docs/REGISTRO_TRABALHO.md#retomada-do-desenvolvimento-em-15112026)
+O painel do intérprete já detalha valores recebidos e a receber por atendimento na semana de Brasília (RF26). A redistribuição revalida o estado sob bloqueio e deixa de criar oferta e aviso quando o cancelamento ou aceite chegou primeiro. [Registro da retomada](../docs/REGISTRO_TRABALHO.md#retomada-do-desenvolvimento-em-15112026)
 
 As correções do aplicativo e esta passagem de bastão estão na `main` do repositório `lucio734/viamos`. Para atualizar seu clone:
 
@@ -17,15 +17,15 @@ git pull --ff-only origin main
 
 - **Aplicação** 33 rotas de tela, 65 operações de API e 27 tabelas conferidas. A contagem de 23 rotas no relatório histórico foi corrigida na auditoria atual.
 - **Jornada presencial** Acompanhamento da solicitação a cada 5 s, validação da agenda dentro da transação de aceite, cancelamento e check-in com bloqueios na mesma ordem e posição compartilhada por canal temporário na sala. O leitor de QR exige captura de posição. A simulação está disponível no servidor local de desenvolvimento para ensaio.
-- **Ambiente e deploy** Configure `DATABASE_URL_TEST` para uma base exclusiva e descartável antes de rodar a suíte. Use Node.js 22.12+ na série 22 e `npm ci` em `backend` e `frontend`. O Render instala as dependências de build explicitamente e a Vercel usa a origem da API em `VITE_API_URL`. Veja o [README](README.md) e o [guia de deploy](docs/DEPLOY.md).
-- **Evidência local** A última execução aprovou 62 testes de backend com PostgreSQL 18.6 descartável, 6 testes de frontend, ambos os builds e a verificação dos 34 diagramas. O ensaio anterior no Chrome cobriu cotação, solicitação, aceite sem recarga, QR manual com GPS emulado, localização na sala, encerramento, Pix simulado e resposta PDF. [Relatório de testes](docs/TESTES.md)
+- **Ambiente e deploy** Configure `DATABASE_URL_TEST` para uma base exclusiva e descartável antes de rodar a suíte. Use Node.js 22.12+ na série 22 e `npm ci` em `backend` e `frontend`. O Render instala as dependências de build explicitamente e a Vercel usa a origem da API em `VITE_API_URL`. Veja o [README](../README.md) e o [guia de deploy](../docs/DEPLOY.md).
+- **Evidência local** A última execução aprovou 62 testes de backend com PostgreSQL 18.6 descartável, 6 testes de frontend, ambos os builds e a verificação dos 34 diagramas. O ensaio anterior no Chrome cobriu cotação, solicitação, aceite sem recarga, QR manual com GPS emulado, localização na sala, encerramento, Pix simulado e resposta PDF. [Relatório de testes](../docs/TESTES.md)
 
 ### Continuidade
 
-1. Leia [AGENTS.md](AGENTS.md) e o [registro da retomada](docs/REGISTRO_TRABALHO.md#retomada-em-15112026). A [matriz de verificações](docs/VERIFICACOES.md) e o [log de bugs](docs/BUGS.md) registram evidências e limites.
+1. Leia [AGENTS.md](../AGENTS.md) e o [registro da retomada](../docs/REGISTRO_TRABALHO.md#retomada-em-15112026). A [matriz de verificações](../docs/VERIFICACOES.md) e o [log de bugs](../docs/BUGS.md) registram evidências e limites.
 2. Reproduza a corrida **B-031** entre criação da solicitação e mudança de elegibilidade. A distribuição, a lista, o detalhe e o aceite já compartilham a regra D-20. A janela pelo horário de início e a interpretação de grade vazia seguem para validação do grupo (P-05).
 3. Resolva com o grupo a divergência entre D-10 e a entrega de modelagem sobre o momento da emissão do PDF (P-06). D-01 e D-05 também seguem para validação do grupo.
-4. O DOCX e o PDF de 16/11 estão no índice das entregas com os dois diagramas e a captura de ganhos atualizados. O workflow do GitHub Actions permite regerar a edição com a opção `figma_url`. O link do Figma segue pendente (P-01). No ensaio em aparelho físico, verifique o login, a leitura de QR com GPS e o download do comprovante. [Índice de entregas](Entregas/README.md) · [Registro de trabalho](docs/REGISTRO_TRABALHO.md#organização-das-entregas-em-16112026) · [Roteiro](docs/ROTEIRO_DEMONSTRACAO.md)
+4. O DOCX e o PDF de 16/11 estão no índice das entregas com os dois diagramas e a captura de ganhos atualizados. O workflow do GitHub Actions permite regerar a edição com a opção `figma_url`. A equipe produziu somente as telas do Stitch. O link do Figma exigido no roteiro segue pendente (P-01). No ensaio em aparelho físico, verifique o login, a leitura de QR com GPS e o download do comprovante. [Índice de entregas](../Entregas/README.md) · [Registro de trabalho](../docs/REGISTRO_TRABALHO.md#organização-das-entregas-em-16112026) · [Roteiro](../docs/ROTEIRO_DEMONSTRACAO.md)
 
 ## Relatório histórico de 12/11/2026
 

@@ -3,6 +3,12 @@
 Documento de continuidade: o que foi **concluído e verificado**, o que está **pendente ou não testado**, quem fez
 (papel/agente), arquivos relevantes, decisões, riscos e próximos passos. Atualizar ao fim de cada bloco.
 
+## Preparação final da documentação
+
+O README aponta para as cinco seções da Produção Técnica, a edição em DOCX e PDF e os comandos de instalação, execução e validação. As instruções permanentes estão em `AGENTS.md` e no índice de documentação. Os dois relatórios de passagem de bastão foram reunidos em `CLAUDE/`, que pode ser retirada depois da implementação, dos testes finais e da validação do deploy. O registro de trabalho, as fontes do Stitch e os arquivos usados na geração do capítulo ficam disponíveis para consulta e atualização da entrega.
+
+A equipe confirmou que produziu as telas no Stitch. O protótipo navegável no Figma e as evidências de seu fluxo seguem registrados em P-01. O plano de fechamento apresenta as etapas pendentes do aplicativo e da entrega. [Índice de entregas](../Entregas/README.md) · [Plano de fechamento](PLANO_BLOCOS.md#fechamento-do-projeto)
+
 ## Revisão dos arquivos de contexto
 
 Foi removida a cópia duplicada de `DESIGN.md` em `Contexto/ARQUIVOS .MD/`. As duas cópias tinham o mesmo conteúdo no Git. O README aponta para o arquivo junto aos protótipos Stitch.

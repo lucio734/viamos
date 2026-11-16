@@ -36,7 +36,7 @@ Legenda: ✅ atendido e verificado · 🟡 parcialmente atendido · ⬜ pendente
 | 3 Core Development | Acesso ao repositório de código | ✅ repositório público no GitHub com commits publicados na `main` | `README.md` §8 |
 | 3 | MVP funcional / builds incrementais | ✅ 33 rotas de tela implementadas e compiladas. Cobertura de comportamento e lacunas registradas por fluxo | `frontend/src/rotas.tsx`, `docs/REGISTRO_TRABALHO.md` |
 | 3 | Documentação da API (Swagger/OpenAPI) | 🟡 65 operações listadas. Faltam parâmetros de caminho e contratos de entrada em diversas operações | `docs/api/openapi.yaml`, `backend/src/routes/index.ts` |
-| 4 QA & Testing | Plano e casos de teste | ✅ 59 casos no backend, 6 no frontend e validação local em modo produção | `backend/tests/`, `frontend/tests/`, `docs/TESTES.md` |
+| 4 QA & Testing | Plano e casos de teste | ✅ 62 casos no backend, 6 no frontend e validação local em modo produção | `backend/tests/`, `frontend/tests/`, `docs/TESTES.md` |
 | 4 | Relatório de bugs e resoluções | ✅ log atualizado com as correções da retomada e da continuação (B-022 a B-026) | `docs/BUGS.md` |
 | 4 | Auditoria de performance e segurança | 🟡 revisão de código e controles registrados. Faltam as medições de carga e as evidências operacionais de segurança e privacidade | `docs/SEGURANCA.md`, `docs/SLA.md` |
 | 5 Deployment & SLA | Ambiente de produção ativo | ✅ API e PostgreSQL no Render, frontend integrado ao endereço da API, HTTPS e teste HTTP de login com credenciais fictícias. Login autenticado e ensaio documentados como pendências | `docs/DEPLOY.md`, `.github/workflows/ci.yml` |
@@ -54,7 +54,7 @@ Estado por item, com a evidência atual. Itens 1–28 são o documento "Produç�
 | 1–2 | Texto introdutório e modelagem do produto | ✅ introdução do capítulo e seção 1 do documento | [Produção Técnica em Entregas](../Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/README.md) |
 | 3 | Sitemap | ✅ figura completa e uma por área (pública, cliente, intérprete, backoffice), tabela de rotas e explicação, geradas de `rotas.tsx` | `docs/producao-tecnica/` (1.1), `docs/diagramas/` |
 | 4 | Wireframes tela a tela com tabela | ✅ 30 telas capturadas do aplicativo + tabela de componentes por tela | `docs/producao-tecnica/` (1.2), `docs/producao-tecnica/telas/` |
-| 5 | Prototipação (link Figma) | 🟡 protótipos Stitch no documento; o link do Figma segue pendente (preencher `FIGMA_URL` em `build/gerar_docx.py` e regerar) | Pendência P-01, `docs/producao-tecnica/README.md` |
+| 5 | Prototipação (link Figma) | 🟡 telas Stitch no capítulo. A equipe ainda não criou um protótipo no Figma. O link navegável e os registros do fluxo exigidos no roteiro seguem pendentes | Pendência P-01, `docs/producao-tecnica/README.md` |
 | 6–9 | Arquitetura (texto, funcional, técnica, MVC) | ✅ texto, diagramas e tabelas de tecnologias e camadas no documento | `docs/producao-tecnica/` (2.1–2.3), `backend/src/` |
 | 10–14 | Requisitos (texto, RF, RNF, associação, projeto linear) | ✅ 45 RF, 45 RNF, associação RF × RNF e projeto linear lidos da planilha e tabelados no documento | `docs/producao-tecnica/` (3.1–3.4), `Entregas/Engenharia de Requisitos/` |
 | 15–18 | Processos (texto, macroprocesso, fluxograma, BPMN) | ✅ macroprocesso e fluxograma (4 partes) gerados do código + os 6 BPMN da entrega de 11/11 | `docs/producao-tecnica/` (4.1–4.3) |

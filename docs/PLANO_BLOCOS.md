@@ -1,11 +1,8 @@
 # Plano de trabalho em blocos — entrega final em 21/11/2026
 
-Regra de ouro: **uma conversa com a IA = um bloco**. Cada bloco termina com código rodando, commit na branch
-e o arquivo de passagem de bastão atualizado (`contexto_atual_chatgpt.md` quando o próximo é o Lúcio;
-`contexto_atual_claude.md` quando o próximo é o Gustavo). Se um bloco for grande, ele tem *checkpoints*
-(commits intermediários) — assim nada se perde se os créditos acabarem no meio.
+Cada bloco fecha com uma alteração verificada na `main` e evidências no registro de trabalho. A equipe usa `CLAUDE/` para os relatórios temporários durante a implementação.
 
-Regras obrigatórias de `CLAUDE/AGENTS.md` que valem para todos os blocos:
+Regras obrigatórias de `AGENTS.md` que valem para todos os blocos:
 - **Preservar** `Contexto/` e `Entregas/`: não mover, renomear, excluir nem reorganizar; material novo vai em `docs/`.
 - Ler as fontes obrigatórias (`PROMPT AGENTES`, `labProt`, `Software Development Checklist 2026`, `Dossie_Checklist_Vibe_Coding`) e **registrar** as verificações em `docs/VERIFICACOES.md`.
 - Trabalhar com a **equipe de agentes** de `docs/EQUIPE_AGENTES.md` (subagentes no Claude; papéis em sequência no ChatGPT) e declarar honestamente quando um bloco foi feito por um agente só.
@@ -17,6 +14,14 @@ e log de bugs (`docs/TESTES.md`, `docs/BUGS.md` — F4, alimentado desde F1), au
 
 Legenda de responsáveis: **G** = Gustavo + Claude · **L** = Lúcio + ChatGPT. Os blocos de G e L do mesmo
 período mexem em pastas diferentes, para evitar conflito de merge.
+
+## Fechamento do projeto
+
+- A Produção Técnica está em cinco pastas na ordem do roteiro. O capítulo editável e o PDF estão na pasta da entrega. A prototipação registrada é a exportação do Stitch. O roteiro ainda pede o link navegável no Figma (P-01).
+- A próxima correção de aplicativo registrada é B-031. As demais regras que exigem decisão da equipe constam em P-02, P-04, P-05 e P-06.
+- Depois da implementação, validar os fluxos e a demonstração, publicar e verificar a versão final e registrar as evidências. Atualizar as capturas, os diagramas e o capítulo quando as alterações do código afetarem os artefatos. Em seguida, retirar `CLAUDE/` conforme a decisão da equipe.
+
+[Entregas](../Entregas/README.md) · [Bugs](BUGS.md) · [Decisões](DECISOES.md) · [Testes](TESTES.md) · [Deploy](DEPLOY.md)
 
 ## Situação em 12/11 (manhã)
 

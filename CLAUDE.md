@@ -1,16 +1,5 @@
 # Instruções para o Claude — Projeto Víamos
 
-Leia e siga integralmente o arquivo `AGENTS.md` na raiz deste repositório
-(e [`CLAUDE/AGENTS.md`](CLAUDE/AGENTS.md)) antes de planejar ou executar qualquer trabalho.
+Leia [AGENTS.md](AGENTS.md) antes de trabalhar no repositório. Consulte o [registro de trabalho](docs/REGISTRO_TRABALHO.md) e as [decisões](docs/DECISOES.md) para retomar o último estado validado.
 
-Em particular, analise o contexto e as entregas, leia os arquivos
-obrigatórios da pasta de auxílio ao vibecoding, utilize o "PROMPT AGENTES"
-no desenvolvimento com múltiplos agentes e verifique os prompts e processos
-contra "labProt", "Software Development Checklist 2026_ Phases & Deliverables"
-e "Dossie_Checklist_Vibe_Coding".
-
-Preserve os arquivos existentes e documente o trabalho para continuidade
-por outros integrantes e outras IAs.
-
-Ao retomar o desenvolvimento, consulte a [passagem de bastão para Gustavo e Claude](contexto_atual_claude.md)
-e o [registro de trabalho](docs/REGISTRO_TRABALHO.md) para identificar o último estado validado e as pendências.
+Durante o desenvolvimento, os relatórios de passagem de bastão ficam em `CLAUDE/`.

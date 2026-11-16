@@ -14,4 +14,4 @@ A seção 1.2 do capítulo apresenta as imagens tela por tela, com descrições 
 
 ## Prototipação
 
-A seção 1.3 explica a relação entre os protótipos Stitch e as telas implementadas. A URL e os registros do fluxo navegável no Figma aguardam a publicação do protótipo. [Protótipos Stitch](../../../Contexto/Arquivos%20Stitch/) · [Pendência P-01](../../../docs/DECISOES.md#pend%C3%AAncias-que-dependem-do-grupo)
+A seção 1.3 explica a relação entre os protótipos Stitch e as telas implementadas. A equipe fez a prototipação no Stitch. O link navegável no Figma e as imagens desse fluxo seguem pendentes conforme o roteiro. [Protótipos Stitch](../../../Contexto/Arquivos%20Stitch/) · [Pendência P-01](../../../docs/DECISOES.md#pend%C3%AAncias-que-dependem-do-grupo)

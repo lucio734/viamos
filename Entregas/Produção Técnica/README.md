@@ -17,4 +17,4 @@ A edição de 16/11 tem 116 páginas no PDF. Ela incorpora a [captura de Ganhos 
 
 O capítulo usa o [modelo da disciplina](../modelo_entrega.docx). Consulte o [roteiro original](../../Contexto/DOCUMENTA%C3%87%C3%83O%20REPOSIT%C3%93RIO/DOC.txt), as [fontes e instruções de geração](../../docs/producao-tecnica/README.md) e a [matriz de verificação](../../docs/VERIFICACOES.md#3-dossiê--checklist-de-50-critérios-auditoria-da-reta-final).
 
-O protótipo navegável no Figma e a decisão sobre o momento de emissão do comprovante constam nas [pendências do grupo](../../docs/DECISOES.md#pendências-que-dependem-do-grupo).
+A prototipação incluída no capítulo usa as telas exportadas do Stitch. O link navegável no Figma solicitado no roteiro e a decisão sobre o momento de emissão do comprovante constam nas [pendências do grupo](../../docs/DECISOES.md#pendências-que-dependem-do-grupo).

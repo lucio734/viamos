@@ -1,164 +1,107 @@
 # Víamos — plataforma de intermediação de intérpretes de Libras
 
-> Projeto da disciplina **Engenharia de Software e Arquitetura de Sistemas** — FECAP, Ciência da Computação (CCOMP4 noturno).
-> Equipe: Lúcio Vecchio, Gustavo Pires e Felipe Mathey. Professor: Luis Fernando dos Santos Pires.
+Projeto da disciplina **Engenharia de Software e Arquitetura de Sistemas** da FECAP, Ciência da Computação (CCOMP4 noturno). Equipe: Lúcio Vecchio, Gustavo Pires e Felipe Mathey. Professor: Luis Fernando dos Santos Pires.
 
-> **Para qualquer IA ou integrante que for trabalhar aqui:** leia primeiro [`CLAUDE/AGENTS.md`](CLAUDE/AGENTS.md) (regras obrigatórias),
-> depois [`docs/PLANO_BLOCOS.md`](docs/PLANO_BLOCOS.md), [`docs/REGISTRO_TRABALHO.md`](docs/REGISTRO_TRABALHO.md) e o `contexto_atual_*.md` mais recente.
+O Víamos conecta pessoas surdas a intérpretes de Libras para atendimentos presenciais. O fluxo inclui solicitação com estimativa, distribuição por proximidade, aceite exclusivo, sala de atendimento, check-in por QR Code e geolocalização, pagamento simulado e comprovante verificável.
 
-O Víamos conecta pessoas surdas a intérpretes de Libras certificados para **atendimentos presenciais** (saúde, jurídico, educação, eventos),
-com distribuição por proximidade (até 15 km), aceite exclusivo, sala de atendimento, check-in por QR Code geolocalizado,
-pagamento e emissão do **Comprovante de Acessibilidade Garantida**.
+**Produção Técnica.** A entrega segue as cinco seções do roteiro do professor. O capítulo completo está disponível em DOCX e PDF, com os diagramas, as tabelas e as fontes organizados por seção. A equipe prototipou as telas no Stitch. O link do protótipo navegável no Figma, solicitado no roteiro, segue como pendência acadêmica. [Índice de entregas](Entregas/README.md) · [Produção Técnica](Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/README.md) · [Roteiro do professor](Contexto/DOCUMENTA%C3%87%C3%83O%20REPOSIT%C3%93RIO/DOC.txt)
 
-| Camada | Tecnologia | Pasta |
+**Aplicativo.** O repositório registra o ambiente publicado e as etapas que faltam para a entrega final. A implementação, os testes finais e a publicação da versão concluída seguem no plano de trabalho. [Plano e pendências](docs/PLANO_BLOCOS.md) · [Registro de trabalho](docs/REGISTRO_TRABALHO.md)
+
+| Camada | Tecnologia | Onde consultar |
 |---|---|---|
-| Frontend (SPA mobile-first) | React 19 + Vite + TypeScript + Tailwind CSS v4 (tokens do [design system](Contexto/Arquivos%20Stitch/DESIGN.md)) + React Router + Leaflet/OpenStreetMap | [`frontend/`](frontend) |
-| Backend (API REST, **arquitetura MVC**) | Node 22 + Express 5 + TypeScript + Zod + JWT | [`backend/`](backend) |
-| Banco de dados | PostgreSQL 16 + **Drizzle ORM** (migrações SQL versionadas + seed) | [`backend/src/models/schema.ts`](backend/src/models/schema.ts), [`backend/drizzle/`](backend/drizzle) |
-| Hospedagem prevista | Vercel (frontend) · Render (API) · Neon ou Render Postgres (banco) — todos com HTTPS | [`render.yaml`](render.yaml), [`frontend/vercel.json`](frontend/vercel.json) |
-| Documentação | Instruções para IAs, material do projeto, entregas e capítulo "Produção Técnica" | [`CLAUDE/`](CLAUDE), [`Contexto/`](Contexto), [Entregas](Entregas/README.md), [Documentação](docs/README.md) |
-
----
+| Interface web | React 19, Vite, TypeScript, Tailwind CSS e Leaflet | [Frontend](frontend/) · [Design system](Contexto/Arquivos%20Stitch/DESIGN.md) |
+| API REST em MVC | Node.js 22, Express 5, TypeScript, Zod e sessões JWT | [Backend](backend/) · [OpenAPI](docs/api/openapi.yaml) |
+| Banco | PostgreSQL e Drizzle ORM | [Esquema](backend/src/models/schema.ts) · [Migrações](backend/drizzle/) |
+| Hospedagem | Vercel, Render Web Service e Render PostgreSQL | [Guia de deploy](docs/DEPLOY.md) |
 
 ## 1. Pré-requisitos
 
-- **Node.js 22.12+ na série 22** e npm — <https://nodejs.org>
-- **PostgreSQL** — uma das opções:
-  - Docker Desktop (`docker compose up -d` sobe um Postgres local já configurado), **ou**
-  - um banco gratuito no [Neon](https://neon.tech) (copie a *connection string*), **ou**
-  - PostgreSQL instalado localmente (crie o banco `viamos` e o usuário `viamos`/`viamos`)
-- Git (ou GitHub Desktop)
+Use Git, Node.js **22.12+ na série 22**, npm e um PostgreSQL local. O Docker Compose incluído configura o PostgreSQL 16 para desenvolvimento. [Configuração do banco local](docker-compose.yml)
 
 ## 2. Clonar e instalar
 
 ```bash
 git clone https://github.com/lucio734/viamos.git
 cd viamos
-
-# Backend
-cd backend
-npm ci
-cp .env.example .env        # Windows (PowerShell): copy .env.example .env
-cd ..
-
-# Frontend
-cd frontend
-npm ci
-cp .env.example .env
-cd ..
+npm ci --prefix backend
+npm ci --prefix frontend
+cp backend/.env.example backend/.env
+cp frontend/.env.example frontend/.env
+docker compose up -d
 ```
 
-Abra `backend/.env` e confira a `DATABASE_URL`:
+As configurações de exemplo apontam para o PostgreSQL criado pelo Docker na porta 5432. Para usar outra instância local, ajuste `DATABASE_URL` em `backend/.env`. [Exemplo da API](backend/.env.example) · [Exemplo do frontend](frontend/.env.example)
 
-- Docker: já vem pronta (`postgresql://viamos:viamos@localhost:5432/viamos`) — rode `docker compose up -d` na raiz.
-- Neon: cole a URL fornecida (termina com `?sslmode=require`).
-
-## 3. Preparar o banco (migrações + dados de demonstração)
+## 3. Preparar o banco de demonstração
 
 ```bash
-cd backend
-npm run db:migrate   # aplica as migrações SQL em backend/drizzle/
-npm run db:seed      # limpa e recria o cenário de demonstração (nunca use em produção)
+npm --prefix backend run db:migrate
+npm --prefix backend run db:seed
 ```
 
-Contas criadas pelo seed (senha de todas: **`Viamos@2026`**):
+O seed limpa e recria os dados do banco configurado. Execute-o em uma base dedicada à demonstração. A senha das contas fictícias é `Viamos@2026`. [Roteiro da demonstração](docs/ROTEIRO_DEMONSTRACAO.md)
 
-| Perfil | E-mail | Situação |
-|---|---|---|
-| Cliente surdo | `joao@viamos.app` | tem solicitação em busca, atendimento pago com comprovante e um pagamento pendente |
-| Cliente surdo | `ana@viamos.app` | tem atendimento aceito (com QR de check-in) |
-| Intérprete **aprovada**, online | `maria@viamos.app` | base na Av. Paulista, raio 15 km |
-| Intérprete **aprovado**, online | `carlos@viamos.app` | base em Pinheiros, raio 10 km |
-| Intérprete **em análise** | `pedro@viamos.app` | aguardando parecer do backoffice |
-| Backoffice | `operador@viamos.app` | aprova/reprova certificações |
+| Perfil | E-mail |
+|---|---|
+| Cliente | `joao@viamos.app`, `ana@viamos.app` |
+| Intérprete aprovado | `maria@viamos.app`, `carlos@viamos.app` |
+| Intérprete em análise | `pedro@viamos.app` |
+| Backoffice | `operador@viamos.app` |
 
 ## 4. Executar em desenvolvimento
 
-Em dois terminais:
+Abra dois terminais na raiz do projeto. O Vite encaminha `/api` para a API local.
 
 ```bash
-# Terminal 1 — API em http://localhost:3333
-cd backend
-npm run dev
+# Terminal 1
+npm --prefix backend run dev
 
-# Terminal 2 — aplicação em http://localhost:5173
-cd frontend
-npm run dev
+# Terminal 2
+npm --prefix frontend run dev
 ```
 
-O Vite encaminha as chamadas `/api/*` para a API local, então não é preciso configurar CORS em desenvolvimento.
-Teste rápido da API: <http://localhost:3333/api/health>.
+[Aplicação local](http://localhost:5173) · [Sonda da API local](http://localhost:3333/api/health)
 
 ## 5. Testes automatizados
 
+Crie um banco de teste separado e configure `DATABASE_URL_TEST` em `backend/.env`. O preparo da suíte limpa a base indicada.
+
 ```bash
-cd backend
-npm test            # fluxo principal, exceções e unidades (exige DATABASE_URL_TEST)
-npm run typecheck   # verificação de tipos
+docker compose exec postgres createdb -U viamos viamos_test
+npm --prefix backend test
+npm --prefix frontend test
+npm --prefix backend run typecheck
+npm --prefix frontend run typecheck
+npm --prefix frontend run lint
+npm --prefix docs/diagramas run verificar
 ```
 
-Crie o banco de teste uma vez (Docker: `docker compose exec postgres createdb -U viamos viamos_test`, local: `createdb -U viamos viamos_test`). Defina `DATABASE_URL_TEST` para essa base isolada. A suíte aplica migrações e limpa essa base antes de executar os cenários.
+O último comando compara o material de documentação com os dados extraídos do código. [Relatório de testes](docs/TESTES.md) · [Workflow de CI](.github/workflows/ci.yml)
 
 ## 6. Build e deploy
 
 ```bash
-cd backend && npm run build && npm run deploy     # migra e sobe a API a partir de dist/
-cd frontend && npm run build                      # gera frontend/dist (estático)
+npm --prefix backend run build
+npm --prefix frontend run build
 ```
 
-- **Render** (API): *New → Blueprint* apontando para este repositório; o [`render.yaml`](render.yaml) cria o serviço e o banco. Ajuste `CORS_ORIGINS`, `API_PUBLIC_URL` e `FRONTEND_URL`.
-- **Vercel** (frontend): importe o repositório com *Root Directory* = `frontend`, defina `VITE_API_URL` com a URL da API. O [`vercel.json`](frontend/vercel.json) já contém o *rewrite* para rotas SPA (`/cliente/...` recarregadas não dão 404).
-- O passo a passo e as verificações pós-publicação estão no [guia de deploy](docs/DEPLOY.md).
-- **Diagramas da documentação:** gerados do código em [`docs/diagramas/`](docs/diagramas/README.md) (`npm run figuras` gera; `npm run verificar` confere, também no CI).
-- O [índice de entregas](Entregas/README.md) reúne o capítulo **Produção Técnica** em DOCX e PDF, as entregas anteriores e o modelo da disciplina. As [fontes e instruções para regerar](docs/producao-tecnica/README.md) ficam em `docs/producao-tecnica/`.
+O Render usa o Blueprint do repositório e aplica as migrações com `npm run deploy`. O projeto Vercel usa o diretório `frontend` e a variável `VITE_API_URL` com a origem da API. O guia registra a configuração, os domínios, as checagens de prontidão e o ensaio pendente. [Render Blueprint](render.yaml) · [Configuração da Vercel](frontend/vercel.json) · [Guia de deploy](docs/DEPLOY.md)
 
 ## 7. Estrutura do repositório
 
-```
-viamos/
-├── backend/
-│   ├── drizzle/              # migrações SQL versionadas (0000_esquema_inicial, 0001_auditoria_imutavel)
-│   ├── src/
-│   │   ├── models/           # MODEL: schema.ts (DER) + conexão
-│   │   ├── controllers/      # CONTROLLER: HTTP ⇄ services, esquemas Zod de validação
-│   │   ├── routes/           # mapa da API (middlewares de auth/papel + validação + controller)
-│   │   ├── services/         # regras de negócio (RF01–RF45)
-│   │   ├── views/            # VIEW: presenters JSON e PDF do comprovante
-│   │   ├── middlewares/      # autenticação JWT, validação, tratamento de erros
-│   │   ├── config/           # env.ts (variáveis) e regras.ts (parâmetros de negócio)
-│   │   ├── utils/            # geolocalização (Haversine), CPF/CNPJ, datas
-│   │   └── db/               # migrate.ts e seed.ts
-│   └── tests/                # Vitest + Supertest
-├── frontend/
-│   └── src/
-│       ├── rotas.tsx         # SITEMAP: todas as rotas por perfil (fonte da figura do sitemap)
-│       ├── api/              # cliente HTTP + tipos
-│       ├── auth/             # sessão (login/logout/splash)
-│       ├── components/       # design system (ui.tsx) e AppShell (navegação inferior/lateral)
-│       ├── pages/            # telas por perfil (auth/, cliente/, interprete/, backoffice/)
-│       └── utils/            # máscaras (CPF, CEP, telefone, cartão) e formatadores pt-BR
-├── CLAUDE/                   # CLAUDE.md e AGENTS.md — instruções obrigatórias para qualquer IA (leia antes de tudo)
-├── Contexto/                 # material original do grupo: briefing, PRD, design system, protótipos Stitch, auxílio ao vibecoding
-├── Entregas/                 # Produção Técnica em DOCX/PDF, entregas anteriores e modelo da disciplina
-├── docs/
-│   ├── PLANO_BLOCOS.md       # plano de trabalho até a entrega, dividido em blocos
-│   ├── DECISOES.md           # decisões de regra de negócio (D-01…) referenciadas no código
-│   ├── REGISTRO_TRABALHO.md  # estado real do trabalho: feito/verificado × pendente, contribuições, divergências
-│   ├── VERIFICACOES.md       # verificação dos prompts e processos contra labProt, Checklist 2026 e Dossiê
-│   ├── diagramas/            # gerador dos diagramas a partir do código (npm run figuras / npm run verificar)
-│   └── producao-tecnica/     # fontes, figuras, capturas de telas e scripts da Produção Técnica
-├── contexto_atual_chatgpt.md # passagem de bastão para Lúcio e ChatGPT
-├── contexto_atual_claude.md  # passagem de bastão para Gustavo e Claude
-├── docker-compose.yml        # PostgreSQL local
-└── render.yaml               # blueprint de deploy da API
-```
+| Pasta | Conteúdo |
+|---|---|
+| [`frontend/`](frontend/) | Interface, rotas, autenticação, componentes e cliente da API |
+| [`backend/`](backend/) | Serviços, controladores, banco, migrações e testes da API |
+| [`Entregas/`](Entregas/README.md) | Produção Técnica nas cinco seções do roteiro, documentos anteriores e modelo da disciplina |
+| [`Contexto/`](Contexto/) | Roteiro, requisitos de referência, protótipos Stitch e fontes usadas na produção da documentação |
+| [`docs/`](docs/README.md) | Como regerar a Produção Técnica, diagramas, documentação da API, manual e evidências de validação |
 
 ## 8. Fluxo de trabalho com Git
 
-- `main` recebe apenas código testado; o trabalho acontece em branches `feat/...`, `docs/...`, `fix/...` com *pull request*.
-- Mensagens de commit no formato `tipo(escopo): descrição` (ex.: `feat(frontend): tela de nova solicitação`).
-- Nunca versionar `.env`, `node_modules` ou builds (`.gitignore`).
+O projeto usa a branch `main`. Atualize seu clone com `git pull --ff-only origin main`, confira o diff e faça commits por assunto. Mantenha as instruções e as evidências de desenvolvimento no registro permanente. [Instruções do repositório](AGENTS.md) · [Registro de trabalho](docs/REGISTRO_TRABALHO.md)
 
-## 9. Licença e contexto acadêmico
+## 9. Contexto acadêmico
 
-Uso acadêmico. Integrações de pagamento e e-mail são **simuladas** no MVP (ver `backend/src/services/gateway.service.ts` e `email.service.ts`), conforme documentado no briefing do projeto.
+O MVP simula pagamento e e-mail. Os requisitos, a matriz de verificação e as decisões registram o escopo e as pendências para a avaliação. [Decisões](docs/DECISOES.md) · [Matriz de verificações](docs/VERIFICACOES.md)

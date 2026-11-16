@@ -1,6 +1,6 @@
 # Equipe de agentes — aplicação do "PROMPT AGENTES"
 
-Fonte obrigatória: `Contexto/Auxílio Vibecoding/PROMPT AGENTES.docx` (exigido por `CLAUDE/AGENTS.md`, §3).
+Fonte obrigatória: `Contexto/Auxílio Vibecoding/PROMPT AGENTES.docx` (exigido por `AGENTS.md`, §3).
 O prompt pede uma software house com especialistas de alto nível (mestrado/doutorado, anos de experiência):
 **PO, Scrum Master, Front-end, UX/UI, Back-end, Dados (DBA), CI/CD, DevOps/SRE, QA, Security, Business Analytics**
 e um **Decisor** para desempates. Abaixo, a equipe instanciada para o Víamos e como ela é usada no trabalho com IA.
