@@ -1,10 +1,10 @@
 # Víamos — Passagem de bastão para Gustavo e Claude
 
-> A API e o PostgreSQL do Bloco D estão ativos no Render. A Vercel serve por HTTPS o build com a origem da API e o painel financeiro corrigido. A base hospedada foi migrada e segue sem a carga de demonstração. [Guia de deploy e evidências](docs/DEPLOY.md#publicação-de-15112026)
+> Atualizado em 16/11/2026. A aplicação do commit `2710e91` foi verificada no Render e na Vercel. O PostgreSQL hospedado está migrado e segue sem os dados de demonstração. [Guia de deploy e evidências](docs/DEPLOY.md#publicação-de-15112026)
 
 ## Retomada de 15/11/2026
 
-O painel do intérprete já detalha valores recebidos e a receber por atendimento na semana de Brasília (RF26). A redistribuição revalida o estado sob bloqueio e deixa de criar oferta e aviso quando o cancelamento ou aceite chegou primeiro. A referência atual são 62 testes de backend e 6 de frontend aprovados. O próximo defeito de distribuição é a corrida entre a criação e a entrada do intérprete online (B-031). [Registro e pendências](docs/REGISTRO_TRABALHO.md#retomada-do-desenvolvimento-em-15112026)
+O painel do intérprete já detalha valores recebidos e a receber por atendimento na semana de Brasília (RF26). A redistribuição revalida o estado sob bloqueio e deixa de criar oferta e aviso quando o cancelamento ou aceite chegou primeiro. [Registro da retomada](docs/REGISTRO_TRABALHO.md#retomada-do-desenvolvimento-em-15112026)
 
 As correções do aplicativo e esta passagem de bastão estão na `main` do repositório `lucio734/viamos`. Para atualizar seu clone:
 
@@ -18,14 +18,14 @@ git pull --ff-only origin main
 - **Aplicação** 33 rotas de tela, 65 operações de API e 27 tabelas conferidas. A contagem de 23 rotas no relatório histórico foi corrigida na auditoria atual.
 - **Jornada presencial** Acompanhamento da solicitação a cada 5 s, validação da agenda dentro da transação de aceite, cancelamento e check-in com bloqueios na mesma ordem e posição compartilhada por canal temporário na sala. O leitor de QR exige captura de posição. A simulação está disponível no servidor local de desenvolvimento para ensaio.
 - **Ambiente e deploy** Configure `DATABASE_URL_TEST` para uma base exclusiva e descartável antes de rodar a suíte. Use Node.js 22.12+ na série 22 e `npm ci` em `backend` e `frontend`. O Render instala as dependências de build explicitamente e a Vercel usa a origem da API em `VITE_API_URL`. Veja o [README](README.md) e o [guia de deploy](docs/DEPLOY.md).
-- **Evidência local** 53 testes de backend com PostgreSQL 18.6, 6 casos de frontend e builds concluídos. O teste no Chrome cobriu cotação, solicitação, aceite observado sem recarga, QR manual com GPS emulado, localização na sala, encerramento, Pix simulado e resposta PDF. Consulte o [relatório de testes](docs/TESTES.md).
+- **Evidência local** A última execução aprovou 62 testes de backend com PostgreSQL 18.6 descartável, 6 testes de frontend, ambos os builds e a verificação dos 34 diagramas. O ensaio anterior no Chrome cobriu cotação, solicitação, aceite sem recarga, QR manual com GPS emulado, localização na sala, encerramento, Pix simulado e resposta PDF. [Relatório de testes](docs/TESTES.md)
 
 ### Continuidade
 
 1. Leia [AGENTS.md](AGENTS.md) e o [registro da retomada](docs/REGISTRO_TRABALHO.md#retomada-em-15112026). A [matriz de verificações](docs/VERIFICACOES.md) e o [log de bugs](docs/BUGS.md) registram evidências e limites.
 2. Reproduza a corrida **B-031** entre criação da solicitação e mudança de elegibilidade. A distribuição, a lista, o detalhe e o aceite já compartilham a regra D-20. A janela pelo horário de início e a interpretação de grade vazia seguem para validação do grupo (P-05).
 3. Resolva com o grupo a divergência entre D-10 e a entrega de modelagem sobre o momento da emissão do PDF (P-06). D-01 e D-05 também seguem para validação do grupo.
-4. Para a entrega acadêmica, faltam a consolidação da Produção Técnica, o link do Figma e o ensaio em dispositivo físico. No ensaio em hospedagem, verifique o login e a emissão do PDF com contas de teste. Siga o [roteiro atualizado](docs/ROTEIRO_DEMONSTRACAO.md).
+4. Para a entrega acadêmica, faltam consolidar a Produção Técnica, inserir o link do Figma e realizar o ensaio em dispositivo físico. As fontes Mermaid já refletem o código, e os PNGs `26-telas-interprete` e `27-ferramenta-case` aguardam nova renderização. No ensaio hospedado, verifique o login e o PDF com contas de teste. [Registro de trabalho](docs/REGISTRO_TRABALHO.md#retomada-do-desenvolvimento-em-15112026) · [Roteiro](docs/ROTEIRO_DEMONSTRACAO.md)
 
 ## Relatório histórico de 12/11/2026
 

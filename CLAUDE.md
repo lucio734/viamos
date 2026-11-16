@@ -11,3 +11,6 @@ e "Dossie_Checklist_Vibe_Coding".
 
 Preserve os arquivos existentes e documente o trabalho para continuidade
 por outros integrantes e outras IAs.
+
+Ao retomar o desenvolvimento, consulte a [passagem de bastão para Gustavo e Claude](contexto_atual_claude.md)
+e o [registro de trabalho](docs/REGISTRO_TRABALHO.md) para identificar o último estado validado e as pendências.
