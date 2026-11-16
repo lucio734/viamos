@@ -9,6 +9,8 @@ Foi removida a cópia duplicada de `DESIGN.md` em `Contexto/ARQUIVOS .MD/`. As d
 
 A Produção Técnica usa as imagens originais do Stitch no gerador e aponta para o roteiro da disciplina em `DOC.txt`. O briefing, o PRD e as fontes de auxílio ao vibecoding continuam disponíveis para conferir requisitos e decisões. A revisão dos arquivos de passagem de bastão fica para o encerramento do aplicativo e a validação das pendências registradas no projeto.
 
+A pasta da Produção Técnica passou a seguir a ordem das cinco seções do `DOC.txt`. Os índices de cada seção ligam os subtópicos aos diagramas, tabelas e fontes, e o capítulo integral fica no DOCX e no PDF. A exportação inicial da auditoria do Dossiê foi removida após conferir que repetia os 50 critérios do checklist original, todos com status pendente. A matriz de verificações reúne os resultados atuais. [Índice da entrega](../Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/README.md) · [Matriz de verificações](VERIFICACOES.md)
+
 ## Organização das entregas em 16/11/2026
 
 Os índices em `Entregas/` e `docs/` apontam para o capítulo atual, o modelo e as entregas anteriores. O DOCX e o PDF de 15/11 foram movidos para `Entregas/Produção Técnica/`. As fontes e o gerador ficam em `docs/producao-tecnica/`. A organização foi conferida contra as cinco seções do `DOC.txt`, o modelo da disciplina e os itens #1 a #28 do Dossiê. Os links locais, a abertura dos pacotes e a verificação dos 34 diagramas foram conferidos.

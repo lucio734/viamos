@@ -52,7 +52,7 @@ Fontes de verdade (todas no repositório, pasta `Contexto/` e `Entregas/`, **que
 - `Contexto/Arquivos Stitch/` — 12 telas prototipadas (HTML + PNG) e `DESIGN.md` (design system).
 - `Contexto/DOCUMENTAÇÃO REPOSITÓRIO/DOC.txt` — os 28 itens do capítulo "Produção Técnica".
 - `Contexto/Auxílio Vibecoding/` — `Dossie_Checklist_Vibe_Coding.html` (50 critérios do professor),
-  `PROMPT AGENTES.docx`, `labProt.html`, `Software Development Checklist 2026…html`, `auditoria_vibe_coding_2026-11-11.txt`.
+  `PROMPT AGENTES.docx`, `labProt.html`, `Software Development Checklist 2026…html`. Os resultados da avaliação estão na [matriz de verificações](docs/VERIFICACOES.md).
 - `CLAUDE/AGENTS.md` e `CLAUDE/CLAUDE.md` — **regras obrigatórias para qualquer IA** (leia antes de começar).
 - `Entregas/` — entregas de 02/09 (requisitos), 07/10 (casos de uso e classes) e 11/11 (contexto, BPMN, DFD, estados) + `modelo_entrega.docx`.
 
