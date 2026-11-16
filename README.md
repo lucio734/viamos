@@ -1,10 +1,21 @@
-# Víamos — plataforma de intermediação de intérpretes de Libras
+<p align="center">
+  <img src="docs/producao-tecnica/figuras/viamos-marca.png" alt="Símbolo do Víamos" width="88" />
+</p>
+
+<h1 align="center">Víamos</h1>
+
+<p align="center">Plataforma de intermediação de intérpretes de Libras</p>
 
 Projeto da disciplina **Engenharia de Software e Arquitetura de Sistemas** da FECAP, Ciência da Computação (CCOMP4 noturno), com o professor Luis Fernando dos Santos Pires.
 
 **Integrantes do grupo:** Lúcio Vecchio, Gustavo Pires e Felipe Mathey.
 
 O Víamos conecta pessoas surdas a intérpretes de Libras para atendimentos presenciais. O fluxo inclui solicitação com estimativa, distribuição por proximidade, aceite exclusivo, sala de atendimento, check-in por QR Code e geolocalização, pagamento simulado e comprovante verificável.
+
+<p align="center">
+  <img src="docs/producao-tecnica/telas/09-hub-cliente.png" alt="Painel do cliente com o botão Solicitar intérprete agora" width="210" />
+  <img src="docs/producao-tecnica/telas/18-hub-interprete.png" alt="Painel do intérprete com disponibilidade e mapa de solicitações" width="210" />
+</p>
 
 **Produção Técnica.** A entrega segue as cinco seções do roteiro do professor. O capítulo em DOCX e PDF inclui as capturas e a explicação das duas jornadas no Figma. [Produção Técnica](Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/README.md) · [Protótipo no Figma](https://www.figma.com/proto/zBuQC5GjLzW9ReazQqo5aH/V%C3%ADamos-%E2%80%94-Prot%C3%B3tipo-naveg%C3%A1vel?node-id=1-1640&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A1640&show-proto-sidebar=1) · [Roteiro do professor](Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/DOC.txt)
 
