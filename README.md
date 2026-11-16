@@ -19,7 +19,7 @@ O Víamos conecta pessoas surdas a intérpretes de Libras para atendimentos pres
 
 **Produção Técnica.** A entrega segue as cinco seções do roteiro do professor. O capítulo em DOCX e PDF inclui as capturas e a explicação das duas jornadas no Figma. [Produção Técnica](Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/README.md) · [Protótipo no Figma](https://www.figma.com/proto/zBuQC5GjLzW9ReazQqo5aH/V%C3%ADamos-%E2%80%94-Prot%C3%B3tipo-naveg%C3%A1vel?node-id=1-1640&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A1640&show-proto-sidebar=1) · [Roteiro do professor](Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/DOC.txt)
 
-**Aplicativo.** O repositório registra o ambiente publicado e as etapas que faltam para a entrega final. A implementação, os testes finais e a publicação da versão concluída seguem no plano de trabalho. [Plano e pendências](docs/PLANO_BLOCOS.md) · [Registro de trabalho](docs/REGISTRO_TRABALHO.md)
+**Aplicativo.** O Víamos está publicado na Vercel, com API e banco no Render. [Abrir o Víamos](https://viamos-eight.vercel.app) · [Guia de deploy](docs/DEPLOY.md) · [Registro de trabalho](docs/REGISTRO_TRABALHO.md)
 
 | Camada | Tecnologia | Onde consultar |
 |---|---|---|

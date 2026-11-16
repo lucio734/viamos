@@ -3,6 +3,12 @@
 Documento de continuidade: o que foi **concluído e verificado**, o que está **pendente ou não testado**, quem fez
 (papel/agente), arquivos relevantes, decisões, riscos e próximos passos. Atualizar ao fim de cada bloco.
 
+## Fechamento da entrega em 16/11/2026
+
+O README recebeu o símbolo do Víamos, o título centralizado e as capturas dos painéis de cliente e intérprete. A Produção Técnica foi publicada com o Figma navegável, os diagramas e as regras vigentes. O CI confirmou 63 testes de backend, seis de frontend e os builds. A API do Render e o frontend da Vercel foram conferidos, incluindo os logins e painéis dos dois perfis fictícios. Lúcio confirmou que entrou no iPhone e dispensou, para esta entrega, a validação física de câmera e GPS e a continuação do ensaio no ambiente hospedado.
+
+A pasta de passagem de bastão foi retirada após preservar neste registro os resultados e as decisões, no roteiro os passos da demonstração e no guia os dados de publicação. [Guia de deploy](DEPLOY.md) · [Produção Técnica](../Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/README.md)
+
 ## Regras do MVP confirmadas em 16/11/2026
 
 Lúcio confirmou os preços de referência, a janela de check-in de 30 minutos, a disponibilidade por horário de início e o comprovante após o pagamento simulado. A seção 4.3 e a seção 5.6 descrevem a regra atual e a diferença para a modelagem de 11/11. A agenda do intérprete informa a regra e o fuso de Brasília. O aviso de contas do seed passou a aparecer no login apenas no servidor de desenvolvimento. [Decisões](DECISOES.md)

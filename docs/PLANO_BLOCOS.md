@@ -1,6 +1,6 @@
 # Plano de trabalho em blocos — entrega final em 21/11/2026
 
-Cada bloco fecha com uma alteração verificada na `main` e evidências no registro de trabalho. A equipe usa `CLAUDE/` para os relatórios temporários durante a implementação.
+Cada bloco fecha com uma alteração verificada na `main` e evidências no registro de trabalho.
 
 Regras obrigatórias de `AGENTS.md` que valem para todos os blocos:
 - **Preservar** `docs/producao-tecnica/fontes/` e `Entregas/`: não mover, renomear, excluir nem reorganizar; material novo vai em `docs/`.
@@ -19,8 +19,8 @@ período mexem em pastas diferentes, para evitar conflito de merge.
 
 - A Produção Técnica está em cinco pastas na ordem do roteiro. O DOCX e o PDF incluem o link navegável no Figma, a explicação das duas jornadas e quatro capturas da apresentação (P-01).
 - A correção B-031 passou na regressão e na suíte completa. O upload de foto já está disponível no perfil do intérprete (RF04). Lúcio confirmou as regras P-02, P-05 e P-06 em 16/11.
-- O Render confirmou o commit `4848335` ativo, com sonda HTTP 200 e CORS de login HTTP 204. O ensaio do grupo em produção, com câmera e GPS físicos, segue pendente.
-- Depois da implementação, validar os fluxos e a demonstração, publicar e verificar a versão final e registrar as evidências. Atualizar as capturas, os diagramas e o capítulo quando as alterações do código afetarem os artefatos. Em seguida, executar a limpeza final. Use o `DOC.txt` como referência para a estrutura da entrega. Retire os arquivos auxiliares fora do roteiro após verificar que perderam a utilidade e preserve as dependências da aplicação e da geração do capítulo. A pasta `CLAUDE/` sai por último. Se a validação apontar alguma tela incompleta, registre a rota e preserve seu protótipo até concluir a correção.
+- O Render confirmou o commit `4848335` ativo. A sonda, o CORS e os dois logins fictícios em produção passaram. Lúcio dispensou a leitura física de QR, o GPS e o restante do ensaio em produção para o fechamento da entrega.
+- O fechamento preservou as cinco seções do `DOC.txt`, as fontes usadas pelo gerador e as evidências no registro de trabalho. A pasta temporária de passagem de bastão foi retirada.
 
 [Entregas](../Entregas/README.md) · [Bugs](BUGS.md) · [Decisões](DECISOES.md) · [Testes](TESTES.md) · [Deploy](DEPLOY.md)
 

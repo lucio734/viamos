@@ -81,7 +81,7 @@ Estado por item, com a evidência atual. Itens 1–28 são o documento "Produç�
 | 45–47 | Deploy, HTTPS, rotas SPA | ✅ `4848335` ativo no Render. Sonda HTTP 200 com PostgreSQL conectado, CORS de login HTTP 204 para a Vercel e acesso direto à rota SPA HTTP 200 | `docs/DEPLOY.md`, `docs/TESTES.md` |
 | 48 | Testes de fluxo principal e exceções | ✅ 63 casos de backend e 6 de frontend. A nova regressão verifica a criação simultânea à entrada do intérprete online (B-031) | `docs/TESTES.md` |
 | 49 | Auditoria de código (domínio da equipe) | ⬜ cada integrante revisa e explica sua parte (Bloco Z) | — |
-| 50 | Ensaio de demonstração | 🟡 roteiro atualizado. Ensaio integral com o grupo no ambiente de avaliação continua pendente | `docs/ROTEIRO_DEMONSTRACAO.md` |
+| 50 | Ensaio de demonstração | 🟡 roteiro atualizado e logins em produção verificados. Ensaio físico e fluxo integral hospedado dispensados para esta entrega | `docs/ROTEIRO_DEMONSTRACAO.md`, `docs/DEPLOY.md` |
 
 ## 4. Divergências encontradas entre materiais (AGENTS.md §4)
 
