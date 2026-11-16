@@ -36,28 +36,28 @@ PAGINAS = [
     ('Viamos_Modelagem_Sistemas.pdf', 15, 'dfd-p5-historico-comprovante-e-avaliacao'),
     ('Viamos_Modelagem_Sistemas.pdf', 16, 'dfd-p6-privacidade-auditoria-e-notificacoes'),
     ('Viamos_Modelagem_Sistemas.pdf', 17, 'estados-solicitacao-e-atendimento'),
-    ('30_09/Viamos_Entrega_Arquitetura_UML.pdf', 1, 'uc-0-jornada-principal'),
-    ('30_09/Viamos_Entrega_Arquitetura_UML.pdf', 3, 'uc-1-cadastro-e-habilitacao'),
-    ('30_09/Viamos_Entrega_Arquitetura_UML.pdf', 4, 'uc-2-acesso-a-plataforma'),
-    ('30_09/Viamos_Entrega_Arquitetura_UML.pdf', 5, 'uc-3-solicitacao-de-interprete'),
-    ('30_09/Viamos_Entrega_Arquitetura_UML.pdf', 6, 'uc-4-demandas-e-disponibilidade'),
-    ('30_09/Viamos_Entrega_Arquitetura_UML.pdf', 7, 'uc-5-comunicacao-e-suporte'),
-    ('30_09/Viamos_Entrega_Arquitetura_UML.pdf', 8, 'uc-6-checkin-e-encerramento'),
-    ('30_09/Viamos_Entrega_Arquitetura_UML.pdf', 9, 'uc-7-pagamento-e-ganhos'),
-    ('30_09/Viamos_Entrega_Arquitetura_UML.pdf', 10, 'uc-8-historico-e-pos-atendimento'),
-    ('30_09/Viamos_Entrega_Arquitetura_UML.pdf', 11, 'uc-9-perfil-privacidade-e-notificacoes'),
-    ('30_09/Viamos_Entrega_Arquitetura_UML.pdf', 2, 'classes-0-estrutura-principal'),
-    ('30_09/Viamos_Entrega_Arquitetura_UML.pdf', 12, 'classes-01-quem-usa-o-viamos'),
-    ('30_09/Viamos_Entrega_Arquitetura_UML.pdf', 13, 'classes-02-habilitacao-e-disponibilidade'),
-    ('30_09/Viamos_Entrega_Arquitetura_UML.pdf', 14, 'classes-03-pedido-e-estimativa'),
-    ('30_09/Viamos_Entrega_Arquitetura_UML.pdf', 15, 'classes-04-distribuicao-aceite-e-vinculo'),
-    ('30_09/Viamos_Entrega_Arquitetura_UML.pdf', 16, 'classes-05-comunicacao'),
-    ('30_09/Viamos_Entrega_Arquitetura_UML.pdf', 17, 'classes-06-checkin-e-suporte'),
-    ('30_09/Viamos_Entrega_Arquitetura_UML.pdf', 18, 'classes-07-cobranca'),
-    ('30_09/Viamos_Entrega_Arquitetura_UML.pdf', 19, 'classes-08-ganhos-saldo-e-repasses'),
-    ('30_09/Viamos_Entrega_Arquitetura_UML.pdf', 20, 'classes-09-comprovante-e-avaliacao'),
-    ('30_09/Viamos_Entrega_Arquitetura_UML.pdf', 21, 'classes-10-privacidade-e-notificacoes'),
-    ('30_09/Viamos_Entrega_Arquitetura_UML.pdf', 22, 'classes-11-acesso-recuperacao-e-auditoria'),
+    ('Arquitetura e UML/Viamos_Entrega_Arquitetura_UML.pdf', 1, 'uc-0-jornada-principal'),
+    ('Arquitetura e UML/Viamos_Entrega_Arquitetura_UML.pdf', 3, 'uc-1-cadastro-e-habilitacao'),
+    ('Arquitetura e UML/Viamos_Entrega_Arquitetura_UML.pdf', 4, 'uc-2-acesso-a-plataforma'),
+    ('Arquitetura e UML/Viamos_Entrega_Arquitetura_UML.pdf', 5, 'uc-3-solicitacao-de-interprete'),
+    ('Arquitetura e UML/Viamos_Entrega_Arquitetura_UML.pdf', 6, 'uc-4-demandas-e-disponibilidade'),
+    ('Arquitetura e UML/Viamos_Entrega_Arquitetura_UML.pdf', 7, 'uc-5-comunicacao-e-suporte'),
+    ('Arquitetura e UML/Viamos_Entrega_Arquitetura_UML.pdf', 8, 'uc-6-checkin-e-encerramento'),
+    ('Arquitetura e UML/Viamos_Entrega_Arquitetura_UML.pdf', 9, 'uc-7-pagamento-e-ganhos'),
+    ('Arquitetura e UML/Viamos_Entrega_Arquitetura_UML.pdf', 10, 'uc-8-historico-e-pos-atendimento'),
+    ('Arquitetura e UML/Viamos_Entrega_Arquitetura_UML.pdf', 11, 'uc-9-perfil-privacidade-e-notificacoes'),
+    ('Arquitetura e UML/Viamos_Entrega_Arquitetura_UML.pdf', 2, 'classes-0-estrutura-principal'),
+    ('Arquitetura e UML/Viamos_Entrega_Arquitetura_UML.pdf', 12, 'classes-01-quem-usa-o-viamos'),
+    ('Arquitetura e UML/Viamos_Entrega_Arquitetura_UML.pdf', 13, 'classes-02-habilitacao-e-disponibilidade'),
+    ('Arquitetura e UML/Viamos_Entrega_Arquitetura_UML.pdf', 14, 'classes-03-pedido-e-estimativa'),
+    ('Arquitetura e UML/Viamos_Entrega_Arquitetura_UML.pdf', 15, 'classes-04-distribuicao-aceite-e-vinculo'),
+    ('Arquitetura e UML/Viamos_Entrega_Arquitetura_UML.pdf', 16, 'classes-05-comunicacao'),
+    ('Arquitetura e UML/Viamos_Entrega_Arquitetura_UML.pdf', 17, 'classes-06-checkin-e-suporte'),
+    ('Arquitetura e UML/Viamos_Entrega_Arquitetura_UML.pdf', 18, 'classes-07-cobranca'),
+    ('Arquitetura e UML/Viamos_Entrega_Arquitetura_UML.pdf', 19, 'classes-08-ganhos-saldo-e-repasses'),
+    ('Arquitetura e UML/Viamos_Entrega_Arquitetura_UML.pdf', 20, 'classes-09-comprovante-e-avaliacao'),
+    ('Arquitetura e UML/Viamos_Entrega_Arquitetura_UML.pdf', 21, 'classes-10-privacidade-e-notificacoes'),
+    ('Arquitetura e UML/Viamos_Entrega_Arquitetura_UML.pdf', 22, 'classes-11-acesso-recuperacao-e-auditoria'),
 ]
 
 
@@ -97,7 +97,7 @@ def main() -> None:
         imagem = pagina.get_pixmap(matrix=pymupdf.Matrix(ESCALA, ESCALA), clip=recorte, alpha=False)
         destino = SAIDA / f'{nome}.png'
         imagem.save(destino)
-        if pdf.startswith('30_09/'):
+        if pdf.startswith('Arquitetura e UML/'):
             # os slides da entrega de 30/09 têm fundo escuro: em tons de cinza invertidos, ficam legíveis impressos
             ImageOps.autocontrast(ImageOps.invert(Image.open(destino).convert('L'))).save(destino, optimize=True)
         print(f'{nome}.png  {imagem.width}x{imagem.height}  ({pdf} p.{numero})')

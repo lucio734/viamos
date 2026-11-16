@@ -6,11 +6,11 @@ Leia a seção 5 no capítulo completo. [DOCX](../Viamos_Producao_Tecnica.docx) 
 
 ## Diagrama de Caso de Uso
 
-A seção 5.1 reúne os diagramas e a tabela de caso de uso de cada tela. [Jornada principal](../../../docs/producao-tecnica/figuras-entregas/uc-0-jornada-principal.png) · [Entrega de Arquitetura e UML](../../30_09/Viamos_Entrega_Arquitetura_UML.pdf)
+A seção 5.1 reúne os diagramas e a tabela de caso de uso de cada tela. [Jornada principal](../../../docs/producao-tecnica/figuras-entregas/uc-0-jornada-principal.png) · [Entrega de Arquitetura e UML](../../Arquitetura%20e%20UML/Viamos_Entrega_Arquitetura_UML.pdf)
 
 ## Diagrama de Classe
 
-A seção 5.2 explica as classes e suas relações e registra diferenças entre a modelagem e a implementação. [Estrutura principal](../../../docs/producao-tecnica/figuras-entregas/classes-0-estrutura-principal.png) · [Entrega de Arquitetura e UML](../../30_09/Viamos_Entrega_Arquitetura_UML.pdf)
+A seção 5.2 explica as classes e suas relações e registra diferenças entre a modelagem e a implementação. [Estrutura principal](../../../docs/producao-tecnica/figuras-entregas/classes-0-estrutura-principal.png) · [Entrega de Arquitetura e UML](../../Arquitetura%20e%20UML/Viamos_Entrega_Arquitetura_UML.pdf)
 
 ## Diagrama de Entidade-Relacionamento
 

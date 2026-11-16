@@ -611,7 +611,7 @@ def diagramas(d, ctx):
 
     # 5.8 CASE ---------------------------------------------------------------------------------------
     d.subsecao('5.8 Ferramenta CASE.')
-    d.paragrafo('O projeto usou ferramentas computacionais de modelagem em duas frentes: o diagrams.net para os modelos UML da entrega de 30/09 (arquivo editável em `Entregas/30_09/Viamos_Diagramas_Editaveis.drawio`) e uma cadeia de geração de modelos a partir do código, criada para este documento.')
+    d.paragrafo('O projeto usou ferramentas computacionais de modelagem em duas frentes: o diagrams.net para os modelos UML da entrega de 30/09 (arquivo editável em `Entregas/Arquitetura e UML/Viamos_Diagramas_Editaveis.drawio`) e uma cadeia de geração de modelos a partir do código, criada para este documento.')
     d.figura(FIG / '27-ferramenta-case.png', 'Cadeia CASE de geração dos modelos a partir do código', FONTE_CODIGO)
     d.itens([
         'O exportador de modelo usa a introspecção do Drizzle ORM sobre o esquema do banco; o extrator usa a árvore sintática do compilador TypeScript para ler rotas, telas, navegação e endpoints.',
@@ -619,7 +619,7 @@ def diagramas(d, ctx):
         'O comando de verificação, executado no CI, falha se alguma figura ou tabela versionada estiver diferente do que o código atual gera — é o que mantém o DER alinhado ao banco.',
     ])
     d.tabela('Ferramentas CASE e artefatos produzidos', ['Ferramenta', 'Uso', 'Artefato'], [
-        ['diagrams.net (draw.io)', 'Modelagem UML de casos de uso e classes', '`Entregas/30_09/Viamos_Diagramas_Editaveis.drawio`'],
+        ['diagrams.net (draw.io)', 'Modelagem UML de casos de uso e classes', '`Entregas/Arquitetura e UML/Viamos_Diagramas_Editaveis.drawio`'],
         ['Google Stitch', 'Protótipo de alta fidelidade', '`docs/producao-tecnica/fontes/stitch/`'],
         ['Drizzle ORM e Drizzle Kit', 'Modelo físico e migrações SQL', '`backend/src/models/schema.ts`, `backend/drizzle/`'],
         ['Compilador TypeScript', 'Extração de rotas, navegação e endpoints', '`docs/diagramas/lib/extrair.mjs`'],

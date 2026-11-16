@@ -704,7 +704,7 @@ export function diagramaCase(totais) {
         'Os diagramas deste capítulo não são desenhados à mão: uma cadeia de ferramentas lê o código-fonte, extrai o modelo e gera as figuras. ' +
         'O exportador usa a introspecção do Drizzle ORM sobre o `schema.ts`; o extrator usa a árvore sintática do compilador TypeScript; o Mermaid CLI renderiza as fontes `.mmd`. ' +
         '`npm run verificar` falha se alguma fonte versionada estiver diferente do que o código atual gera — é o que mantém o DER alinhado ao banco (item #38). ' +
-        'Os diagramas de casos de uso e de classes das entregas anteriores foram modelados no diagrams.net (`Entregas/30_09/Viamos_Diagramas_Editaveis.drawio`).',
+        'Os diagramas de casos de uso e de classes das entregas anteriores foram modelados no diagrams.net (`Entregas/Arquitetura e UML/Viamos_Diagramas_Editaveis.drawio`).',
       mermaid: l.join('\n'),
     },
   ];
