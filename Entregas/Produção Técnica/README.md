@@ -17,4 +17,4 @@ A edição de 16/11 tem 117 páginas. A seção 1.3 inclui o link navegável do 
 
 O capítulo usa o [modelo da disciplina](../modelo_entrega.docx). Consulte o [roteiro original](DOC.txt), as [fontes e instruções de geração](../../docs/producao-tecnica/README.md) e a [matriz de verificação](../../docs/VERIFICACOES.md#3-dossiê--checklist-de-50-critérios-auditoria-da-reta-final).
 
-A divergência da modelagem sobre o momento de emissão do comprovante está descrita nas [decisões de produto](../../docs/DECISOES.md#pendências-que-dependem-do-grupo).
+As seções 4.3 e 5.6 registram a regra confirmada para a emissão do comprovante após o pagamento simulado. [Decisões de produto](../../docs/DECISOES.md#pendências-que-dependem-do-grupo) · [Exportação verificada](https://github.com/lucio734/viamos/actions/runs/43971829849)
