@@ -3,6 +3,12 @@
 Documento de continuidade: o que foi **concluído e verificado**, o que está **pendente ou não testado**, quem fez
 (papel/agente), arquivos relevantes, decisões, riscos e próximos passos. Atualizar ao fim de cada bloco.
 
+## Revisão dos arquivos de contexto
+
+Foi removida a cópia duplicada de `DESIGN.md` em `Contexto/ARQUIVOS .MD/`. As duas cópias tinham o mesmo conteúdo no Git. O README aponta para o arquivo junto aos protótipos Stitch.
+
+A Produção Técnica usa as imagens originais do Stitch no gerador e aponta para o roteiro da disciplina em `DOC.txt`. O briefing, o PRD e as fontes de auxílio ao vibecoding continuam disponíveis para conferir requisitos e decisões. A revisão dos arquivos de passagem de bastão fica para o encerramento do aplicativo e a validação das pendências registradas no projeto.
+
 ## Organização das entregas em 16/11/2026
 
 Os índices em `Entregas/` e `docs/` apontam para o capítulo atual, o modelo e as entregas anteriores. O DOCX e o PDF de 15/11 foram movidos para `Entregas/Produção Técnica/`. As fontes e o gerador ficam em `docs/producao-tecnica/`. A organização foi conferida contra as cinco seções do `DOC.txt`, o modelo da disciplina e os itens #1 a #28 do Dossiê. Os links locais, a abertura dos pacotes e a verificação dos 34 diagramas foram conferidos.

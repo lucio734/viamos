@@ -12,7 +12,7 @@ pagamento e emissão do **Comprovante de Acessibilidade Garantida**.
 
 | Camada | Tecnologia | Pasta |
 |---|---|---|
-| Frontend (SPA mobile-first) | React 19 + Vite + TypeScript + Tailwind CSS v4 (tokens do `DESIGN.md`) + React Router + Leaflet/OpenStreetMap | [`frontend/`](frontend) |
+| Frontend (SPA mobile-first) | React 19 + Vite + TypeScript + Tailwind CSS v4 (tokens do [design system](Contexto/Arquivos%20Stitch/DESIGN.md)) + React Router + Leaflet/OpenStreetMap | [`frontend/`](frontend) |
 | Backend (API REST, **arquitetura MVC**) | Node 22 + Express 5 + TypeScript + Zod + JWT | [`backend/`](backend) |
 | Banco de dados | PostgreSQL 16 + **Drizzle ORM** (migrações SQL versionadas + seed) | [`backend/src/models/schema.ts`](backend/src/models/schema.ts), [`backend/drizzle/`](backend/drizzle) |
 | Hospedagem prevista | Vercel (frontend) · Render (API) · Neon ou Render Postgres (banco) — todos com HTTPS | [`render.yaml`](render.yaml), [`frontend/vercel.json`](frontend/vercel.json) |
