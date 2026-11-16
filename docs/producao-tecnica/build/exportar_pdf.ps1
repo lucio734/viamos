@@ -6,7 +6,8 @@
 $ErrorActionPreference = 'Stop'
 # [string]: a saída do Join-Path vem embrulhada num PSObject, que o Word recebe como referência COM em vez de texto;
 # com isso a exportação fica parada por muitos minutos. Texto puro exporta em segundos.
-$pasta = [string](Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+$raiz = (Resolve-Path (Join-Path $PSScriptRoot '../../..')).Path
+$pasta = [string](Join-Path (Join-Path $raiz 'Entregas') 'Produção Técnica')
 $docx = [string](Join-Path $pasta 'Viamos_Producao_Tecnica.docx')
 $pdf = [string](Join-Path $pasta 'Viamos_Producao_Tecnica.pdf')
 if (-not (Test-Path $docx)) { throw "Documento não encontrado: $docx (rode antes gerar_docx.py)" }

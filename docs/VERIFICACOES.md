@@ -51,7 +51,7 @@ Estado por item, com a evidência atual. Itens 1–28 são o documento "Produç�
 
 | # | Critério | Situação | Evidência |
 |---|---|---|---|
-| 1–2 | Texto introdutório e modelagem do produto | ✅ introdução do capítulo e seção 1 do documento | `docs/producao-tecnica/Viamos_Producao_Tecnica.docx` |
+| 1–2 | Texto introdutório e modelagem do produto | ✅ introdução do capítulo e seção 1 do documento | [Produção Técnica em Entregas](../Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/README.md) |
 | 3 | Sitemap | ✅ figura completa e uma por área (pública, cliente, intérprete, backoffice), tabela de rotas e explicação, geradas de `rotas.tsx` | `docs/producao-tecnica/` (1.1), `docs/diagramas/` |
 | 4 | Wireframes tela a tela com tabela | ✅ 30 telas capturadas do aplicativo + tabela de componentes por tela | `docs/producao-tecnica/` (1.2), `docs/producao-tecnica/telas/` |
 | 5 | Prototipação (link Figma) | 🟡 protótipos Stitch no documento; o link do Figma segue pendente (preencher `FIGMA_URL` em `build/gerar_docx.py` e regerar) | Pendência P-01, `docs/producao-tecnica/README.md` |

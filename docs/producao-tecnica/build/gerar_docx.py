@@ -10,7 +10,7 @@ Fontes de conteúdo (todas no repositório):
   - dados extraídos do código ............ docs/diagramas/dados/{modelo,extracao}.json
 
 Uso (na raiz do repositório):  python docs/producao-tecnica/build/gerar_docx.py
-Saída: docs/producao-tecnica/Viamos_Producao_Tecnica.docx
+Saída: Entregas/Produção Técnica/Viamos_Producao_Tecnica.docx
 """
 import json
 import os
@@ -25,6 +25,7 @@ from telas import telas  # noqa: E402
 
 RAIZ = Path(__file__).resolve().parents[3]
 PT = RAIZ / 'docs' / 'producao-tecnica'
+ENTREGA = RAIZ / 'Entregas' / 'Produção Técnica'
 FIG = PT / 'figuras'
 FIG_ENT = PT / 'figuras-entregas'
 TELAS = PT / 'telas'
@@ -180,22 +181,22 @@ def modelagem_produto(d, ctx):
              [[t['nome'], f'`{t["rotas"]}`', t['componentes'], t['rf']] for t in lista_telas],
              FONTE_IA, larguras_cm=[2.8, 3.6, 6.6, 2.0], tamanho=8, primeira_coluna_italico=True)
     d.paragrafo(
-        'Todas as telas tratam os quatro estados visuais exigidos (carregando, sucesso, erro com "tentar novamente" e vazio), '
-        'validam os campos no próprio formulário com máscaras em português e repetem a validação no servidor, de modo que a '
-        'interface nunca dependa só do navegador para garantir a regra.'
+        'As telas usam componentes de carregamento, sucesso, erro e conteúdo vazio. A conferência sistemática desses '
+        'estados por tela segue registrada na matriz de verificações. Os formulários aplicam máscaras em português e '
+        'o servidor valida as entradas das operações da API.'
     )
 
     # 1.3 Prototipação ---------------------------------------------------------------------------------
     d.subsecao('1.3 Prototipação.')
     d.paragrafo(
         'O protótipo de alta fidelidade foi desenhado no Google Stitch a partir do design system do Víamos e serviu de referência '
-        'visual para a implementação: cada tela do aplicativo indica, no código, o protótipo que a originou. O protótipo navegável '
-        'no Figma é importado diretamente do Stitch; o link é o seguinte:'
+        'visual para a implementação. As fichas das telas registram as referências aos protótipos correspondentes. '
+        'As imagens a seguir mostram as telas prototipadas no Stitch.'
     )
     if FIGMA_URL:
-        d.link('', FIGMA_URL)
+        d.link('Abrir o protótipo navegável no Figma', FIGMA_URL)
     else:
-        d.paragrafo('[Link do protótipo no Figma — a ser incluído pelo grupo (pendência P-01 em docs/DECISOES.md).]', italico=True)
+        d.paragrafo('A publicação do link do protótipo navegável no Figma está registrada na pendência P-01.', italico=True)
     prototipos = [t for t in lista_telas if t['prototipo']]
     vistos, figuras_prototipo = set(), []
     for t in prototipos:
@@ -259,7 +260,7 @@ def arquitetura(d, ctx):
     d.itens([
         f'O frontend é uma SPA em React {v["frontend"]["react"].split(".")[0]} compilada pelo Vite e servida como arquivos estáticos pela CDN da Vercel, com a regra de reescrita que faz qualquer rota abrir o aplicativo (recarregar `/cliente/historico` não dá erro 404).',
         f'A API é um serviço Node.js com Express {v["backend"]["express"]} no Render ({h["render"]["servico"]}), com Helmet, CORS restrito, limite de tentativas, sessão JWT revogável e validação Zod em todas as entradas. O health check fica em `{h["render"]["health"]}`.',
-        'O banco é um PostgreSQL gerenciado (Render Postgres ou Neon), acessado pela API com TLS e consultas parametrizadas pelo Drizzle ORM; as migrações SQL são versionadas no repositório.',
+        'O PostgreSQL gerenciado está hospedado no Render. A API usa consultas parametrizadas pelo Drizzle ORM e aplica as migrações SQL versionadas no repositório.',
         f'O GitHub Actions executa, a cada envio para a `main`, typecheck, testes (com PostgreSQL {h["ci"]["imagemPostgres"].split(":")[1].split("-")[0]} de serviço), lint, build e a verificação de que os diagramas estão em dia com o código.',
     ])
     b, f = v['backend'], v['frontend']
@@ -656,7 +657,7 @@ def main():
     requisitos(d, ctx)
     processos(d, ctx)
     diagramas(d, ctx)
-    destino = PT / 'Viamos_Producao_Tecnica.docx'
+    destino = ENTREGA / 'Viamos_Producao_Tecnica.docx'
     d.salvar(destino, 'Víamos — Produção Técnica', 'Equipe Víamos')
     print(f'{destino.relative_to(RAIZ)}: {d.figuras} figuras, {d.tabelas} tabelas.')
 

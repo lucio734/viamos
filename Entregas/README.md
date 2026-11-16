@@ -1,0 +1,11 @@
+# Entregas do Víamos
+
+| Entrega | Arquivos |
+|---|---|
+| **Produção Técnica** | [Capítulo em DOCX e PDF](Produ%C3%A7%C3%A3o%20T%C3%A9cnica/README.md) |
+| Engenharia de Requisitos | [Planilha consolidada](Engenharia%20de%20Requisitos/ENTREGA%20VIAMOS%20COMPLETA.xlsx) e [entrega de 02/09](Engenharia%20de%20Requisitos/Separado/02_09/) |
+| Arquitetura e UML | [Relatório PDF](30_09/Viamos_Entrega_Arquitetura_UML.pdf) e [diagramas editáveis](30_09/Viamos_Diagramas_Editaveis.drawio) |
+| Modelagem de Sistemas | [PDF](Viamos_Modelagem_Sistemas.pdf) e [versão horizontal](Viamos_Modelagem_Sistemas_Horizontal.pdf) |
+| Modelo da disciplina | [Modelo DOCX](modelo_entrega.docx) e [roteiro de conteúdo](../Contexto/DOCUMENTA%C3%87%C3%83O%20REPOSIT%C3%93RIO/DOC.txt) |
+
+As fontes, figuras e instruções de geração do capítulo ficam na [documentação técnica](../docs/producao-tecnica/README.md). A [matriz do Dossiê](../docs/VERIFICACOES.md) registra as evidências e as pendências da avaliação.

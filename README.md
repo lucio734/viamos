@@ -110,7 +110,7 @@ cd frontend && npm run build                      # gera frontend/dist (estátic
 - **Vercel** (frontend): importe o repositório com *Root Directory* = `frontend`, defina `VITE_API_URL` com a URL da API. O [`vercel.json`](frontend/vercel.json) já contém o *rewrite* para rotas SPA (`/cliente/...` recarregadas não dão 404).
 - O passo a passo e as verificações pós-publicação estão no [guia de deploy](docs/DEPLOY.md).
 - **Diagramas da documentação:** gerados do código em [`docs/diagramas/`](docs/diagramas/README.md) (`npm run figuras` gera; `npm run verificar` confere, também no CI).
-- **Documento "Produção Técnica"** (`.docx` e `.pdf`, itens #1–#28 do checklist): [`docs/producao-tecnica/`](docs/producao-tecnica/README.md), com o passo a passo para regerar.
+- O [índice de entregas](Entregas/README.md) reúne o capítulo **Produção Técnica** em DOCX e PDF, as entregas anteriores e o modelo da disciplina. As [fontes e instruções para regerar](docs/producao-tecnica/README.md) ficam em `docs/producao-tecnica/`.
 
 ## 7. Estrutura do repositório
 
@@ -139,14 +139,14 @@ viamos/
 │       └── utils/            # máscaras (CPF, CEP, telefone, cartão) e formatadores pt-BR
 ├── CLAUDE/                   # CLAUDE.md e AGENTS.md — instruções obrigatórias para qualquer IA (leia antes de tudo)
 ├── Contexto/                 # material original do grupo: briefing, PRD, design system, protótipos Stitch, auxílio ao vibecoding
-├── Entregas/                 # entregas anteriores (requisitos 02/09, UML 07/10, modelagem 11/11) e modelo_entrega.docx
+├── Entregas/                 # Produção Técnica em DOCX/PDF, entregas anteriores e modelo da disciplina
 ├── docs/
 │   ├── PLANO_BLOCOS.md       # plano de trabalho até a entrega, dividido em blocos
 │   ├── DECISOES.md           # decisões de regra de negócio (D-01…) referenciadas no código
 │   ├── REGISTRO_TRABALHO.md  # estado real do trabalho: feito/verificado × pendente, contribuições, divergências
 │   ├── VERIFICACOES.md       # verificação dos prompts e processos contra labProt, Checklist 2026 e Dossiê
 │   ├── diagramas/            # gerador dos diagramas a partir do código (npm run figuras / npm run verificar)
-│   └── producao-tecnica/     # documento "Produção Técnica" (.docx e .pdf), figuras, telas e scripts que o geram
+│   └── producao-tecnica/     # fontes, figuras, capturas de telas e scripts da Produção Técnica
 ├── contexto_atual_chatgpt.md # passagem de bastão para Lúcio e ChatGPT
 ├── contexto_atual_claude.md  # passagem de bastão para Gustavo e Claude
 ├── docker-compose.yml        # PostgreSQL local
