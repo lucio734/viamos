@@ -170,7 +170,7 @@ class Documento:
         for romano, texto in zip(ROMANOS, textos):
             self.paragrafo(f'({romano}) {texto}')
 
-    def link(self, antes: str, url: str, depois: str = ''):
+    def link(self, antes: str, url: str, depois: str = '', *, rotulo: str | None = None):
         self._retrato()
         p = self.doc.add_paragraph()
         _espacamento(p)
@@ -190,7 +190,7 @@ class Documento:
             rpr.append(e)
         novo.append(rpr)
         t = OxmlElement('w:t')
-        t.text = url
+        t.text = rotulo if rotulo is not None else url
         t.set(qn('xml:space'), 'preserve')
         novo.append(t)
         hyperlink.append(novo)

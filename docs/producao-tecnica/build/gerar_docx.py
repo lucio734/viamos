@@ -194,7 +194,7 @@ def modelagem_produto(d, ctx):
         'visual para a implementação. A equipe exportou 14 quadros revisados do Stitch para o Figma e vinculou as telas '
         'com 13 interações de clique, organizadas em dois fluxos de apresentação.'
     )
-    d.link('Abrir o protótipo navegável no Figma', FIGMA_URL)
+    d.link('', FIGMA_URL, rotulo='Abrir o protótipo navegável no Figma')
     d.paragrafo('Use o menu de fluxos à esquerda para alternar entre a jornada do cliente e a do intérprete. Os dados e as mudanças de estado são demonstrativos.')
     d.itens([
         'Jornada do cliente. Em Entrar, abra o painel e clique em Solicitar intérprete agora. Avance pela definição do atendimento, pelo endereço e pela revisão do preço. Confirme para ver a busca. O cartão do acompanhamento leva ao atendimento confirmado e simula a mudança de estado após o aceite. Abra a sala pela ficha e use a seta da sala para voltar.',
