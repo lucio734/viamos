@@ -1,3 +1,3 @@
 # Instruções para o Claude — Projeto Víamos
 
-Leia [AGENTS.md](AGENTS.md) antes de trabalhar no repositório. Consulte o [registro de trabalho](docs/REGISTRO_TRABALHO.md) e as [decisões](docs/DECISOES.md) para retomar o último estado validado.
+Leia [AGENTS.md](AGENTS.md) para consultar as instruções do repositório.

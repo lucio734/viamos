@@ -15,6 +15,6 @@ A edição de 16/11 tem 117 páginas. A seção 1.3 inclui o link navegável do 
 | [4. Modelagem de Processos e Fluxos](04%20Modelagem%20de%20Processos%20e%20Fluxos/README.md) | Macroprocesso, fluxogramas e BPMN com explicação |
 | [5. Diagramas e Modelagem de Software](05%20Diagramas%20e%20Modelagem%20de%20Software/README.md) | Casos de uso com tabela por tela, classes, DER, estados, operação, DFD, processos de telas, CASE e contexto |
 
-O capítulo usa o [modelo da disciplina](../modelo_entrega.docx). Consulte o [roteiro original](DOC.txt), as [fontes e instruções de geração](../../docs/producao-tecnica/README.md) e a [matriz de verificação](../../docs/VERIFICACOES.md#3-dossiê--checklist-de-50-critérios-auditoria-da-reta-final).
+O capítulo usa o [modelo da disciplina](../modelo_entrega.docx). Consulte o [roteiro original](DOC.txt), as [fontes e instruções de geração](../../docs/producao-tecnica/README.md) e a [matriz de verificação](../../docs/VERIFICACOES.md).
 
 As seções 4.3 e 5.6 registram a regra confirmada para a emissão do comprovante após o pagamento simulado. [Decisões de produto](../../docs/DECISOES.md#validação-e-fechamento-do-mvp)

@@ -1,17 +1,12 @@
-# Guia de Deploy em Produção — Víamos (Bloco D & Dossiê #45–#47)
+# Hospedagem do Víamos
 
-## Publicação de 15/11/2026
+| Serviço | Provedor | Endereço |
+|---|---|---|
+| Interface web | Vercel | [Aplicativo](https://viamos-eight.vercel.app/) |
+| API REST | Render Web Service | [Status da API](https://viamos-api.onrender.com/api/health) |
+| Banco de dados | Render PostgreSQL | [Painel da instância](https://dashboard.render.com/d/dpg-dbt69um7bikc73d60h3g-a) |
 
-- O Blueprint da `main` publicou a API do commit `297b214` e provisionou o PostgreSQL `viamos-db` no Render. O comando de inicialização executou as migrações. A sonda retornou HTTP 200 com `status: "ok"` e `banco: "conectado"`. [Deploy da API](https://dashboard.render.com/web/srv-dbt6a8u7bikc73d61gng/deploys/dep-dbt6a967bikc73d61h9g) · [Sonda pública](https://viamos-api.onrender.com/api/health)
-- A API usa `https://viamos-eight.vercel.app` em `CORS_ORIGINS` e `FRONTEND_URL`. O preflight de `POST /api/auth/login` respondeu HTTP 204 e autorizou esse domínio. A Vercel salvou `VITE_API_URL=https://viamos-api.onrender.com` em Production. [Frontend público](https://viamos-eight.vercel.app)
-- Em 16/11, o push do commit `2710e91` publicou na Vercel um build com `VITE_API_URL` e o novo painel financeiro. O bundle servido em `/cliente/historico` confirma a origem do Render e o acesso direto à rota SPA retorna HTTP 200. Uma tentativa de login com e-mail fictício recebeu HTTP 401 (`NAO_AUTENTICADO`) e `Access-Control-Allow-Origin: https://viamos-eight.vercel.app`. O login autenticado com dados de demonstração segue como etapa do ensaio. [Deploy da Vercel](https://vercel.com/lucio-vecchios-projects/viamos/7NRsohhgxcQN4aWBitj8jq54zyAX) · [CI do commit](https://github.com/lucio734/viamos/actions/runs/43795728056)
-- O mesmo commit foi publicado manualmente no Render em 16/11. O painel confirmou o serviço ativo às 00h06 BRT e a sonda voltou a retornar HTTP 200 com o banco conectado. [Eventos do Render](https://dashboard.render.com/web/srv-dbt6a8u7bikc73d61gng/events) · [Sonda pública](https://viamos-api.onrender.com/api/health)
-- O painel do Render informa que o banco gratuito expira em **15/12/2026**. [Painel do banco](https://dashboard.render.com/d/dpg-dbt69um7bikc73d60h3g-a)
-- Em 16/11, o CI e a publicação do commit `8ddde67` na Vercel passaram. A rota `/cliente/historico` retornou HTTP 200. [CI](https://github.com/lucio734/viamos/actions/runs/43963520769) · [Deploy da Vercel](https://vercel.com/lucio-vecchios-projects/viamos/FXZxrR5qNGbaMi4GafZrkBuwUGWv)
-- O Render publicou manualmente o commit `4848335` da `main`, que contém a correção `8ddde67` (B-031). O painel exibiu **Deploy succeeded | Live** e os logs confirmaram as migrações. A sonda pública retornou HTTP 200 com o banco conectado e o preflight de login retornou HTTP 204 para `https://viamos-eight.vercel.app`. O ensaio autenticado ponta a ponta em HTTPS continua no roteiro. [Deploy confirmado no Render](https://dashboard.render.com/web/srv-dbt6a8u7bikc73d61gng/deploys/dep-dbtnq93m8hqs73d14kj0) · [Sonda pública](https://viamos-api.onrender.com/api/health)
-- Para o ensaio em iPhone, foram criados dois perfis fictícios com senhas aleatórias, cliente e intérprete, por inserção específica no PostgreSQL. A API respondeu HTTP 200 para os dois logins e para os dois painéis autenticados. As credenciais de ensaio ficam com a equipe. O site publicado disponibiliza as correções da agenda e da tela de login de `6d740c2`. [Deploy da Vercel](https://vercel.com/lucio-vecchios-projects/viamos/qbnc6U9A5ZPqfCoytEBGoPtkkGLM) · [CI](https://github.com/lucio734/viamos/actions/runs/43971829842)
-
-## 1. Arquitetura de Hospedagem Gratuita com HTTPS
+## 1. Arquitetura de hospedagem
 
 - **Banco de Dados PostgreSQL:** **Neon** (Serverless Postgres gratuito) ou **Render PostgreSQL** (definido em [`render.yaml`](../render.yaml)).
 - **Backend (API REST Express + Drizzle):** **Render Web Service** (configurado via Blueprint em [`render.yaml`](../render.yaml)).
@@ -51,6 +46,6 @@
 2. [x] Resposta via HTTPS tanto no domínio da Vercel quanto no domínio do Render (#46).
 3. [x] Os dois logins fictícios e seus painéis responderam HTTP 200. O preflight autorizou a origem HTTPS da Vercel.
 4. [x] Um acesso direto a `/cliente/historico` retornou a SPA com HTTP 200 (#47).
-5. Download e verificação pública do comprovante passaram no teste de integração local. A repetição do fluxo completo em produção foi dispensada para esta entrega.
+
 
 Abra `/api/health` na origem confirmada do Render três minutos antes da apresentação. No plano gratuito, a instância hiberna após 15 minutos sem tráfego e pode levar cerca de um minuto para voltar. [Limites do Render Free](https://render.com/docs/free#spinning-down-on-idle)

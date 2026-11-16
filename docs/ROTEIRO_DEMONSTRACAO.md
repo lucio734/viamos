@@ -1,6 +1,6 @@
 # Roteiro de Demonstração e Manual de Uso — Víamos (Bloco Z & Dossiê #50)
 
-## 1. Credenciais Prontas do Seed (`senha padrão: Viamos@2026`)
+## 1. Contas locais do seed (`senha padrão: Viamos@2026`)
 
 | Perfil | E-mail | Situação Inicial no Seed |
 |---|---|---|

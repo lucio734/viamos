@@ -6,33 +6,28 @@
 
 <p align="center">Plataforma de intermediação de intérpretes de Libras</p>
 
-Projeto da disciplina **Engenharia de Software e Arquitetura de Sistemas** da FECAP, Ciência da Computação (CCOMP4 noturno), com o professor Luis Fernando dos Santos Pires.
+O Víamos conecta pessoas surdas a intérpretes de Libras para atendimentos presenciais. Permite solicitar e acompanhar um atendimento, combinar o encontro pela sala de mensagens e fazer check-in por QR Code. O pagamento é simulado e gera um comprovante verificável.
 
-**Integrantes do grupo:** Lúcio Vecchio, Gustavo Pires e Felipe Mathey.
-
-O Víamos conecta pessoas surdas a intérpretes de Libras para atendimentos presenciais. O fluxo inclui solicitação com estimativa, distribuição por proximidade, aceite exclusivo, sala de atendimento, check-in por QR Code e geolocalização, pagamento simulado e comprovante verificável.
+**Integrantes:** Lúcio Vecchio, Gustavo Pires e Felipe Mathey.
 
 <p align="center">
   <img src="docs/producao-tecnica/telas/09-hub-cliente.png" alt="Painel do cliente com o botão Solicitar intérprete agora" width="210" />
   <img src="docs/producao-tecnica/telas/18-hub-interprete.png" alt="Painel do intérprete com disponibilidade e mapa de solicitações" width="210" />
 </p>
 
-**Produção Técnica.** A entrega segue as cinco seções do roteiro do professor. O capítulo em DOCX e PDF inclui as capturas e a explicação das duas jornadas no Figma. [Produção Técnica](Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/README.md) · [Protótipo no Figma](https://www.figma.com/proto/zBuQC5GjLzW9ReazQqo5aH/V%C3%ADamos-%E2%80%94-Prot%C3%B3tipo-naveg%C3%A1vel?node-id=1-1640&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=1%3A1640&show-proto-sidebar=1) · [Roteiro do professor](Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/DOC.txt)
+## Aplicativo hospedado
 
-**Aplicativo.** O Víamos está publicado na Vercel, com API e banco no Render. [Abrir o Víamos](https://viamos-eight.vercel.app) · [Guia de deploy](docs/DEPLOY.md) · [Registro de trabalho](docs/REGISTRO_TRABALHO.md)
-
-| Camada | Tecnologia | Onde consultar |
+| Camada | Hospedagem | Acesso |
 |---|---|---|
-| Interface web | React 19, Vite, TypeScript, Tailwind CSS e Leaflet | [Frontend](frontend/) · [Design system](docs/producao-tecnica/fontes/stitch/DESIGN.md) |
-| API REST em MVC | Node.js 22, Express 5, TypeScript, Zod e sessões JWT | [Backend](backend/) · [OpenAPI](docs/api/openapi.yaml) |
-| Banco | PostgreSQL e Drizzle ORM | [Esquema](backend/src/models/schema.ts) · [Migrações](backend/drizzle/) |
-| Hospedagem | Vercel, Render Web Service e Render PostgreSQL | [Guia de deploy](docs/DEPLOY.md) |
+| Frontend | Vercel · React, TypeScript e Vite | [Abrir o Víamos](https://viamos-eight.vercel.app/) |
+| API | Render Web Service · Node.js e Express | [Verificar status da API](https://viamos-api.onrender.com/api/health) |
+| Banco | Render PostgreSQL · Drizzle ORM | [Esquema](backend/src/models/schema.ts) e [migrações](backend/drizzle/) |
 
-## 1. Pré-requisitos
+O frontend usa `VITE_API_URL=https://viamos-api.onrender.com` em produção. A API lê a conexão PostgreSQL de `DATABASE_URL` no Render. [Configuração de hospedagem](docs/DEPLOY.md)
 
-Use Git, Node.js **22.12+ na série 22**, npm e um PostgreSQL local. O Docker Compose incluído configura o PostgreSQL 16 para desenvolvimento. [Configuração do banco local](docker-compose.yml)
+## Executar localmente
 
-## 2. Clonar e instalar
+Instale Git, Node.js 22.12 ou superior na série 22 e Docker com Compose.
 
 ```bash
 git clone https://github.com/lucio734/viamos.git
@@ -41,80 +36,20 @@ npm ci --prefix backend
 npm ci --prefix frontend
 cp backend/.env.example backend/.env
 cp frontend/.env.example frontend/.env
-docker compose up -d
-```
-
-As configurações de exemplo apontam para o PostgreSQL criado pelo Docker na porta 5432. Para usar outra instância local, ajuste `DATABASE_URL` em `backend/.env`. [Exemplo da API](backend/.env.example) · [Exemplo do frontend](frontend/.env.example)
-
-## 3. Preparar o banco de demonstração
-
-```bash
+docker compose up -d --wait
 npm --prefix backend run db:migrate
-npm --prefix backend run db:seed
 ```
 
-O seed limpa e recria os dados do banco configurado. Execute-o em uma base dedicada à demonstração. A senha das contas fictícias é `Viamos@2026`. [Roteiro da demonstração](docs/ROTEIRO_DEMONSTRACAO.md)
+Para carregar contas e atendimentos fictícios, rode `npm --prefix backend run db:seed` em uma base de demonstração. O comando limpa os dados da base configurada. [Contas e roteiro](docs/ROTEIRO_DEMONSTRACAO.md)
 
-| Perfil | E-mail |
-|---|---|
-| Cliente | `joao@viamos.app`, `ana@viamos.app` |
-| Intérprete aprovado | `maria@viamos.app`, `carlos@viamos.app` |
-| Intérprete em análise | `pedro@viamos.app` |
-| Backoffice | `operador@viamos.app` |
-
-## 4. Executar em desenvolvimento
-
-Abra dois terminais na raiz do projeto. O Vite encaminha `/api` para a API local.
+Abra dois terminais na raiz do projeto.
 
 ```bash
-# Terminal 1
+# Terminal 1 — API
 npm --prefix backend run dev
 
-# Terminal 2
+# Terminal 2 — frontend
 npm --prefix frontend run dev
 ```
 
-[Aplicação local](http://localhost:5173) · [Sonda da API local](http://localhost:3333/api/health)
-
-## 5. Testes automatizados
-
-Crie um banco de teste separado e configure `DATABASE_URL_TEST` em `backend/.env`. O preparo da suíte limpa a base indicada.
-
-```bash
-docker compose exec postgres createdb -U viamos viamos_test
-npm --prefix backend test
-npm --prefix frontend test
-npm --prefix backend run typecheck
-npm --prefix frontend run typecheck
-npm --prefix frontend run lint
-npm --prefix docs/diagramas run verificar
-```
-
-O último comando compara o material de documentação com os dados extraídos do código. [Relatório de testes](docs/TESTES.md) · [Workflow de CI](.github/workflows/ci.yml)
-
-## 6. Build e deploy
-
-```bash
-npm --prefix backend run build
-npm --prefix frontend run build
-```
-
-O Render usa o Blueprint do repositório e aplica as migrações com `npm run deploy`. O projeto Vercel usa o diretório `frontend` e a variável `VITE_API_URL` com a origem da API. O guia registra a configuração, os domínios e as verificações realizadas em produção. [Render Blueprint](render.yaml) · [Configuração da Vercel](frontend/vercel.json) · [Guia de deploy](docs/DEPLOY.md)
-
-## 7. Estrutura do repositório
-
-| Pasta | Conteúdo |
-|---|---|
-| [`frontend/`](frontend/) | Interface, rotas, autenticação, componentes e cliente da API |
-| [`backend/`](backend/) | Serviços, controladores, banco, migrações e testes da API |
-| [`Entregas/`](Entregas/README.md) | Produção Técnica nas cinco seções do roteiro, documentos anteriores e modelo da disciplina |
-| [Fontes da Produção Técnica](docs/producao-tecnica/fontes) | Protótipos Stitch e referências de projeto e metodologia usadas no capítulo |
-| [`docs/`](docs/README.md) | Como regerar a Produção Técnica, diagramas, documentação da API, manual e evidências de validação |
-
-## 8. Fluxo de trabalho com Git
-
-O projeto usa a branch `main`. Atualize seu clone com `git pull --ff-only origin main`, confira o diff e faça commits por assunto. Mantenha as instruções e as evidências de desenvolvimento no registro permanente. [Instruções do repositório](AGENTS.md) · [Registro de trabalho](docs/REGISTRO_TRABALHO.md)
-
-## 9. Contexto acadêmico
-
-O MVP simula pagamento e e-mail. As decisões descrevem as regras confirmadas e a matriz de verificação registra as evidências e os limites dos testes. [Decisões](docs/DECISOES.md) · [Matriz de verificações](docs/VERIFICACOES.md)
+[Aplicativo local](http://localhost:5173) · [Sonda da API local](http://localhost:3333/api/health)

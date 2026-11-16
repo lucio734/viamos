@@ -16,7 +16,7 @@ cd backend
 npm test
 ```
 - **Resultado em 15/11/2026:** **53 de 53 casos**, em 3 arquivos, com PostgreSQL 18.6 isolado. `DATABASE_URL_TEST` é obrigatória e a preparação da suíte limpa a base apontada. As verificações em integração incluem duas ofertas sobrepostas para o mesmo intérprete, cancelamento simultâneo ao check-in e localização antes e depois do encerramento.
-- **Resultado em 15/11/2026, 20:32 (continuação Gustavo + Claude):** **57 de 57 casos**, em 3 arquivos, com PostgreSQL 18 local isolado; `npm run typecheck` e `npm run docs:modelo -- --verificar` sem erros. Os quatro casos novos cobrem a regra única de elegibilidade (D-20), a nova distribuição, a cobrança simultânea e o saldo com repasses simultâneos (B-025 e B-026). Os dois casos de pagamento e repasse foram executados também contra o serviço anterior e falharam, o que confirma que detectam o defeito corrigido.
+- **Resultado em 15/11/2026, 20:32:** **57 de 57 casos**, em 3 arquivos, com PostgreSQL 18 local isolado. As verificações de tipos e do DER passaram. Os casos cobrem elegibilidade, redistribuição, cobrança simultânea e saldo com repasses simultâneos (B-025 e B-026).
 - **Retomada após `c2ce8f1`:** **59 de 59 casos**, com PostgreSQL 18.6 e base descartável. A suíte conferiu o acesso ao detalhe e à ficha antes e depois do aceite, a recusa e os retornos 503 e 200 da sonda. O build do backend e `docs:modelo -- --verificar` passaram.
 
 ### 2.2. Frontend (Node Test Runner + TypeScript)
@@ -44,7 +44,7 @@ Em 15/11/2026, duas sessões isoladas do Chrome com Playwright usaram o build de
 
 Para repetir, prepare um banco de demonstração local e siga o [roteiro de demonstração](ROTEIRO_DEMONSTRACAO.md). Use um dispositivo no ponto escolhido para verificar câmera e GPS físicos. A validação de 15/11 usou o código alfanumérico do QR e emulação do navegador. HTTPS e comportamento nos domínios hospedados dependem do deploy.
 
-Na retomada após `c2ce8f1`, a API também foi exercitada em `NODE_ENV=production`, com base descartável e proxy HTTPS simulado. Foram verificados o retorno 200 para a sonda HTTP interna, o redirecionamento de uma rota da aplicação, o preflight com a origem configurada, o fallback de `API_PUBLIC_URL` a partir de `RENDER_EXTERNAL_URL` e o login. O retorno 503 foi testado com falha simulada do pool. As evidências nos domínios publicados estão no [guia de deploy](DEPLOY.md#publicação-de-15112026).
+A API também foi exercitada em `NODE_ENV=production`, com base descartável e proxy HTTPS simulado. Foram verificados o retorno 200 para a sonda HTTP interna, o redirecionamento de uma rota da aplicação, o preflight com a origem configurada, o fallback de `API_PUBLIC_URL` a partir de `RENDER_EXTERNAL_URL` e o login. O retorno 503 foi testado com falha simulada do pool. As verificações nos domínios publicados estão no [guia de hospedagem](DEPLOY.md).
 
 ---
 
