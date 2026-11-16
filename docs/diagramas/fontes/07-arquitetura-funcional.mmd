@@ -13,7 +13,7 @@ flowchart TB
     subgraph sg_contratacao["Contratação"]
       m_demanda["<b>Demandas, aceite exclusivo e<br/>agenda</b><br/>RF20–RF25, RNF36<br/>7 endpoints: 7 intérprete"]
       m_solicitacao["<b>Solicitação, estimativa e<br/>distribuição</b><br/>RF10–RF19<br/>6 endpoints: 5 cliente · 1 qualquer papel"]
-      m_solicitacao -->|"interpreteElegivelParaDemanda"| m_demanda
+      m_solicitacao -->|"interpreteElegivelParaDemanda, travarDistribuicaoDemandas"| m_demanda
     end
     subgraph sg_financeiro["Financeiro e comprovação"]
       m_comprovante["<b>Comprovante e verificação<br/>pública</b><br/>RF37, RF38, RNF41<br/>2 endpoints: 1 qualquer papel · 1 público"]

@@ -33,6 +33,6 @@ Alterar uma decisão = alterar o parâmetro em `regras.ts`, atualizar este arqui
 - **P-01** Prototipação (item #5). A equipe produziu telas no Stitch, registradas na Produção Técnica. O `DOC.txt` pede um link navegável no Figma e imagens do fluxo. Para fechar o item, quando o protótipo estiver disponível, informe `figma_url` no workflow de geração e confira a seção 1.3. [Como gerar o capítulo](producao-tecnica/README.md)
 - **P-02** Validar os valores de D-01 (preços de referência) e D-05 (janela de 30 min).
 - **P-03 — hospedagem provisionada** A equipe usa Vercel, Render Web Service e Render PostgreSQL. Os domínios e as verificações estão em [DEPLOY.md](DEPLOY.md).
-- **P-04** Fotos de perfil: hoje `fotoUrl` aceita uma URL/data URL pequena; decidir se entra no MVP.
+- **P-04 — implementada** O intérprete pode enviar foto pelo perfil (RF04). A interface usa JPG, PNG ou WebP de até 350 KB. [Perfil do intérprete](../frontend/src/pages/interprete/PerfilInterprete.tsx)
 - **P-05** Validar D-20: agenda vazia significa "disponível sempre"? A compatibilidade pelo horário de início basta, ou o atendimento inteiro deve caber na janela?
 - **P-06** Momento do comprovante (RF37/RF38): o DFD P5 da entrega de Modelagem libera o PDF no encerramento; D-10 e a aplicação o emitem após a confirmação do pagamento. Escolher um e ajustar o outro artefato.

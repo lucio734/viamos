@@ -23,7 +23,7 @@ import { avaliarElegibilidade } from '../utils/elegibilidade.js';
 import { Erros } from '../utils/erros.js';
 import { apresentarInterpretePublico, ROTULOS } from '../views/presenters.js';
 import { registrarEvento } from './auditoria.service.js';
-import { interpreteElegivelParaDemanda } from './demanda.service.js';
+import { interpreteElegivelParaDemanda, travarDistribuicaoDemandas } from './demanda.service.js';
 import { notificar } from './notificacao.service.js';
 
 export interface EntradaEstimativa {
@@ -84,6 +84,7 @@ export async function criarSolicitacao(clienteId: string, entrada: EntradaSolici
   const estimativa = calcularEstimativa(entrada);
 
   const resultado = await db.transaction(async (tx) => {
+    await travarDistribuicaoDemandas(tx, 'criacao');
     const [s] = await tx
       .insert(solicitacoes)
       .values({
@@ -114,7 +115,7 @@ export async function criarSolicitacao(clienteId: string, entrada: EntradaSolici
       tx,
     );
     return { solicitacao: s, elegiveis: elegiveis.length };
-  });
+  }, { isolationLevel: 'read committed' });
 
   return { ...(await obterSolicitacao(resultado.solicitacao.id, clienteId, 'CLIENTE')), interpretesNotificados: resultado.elegiveis };
 }

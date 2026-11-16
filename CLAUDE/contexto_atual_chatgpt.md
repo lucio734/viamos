@@ -2,7 +2,7 @@
 
 Antes de encerrar o projeto, siga a [regra de limpeza final](README.md#regra-de-limpeza-final) após a implementação, os testes, o deploy e a conferência das entregas.
 
-> Atualização de 16/11/2026. A retomada corrigiu ganhos semanais por atendimento e redistribuição concorrente. A API e o PostgreSQL do Bloco D estão ativos no Render, e a Vercel serve o novo build por HTTPS com a origem da API configurada. [Registro da retomada](../docs/REGISTRO_TRABALHO.md#retomada-do-desenvolvimento-em-15112026) · [Guia de deploy](../docs/DEPLOY.md) · [Passagem de bastão](contexto_atual_claude.md)
+> Atualização de 16/11/2026. A criação simultânea à entrada do intérprete online foi corrigida (B-031). Passaram 63 testes de backend e seis de frontend. O Stitch tem novos quadros com o fluxo presencial revisado. Falta exportar a seleção para o Figma, ligar as telas e obter o link e as capturas da apresentação para gerar o capítulo final. Confirme o commit ativo no Render e execute o ensaio em HTTPS com dados de demonstração, câmera e GPS físicos. [Registro da retomada](../docs/REGISTRO_TRABALHO.md#correção-e-revisão-do-protótipo-em-16112026) · [Guia de deploy](../docs/DEPLOY.md) · [Passagem de bastão](contexto_atual_claude.md)
 
 > Gerado em 12/11/2026 (18h) por Gustavo + Claude. Este é o documento de passagem de bastão previsto no nosso
 > protocolo de revezamento. Ele descreve **o que já existe**, **o que falta**, **o passo a passo até a entrega

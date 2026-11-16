@@ -2477,20 +2477,21 @@
           "usuarios"
         ],
         "funcoes": [
+          "travarDistribuicaoDemandas",
           "carregarContextoElegibilidade",
           "interpreteElegivelParaDemanda",
           "listarDemandas",
           "aceitarDemanda",
           "recusarDemanda",
           "atualizarConfiguracao",
-          "ofertarDemandasAbertas",
           "listarDisponibilidades",
           "salvarDisponibilidades",
           "resumoHubInterprete"
         ],
         "funcoesInternas": [
           "carregarInterprete",
-          "exigirHabilitado"
+          "exigirHabilitado",
+          "ofertarDemandasAbertas"
         ]
       },
       {
@@ -2665,7 +2666,8 @@
             "registrarEvento"
           ],
           "demanda": [
-            "interpreteElegivelParaDemanda"
+            "interpreteElegivelParaDemanda",
+            "travarDistribuicaoDemandas"
           ],
           "notificacao": [
             "notificar"

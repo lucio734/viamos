@@ -8,7 +8,7 @@ import { and, eq, sql } from 'drizzle-orm';
 import request from 'supertest';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 import { db, pool } from '../src/models/db.js';
-import { atendimentos, lancamentosFinanceiros, notificacoes, ofertas, pagamentos, solicitacoes } from '../src/models/schema.js';
+import { atendimentos, eventosAuditoria, lancamentosFinanceiros, notificacoes, ofertas, pagamentos, solicitacoes } from '../src/models/schema.js';
 import * as datas from '../src/utils/datas.js';
 import { aceitarEFazerCheckin, app, auth, criarSolicitacao, daquiAMinutos, login, LOCAL_HC } from './helpers.js';
 
@@ -274,6 +274,54 @@ describe('Elegibilidade única e nova distribuição (RF17, RF20–RF25, D-20)',
     expect((await redistribuicao)?.status).toBe(200);
     expect(await db.select().from(ofertas).where(and(eq(ofertas.interpreteId, carlosId), eq(ofertas.solicitacaoId, id)))).toHaveLength(0);
     expect(await db.select().from(notificacoes).where(and(eq(notificacoes.usuarioId, carlosId), eq(notificacoes.referenciaRecurso, `/interprete/demandas/${id}`)))).toHaveLength(0);
+  });
+
+  it('B-031: criar solicitação enquanto o intérprete fica online gera uma única oferta e um aviso', async () => {
+    const carlosId = (await request(app).get('/api/auth/me').set(auth(carlos))).body.usuario.id as string;
+    expect((await request(app).put('/api/interprete/configuracao').set(auth(carlos)).send({ disponivelAgora: false })).status).toBe(200);
+
+    let criacao: ReturnType<typeof criarSolicitacao> | undefined;
+    let online: Promise<{ status: number }> | undefined;
+    try {
+      await db.transaction(async (tx) => {
+        // Segura o INSERT de auditoria para a criação parar após a distribuição, antes do commit.
+        await tx.execute(sql`lock table ${eventosAuditoria} in share mode`);
+        criacao = criarSolicitacao(joao, { inicioPrevisto: daquiAMinutos(8 * 24 * 60) });
+        void criacao.catch(() => {});
+        const pidCriacao = await vi.waitFor(async () => {
+          const { rows } = await tx.execute<{ pid: number }>(sql`
+            select a.pid from pg_stat_activity a
+            where pg_backend_pid() = any(pg_blocking_pids(a.pid))
+          `);
+          expect(rows).toHaveLength(1);
+          return rows[0].pid;
+        }, { timeout: 5000 });
+
+        let configuracaoConcluida = false;
+        online = request(app).put('/api/interprete/configuracao').set(auth(carlos)).send({ disponivelAgora: true })
+          .then((res) => { configuracaoConcluida = true; return res; });
+        void online.catch(() => {});
+
+        // Com a falha, o PUT termina pela visão antiga. Com o bloqueio, ele aguarda a criação.
+        await vi.waitFor(async () => {
+          if (configuracaoConcluida) return;
+          const { rows } = await db.execute<{ aguardando: boolean }>(sql`
+            select exists (select from pg_stat_activity a where ${pidCriacao} = any(pg_blocking_pids(a.pid))) as aguardando
+          `);
+          expect(rows[0].aguardando).toBe(true);
+        }, { timeout: 5000 });
+      });
+    } finally {
+      await Promise.allSettled([criacao, online]);
+    }
+
+    const sol = await criacao;
+    expect(sol?.status).toBe(201);
+    expect((await online)?.status).toBe(200);
+    const id = sol?.body.id as string;
+    const ofertasCarlos = await db.select().from(ofertas).where(and(eq(ofertas.interpreteId, carlosId), eq(ofertas.solicitacaoId, id)));
+    expect(ofertasCarlos).toMatchObject([{ status: 'ENVIADA' }]);
+    expect(await db.select().from(notificacoes).where(and(eq(notificacoes.usuarioId, carlosId), eq(notificacoes.referenciaRecurso, `/interprete/demandas/${id}`)))).toHaveLength(1);
   });
 });
 

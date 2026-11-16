@@ -1,6 +1,8 @@
 # Víamos — plataforma de intermediação de intérpretes de Libras
 
-Projeto da disciplina **Engenharia de Software e Arquitetura de Sistemas** da FECAP, Ciência da Computação (CCOMP4 noturno). Equipe: Lúcio Vecchio, Gustavo Pires e Felipe Mathey. Professor: Luis Fernando dos Santos Pires.
+Projeto da disciplina **Engenharia de Software e Arquitetura de Sistemas** da FECAP, Ciência da Computação (CCOMP4 noturno), com o professor Luis Fernando dos Santos Pires.
+
+**Integrantes do grupo:** Lúcio Vecchio, Gustavo Pires e Felipe Mathey.
 
 O Víamos conecta pessoas surdas a intérpretes de Libras para atendimentos presenciais. O fluxo inclui solicitação com estimativa, distribuição por proximidade, aceite exclusivo, sala de atendimento, check-in por QR Code e geolocalização, pagamento simulado e comprovante verificável.
 

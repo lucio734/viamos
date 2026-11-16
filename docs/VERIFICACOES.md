@@ -79,7 +79,7 @@ Estado por item, com a evidência atual. Itens 1–28 são o documento "Produç�
 | 43 | Branches e commits organizados | ✅ commits organizados por escopo na `main` | histórico git |
 | 44 | README com clonagem/instalação/execução | ✅ | `README.md` |
 | 45–47 | Deploy, HTTPS, rotas SPA | ✅ API pública com banco conectado, origem da API confirmada no bundle da Vercel, CORS da Vercel confirmado, HTTPS nos dois domínios e acesso direto à rota SPA com HTTP 200 | `docs/DEPLOY.md`, `docs/TESTES.md` |
-| 48 | Testes de fluxo principal e exceções | ✅ 62 casos de backend e 6 de frontend. A retomada inclui a virada semanal, os totais e detalhes financeiros e o cancelamento simultâneo à redistribuição | `docs/TESTES.md` |
+| 48 | Testes de fluxo principal e exceções | ✅ 63 casos de backend e 6 de frontend. A nova regressão verifica a criação simultânea à entrada do intérprete online (B-031) | `docs/TESTES.md` |
 | 49 | Auditoria de código (domínio da equipe) | ⬜ cada integrante revisa e explica sua parte (Bloco Z) | — |
 | 50 | Ensaio de demonstração | 🟡 roteiro atualizado. Ensaio integral com o grupo no ambiente de avaliação continua pendente | `docs/ROTEIRO_DEMONSTRACAO.md` |
 

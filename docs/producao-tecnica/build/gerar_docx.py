@@ -206,8 +206,8 @@ def modelagem_produto(d, ctx):
         figuras_prototipo.append((STITCH / t['prototipo'], f'Protótipo — {t["nome"]}'))
     d.grade(figuras_prototipo, FONTE_STITCH, colunas=3, largura_cm=4.4)
     d.itens([
-        'O protótipo cobre a jornada principal das duas pontas: login e splash, os dois cadastros, o hub do cliente e a nova solicitação em três passos, a sala de atendimento, a avaliação, o histórico e o perfil, e, do lado do intérprete, o hub com o mapa e a gestão de solicitações.',
-        'As telas sem protótipo dedicado (recuperação de senha, acompanhamento, pagamento, agenda, ganhos, backoffice, notificações e suporte) foram construídas com os mesmos componentes e tokens do design system, seguindo os padrões das telas prototipadas.',
+        'As referências iniciais nas imagens cobrem login e splash, cadastros, hubs, uma versão de uma tela da nova solicitação, sala, avaliação, histórico, perfil e gestão de solicitações do intérprete.',
+        'Os quadros revisados no Stitch seguem a versão implementada da jornada presencial: solicitação em três passos, acompanhamento, aceite, check-in, encerramento, pagamento simulado e emissão do comprovante.',
         'Durante a implementação, o protótipo foi corrigido onde faltavam dados exigidos pelos requisitos: telefone obrigatório e consentimentos da LGPD no cadastro, documento, raio e envio do certificado no cadastro do intérprete e a estimativa antes do envio da solicitação.',
         'O próprio aplicativo funciona como protótipo navegável do fluxo completo com as contas de demonstração, seguindo o roteiro de `docs/ROTEIRO_DEMONSTRACAO.md`.',
     ])

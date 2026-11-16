@@ -3,6 +3,12 @@
 Documento de continuidade: o que foi **concluído e verificado**, o que está **pendente ou não testado**, quem fez
 (papel/agente), arquivos relevantes, decisões, riscos e próximos passos. Atualizar ao fim de cada bloco.
 
+## Correção e revisão do protótipo em 16/11/2026
+
+O Codex corrigiu a corrida B-031: a criação e a alteração de disponibilidade, raio ou agenda passam por um bloqueio transacional comum. O PostgreSQL permite criações simultâneas e serializa a redistribuição com elas. A nova configuração e suas ofertas são confirmadas juntas. A revisão `revisao_redistribuicao` analisou a ordem dos bloqueios e `backend_qa` implementou a regressão com duas requisições simultâneas. Ela reprovou no código anterior e passou na correção. O modelo do banco, os 34 diagramas, os builds, 63 testes de backend e seis de frontend passaram. A revisão foi registrada conforme as fases de implementação e testes do Checklist 2026 e o item 48 do Dossiê. [Log de bugs](BUGS.md) · [Relatório de testes](TESTES.md)
+
+A revisão `produto_ux` comparou as telas originais do Stitch com o aplicativo e o roteiro oficial. O Codex acrescentou e revisou no Stitch quadros da solicitação em três etapas, acompanhamento, aceite, check-in, encerramento, pagamento simulado e comprovante, com entradas de login, painéis e sala. O arquivo do Figma, as transições e as capturas em modo de apresentação seguem pendentes. Os originais do Stitch foram preservados. [Projeto Stitch](https://stitch.google.com/projects/15659746409633817631) · [Produção Técnica](../Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/README.md)
+
 ## Transferência das fontes da Produção Técnica
 
 O roteiro do professor passou para a pasta da entrega. Os originais do Stitch, as referências do projeto e os materiais de metodologia passaram para as fontes da Produção Técnica. Os arquivos foram transferidos por identidade de conteúdo no Git. O gerador, os índices e as instruções passaram a usar os novos caminhos. Os relatórios temporários continuam reunidos em CLAUDE durante a implementação e a validação final. [Fontes](producao-tecnica/fontes/README.md) · [Entrega](../Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/README.md)

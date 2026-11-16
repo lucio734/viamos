@@ -17,8 +17,8 @@ período mexem em pastas diferentes, para evitar conflito de merge.
 
 ## Fechamento do projeto
 
-- A Produção Técnica está em cinco pastas na ordem do roteiro. O capítulo editável e o PDF estão na pasta da entrega. A prototipação registrada é a exportação do Stitch. O roteiro ainda pede o link navegável no Figma (P-01).
-- A próxima correção de aplicativo registrada é B-031. As demais regras que exigem decisão da equipe constam em P-02, P-04, P-05 e P-06.
+- A Produção Técnica está em cinco pastas na ordem do roteiro. O capítulo editável e o PDF estão na pasta da entrega. Há quadros revisados da jornada presencial no Stitch. O roteiro ainda pede o link navegável no Figma e capturas do funcionamento (P-01).
+- A correção B-031 passou na regressão e na suíte completa. O upload de foto já está disponível no perfil do intérprete (RF04). As confirmações de regra de negócio com o grupo constam em P-02, P-05 e P-06.
 - Depois da implementação, validar os fluxos e a demonstração, publicar e verificar a versão final e registrar as evidências. Atualizar as capturas, os diagramas e o capítulo quando as alterações do código afetarem os artefatos. Em seguida, executar a limpeza final. Use o `DOC.txt` como referência para a estrutura da entrega. Retire os arquivos auxiliares fora do roteiro após verificar que perderam a utilidade e preserve as dependências da aplicação e da geração do capítulo. A pasta `CLAUDE/` sai por último. Se a validação apontar alguma tela incompleta, registre a rota e preserve seu protótipo até concluir a correção.
 
 [Entregas](../Entregas/README.md) · [Bugs](BUGS.md) · [Decisões](DECISOES.md) · [Testes](TESTES.md) · [Deploy](DEPLOY.md)

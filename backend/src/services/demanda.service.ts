@@ -4,7 +4,7 @@
  * Lista, detalhe, aceite e distribuição usam a mesma regra de elegibilidade (utils/elegibilidade.ts).
  */
 import { randomBytes } from 'node:crypto';
-import { and, desc, eq, gt, inArray, ne, notExists } from 'drizzle-orm';
+import { and, desc, eq, gt, inArray, ne, notExists, sql } from 'drizzle-orm';
 import { REGRAS } from '../config/regras.js';
 import { db, type Tx } from '../models/db.js';
 import { atendimentos, checkins, disponibilidades, interpretes, ofertas, solicitacoes, usuarios } from '../models/schema.js';
@@ -16,6 +16,16 @@ import { registrarEvento } from './auditoria.service.js';
 import { notificar } from './notificacao.service.js';
 
 type Conexao = typeof db | Tx;
+
+const CHAVE_DISTRIBUICAO_DEMANDAS = 17;
+
+/** Criações podem rodar juntas. Alterações de elegibilidade e suas ofertas esperam a criação, ou vice-versa. */
+export async function travarDistribuicaoDemandas(tx: Tx, modo: 'criacao' | 'redistribuicao') {
+  // Adquirir antes de tocar as linhas. As consultas seguintes usam novos snapshots em READ COMMITTED.
+  await tx.execute(modo === 'criacao'
+    ? sql`select pg_advisory_xact_lock_shared(${CHAVE_DISTRIBUICAO_DEMANDAS}::bigint)`
+    : sql`select pg_advisory_xact_lock(${CHAVE_DISTRIBUICAO_DEMANDAS}::bigint)`);
+}
 
 async function carregarInterprete(usuarioId: string) {
   const [i] = await db.select().from(interpretes).where(eq(interpretes.usuarioId, usuarioId)).limit(1);
@@ -203,17 +213,19 @@ export async function recusarDemanda(usuarioId: string, solicitacaoId: string, m
 
 /** RF24 — raio (≤ 15 km) e toggle online. Ficar online ou mudar o raio dispara nova distribuição (RF17, D-20). */
 export async function atualizarConfiguracao(usuarioId: string, dados: { raioKm?: number; disponivelAgora?: boolean }) {
-  await carregarInterprete(usuarioId);
   if (dados.raioKm !== undefined && (dados.raioKm < 1 || dados.raioKm > REGRAS.RAIO_MAXIMO_KM)) {
     throw Erros.regraNegocio(`O raio deve estar entre 1 e ${REGRAS.RAIO_MAXIMO_KM} km.`, 'RAIO_INVALIDO');
   }
-  const [i] = await db
-    .update(interpretes)
-    .set({ ...(dados.raioKm !== undefined ? { raioKm: dados.raioKm } : {}), ...(dados.disponivelAgora !== undefined ? { disponivelAgora: dados.disponivelAgora } : {}) })
-    .where(eq(interpretes.usuarioId, usuarioId))
-    .returning({ raioKm: interpretes.raioKm, disponivelAgora: interpretes.disponivelAgora, statusHabilitacao: interpretes.statusHabilitacao });
-  const novasOfertas = dados.disponivelAgora === true || dados.raioKm !== undefined ? await ofertarDemandasAbertas(usuarioId) : 0;
-  return { ...i, novasOfertas };
+  return db.transaction(async (tx) => {
+    await travarDistribuicaoDemandas(tx, 'redistribuicao');
+    const [i] = await tx.update(interpretes)
+      .set({ raioKm: dados.raioKm, disponivelAgora: dados.disponivelAgora })
+      .where(eq(interpretes.usuarioId, usuarioId))
+      .returning();
+    if (!i) throw Erros.naoEncontrado('Perfil de intérprete');
+    const novasOfertas = dados.disponivelAgora === true || dados.raioKm !== undefined ? await ofertarDemandasAbertas(tx, i) : 0;
+    return { raioKm: i.raioKm, disponivelAgora: i.disponivelAgora, statusHabilitacao: i.statusHabilitacao, novasOfertas };
+  }, { isolationLevel: 'read committed' });
 }
 
 /**
@@ -221,65 +233,64 @@ export async function atualizarConfiguracao(usuarioId: string, dados: { raioKm?:
  * elegível — porque ele estava offline, fora do raio ou da agenda quando ela foi criada — passa a ser oferecida
  * quando ele fica online ou muda o raio ou a disponibilidade. Cria a oferta e avisa o intérprete.
  */
-export async function ofertarDemandasAbertas(interpreteId: string): Promise<number> {
-  return db.transaction(async (tx) => {
-    const [i] = await tx.select().from(interpretes).where(eq(interpretes.usuarioId, interpreteId)).for('no key update');
-    if (!i || i.statusHabilitacao !== 'APROVADO' || !i.disponivelAgora) return 0;
-    const ctx = await carregarContextoElegibilidade(tx, i);
-    const abertas = await tx
-      .select()
-      .from(solicitacoes)
-      .where(
-        and(
-          eq(solicitacoes.status, 'BUSCANDO'),
-          gt(solicitacoes.inicioPrevisto, new Date()),
-          notExists(tx.select({ id: ofertas.id }).from(ofertas).where(and(eq(ofertas.solicitacaoId, solicitacoes.id), eq(ofertas.interpreteId, interpreteId)))),
-        ),
-      )
-      .orderBy(solicitacoes.id);
-    let novas = 0;
-    for (const s of abertas) {
-      const avaliacao = avaliarElegibilidade(ctx, s);
-      if (!avaliacao.elegivel) continue;
-      // Aceite e cancelamento expiram as ofertas sob o mesmo bloqueio da solicitação.
-      const [aberta] = await tx.select({ inicioPrevisto: solicitacoes.inicioPrevisto }).from(solicitacoes)
-        .where(and(eq(solicitacoes.id, s.id), eq(solicitacoes.status, 'BUSCANDO'))).for('no key update');
-      if (!aberta || aberta.inicioPrevisto.getTime() <= Date.now()) continue;
-      const [oferta] = await tx.insert(ofertas).values({ solicitacaoId: s.id, interpreteId, distanciaKm: avaliacao.distanciaKm }).onConflictDoNothing().returning({ id: ofertas.id });
-      if (!oferta) continue;
-      novas += 1;
-      await notificar(
-        {
-          usuarioId: interpreteId,
-          tipo: 'SOLICITACAO',
-          titulo: 'Nova demanda próxima de você',
-          conteudo: `${ROTULOS.tipoServico[s.tipoServico]} a ${avaliacao.distanciaKm} km • ${s.duracaoPrevistaMin} min.`,
-          referencia: `/interprete/demandas/${s.id}`,
-        },
-        tx,
-      );
-    }
-    return novas;
-  });
+async function ofertarDemandasAbertas(tx: Tx, i: typeof interpretes.$inferSelect): Promise<number> {
+  if (i.statusHabilitacao !== 'APROVADO' || !i.disponivelAgora) return 0;
+  const interpreteId = i.usuarioId;
+  const ctx = await carregarContextoElegibilidade(tx, i);
+  const abertas = await tx
+    .select()
+    .from(solicitacoes)
+    .where(
+      and(
+        eq(solicitacoes.status, 'BUSCANDO'),
+        gt(solicitacoes.inicioPrevisto, new Date()),
+        notExists(tx.select({ id: ofertas.id }).from(ofertas).where(and(eq(ofertas.solicitacaoId, solicitacoes.id), eq(ofertas.interpreteId, interpreteId)))),
+      ),
+    )
+    .orderBy(solicitacoes.id);
+  let novas = 0;
+  for (const s of abertas) {
+    const avaliacao = avaliarElegibilidade(ctx, s);
+    if (!avaliacao.elegivel) continue;
+    // Aceite e cancelamento expiram as ofertas sob o mesmo bloqueio da solicitação.
+    const [aberta] = await tx.select({ inicioPrevisto: solicitacoes.inicioPrevisto }).from(solicitacoes)
+      .where(and(eq(solicitacoes.id, s.id), eq(solicitacoes.status, 'BUSCANDO'))).for('no key update');
+    if (!aberta || aberta.inicioPrevisto.getTime() <= Date.now()) continue;
+    const [oferta] = await tx.insert(ofertas).values({ solicitacaoId: s.id, interpreteId, distanciaKm: avaliacao.distanciaKm }).onConflictDoNothing().returning({ id: ofertas.id });
+    if (!oferta) continue;
+    novas += 1;
+    await notificar(
+      {
+        usuarioId: interpreteId,
+        tipo: 'SOLICITACAO',
+        titulo: 'Nova demanda próxima de você',
+        conteudo: `${ROTULOS.tipoServico[s.tipoServico]} a ${avaliacao.distanciaKm} km • ${s.duracaoPrevistaMin} min.`,
+        referencia: `/interprete/demandas/${s.id}`,
+      },
+      tx,
+    );
+  }
+  return novas;
 }
 
 /** RF25 — disponibilidade semanal (substitui a grade inteira). */
-export async function listarDisponibilidades(usuarioId: string) {
-  return db.select().from(disponibilidades).where(eq(disponibilidades.interpreteId, usuarioId)).orderBy(disponibilidades.diaSemana, disponibilidades.inicio);
+export async function listarDisponibilidades(usuarioId: string, conexao: Conexao = db) {
+  return conexao.select().from(disponibilidades).where(eq(disponibilidades.interpreteId, usuarioId)).orderBy(disponibilidades.diaSemana, disponibilidades.inicio);
 }
 
 export async function salvarDisponibilidades(usuarioId: string, faixas: { diaSemana: number; inicio: string; fim: string }[]) {
-  await carregarInterprete(usuarioId);
   for (const f of faixas) {
     if (f.inicio >= f.fim) throw Erros.validacao([{ campo: 'faixas', mensagem: `Faixa inválida no dia ${f.diaSemana}: início deve ser antes do fim.` }]);
   }
-  await db.transaction(async (tx) => {
+  return db.transaction(async (tx) => {
+    await travarDistribuicaoDemandas(tx, 'redistribuicao');
+    const [i] = await tx.select().from(interpretes).where(eq(interpretes.usuarioId, usuarioId)).for('no key update');
+    if (!i) throw Erros.naoEncontrado('Perfil de intérprete');
     await tx.delete(disponibilidades).where(eq(disponibilidades.interpreteId, usuarioId));
     if (faixas.length) await tx.insert(disponibilidades).values(faixas.map((f) => ({ ...f, interpreteId: usuarioId })));
-  });
-  // a nova agenda pode tornar o intérprete elegível para demandas abertas (nova distribuição — D-20)
-  await ofertarDemandasAbertas(usuarioId);
-  return listarDisponibilidades(usuarioId);
+    await ofertarDemandasAbertas(tx, i);
+    return listarDisponibilidades(usuarioId, tx);
+  }, { isolationLevel: 'read committed' });
 }
 
 /** Painel do hub do intérprete: próximos atendimentos, demandas pendentes, status. */
