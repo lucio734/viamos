@@ -14,7 +14,7 @@ título "Tabela NN – …" acima e explicações numeradas (i), (ii), (iii).
 | `telas/` | 33 capturas do aplicativo rodando com o seed (celular 390×844; backoffice 1280×800) | `build/capturar_telas.mjs` |
 | `build/` | Scripts do documento (`motor.py` aplica o formato do modelo; `telas.py` tem a ficha de cada tela) | — |
 
-Os scripts leem os protótipos, a planilha, os PDFs históricos e o modelo de `Contexto/` e `Entregas/`. A geração grava as versões do capítulo em `Entregas/Produção Técnica/`.
+Os scripts leem os protótipos, a planilha, os PDFs históricos e o modelo de `docs/producao-tecnica/fontes/` e `Entregas/`. A geração grava as versões do capítulo em `Entregas/Produção Técnica/`.
 
 ## Onde cada item do checklist aparece
 

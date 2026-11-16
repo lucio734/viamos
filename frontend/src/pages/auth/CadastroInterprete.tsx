@@ -1,6 +1,6 @@
 /**
  * RF04 / RF05 / RF45 / RNF09 / RNF36 — Cadastro profissional do intérprete de Libras.
- * Protótipo de referência: Contexto/Arquivos Stitch/code (17).html ("Cadastro Profissional — Novo Cadastro"),
+ * Protótipo de referência: docs/producao-tecnica/fontes/stitch/code (17).html ("Cadastro Profissional — Novo Cadastro"),
  * completo com endereço-base no mapa (Leaflet), raio de atuação (≤ 15 km), número e upload real do certificado
  * (clique ou arrastar/soltar, PDF/JPG/PNG ≤ 5 MB em base64) e consentimentos LGPD.
  */

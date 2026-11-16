@@ -5,7 +5,7 @@ Fontes de conteúdo (todas no repositório):
   - figuras geradas do código ............ docs/producao-tecnica/figuras/        (docs/diagramas, npm run figuras)
   - diagramas das entregas anteriores .... docs/producao-tecnica/figuras-entregas/ (extrair_figuras_entregas.py)
   - capturas das telas ................... docs/producao-tecnica/telas/           (capturar_telas.mjs)
-  - protótipos Stitch .................... Contexto/Arquivos Stitch/            (somente leitura)
+  - protótipos Stitch .................... docs/producao-tecnica/fontes/stitch/            (somente leitura)
   - requisitos ........................... Entregas/Engenharia de Requisitos/ENTREGA VIAMOS COMPLETA.xlsx (somente leitura)
   - dados extraídos do código ............ docs/diagramas/dados/{modelo,extracao}.json
 
@@ -29,7 +29,7 @@ ENTREGA = RAIZ / 'Entregas' / 'Produção Técnica'
 FIG = PT / 'figuras'
 FIG_ENT = PT / 'figuras-entregas'
 TELAS = PT / 'telas'
-STITCH = next(p for p in (RAIZ / 'Contexto').iterdir() if p.name.startswith('Arquivos Stitch'))
+STITCH = PT / 'fontes' / 'stitch'
 PLANILHA = RAIZ / 'Entregas' / 'Engenharia de Requisitos' / 'ENTREGA VIAMOS COMPLETA.xlsx'
 REPO = 'https://github.com/lucio734/viamos'
 # P-01 (docs/DECISOES.md): link público do protótipo navegável no Figma. Preencha aqui ou na variável de ambiente
@@ -610,7 +610,7 @@ def diagramas(d, ctx):
     ])
     d.tabela('Ferramentas CASE e artefatos produzidos', ['Ferramenta', 'Uso', 'Artefato'], [
         ['diagrams.net (draw.io)', 'Modelagem UML de casos de uso e classes', '`Entregas/30_09/Viamos_Diagramas_Editaveis.drawio`'],
-        ['Google Stitch', 'Protótipo de alta fidelidade', '`Contexto/Arquivos Stitch/`'],
+        ['Google Stitch', 'Protótipo de alta fidelidade', '`docs/producao-tecnica/fontes/stitch/`'],
         ['Drizzle ORM e Drizzle Kit', 'Modelo físico e migrações SQL', '`backend/src/models/schema.ts`, `backend/drizzle/`'],
         ['Compilador TypeScript', 'Extração de rotas, navegação e endpoints', '`docs/diagramas/lib/extrair.mjs`'],
         ['Mermaid CLI', 'Renderização dos diagramas gerados', '`docs/diagramas/fontes/*.mmd` → `docs/producao-tecnica/figuras/`'],

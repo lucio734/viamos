@@ -47,11 +47,11 @@ com duração real → pagamento → Comprovante de Acessibilidade Garantida (PD
 bilateral. Backoffice aprova a documentação (Prolibras ou equivalente) dos intérpretes.
 
 Fontes de verdade (todas no repositório, pasta `Contexto/` e `Entregas/`, **que não devem ser alteradas**):
-- `Contexto/ARQUIVOS .MD/Briefing_Projeto_Viamos.md` — 45 RF, 45 RNF, 24 histórias de usuário, entidades, estados, regras.
-- `Contexto/ARQUIVOS .MD/prd_projeto_v_amos.md` e `context.md_projeto_v_amos.md` — PRD e contexto.
-- `Contexto/Arquivos Stitch/` — 12 telas prototipadas (HTML + PNG) e `DESIGN.md` (design system).
-- `Contexto/DOCUMENTAÇÃO REPOSITÓRIO/DOC.txt` — os 28 itens do capítulo "Produção Técnica".
-- `Contexto/Auxílio Vibecoding/` — `Dossie_Checklist_Vibe_Coding.html` (50 critérios do professor),
+- `docs/producao-tecnica/fontes/referencias/Briefing_Projeto_Viamos.md` — 45 RF, 45 RNF, 24 histórias de usuário, entidades, estados, regras.
+- `docs/producao-tecnica/fontes/referencias/prd_projeto_v_amos.md` e `context.md_projeto_v_amos.md` — PRD e contexto.
+- `docs/producao-tecnica/fontes/stitch/` — 12 telas prototipadas (HTML + PNG) e `DESIGN.md` (design system).
+- `Entregas/Produção Técnica/DOC.txt` — os 28 itens do capítulo "Produção Técnica".
+- `docs/producao-tecnica/fontes/metodologia/` — `Dossie_Checklist_Vibe_Coding.html` (50 critérios do professor),
   `PROMPT AGENTES.docx`, `labProt.html`, `Software Development Checklist 2026…html`. Os resultados da avaliação estão na [matriz de verificações](../docs/VERIFICACOES.md).
 - `CLAUDE/AGENTS.md` e `CLAUDE/CLAUDE.md` — **regras obrigatórias para qualquer IA** (leia antes de começar).
 - `Entregas/` — entregas de 02/09 (requisitos), 07/10 (casos de uso e classes) e 11/11 (contexto, BPMN, DFD, estados) + `modelo_entrega.docx`.
@@ -202,7 +202,7 @@ Telas do F1 (ordem sugerida; commit a cada duas):
    `/redefinir-senha/:token` → `POST /api/auth/redefinir-senha` (RF07).
 2. `/cadastro` — seleção de perfil (dois cartões: usuário surdo / intérprete) (RF02).
 3. `/cadastro/cliente` → `POST /api/cadastro/cliente` (campos e validações em
-   `backend/src/controllers/cadastro.controller.ts`, `esquemaCadastroCliente`); protótipo `Contexto/Arquivos Stitch/code (7).html` (RF03).
+   `backend/src/controllers/cadastro.controller.ts`, `esquemaCadastroCliente`); protótipo `docs/producao-tecnica/fontes/stitch/code (7).html` (RF03).
 4. `/cadastro/interprete` → `POST /api/cadastro/interprete` (`esquemaCadastroInterprete`): exige `latitudeBase/longitudeBase`
    (criar `src/components/Mapa.tsx` com react-leaflet, já instalado, para o usuário marcar o ponto) e o certificado em
    base64 `{ nome, mime, conteudoBase64 }` (PDF/JPG/PNG ≤ 5 MB); protótipo `code (17).html` (RF04/RF05).

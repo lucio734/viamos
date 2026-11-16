@@ -3,6 +3,10 @@
 Documento de continuidade: o que foi **concluído e verificado**, o que está **pendente ou não testado**, quem fez
 (papel/agente), arquivos relevantes, decisões, riscos e próximos passos. Atualizar ao fim de cada bloco.
 
+## Transferência das fontes da Produção Técnica
+
+O roteiro do professor passou para a pasta da entrega. Os originais do Stitch, as referências do projeto e os materiais de metodologia passaram para as fontes da Produção Técnica. Os arquivos foram transferidos por identidade de conteúdo no Git. O gerador, os índices e as instruções passaram a usar os novos caminhos. Os relatórios temporários continuam reunidos em CLAUDE durante a implementação e a validação final. [Fontes](producao-tecnica/fontes/README.md) · [Entrega](../Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/README.md)
+
 ## Preparação final da documentação
 
 O README aponta para as cinco seções da Produção Técnica, a edição em DOCX e PDF e os comandos de instalação, execução e validação. As instruções permanentes estão em `AGENTS.md` e no índice de documentação. Os dois relatórios de passagem de bastão foram reunidos em `CLAUDE/`, que pode ser retirada depois da implementação, dos testes finais e da validação do deploy. O registro de trabalho, as fontes do Stitch e os arquivos usados na geração do capítulo ficam disponíveis para consulta e atualização da entrega.
@@ -11,7 +15,7 @@ A equipe confirmou que produziu as telas no Stitch. O protótipo navegável no F
 
 ## Revisão dos arquivos de contexto
 
-Foi removida a cópia duplicada de `DESIGN.md` em `Contexto/ARQUIVOS .MD/`. As duas cópias tinham o mesmo conteúdo no Git. O README aponta para o arquivo junto aos protótipos Stitch.
+Foi removida a cópia duplicada de `DESIGN.md` em `docs/producao-tecnica/fontes/referencias/`. As duas cópias tinham o mesmo conteúdo no Git. O README aponta para o arquivo junto aos protótipos Stitch.
 
 A Produção Técnica usa as imagens originais do Stitch no gerador e aponta para o roteiro da disciplina em `DOC.txt`. O briefing, o PRD e as fontes de auxílio ao vibecoding continuam disponíveis para conferir requisitos e decisões. A revisão dos arquivos de passagem de bastão fica para o encerramento do aplicativo e a validação das pendências registradas no projeto.
 
@@ -88,7 +92,7 @@ A revisão começou em `089774a`, com `main` e `origin/main` iguais no clone e s
 |---|---|
 | Aplicação e arquitetura | React/Vite, API MVC Express/Drizzle, PostgreSQL com 27 tabelas e duas migrações. O sitemap soma 33 telas (8 públicas, 9 de cliente, 10 de intérprete, 4 de backoffice, 2 comuns), além do redirecionamento coringa. Os registros históricos de 23 telas não representam a contagem atual. |
 | Requisitos e design | Foram consultados o Briefing, PRD, design e protótipos Stitch, as duas planilhas de requisitos, os PDFs de UML e Modelagem e o modelo DOCX. A planilha consolidada contém 45 RF, 45 RNF, associações, projeto linear e histórias. A presença de uma tela indica implementação da rota. A evidência de cada comportamento depende da revisão e dos testes correspondentes. |
-| Produção Técnica | Já existem diagramas Mermaid, PDFs de contexto/BPMN/DFD/estados e arquivos UML/CASE da equipe. `Contexto/DOCUMENTAÇÃO REPOSITÓRIO/DOC.txt` e o Dossiê descrevem os itens 1–28. O `modelo_entrega.docx` mostra a sequência de introdução, figura numerada com fonte, explicação, tabela quando aplicável e conclusão. A consolidação final com figuras, tabelas por caso de uso e link do Figma segue pendente. |
+| Produção Técnica | Já existem diagramas Mermaid, PDFs de contexto/BPMN/DFD/estados e arquivos UML/CASE da equipe. `Entregas/Produção Técnica/DOC.txt` e o Dossiê descrevem os itens 1–28. O `modelo_entrega.docx` mostra a sequência de introdução, figura numerada com fonte, explicação, tabela quando aplicável e conclusão. A consolidação final com figuras, tabelas por caso de uso e link do Figma segue pendente. |
 | Operação e qualidade | CI, OpenAPI parcial, guia de deploy, SLA, plano de testes, manual e roteiro já existiam no commit de base. O roteiro não comprova ensaio na hospedagem. Publicação, HTTPS, metas de carga/disponibilidade e cobertura integral de acessibilidade ainda precisam de evidências. |
 
 ### Correções desta etapa
@@ -214,7 +218,7 @@ A revisão começou em `089774a`, com `main` e `origin/main` iguais no clone e s
 
 - **Bloco 0 (11–12/11):** executado por **um único agente (Claude)**, sob direção do Gustavo, acumulando os papéis de Back-end, Dados, Front-end, QA e Security de forma sequencial, sem subagentes independentes.
 - **Continuação de 15/11 (correções RF17–RF27/RF36, Blocos P1 e P2):** executada por **um único agente (Claude)**, sob direção do Gustavo, acumulando em sequência Back-end, Dados, QA, Documentação e DevOps, sem subagentes independentes. Detalhes e verificações no início deste documento.
-- **Bloco F1 (12/11):** executado sob coordenação do agente principal (atuando como **Scrum Master / Front-end / Back-end**) com **revisão independente por 3 subagentes especializados** instanciados via `define_subagent` / `invoke_subagent` conforme `Contexto/Auxílio Vibecoding/PROMPT AGENTES.docx` e `docs/EQUIPE_AGENTES.md`:
+- **Bloco F1 (12/11):** executado sob coordenação do agente principal (atuando como **Scrum Master / Front-end / Back-end**) com **revisão independente por 3 subagentes especializados** instanciados via `define_subagent` / `invoke_subagent` conforme `docs/producao-tecnica/fontes/metodologia/PROMPT AGENTES.docx` e `docs/EQUIPE_AGENTES.md`:
   1. **`revisor_ux_ui` (UX/UI & Accessibility Reviewer):** conferiu todas as telas do Bloco F1 contra `DESIGN.md`, `code (7).html`, `code (17).html` e WCAG 2.2 AA (RNF11–RNF16, RNF19, RNF45). Parecer: **APROVADO** com 5 recomendações de refinamento (`min-h-touch` no slider e links secundários; `text-base` 16 px nos textos descritivos de notificações e suporte), todas aplicadas (`B-006`).
   2. **`revisor_qa_security` (QA & Security Reviewer):** auditou contratos Frontend ⇄ Zod, máscaras, estados de erro e segurança OWASP ASVS. Identificou 4 pontos de atenção imediatos (`B-002`: *rollover* de datas inválidas como `2000-02-31` gerando 500 no banco; `B-003`: ausência de `.max(72)` nas senhas de redefinição/alteração; `B-004`: chaves aninhadas `certificacao.arquivo.*` no erro de upload e `.max(7_000_000)` no Base64; `B-005`: ícone `SOLICITACAO` e `try/catch` em `JSON.parse`), todos corrigidos e cobertos por teste automatizado em `backend/tests/excecoes.test.ts`. Também listou melhorias adicionais de defesa em profundidade para o Bloco F4 (validação de *magic bytes* do certificado, revogação de demais sessões em `alterarSenha` e download de PDF via Blob para evitar token na query string).
   3. **`revisor_po` (Product Owner Reviewer):** auditou as 7 rotas contra `Briefing_Projeto_Viamos.md` (RF02–RF07, RF34, RF42, RF45; US01, US02, US04, US24) e `docs/PLANO_BLOCOS.md`. Parecer: **6 rotas ACEITAS e 1 ACEITA COM RESSALVA** (`/cadastro/interprete`: o campo de foto de perfil do RF04 fica alocado na tela `/interprete/perfil` do Bloco F3, conforme planejado em `PLANO_BLOCOS.md`).

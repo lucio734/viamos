@@ -4,13 +4,13 @@ Projeto da disciplina **Engenharia de Software e Arquitetura de Sistemas** da FE
 
 O Víamos conecta pessoas surdas a intérpretes de Libras para atendimentos presenciais. O fluxo inclui solicitação com estimativa, distribuição por proximidade, aceite exclusivo, sala de atendimento, check-in por QR Code e geolocalização, pagamento simulado e comprovante verificável.
 
-**Produção Técnica.** A entrega segue as cinco seções do roteiro do professor. O capítulo completo está disponível em DOCX e PDF, com os diagramas, as tabelas e as fontes organizados por seção. A equipe prototipou as telas no Stitch. O link do protótipo navegável no Figma, solicitado no roteiro, segue como pendência acadêmica. [Índice de entregas](Entregas/README.md) · [Produção Técnica](Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/README.md) · [Roteiro do professor](Contexto/DOCUMENTA%C3%87%C3%83O%20REPOSIT%C3%93RIO/DOC.txt)
+**Produção Técnica.** A entrega segue as cinco seções do roteiro do professor. O capítulo completo está disponível em DOCX e PDF, com os diagramas, as tabelas e as fontes organizados por seção. A equipe prototipou as telas no Stitch. O link do protótipo navegável no Figma, solicitado no roteiro, segue como pendência acadêmica. [Índice de entregas](Entregas/README.md) · [Produção Técnica](Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/README.md) · [Roteiro do professor](Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/DOC.txt)
 
 **Aplicativo.** O repositório registra o ambiente publicado e as etapas que faltam para a entrega final. A implementação, os testes finais e a publicação da versão concluída seguem no plano de trabalho. [Plano e pendências](docs/PLANO_BLOCOS.md) · [Registro de trabalho](docs/REGISTRO_TRABALHO.md)
 
 | Camada | Tecnologia | Onde consultar |
 |---|---|---|
-| Interface web | React 19, Vite, TypeScript, Tailwind CSS e Leaflet | [Frontend](frontend/) · [Design system](Contexto/Arquivos%20Stitch/DESIGN.md) |
+| Interface web | React 19, Vite, TypeScript, Tailwind CSS e Leaflet | [Frontend](frontend/) · [Design system](docs/producao-tecnica/fontes/stitch/DESIGN.md) |
 | API REST em MVC | Node.js 22, Express 5, TypeScript, Zod e sessões JWT | [Backend](backend/) · [OpenAPI](docs/api/openapi.yaml) |
 | Banco | PostgreSQL e Drizzle ORM | [Esquema](backend/src/models/schema.ts) · [Migrações](backend/drizzle/) |
 | Hospedagem | Vercel, Render Web Service e Render PostgreSQL | [Guia de deploy](docs/DEPLOY.md) |
@@ -95,7 +95,7 @@ O Render usa o Blueprint do repositório e aplica as migrações com `npm run de
 | [`frontend/`](frontend/) | Interface, rotas, autenticação, componentes e cliente da API |
 | [`backend/`](backend/) | Serviços, controladores, banco, migrações e testes da API |
 | [`Entregas/`](Entregas/README.md) | Produção Técnica nas cinco seções do roteiro, documentos anteriores e modelo da disciplina |
-| [`Contexto/`](Contexto/) | Roteiro, requisitos de referência, protótipos Stitch e fontes usadas na produção da documentação |
+| [Fontes da Produção Técnica](docs/producao-tecnica/fontes) | Roteiro, requisitos de referência, protótipos Stitch e fontes usadas na produção da documentação |
 | [`docs/`](docs/README.md) | Como regerar a Produção Técnica, diagramas, documentação da API, manual e evidências de validação |
 
 ## 8. Fluxo de trabalho com Git

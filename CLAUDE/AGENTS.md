@@ -8,10 +8,9 @@ qualquer parte do projeto.
 
 Antes de iniciar uma tarefa:
 
-1. Analise as pastas de contexto e de entregas, incluindo os arquivos
+1. Analise as fontes da Produção Técnica e as entregas, incluindo os arquivos
    relevantes para compreender o projeto e a tarefa.
-2. Dê atenção especial à pasta "auxilio vibecoding". Localize-a mesmo que
-   o nome use acentos, letras maiúsculas ou uma grafia ligeiramente diferente.
+2. Consulte as referências de metodologia em `docs/producao-tecnica/fontes/metodologia/`.
 3. Identifique as exigências, o modelo e as entregas solicitados pelo
    professor nos materiais do projeto e siga-os estritamente.
 4. Confira o estado atual do repositório e os trabalhos existentes antes
@@ -22,7 +21,7 @@ do aplicativo. Identifique e documente eventuais divergências.
 
 ## 2. Fontes obrigatórias para o desenvolvimento
 
-Localize e leia os seguintes arquivos da pasta de auxílio ao vibecoding:
+Localize e leia os seguintes arquivos da pasta `docs/producao-tecnica/fontes/metodologia/`:
 
 - "PROMPT AGENTES"
 - "labProt"
@@ -72,7 +71,7 @@ conciliada.
 
 ## 5. Preservação dos arquivos e do trabalho da equipe
 
-- Preserve as pastas de contexto e entregas e os arquivos existentes.
+- Preserve as fontes da Produção Técnica e os arquivos de entrega existentes.
 - Respeite alterações locais e o trabalho em andamento dos integrantes.
 - Não sobrescreva, exclua ou reorganize esses materiais por iniciativa própria.
 - Antes de integrar código ou criar um commit, confira as alterações

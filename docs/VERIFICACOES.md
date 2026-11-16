@@ -1,6 +1,6 @@
 # Verificação de prompts, métodos e processos (AGENTS.md §2 e §4)
 
-Registro das verificações feitas contra os três documentos obrigatórios da pasta `Contexto/Auxílio Vibecoding/`:
+Registro das verificações feitas contra os três documentos obrigatórios da pasta `docs/producao-tecnica/fontes/metodologia/`:
 **labProt.html** (PE//LAB — Prompt Engineering para Desenvolvedores), **Software Development Checklist 2026: Phases &
 Deliverables.html** (SKM Group) e **Dossie_Checklist_Vibe_Coding.html** (50 critérios do professor). Para cada verificação:
 o que foi conferido, resultado, evidência e pendência. Atualizar ao fim de cada bloco.
@@ -26,11 +26,11 @@ Legenda: ✅ atendido e verificado · 🟡 parcialmente atendido · ⬜ pendente
 
 | Fase | Entregável exigido | Situação no Víamos | Evidência / onde ficará |
 |---|---|---|---|
-| 1 Discovery & Planning | SRS (requisitos funcionais e não funcionais) | ✅ entregue em 02/09 (45 RF, 45 RNF, matriz RF×RNF, histórias) | `Entregas/Engenharia de Requisitos/ENTREGA VIAMOS COMPLETA.xlsx`, `Contexto/ARQUIVOS .MD/Briefing_Projeto_Viamos.md` |
+| 1 Discovery & Planning | SRS (requisitos funcionais e não funcionais) | ✅ entregue em 02/09 (45 RF, 45 RNF, matriz RF×RNF, histórias) | `Entregas/Engenharia de Requisitos/ENTREGA VIAMOS COMPLETA.xlsx`, `docs/producao-tecnica/fontes/referencias/Briefing_Projeto_Viamos.md` |
 | 1 | Roadmap e cronograma | ✅ plano em blocos até 21/11 | `docs/PLANO_BLOCOS.md` |
 | 1 | Wireframes de baixa fidelidade | ✅ o documento apresenta as 30 telas (capturas do aplicativo com dados fictícios) com ficha por tela: descrição, componentes, requisitos e caso de uso; os protótipos Stitch aparecem na prototipação | `docs/producao-tecnica/` (seções 1.2 e 1.3) |
 | 1 | Estimativa de orçamento | ➖ projeto acadêmico sem custo; o documento registra que toda a pilha usa planos gratuitos com HTTPS | `docs/producao-tecnica/` (seção 2.2) |
-| 2 Design & Prototyping | Mockups de alta fidelidade | ✅ 12 telas Stitch (HTML + PNG) | `Contexto/Arquivos Stitch/` |
+| 2 Design & Prototyping | Mockups de alta fidelidade | ✅ 12 telas Stitch (HTML + PNG) | `docs/producao-tecnica/fontes/stitch/` |
 | 2 | Protótipo interativo (clicável) | ⬜ link do Figma pendente (importar do Stitch) | Pendência P-01 em `docs/DECISOES.md` |
 | 2 | Design system / style guide | ✅ `DESIGN.md` aplicado como tokens do Tailwind | `frontend/src/index.css` |
 | 3 Core Development | Acesso ao repositório de código | ✅ repositório público no GitHub com commits publicados na `main` | `README.md` §8 |
@@ -63,7 +63,7 @@ Estado por item, com a evidência atual. Itens 1–28 são o documento "Produç�
 | 23, 25, 28 | Estados, DFD, contexto | ✅ figuras da entrega de 11/11 + máquinas de estado geradas dos enums (solicitação, atendimento, pagamento, habilitação) e diagrama de contexto gerado; divergência do DFD P5 registrada (P-06) | `docs/producao-tecnica/` (5.4, 5.6, 5.9) |
 | 24, 26, 27 | Operação, processos de telas, ferramenta CASE | ✅ 4 diagramas de operação (aceite, check-in, encerramento, pagamento/comprovante), transições de telas e ferramentas CASE com o gerador do próprio repositório | `docs/producao-tecnica/` (5.5, 5.7, 5.8) |
 | 29 | Rotas = sitemap | ✅ 33 rotas com componentes reais conferidas no código e no Mermaid. A rota coringa redireciona para o splash | `frontend/src/rotas.tsx`, `docs/diagramas/DIAGRAMAS_PRODUCAO_TECNICA.md` |
-| 30 | Componentes fiéis aos wireframes | 🟡 telas implementadas. A evidência de aderência ao protótipo final depende dos wireframes e do link do Figma | `frontend/src/pages/`, `Contexto/Arquivos Stitch/` |
+| 30 | Componentes fiéis aos wireframes | 🟡 telas implementadas. A evidência de aderência ao protótipo final depende dos wireframes e do link do Figma | `frontend/src/pages/`, `docs/producao-tecnica/fontes/stitch/` |
 | 31 | Responsividade | 🟡 pagamento conferido a 320, 768 e 1280 px no Chrome. Falta evidência sistemática das demais telas e de dispositivos físicos | `docs/TESTES.md` |
 | 32 | Estados visuais (carregando/sucesso/erro/vazio) | 🟡 componentes disponíveis e fluxos principais exercitados. Falta cobertura por tela | `frontend/src/components/ui.tsx`, `pages/*` |
 | 33 | Validação e máscaras | ✅ máscaras (`formato.ts`) + validação no cliente (`validacao.ts`) + validação Zod no servidor | `frontend/src/utils/{formato,validacao}.ts`, `backend/src/controllers/*` |
@@ -87,7 +87,7 @@ Estado por item, com a evidência atual. Itens 1–28 são o documento "Produç�
 
 | Divergência | Materiais | Tratamento |
 |---|---|---|
-| Janela de check-in: mockup cita 15 min; briefing diz "a definir" | `Contexto/Arquivos Stitch/code (1).html` × briefing | Adotado 30 min como parâmetro (D-05); **grupo decide** |
+| Janela de check-in: mockup cita 15 min; briefing diz "a definir" | `docs/producao-tecnica/fontes/stitch/code (1).html` × briefing | Adotado 30 min como parâmetro (D-05); **grupo decide** |
 | Diagrama de classes tem `Local` como classe separada; o banco absorveu os campos em `solicitacoes` | `Entregas/30_09` × `schema.ts` | Documentado em `docs/REGISTRO_TRABALHO.md` §4; o DER é gerado do schema e a diferença está na tabela de divergências da seção 5.2 do documento |
 | O DFD P5 libera o comprovante no encerramento; D-10 e a aplicação o emitem após a confirmação do pagamento | `Entregas/Viamos_Modelagem_Sistemas.pdf` × `pagamento.service.ts` | Registrado no documento (seção 5.6) e em `docs/DECISOES.md` P-06; **grupo decide** |
 | Disponibilidade semanal era gravada, mas não participava da distribuição; agenda vazia sem significado definido | BPMN 3 (11/11) × código anterior | Regra única D-20 (agenda vazia = disponível sempre; vale o horário de início) aplicada; **grupo valida** (P-05) |

@@ -1,6 +1,6 @@
 /**
  * RF03 / RF45 / RNF09 — Cadastro do usuário surdo (cliente).
- * Protótipo de referência: Contexto/Arquivos Stitch/code (7).html ("Crie sua conta"),
+ * Protótipo de referência: docs/producao-tecnica/fontes/stitch/code (7).html ("Crie sua conta"),
  * acrescido de telefone e consentimentos LGPD exigidos pelo RF03/RNF09 (ver Briefing §Inconsistências).
  */
 import { useState, type FormEvent } from 'react';

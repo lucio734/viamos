@@ -3,7 +3,7 @@
 Cada bloco fecha com uma alteração verificada na `main` e evidências no registro de trabalho. A equipe usa `CLAUDE/` para os relatórios temporários durante a implementação.
 
 Regras obrigatórias de `AGENTS.md` que valem para todos os blocos:
-- **Preservar** `Contexto/` e `Entregas/`: não mover, renomear, excluir nem reorganizar; material novo vai em `docs/`.
+- **Preservar** `docs/producao-tecnica/fontes/` e `Entregas/`: não mover, renomear, excluir nem reorganizar; material novo vai em `docs/`.
 - Ler as fontes obrigatórias (`PROMPT AGENTES`, `labProt`, `Software Development Checklist 2026`, `Dossie_Checklist_Vibe_Coding`) e **registrar** as verificações em `docs/VERIFICACOES.md`.
 - Trabalhar com a **equipe de agentes** de `docs/EQUIPE_AGENTES.md` (subagentes no Claude; papéis em sequência no ChatGPT) e declarar honestamente quando um bloco foi feito por um agente só.
 - Ao fechar o bloco, atualizar `docs/REGISTRO_TRABALHO.md` (feito/verificado × pendente, contribuições por papel, divergências) e nunca commitar `.env`, segredos ou arquivos fora da tarefa.
@@ -69,7 +69,7 @@ Convenções para todos os blocos F:
 - Componentes novos compartilhados vão em **arquivos novos** em `frontend/src/components/` (ex.: `Mapa.tsx`, `LeitorQr.tsx`, `Passos.tsx`); `ui.tsx` só recebe acréscimos pequenos.
 - Toda tela tem os 4 estados: carregando (`<Carregando/>`), erro (`<EstadoErro/>` com tentar novamente), vazio (`<EstadoVazio/>`) e sucesso (`<Alerta tipo="sucesso">`).
 - Máscaras e formatadores já existem em `frontend/src/utils/formato.ts`; os erros por campo vêm em `ErroApi.porCampo`.
-- Fidelidade ao protótipo: abrir o HTML/PNG indicado em `Contexto/Arquivos Stitch/` (o `EmConstrucao` de cada rota já diz qual) e ao `DESIGN.md`.
+- Fidelidade ao protótipo: abrir o HTML/PNG indicado em `docs/producao-tecnica/fontes/stitch/` (o `EmConstrucao` de cada rota já diz qual) e ao `DESIGN.md`.
 
 ### Bloco F1 — Autenticação, cadastros, notificações e suporte (L)
 Pasta: `frontend/src/pages/auth/`, `pages/comum/`.
@@ -132,7 +132,7 @@ Pasta: `docs/diagramas/` (fontes Mermaid/Graphviz + scripts) → PNGs em `docs/p
 6. **Diagrama de processos de telas** (#26): transições entre telas por evento (gerado do sitemap + eventos).
 
 ### Bloco P2 — Consolidação do capítulo (G monta; L escreve textos)
-Pasta: `docs/producao-tecnica/` — um `.md` por item do `Contexto/DOCUMENTAÇÃO REPOSITÓRIO/DOC.txt`, no formato do `Entregas/modelo_entrega.docx`
+Pasta: `docs/producao-tecnica/` — um `.md` por item do `Entregas/Produção Técnica/DOC.txt`, no formato do `Entregas/modelo_entrega.docx`
 (texto introdutório → figura → "Fonte: Autoria própria apoiado por IA generativa" → explicação (i), (ii)… → tabela → conclusão).
 - L: textos introdutórios (#1, #2, #6, #10, #15, #19), tabela de requisitos (do xlsx), tabela por caso de uso para cada tela (#20), descrição dos wireframes (#4) tela a tela.
 - G: montagem das figuras já existentes (extrair dos PDFs de 07/10 e 11/11), DER/sitemap/arquiteturas do P1, script `docs/producao-tecnica/build/gerar_docx.py` que gera o `.docx` final com a formatação do modelo.

@@ -1,6 +1,6 @@
 # Equipe de agentes — aplicação do "PROMPT AGENTES"
 
-Fonte obrigatória: `Contexto/Auxílio Vibecoding/PROMPT AGENTES.docx` (exigido por `AGENTS.md`, §3).
+Fonte obrigatória: `docs/producao-tecnica/fontes/metodologia/PROMPT AGENTES.docx` (exigido por `AGENTS.md`, §3).
 O prompt pede uma software house com especialistas de alto nível (mestrado/doutorado, anos de experiência):
 **PO, Scrum Master, Front-end, UX/UI, Back-end, Dados (DBA), CI/CD, DevOps/SRE, QA, Security, Business Analytics**
 e um **Decisor** para desempates. Abaixo, a equipe instanciada para o Víamos e como ela é usada no trabalho com IA.
@@ -63,7 +63,7 @@ ENTRADA:
 Exemplos de uso por papel:
 - **QA**: "Execute `npm test` em `backend/`; depois escreva 3 casos de exceção que ainda não existem para RF32 e implemente-os."
 - **Security**: "Revise `backend/src/middlewares/auth.ts` e `auth.service.ts` contra OWASP ASVS V2/V3 (autenticação e sessão)."
-- **UX/UI**: "Compare `frontend/src/pages/cliente/Hub.tsx` com `Contexto/Arquivos Stitch/code (9).html` e liste divergências visuais."
+- **UX/UI**: "Compare `frontend/src/pages/cliente/Hub.tsx` com `docs/producao-tecnica/fontes/stitch/code (9).html` e liste divergências visuais."
 - **PO**: "Para cada rota de `frontend/src/rotas.tsx`, confirme o RF atendido e marque o que falta."
 - **Decisor**: "Dados os pareceres de Back-end e Dados sobre <tema>, decida e redija a linha para `docs/DECISOES.md`."
 

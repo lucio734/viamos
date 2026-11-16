@@ -2,7 +2,7 @@
 @import 'leaflet/dist/leaflet.css';
 
 /*
- * Víamos Design System → tokens do Tailwind v4 (fonte: docs/contexto/arquivos-md/DESIGN.md).
+ * Víamos Design System → tokens do Tailwind v4 (fonte: docs/producao-tecnica/fontes/stitch/DESIGN.md).
  * Classes geradas: bg-primary, text-on-primary, bg-surface-container, border-outline-variant, text-status-online...
  * RNF45: cor primária #1a2e44 (primary-container) e navegação inferior persistente.
  */

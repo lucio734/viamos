@@ -8,4 +8,4 @@
 | Continuidade | [Registro de trabalho](REGISTRO_TRABALHO.md), [decisões e pendências](DECISOES.md), [bugs](BUGS.md) |
 | Avaliação | [Verificações do Dossiê](VERIFICACOES.md), [plano de blocos](PLANO_BLOCOS.md) e [equipe de agentes](EQUIPE_AGENTES.md) |
 
-O [índice de entregas acadêmicas](../Entregas/README.md) reúne o modelo da disciplina e os materiais de requisitos, UML e modelagem. O capítulo segue o [roteiro da disciplina](../Contexto/DOCUMENTA%C3%87%C3%83O%20REPOSIT%C3%93RIO/DOC.txt).
+O [índice de entregas acadêmicas](../Entregas/README.md) reúne o modelo da disciplina e os materiais de requisitos, UML e modelagem. O capítulo segue o [roteiro da disciplina](../Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/DOC.txt).

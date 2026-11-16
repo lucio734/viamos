@@ -9,7 +9,7 @@ export interface InfoTela {
   titulo: string;
   requisitos: string;
   endpoints: string[];
-  prototipo?: string; // arquivo em Contexto/Arquivos Stitch (na raiz do repositório)
+  prototipo?: string; // arquivo em docs/producao-tecnica/fontes/stitch (na raiz do repositório)
 }
 
 export function EmConstrucao({ info }: { info: InfoTela }) {
@@ -44,7 +44,7 @@ export function EmConstrucao({ info }: { info: InfoTela }) {
           <div>
             <dt className="font-semibold">Protótipo de referência</dt>
             <dd>
-              <code>Contexto/Arquivos Stitch/{info.prototipo}</code>
+              <code>docs/producao-tecnica/fontes/stitch/{info.prototipo}</code>
             </dd>
           </div>
         )}
