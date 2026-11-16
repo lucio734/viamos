@@ -44,11 +44,12 @@ components:
 paths:
   /health:
     get:
-      summary: Verificação de que a API responde (RNF04)
+      summary: Verificação da prontidão da API e do PostgreSQL (RNF04)
       tags: [Público]
       responses:
         '200':
-          description: Serviço operacional
+          description: API operacional e PostgreSQL conectado
+        '503': { description: Banco de dados temporariamente indisponível }
   /comprovantes/{codigo}/verificar:
     get:
       summary: Verificação pública de autenticidade de comprovante (RF38)
@@ -214,6 +215,7 @@ paths:
   /solicitacoes/{id}:
     get:
       summary: Detalhe e linha do tempo da solicitação (RF18)
+      description: O intérprete elegível vê a demanda aberta sem telefone ou foto do cliente. Após o aceite, a ficha fica disponível ao cliente, ao intérprete alocado e à operação autorizada.
       tags: [Cliente]
       security: [{ bearerAuth: [] }]
       responses:
@@ -293,7 +295,7 @@ paths:
       responses:
         '201': { description: Atendimento alocado ao intérprete }
         '403': { description: Intérprete ainda não habilitado (RNF36) }
-        '409': { description: 'Demanda já aceita por outro intérprete (DEMANDA_INDISPONIVEL) ou conflito de horário (AGENDA_CONFLITANTE)' }
+        '409': { description: 'Demanda ou oferta indisponível (DEMANDA_INDISPONIVEL) ou conflito de horário (AGENDA_CONFLITANTE)' }
         '422': { description: 'Horário já passou (DEMANDA_EXPIRADA), fora do raio (FORA_DO_RAIO) ou fora da disponibilidade semanal (FORA_DA_DISPONIBILIDADE — D-20)' }
   /demandas/{id}/recusar:
     post:
@@ -301,7 +303,9 @@ paths:
       tags: [Intérprete]
       security: [{ bearerAuth: [] }]
       responses:
-        '204': { description: Demanda recusada }
+        '200': { description: Demanda recusada }
+        '409': { description: Demanda já saiu da busca }
+        '422': { description: Horário da demanda já passou }
   /interprete/configuracao:
     put:
       summary: Atualiza disponibilidade imediata (online/offline), raio ≤ 15 km, endereço-base e preço/hora (RF24, RNF27)

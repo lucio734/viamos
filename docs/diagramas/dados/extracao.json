@@ -1241,7 +1241,7 @@
       "validacao": null,
       "limiteTentativas": false,
       "requisitos": [],
-      "linha": 33
+      "linha": 34
     },
     {
       "metodo": "GET",
@@ -1255,7 +1255,7 @@
       "requisitos": [
         "RF38"
       ],
-      "linha": 34
+      "linha": 35
     },
     {
       "metodo": "POST",
@@ -1269,7 +1269,7 @@
       "requisitos": [
         "RF01"
       ],
-      "linha": 39
+      "linha": 55
     },
     {
       "metodo": "POST",
@@ -1283,7 +1283,7 @@
       "requisitos": [
         "RF08"
       ],
-      "linha": 40
+      "linha": 56
     },
     {
       "metodo": "GET",
@@ -1297,7 +1297,7 @@
       "requisitos": [
         "RF09"
       ],
-      "linha": 41
+      "linha": 57
     },
     {
       "metodo": "POST",
@@ -1311,7 +1311,7 @@
       "requisitos": [
         "RF07"
       ],
-      "linha": 42
+      "linha": 58
     },
     {
       "metodo": "POST",
@@ -1325,7 +1325,7 @@
       "requisitos": [
         "RF07"
       ],
-      "linha": 43
+      "linha": 59
     },
     {
       "metodo": "POST",
@@ -1337,7 +1337,7 @@
       "validacao": "auth.esquemaAlterarSenha",
       "limiteTentativas": false,
       "requisitos": [],
-      "linha": 44
+      "linha": 60
     },
     {
       "metodo": "POST",
@@ -1352,7 +1352,7 @@
         "RF02",
         "RF03"
       ],
-      "linha": 46
+      "linha": 62
     },
     {
       "metodo": "POST",
@@ -1368,7 +1368,7 @@
         "RF04",
         "RF05"
       ],
-      "linha": 47
+      "linha": 63
     },
     {
       "metodo": "GET",
@@ -1382,7 +1382,7 @@
       "requisitos": [
         "RF43"
       ],
-      "linha": 52
+      "linha": 68
     },
     {
       "metodo": "PUT",
@@ -1396,7 +1396,7 @@
       "requisitos": [
         "RF43"
       ],
-      "linha": 53
+      "linha": 69
     },
     {
       "metodo": "GET",
@@ -1410,7 +1410,7 @@
       "requisitos": [
         "RF45"
       ],
-      "linha": 54
+      "linha": 70
     },
     {
       "metodo": "PUT",
@@ -1424,7 +1424,7 @@
       "requisitos": [
         "RF45"
       ],
-      "linha": 55
+      "linha": 71
     },
     {
       "metodo": "GET",
@@ -1438,7 +1438,7 @@
       "requisitos": [
         "RF45"
       ],
-      "linha": 56
+      "linha": 72
     },
     {
       "metodo": "POST",
@@ -1452,7 +1452,7 @@
       "requisitos": [
         "RF45"
       ],
-      "linha": 57
+      "linha": 73
     },
     {
       "metodo": "GET",
@@ -1466,7 +1466,7 @@
       "requisitos": [
         "RF42"
       ],
-      "linha": 58
+      "linha": 74
     },
     {
       "metodo": "POST",
@@ -1478,7 +1478,7 @@
       "validacao": null,
       "limiteTentativas": false,
       "requisitos": [],
-      "linha": 59
+      "linha": 75
     },
     {
       "metodo": "POST",
@@ -1490,7 +1490,7 @@
       "validacao": null,
       "limiteTentativas": false,
       "requisitos": [],
-      "linha": 60
+      "linha": 76
     },
     {
       "metodo": "GET",
@@ -1502,7 +1502,7 @@
       "validacao": null,
       "limiteTentativas": false,
       "requisitos": [],
-      "linha": 65
+      "linha": 81
     },
     {
       "metodo": "POST",
@@ -1516,7 +1516,7 @@
       "requisitos": [
         "RF15"
       ],
-      "linha": 66
+      "linha": 82
     },
     {
       "metodo": "POST",
@@ -1530,7 +1530,7 @@
       "requisitos": [
         "RF10–RF16"
       ],
-      "linha": 67
+      "linha": 83
     },
     {
       "metodo": "GET",
@@ -1544,7 +1544,7 @@
       "requisitos": [
         "RF18"
       ],
-      "linha": 68
+      "linha": 84
     },
     {
       "metodo": "GET",
@@ -1558,7 +1558,7 @@
       "requisitos": [
         "RF18"
       ],
-      "linha": 69
+      "linha": 85
     },
     {
       "metodo": "POST",
@@ -1572,7 +1572,7 @@
       "requisitos": [
         "RF19"
       ],
-      "linha": 70
+      "linha": 86
     },
     {
       "metodo": "GET",
@@ -1586,7 +1586,7 @@
       "requisitos": [
         "RF35"
       ],
-      "linha": 72
+      "linha": 88
     },
     {
       "metodo": "POST",
@@ -1600,7 +1600,7 @@
       "requisitos": [
         "RF35"
       ],
-      "linha": 73
+      "linha": 89
     },
     {
       "metodo": "DELETE",
@@ -1614,7 +1614,7 @@
       "requisitos": [
         "RF35"
       ],
-      "linha": 74
+      "linha": 90
     },
     {
       "metodo": "GET",
@@ -1626,7 +1626,7 @@
       "validacao": null,
       "limiteTentativas": false,
       "requisitos": [],
-      "linha": 75
+      "linha": 91
     },
     {
       "metodo": "GET",
@@ -1638,7 +1638,7 @@
       "validacao": null,
       "limiteTentativas": false,
       "requisitos": [],
-      "linha": 76
+      "linha": 92
     },
     {
       "metodo": "POST",
@@ -1652,7 +1652,7 @@
       "requisitos": [
         "RF36"
       ],
-      "linha": 77
+      "linha": 93
     },
     {
       "metodo": "GET",
@@ -1664,7 +1664,7 @@
       "validacao": null,
       "limiteTentativas": false,
       "requisitos": [],
-      "linha": 82
+      "linha": 98
     },
     {
       "metodo": "GET",
@@ -1679,7 +1679,7 @@
         "RF20",
         "RF21"
       ],
-      "linha": 83
+      "linha": 99
     },
     {
       "metodo": "POST",
@@ -1693,7 +1693,7 @@
       "requisitos": [
         "RF22"
       ],
-      "linha": 84
+      "linha": 100
     },
     {
       "metodo": "POST",
@@ -1707,7 +1707,7 @@
       "requisitos": [
         "RF23"
       ],
-      "linha": 85
+      "linha": 101
     },
     {
       "metodo": "PUT",
@@ -1721,7 +1721,7 @@
       "requisitos": [
         "RF24"
       ],
-      "linha": 86
+      "linha": 102
     },
     {
       "metodo": "GET",
@@ -1735,7 +1735,7 @@
       "requisitos": [
         "RF25"
       ],
-      "linha": 87
+      "linha": 103
     },
     {
       "metodo": "PUT",
@@ -1749,7 +1749,7 @@
       "requisitos": [
         "RF25"
       ],
-      "linha": 88
+      "linha": 104
     },
     {
       "metodo": "GET",
@@ -1763,7 +1763,7 @@
       "requisitos": [
         "RF05"
       ],
-      "linha": 89
+      "linha": 105
     },
     {
       "metodo": "POST",
@@ -1777,7 +1777,7 @@
       "requisitos": [
         "RF05"
       ],
-      "linha": 90
+      "linha": 106
     },
     {
       "metodo": "GET",
@@ -1791,7 +1791,7 @@
       "requisitos": [
         "RF26"
       ],
-      "linha": 91
+      "linha": 107
     },
     {
       "metodo": "GET",
@@ -1803,7 +1803,7 @@
       "validacao": null,
       "limiteTentativas": false,
       "requisitos": [],
-      "linha": 92
+      "linha": 108
     },
     {
       "metodo": "POST",
@@ -1815,7 +1815,7 @@
       "validacao": "pagamento.esquemaContaBancaria",
       "limiteTentativas": false,
       "requisitos": [],
-      "linha": 93
+      "linha": 109
     },
     {
       "metodo": "GET",
@@ -1829,7 +1829,7 @@
       "requisitos": [
         "RF27"
       ],
-      "linha": 94
+      "linha": 110
     },
     {
       "metodo": "POST",
@@ -1843,7 +1843,7 @@
       "requisitos": [
         "RF27"
       ],
-      "linha": 95
+      "linha": 111
     },
     {
       "metodo": "GET",
@@ -1857,7 +1857,7 @@
       "requisitos": [
         "RF39"
       ],
-      "linha": 100
+      "linha": 116
     },
     {
       "metodo": "GET",
@@ -1869,7 +1869,7 @@
       "validacao": null,
       "limiteTentativas": false,
       "requisitos": [],
-      "linha": 101
+      "linha": 117
     },
     {
       "metodo": "GET",
@@ -1883,7 +1883,7 @@
       "requisitos": [
         "RF28"
       ],
-      "linha": 102
+      "linha": 118
     },
     {
       "metodo": "POST",
@@ -1898,7 +1898,7 @@
         "RF28",
         "RF30"
       ],
-      "linha": 103
+      "linha": 119
     },
     {
       "metodo": "GET",
@@ -1912,7 +1912,7 @@
       "requisitos": [
         "RF29"
       ],
-      "linha": 104
+      "linha": 120
     },
     {
       "metodo": "POST",
@@ -1926,7 +1926,7 @@
       "requisitos": [
         "RF29"
       ],
-      "linha": 105
+      "linha": 121
     },
     {
       "metodo": "GET",
@@ -1940,7 +1940,7 @@
       "requisitos": [
         "RF31"
       ],
-      "linha": 106
+      "linha": 122
     },
     {
       "metodo": "POST",
@@ -1955,7 +1955,7 @@
         "RF31",
         "RF32"
       ],
-      "linha": 107
+      "linha": 123
     },
     {
       "metodo": "POST",
@@ -1969,7 +1969,7 @@
       "requisitos": [
         "RF33"
       ],
-      "linha": 108
+      "linha": 124
     },
     {
       "metodo": "POST",
@@ -1983,7 +1983,7 @@
       "requisitos": [
         "RF34"
       ],
-      "linha": 109
+      "linha": 125
     },
     {
       "metodo": "POST",
@@ -1997,7 +1997,7 @@
       "requisitos": [
         "RF34"
       ],
-      "linha": 110
+      "linha": 126
     },
     {
       "metodo": "GET",
@@ -2012,7 +2012,7 @@
         "RF37",
         "RF38"
       ],
-      "linha": 111
+      "linha": 127
     },
     {
       "metodo": "POST",
@@ -2026,7 +2026,7 @@
       "requisitos": [
         "RF40"
       ],
-      "linha": 112
+      "linha": 128
     },
     {
       "metodo": "GET",
@@ -2038,7 +2038,7 @@
       "validacao": null,
       "limiteTentativas": false,
       "requisitos": [],
-      "linha": 117
+      "linha": 133
     },
     {
       "metodo": "GET",
@@ -2052,7 +2052,7 @@
       "requisitos": [
         "RF06"
       ],
-      "linha": 118
+      "linha": 134
     },
     {
       "metodo": "GET",
@@ -2066,7 +2066,7 @@
       "requisitos": [
         "RF06"
       ],
-      "linha": 119
+      "linha": 135
     },
     {
       "metodo": "POST",
@@ -2080,7 +2080,7 @@
       "requisitos": [
         "RF06"
       ],
-      "linha": 120
+      "linha": 136
     },
     {
       "metodo": "GET",
@@ -2094,7 +2094,7 @@
       "requisitos": [
         "RF34"
       ],
-      "linha": 121
+      "linha": 137
     },
     {
       "metodo": "POST",
@@ -2106,7 +2106,7 @@
       "validacao": "backoffice.esquemaChamadoStatus",
       "limiteTentativas": false,
       "requisitos": [],
-      "linha": 122
+      "linha": 138
     },
     {
       "metodo": "GET",
@@ -2120,7 +2120,7 @@
       "requisitos": [
         "RF44"
       ],
-      "linha": 123
+      "linha": 139
     }
   ],
   "backend": {

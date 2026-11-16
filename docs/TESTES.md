@@ -17,6 +17,7 @@ npm test
 ```
 - **Resultado em 15/11/2026:** **53 de 53 casos**, em 3 arquivos, com PostgreSQL 18.6 isolado. `DATABASE_URL_TEST` é obrigatória e a preparação da suíte limpa a base apontada. As verificações em integração incluem duas ofertas sobrepostas para o mesmo intérprete, cancelamento simultâneo ao check-in e localização antes e depois do encerramento.
 - **Resultado em 15/11/2026, 20:32 (continuação Gustavo + Claude):** **57 de 57 casos**, em 3 arquivos, com PostgreSQL 18 local isolado; `npm run typecheck` e `npm run docs:modelo -- --verificar` sem erros. Os quatro casos novos cobrem a regra única de elegibilidade (D-20), a nova distribuição, a cobrança simultânea e o saldo com repasses simultâneos (B-025 e B-026). Os dois casos de pagamento e repasse foram executados também contra o serviço anterior e falharam, o que confirma que detectam o defeito corrigido.
+- **Retomada após `c2ce8f1`:** **59 de 59 casos**, com PostgreSQL 18.6 e base descartável. A suíte conferiu o acesso ao detalhe e à ficha antes e depois do aceite, a recusa e os retornos 503 e 200 da sonda. O build do backend e `docs:modelo -- --verificar` passaram.
 
 ### 2.2. Frontend (Node Test Runner + TypeScript)
 ```bash
@@ -28,6 +29,7 @@ npm run build
 ```
 - **Resultado em 15/11/2026:** **6 de 6 casos em 2 suítes**, compilação TypeScript e build Vite concluídos. O lint emitiu avisos sobre efeitos e Fast Refresh. O build avisou sobre o tamanho do bundle principal.
 - **Repetido em 15/11/2026, 20:32:** mesmo resultado (6/6, typecheck e build sem erros, lint com 0 erros e os mesmos avisos `set-state-in-effect`).
+- **Retomada após `c2ce8f1`:** 6/6 e `npm run build` passaram. O aviso de tamanho do bundle continua.
 
 ### 2.2.1. Diagramas e dados da documentação
 ```bash
@@ -42,6 +44,8 @@ Em 15/11/2026, duas sessões isoladas do Chrome com Playwright usaram o build de
 
 Para repetir, prepare um banco de demonstração local e siga o [roteiro de demonstração](ROTEIRO_DEMONSTRACAO.md). Use um dispositivo no ponto escolhido para verificar câmera e GPS físicos. A validação de 15/11 usou o código alfanumérico do QR e emulação do navegador. HTTPS e comportamento nos domínios hospedados dependem do deploy.
 
+Na retomada após `c2ce8f1`, a API também foi exercitada em `NODE_ENV=production`, com base descartável e proxy HTTPS simulado. Foram verificados o retorno 200 para a sonda HTTP interna, o redirecionamento de uma rota da aplicação, o preflight com a origem configurada, o fallback de `API_PUBLIC_URL` a partir de `RENDER_EXTERNAL_URL` e o login. O retorno 503 foi testado com falha simulada do pool. A publicação em Render e Vercel ainda depende dos projetos da equipe.
+
 ---
 
 ## 3. Matriz Resumida de Casos de Teste Automatizados
@@ -50,5 +54,5 @@ Para repetir, prepare um banco de demonstração local e siga o [roteiro de demo
 |---|---|---|---|
 | `backend/tests/unidades.test.ts` | 9 | RF03, RF04, RF15, RF17, RF19, RF33 (Haversine, CPF/CNPJ, estimativa, cobrança, taxa de cancelamento) | ✅ 9/9 Passando |
 | `backend/tests/fluxo-principal.test.ts` | 18 | Cadastros, backoffice, solicitação, aceite, sala, check-in QR/GPS, encerramento, pagamento, PDF, verificação pública, avaliação, repasse e LGPD | ✅ 18/18 Passando |
-| `backend/tests/excecoes.test.ts` | 30 | Aceite e agenda concorrentes (RF22), cancelamento e check-in concorrentes (RF19/RF31), localização temporária (RF29/RNF44), elegibilidade única e nova distribuição (RF17, RF20–RF25, D-20), cobrança simultânea (RF36), saldo com mais de 100 lançamentos e repasses simultâneos (RF26/RF27), recusa 402 com envelope de erro (B-022) e demais exceções da seção 1 | ✅ 30/30 Passando |
+| `backend/tests/excecoes.test.ts` | 32 | Concorrência, elegibilidade e recusa (RF17/RF20–RF25), acesso à ficha (RF18), localização temporária (RF29/RNF44), check-in (RF31–RF32), pagamento/repasse (RF26/RF27/RF36), prontidão do PostgreSQL (RNF04) e demais casos da seção 1 | ✅ 32/32 passando |
 | `frontend/tests/validacao-formato.test.ts` | 6 | Item #33 do Dossiê (máscaras CPF/CNPJ/telefone/CEP/cartão/validade, formatadores pt-BR, validação de CPF/CNPJ/idade/senha/certificado) | ✅ 6/6 Passando |

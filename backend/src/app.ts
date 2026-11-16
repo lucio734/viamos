@@ -30,7 +30,8 @@ export function criarApp() {
   // RNF08 — em produção, força HTTPS (o proxy informa o protocolo original)
   if (env.emProducao) {
     app.use((req, res, next) => {
-      if (req.secure) return next();
+      // A sonda GET interna chega à consulta mesmo por HTTP. Render termina o TLS no proxy público.
+      if (req.secure || (req.method === 'GET' && req.path === '/api/health')) return next();
       res.redirect(301, `https://${req.headers.host}${req.originalUrl}`);
     });
   }

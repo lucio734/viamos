@@ -236,21 +236,23 @@ function resumoSolicitacao(s: {
   };
 }
 
-/** RF18 — detalhe/acompanhamento. Cliente dono, intérprete com oferta/atendimento ou backoffice. */
+/** RF18/RF20 — o candidato vê a demanda aberta e os participantes veem a ficha após o aceite. */
 export async function obterSolicitacao(id: string, usuarioId: string, papel: string) {
   const s = await carregarSolicitacaoCompleta(id);
   if (!s) throw Erros.naoEncontrado('Solicitação');
   const ehDono = s.clienteId === usuarioId;
-  const ehInterpreteVinculado = s.atendimento?.interpreteId === usuarioId || s.ofertas.some((o) => o.interpreteId === usuarioId);
+  const ehInterpreteVinculado = papel === 'INTERPRETE' && s.atendimento?.interpreteId === usuarioId;
   const ehOperador = papel === 'BACKOFFICE' || papel === 'SUPORTE';
-  // a demanda que aparece na lista do intérprete (mesma regra de elegibilidade) também abre no detalhe, com ou sem oferta
-  const ehInterpreteElegivel = papel === 'INTERPRETE' && !ehInterpreteVinculado && (await interpreteElegivelParaDemanda(usuarioId, s));
-  if (!ehDono && !ehInterpreteVinculado && !ehOperador && !ehInterpreteElegivel) throw Erros.proibido();
-  return apresentarSolicitacao(s, usuarioId);
+  const podeVerContato = ehDono || ehInterpreteVinculado || ehOperador;
+  if (!podeVerContato) {
+    const ofertaIndisponivel = s.ofertas.some((o) => o.interpreteId === usuarioId && o.status !== 'ENVIADA');
+    if (papel !== 'INTERPRETE' || ofertaIndisponivel || !(await interpreteElegivelParaDemanda(usuarioId, s))) throw Erros.proibido();
+  }
+  return apresentarSolicitacao(s, usuarioId, podeVerContato);
 }
 
-function apresentarSolicitacao(s: SolicitacaoComRelacoes, usuarioId: string) {
-  const a = s.atendimento;
+function apresentarSolicitacao(s: SolicitacaoComRelacoes, usuarioId: string, podeVerContato: boolean) {
+  const a = podeVerContato ? s.atendimento : null;
   const cert = a?.interprete.certificacoes.find((c) => c.status === 'APROVADA') ?? a?.interprete.certificacoes[0];
   const pagamentoPago = a?.pagamentos.find((p) => p.status === 'PAGO');
   const pagamentoPendente = a?.pagamentos.find((p) => p.status === 'PENDENTE' || p.status === 'FALHOU');
@@ -279,7 +281,12 @@ function apresentarSolicitacao(s: SolicitacaoComRelacoes, usuarioId: string) {
           versaoRegra: s.cotacao.versaoRegra,
         }
       : null,
-    cliente: { id: s.cliente.usuarioId, nome: s.cliente.usuario.nome, telefone: s.cliente.usuario.telefone, fotoUrl: s.cliente.usuario.fotoUrl },
+    cliente: {
+      id: s.cliente.usuarioId,
+      nome: s.cliente.usuario.nome,
+      telefone: podeVerContato ? s.cliente.usuario.telefone : null,
+      fotoUrl: podeVerContato ? s.cliente.usuario.fotoUrl : null,
+    },
     interprete: a ? apresentarInterpretePublico(a.interprete.usuario, a.interprete, cert) : null,
     ofertasEnviadas: s.ofertas.length,
     atendimento: a

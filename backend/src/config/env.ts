@@ -15,7 +15,7 @@ const esquemaEnv = z.object({
   JWT_SECRET: z.string().min(16, 'JWT_SECRET deve ter pelo menos 16 caracteres'),
   JWT_EXPIRES_IN: z.string().default('8h'),
   CORS_ORIGINS: z.string().default('http://localhost:5173'),
-  API_PUBLIC_URL: z.string().default('http://localhost:3333'),
+  API_PUBLIC_URL: z.string().default(process.env.RENDER_EXTERNAL_URL?.trim() || 'http://localhost:3333'),
   FRONTEND_URL: z.string().default('http://localhost:5173'),
   GATEWAY_PAGAMENTO: z.enum(['simulado']).default('simulado'),
   EMAIL_PROVIDER: z.enum(['console']).default('console'),

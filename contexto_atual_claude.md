@@ -1,5 +1,7 @@
 # Víamos — Passagem de bastão para Gustavo e Claude
 
+> Após `c2ce8f1`, a preparação do Bloco D avançou na `main`. A sonda passou a verificar o PostgreSQL e a revisão restringiu o acesso à ficha após o aceite. Para continuar, configure os projetos da equipe e execute o checklist de publicação. [Registro da retomada](docs/REGISTRO_TRABALHO.md#retomada-após-o-push-do-gustavo-em-15112026) · [Guia de deploy](docs/DEPLOY.md)
+
 ## Retomada de 15/11/2026
 
 As correções do aplicativo e esta passagem de bastão estão na `main` do repositório `lucio734/viamos`. Para atualizar seu clone:

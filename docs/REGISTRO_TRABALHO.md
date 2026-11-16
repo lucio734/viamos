@@ -3,6 +3,20 @@
 Documento de continuidade: o que foi **concluído e verificado**, o que está **pendente ou não testado**, quem fez
 (papel/agente), arquivos relevantes, decisões, riscos e próximos passos. Atualizar ao fim de cada bloco.
 
+## Retomada após o push do Gustavo em 15/11/2026
+
+A `main` local foi atualizada por fast-forward até `c2ce8f1`. A etapa priorizou a preparação do Bloco D e a revisão dos fluxos que serão apresentados. A Produção Técnica em DOCX e PDF continua disponível na versão entregue pelo Gustavo.
+
+| Verificação | Resultado e evidência |
+|---|---|
+| Bloco D, Dossiê #45–47 e RNF04 | A sonda `/api/health` consulta o PostgreSQL com prazo inferior a 5 segundos. Retorna 200 quando o banco responde e 503 em caso de falha. O modo local de produção confirmou sonda interna, redirecionamento HTTPS nas rotas da aplicação, CORS, origem pública do Render e login. O Blueprint solicita o domínio efetivo da Vercel. A validação em hospedagem depende dos projetos da equipe (P-03). |
+| RF18, RF20–RF23 e D-20 | Candidatos elegíveis veem a demanda em busca com telefone e foto ocultos. A ficha fica disponível ao cliente, ao intérprete alocado e à operação. Recusa e aceite são coerentes com a lista e a recusa não altera uma oferta após o fim da busca. A regressão está em `backend/tests/excecoes.test.ts`. |
+| Qualidade e rastreabilidade | 59 testes de backend em base descartável e 6 de frontend passaram. Ambos os builds e a checagem dos 34 diagramas passaram. `docs/TESTES.md` registra o escopo da verificação em modo produção local. |
+
+O Codex implementou, executou os testes e atualizou a documentação. Os subagentes `validacao_fluxos` (QA/Back-end) e `preparacao_deploy` (DevOps/SRE) revisaram o código anterior e o diff final. O **PROMPT AGENTES** e `docs/EQUIPE_AGENTES.md` orientaram os papéis. Os prompts usaram contexto, entradas, objetivo, restrições e formato de saída do **labProt**. Os resultados foram conferidos contra as fases de testes e deploy do **Checklist 2026** e os itens #38, #45–48 do **Dossiê**.
+
+Para continuar, provisionar os projetos da equipe e executar o checklist em `docs/DEPLOY.md`. O ensaio com câmera e GPS físicos, o link do Figma e as validações do grupo registradas em `docs/DECISOES.md` continuam pendentes. A revisão também identificou a janela semanal de ganhos (RF26) e uma possível corrida de redistribuição como próximos pontos de teste.
+
 ## Continuação em 15/11/2026 — Gustavo + Claude (agente único)
 
 Partiu de `19ff39a` (retomada do Lúcio já na `main`) e seguiu a "Próxima etapa proposta" da seção seguinte. `Contexto/` e

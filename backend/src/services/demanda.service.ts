@@ -118,6 +118,9 @@ export async function aceitarDemanda(usuarioId: string, solicitacaoId: string, i
     if (!s) throw Erros.naoEncontrado('Demanda');
     if (s.status !== 'BUSCANDO') throw Erros.conflito('Esta demanda já foi aceita por outro intérprete ou foi cancelada.', 'DEMANDA_INDISPONIVEL');
     if (s.inicioPrevisto <= agora) throw Erros.regraNegocio('O horário desta demanda já passou.', 'DEMANDA_EXPIRADA');
+    const [oferta] = await tx.select({ status: ofertas.status }).from(ofertas)
+      .where(and(eq(ofertas.solicitacaoId, solicitacaoId), eq(ofertas.interpreteId, usuarioId)));
+    if (oferta && oferta.status !== 'ENVIADA') throw Erros.conflito('Esta oferta não está mais disponível para você.', 'DEMANDA_INDISPONIVEL');
 
     // Mesma regra da lista e da distribuição; a agenda é lida depois do bloqueio do intérprete (dois aceites dele não se sobrepõem).
     const avaliacao = avaliarElegibilidade(await carregarContextoElegibilidade(tx, i), s);
@@ -172,21 +175,28 @@ export async function aceitarDemanda(usuarioId: string, solicitacaoId: string, i
 
 /** RF23 — recusa individual (não cancela a solicitação para os demais). Motivo opcional. */
 export async function recusarDemanda(usuarioId: string, solicitacaoId: string, motivo?: string, ip?: string) {
-  const i = await carregarInterprete(usuarioId);
-  exigirHabilitado(i);
-  const [s] = await db.select({ id: solicitacoes.id, status: solicitacoes.status }).from(solicitacoes).where(eq(solicitacoes.id, solicitacaoId)).limit(1);
-  if (!s) throw Erros.naoEncontrado('Demanda');
-
-  const agora = new Date();
   await db.transaction(async (tx) => {
-    await tx
+    // Mesma ordem de bloqueios do aceite. A recusa não pode sobrescrever uma oferta aceita ou expirada.
+    const [i] = await tx.select({ statusHabilitacao: interpretes.statusHabilitacao }).from(interpretes)
+      .where(eq(interpretes.usuarioId, usuarioId)).for('no key update');
+    if (!i) throw Erros.naoEncontrado('Perfil de intérprete');
+    exigirHabilitado(i);
+    const [s] = await tx.select({ status: solicitacoes.status, inicioPrevisto: solicitacoes.inicioPrevisto }).from(solicitacoes)
+      .where(eq(solicitacoes.id, solicitacaoId)).for('no key update');
+    if (!s) throw Erros.naoEncontrado('Demanda');
+    if (s.status !== 'BUSCANDO') throw Erros.conflito('Esta demanda não está mais disponível.', 'DEMANDA_INDISPONIVEL');
+    const agora = new Date();
+    if (s.inicioPrevisto <= agora) throw Erros.regraNegocio('O horário desta demanda já passou.', 'DEMANDA_EXPIRADA');
+
+    const [recusa] = await tx
       .insert(ofertas)
       .values({ solicitacaoId, interpreteId: usuarioId, distanciaKm: 0, status: 'RECUSADA', respondidaEm: agora, motivoRecusa: motivo?.trim() || null })
       .onConflictDoUpdate({
         target: [ofertas.solicitacaoId, ofertas.interpreteId],
         set: { status: 'RECUSADA', respondidaEm: agora, motivoRecusa: motivo?.trim() || null },
-      });
-    await registrarEvento({ usuarioId, tipo: 'OFERTA_RECUSADA', entidade: 'solicitacao', entidadeId: solicitacaoId, detalhes: { motivo }, ip }, tx);
+        setWhere: eq(ofertas.status, 'ENVIADA'),
+      }).returning({ id: ofertas.id });
+    if (recusa) await registrarEvento({ usuarioId, tipo: 'OFERTA_RECUSADA', entidade: 'solicitacao', entidadeId: solicitacaoId, detalhes: { motivo }, ip }, tx);
   });
   return { solicitacaoId, status: 'RECUSADA' };
 }

@@ -1,6 +1,6 @@
 # Blueprint do Render (https://render.com) — API do Víamos (item #45/#46: deploy em nuvem com HTTPS).
-# Passos: Render → New → Blueprint → apontar para este repositório. O banco pode ser o Postgres do próprio
-# Render (abaixo) ou um Neon (https://neon.tech); nesse caso remova a seção `databases` e cole a URL em DATABASE_URL.
+# Render → New → Blueprint → apontar para este repositório para usar o Postgres do Render.
+# Para Neon, configure um Web Service manualmente como descrito em docs/DEPLOY.md.
 services:
   - type: web
     name: viamos-api
@@ -25,11 +25,9 @@ services:
       - key: JWT_EXPIRES_IN
         value: 8h
       - key: CORS_ORIGINS
-        value: https://viamos.vercel.app # ajuste para o domínio real do frontend na Vercel
-      - key: API_PUBLIC_URL
-        value: https://viamos-api.onrender.com # ajuste para a URL gerada pelo Render
+        sync: false
       - key: FRONTEND_URL
-        value: https://viamos.vercel.app
+        sync: false
 
 databases:
   - name: viamos-db

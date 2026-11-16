@@ -6,8 +6,8 @@
  */
 import { eq } from 'drizzle-orm';
 import request from 'supertest';
-import { beforeAll, describe, expect, it } from 'vitest';
-import { db } from '../src/models/db.js';
+import { beforeAll, describe, expect, it, vi } from 'vitest';
+import { db, pool } from '../src/models/db.js';
 import { lancamentosFinanceiros, pagamentos } from '../src/models/schema.js';
 import { aceitarEFazerCheckin, app, auth, criarSolicitacao, daquiAMinutos, login, LOCAL_HC } from './helpers.js';
 
@@ -25,6 +25,21 @@ beforeAll(async () => {
     login('carlos@viamos.app'),
     login('pedro@viamos.app'),
   ]);
+});
+
+it('a prontidão retorna 503 durante falha do banco e volta a 200 quando o banco responde', async () => {
+  const consulta = vi.spyOn(pool, 'query').mockRejectedValueOnce(new Error('conexão interrompida'));
+  try {
+    const indisponivel = await request(app).get('/api/health');
+    expect(indisponivel.status).toBe(503);
+    expect(indisponivel.body).toMatchObject({ status: 'indisponivel', erro: { codigo: 'BANCO_INDISPONIVEL' } });
+    expect(indisponivel.text).not.toContain('conexão interrompida');
+  } finally {
+    consulta.mockRestore();
+  }
+  const pronta = await request(app).get('/api/health');
+  expect(pronta.status).toBe(200);
+  expect(pronta.body).toMatchObject({ status: 'ok', banco: 'conectado' });
 });
 
 describe('Validações de entrada (item #33 no servidor) e HTTP semântico (item #35)', () => {
@@ -108,10 +123,35 @@ describe('Distribuição e aceite (RF17, RF22, RF23, RNF27, RNF36)', () => {
     expect(recusa.status).toBe(200);
     const deCarlos = await request(app).get('/api/demandas').set(auth(carlos));
     expect(deCarlos.body.demandas.some((d: { id: string }) => d.id === sol.body.id)).toBe(false);
+    expect((await request(app).get(`/api/solicitacoes/${sol.body.id}`).set(auth(carlos))).status).toBe(403);
+    expect((await request(app).post(`/api/demandas/${sol.body.id}/aceitar`).set(auth(carlos)).send({})).status).toBe(409);
     const deMaria = await request(app).get('/api/demandas').set(auth(maria));
     expect(deMaria.body.demandas.some((d: { id: string }) => d.id === sol.body.id)).toBe(true);
     const status = await request(app).get(`/api/solicitacoes/${sol.body.id}`).set(auth(ana));
     expect(status.body.status).toBe('BUSCANDO');
+  });
+
+  it('reserva o contato e a ficha do atendimento às pessoas vinculadas após o aceite', async () => {
+    const sol = await criarSolicitacao(ana, { inicioPrevisto: daquiAMinutos(60 * 24 * 10) });
+    expect(sol.status).toBe(201);
+    const detalhe = `/api/solicitacoes/${sol.body.id}`;
+    const demanda = `/api/demandas/${sol.body.id}`;
+    const aberta = await request(app).get(detalhe).set(auth(carlos));
+    expect(aberta.status).toBe(200);
+    expect(aberta.body.cliente).toMatchObject({ telefone: null, fotoUrl: null });
+    expect(aberta.body.atendimento).toBeNull();
+
+    const aceite = await request(app).post(`${demanda}/aceitar`).set(auth(maria)).send({});
+    expect(aceite.status).toBe(201);
+    expect((await request(app).get(detalhe).set(auth(carlos))).status).toBe(403);
+    expect((await request(app).post(`${demanda}/recusar`).set(auth(maria)).send({})).status).toBe(409);
+
+    for (const token of [ana, maria]) {
+      const vinculado = await request(app).get(detalhe).set(auth(token));
+      expect(vinculado.status).toBe(200);
+      expect(vinculado.body.cliente.telefone).toEqual(expect.any(String));
+      expect(vinculado.body.atendimento.id).toBe(aceite.body.atendimentoId);
+    }
   });
 
   it('aceites concorrentes: exatamente um 201 e os demais 409', async () => {

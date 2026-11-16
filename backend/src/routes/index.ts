@@ -4,7 +4,7 @@
  * Códigos: 200 OK · 201 criado · 202 aceito · 204 sem conteúdo · 400 validação · 401 não autenticado ·
  * 402 pagamento recusado · 403 proibido · 404 não encontrado · 409 conflito · 422 regra de negócio · 423 bloqueado · 429 limite.
  */
-import { Router } from 'express';
+import { Router, type Request, type Response } from 'express';
 import rateLimit from 'express-rate-limit';
 import { env } from '../config/env.js';
 import * as atendimento from '../controllers/atendimento.controller.js';
@@ -17,6 +17,7 @@ import * as perfil from '../controllers/perfil.controller.js';
 import * as solicitacao from '../controllers/solicitacao.controller.js';
 import { autenticar, exigirPapel } from '../middlewares/auth.js';
 import { validar } from '../middlewares/validar.js';
+import { pool } from '../models/db.js';
 
 export const rotas = Router();
 
@@ -30,8 +31,23 @@ const soOperador = [autenticar, exigirPapel('BACKOFFICE', 'SUPORTE')] as const;
 // ---------------------------------------------------------------------------
 // Público
 // ---------------------------------------------------------------------------
-rotas.get('/health', (_req, res) => res.json({ status: 'ok', servico: 'viamos-api', versao: '0.1.0', ambiente: env.NODE_ENV, agora: new Date() }));
+rotas.get('/health', verificarProntidao);
 rotas.get('/comprovantes/:codigo/verificar', atendimento.verificarComprovante); // RF38 — verificação pública
+
+async function verificarProntidao(_req: Request, res: Response) {
+  const dados = { servico: 'viamos-api', versao: '0.1.0', ambiente: env.NODE_ENV, agora: new Date() };
+  res.set('Cache-Control', 'no-store');
+  try {
+    const consulta = { text: 'select 1', query_timeout: 1500 };
+    await pool.query(consulta);
+    res.json({ ...dados, status: 'ok', banco: 'conectado' });
+  } catch {
+    res.status(503).json({
+      ...dados, status: 'indisponivel', banco: 'indisponivel',
+      erro: { codigo: 'BANCO_INDISPONIVEL', mensagem: 'Banco de dados temporariamente indisponível.' },
+    });
+  }
+}
 
 // ---------------------------------------------------------------------------
 // Autenticação e cadastro

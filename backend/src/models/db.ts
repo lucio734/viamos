@@ -12,8 +12,12 @@ const { Pool } = pg;
 export const pool = new Pool({
   connectionString: env.DATABASE_URL,
   max: env.NODE_ENV === 'test' ? 5 : 10,
+  connectionTimeoutMillis: 2500,
   // Neon e outros provedores em nuvem exigem TLS; localmente não é necessário.
   ssl: env.DATABASE_URL.includes('sslmode=require') || env.DATABASE_URL.includes('neon.tech') ? { rejectUnauthorized: false } : undefined,
+});
+pool.on('error', (erro) => {
+  console.error('Conexão ociosa com PostgreSQL interrompida:', erro.message);
 });
 
 export const db = drizzle(pool, { schema });

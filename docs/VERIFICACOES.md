@@ -36,7 +36,7 @@ Legenda: ✅ atendido e verificado · 🟡 parcialmente atendido · ⬜ pendente
 | 3 Core Development | Acesso ao repositório de código | ✅ repositório público no GitHub com commits publicados na `main` | `README.md` §8 |
 | 3 | MVP funcional / builds incrementais | ✅ 33 rotas de tela implementadas e compiladas. Cobertura de comportamento e lacunas registradas por fluxo | `frontend/src/rotas.tsx`, `docs/REGISTRO_TRABALHO.md` |
 | 3 | Documentação da API (Swagger/OpenAPI) | 🟡 65 operações listadas. Faltam parâmetros de caminho e contratos de entrada em diversas operações | `docs/api/openapi.yaml`, `backend/src/routes/index.ts` |
-| 4 QA & Testing | Plano e casos de teste | ✅ 57 casos no backend e 6 casos em 2 suítes no frontend (15/11, 20:32) | `backend/tests/`, `frontend/tests/`, `docs/TESTES.md` |
+| 4 QA & Testing | Plano e casos de teste | ✅ 59 casos no backend, 6 no frontend e validação local em modo produção | `backend/tests/`, `frontend/tests/`, `docs/TESTES.md` |
 | 4 | Relatório de bugs e resoluções | ✅ log atualizado com as correções da retomada e da continuação (B-022 a B-026) | `docs/BUGS.md` |
 | 4 | Auditoria de performance e segurança | 🟡 revisão de código e controles registrados. Faltam as medições de carga e as evidências operacionais de segurança e privacidade | `docs/SEGURANCA.md`, `docs/SLA.md` |
 | 5 Deployment & SLA | Ambiente de produção ativo | 🟡 configs (`render.yaml`, `vercel.json`, `.github/workflows/ci.yml`) e guia passo a passo prontos; publicação nas contas da equipe | `docs/DEPLOY.md`, `.github/workflows/ci.yml` |
@@ -78,8 +78,8 @@ Estado por item, com a evidência atual. Itens 1–28 são o documento "Produç�
 | 42 | `.gitignore` | ✅ testado (sem `.env`/`node_modules` nos commits) | `.gitignore` |
 | 43 | Branches e commits organizados | ✅ commits organizados por escopo na `main` | histórico git |
 | 44 | README com clonagem/instalação/execução | ✅ | `README.md` |
-| 45–47 | Deploy, HTTPS, rotas SPA | 🟡 configs prontas (`render.yaml`, `vercel.json`); publicação no Bloco D | — |
-| 48 | Testes de fluxo principal e exceções | ✅ 57 casos de backend e 6 de frontend executados em 15/11. Ver cobertura e limites no relatório | `docs/TESTES.md` |
+| 45–47 | Deploy, HTTPS, rotas SPA | 🟡 prontidão, redirecionamento e CORS verificados em modo produção local. Publicação e verificação nos domínios da equipe dependem de P-03 | `docs/DEPLOY.md`, `docs/TESTES.md` |
+| 48 | Testes de fluxo principal e exceções | ✅ 59 casos de backend e 6 de frontend executados em 15/11. Ver cobertura e limites no relatório | `docs/TESTES.md` |
 | 49 | Auditoria de código (domínio da equipe) | ⬜ cada integrante revisa e explica sua parte (Bloco Z) | — |
 | 50 | Ensaio de demonstração | 🟡 roteiro atualizado. Ensaio integral com o grupo no ambiente de avaliação continua pendente | `docs/ROTEIRO_DEMONSTRACAO.md` |
 

@@ -7,7 +7,7 @@ Este documento estabelece a meta de disponibilidade (RNF04), os tempos de respos
 
 | Indicador | Requisito Relacionado | Meta (SLO) | Medição / Verificação |
 |---|---|---|---|
-| **Disponibilidade da Plataforma** | RNF04 | **≥ 99,5%** no mês (medição pendente) | `GET /api/health` para a API e consulta autenticada ao hub para disponibilidade do banco |
+| **Disponibilidade da Plataforma** | RNF04 | **≥ 99,5%** no mês (medição pendente) | `GET /api/health` verifica API e PostgreSQL. A consulta autenticada ao hub verifica a jornada local ou hospedada |
 | **Latência de Consultas e Listagens** | RNF01 | **p95 < 500 ms** (com instância aquecida) | Consultas indexadas no PostgreSQL (`solicitacoes`, `ofertas`, `atendimentos`) |
 | **Processamento de Aceite Exclusivo** | RF22 / RNF33 | **Transação atômica < 300 ms** | `UPDATE ... WHERE status = 'BUSCANDO'` + índice único no PostgreSQL |
 | **Emissão de Comprovante PDF** | RF37 / RNF02 | **< 1.500 ms** | Geração em memória via `PDFKit` e entrega via stream/Blob |

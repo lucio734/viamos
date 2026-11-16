@@ -110,8 +110,8 @@ Checkpoint sugerido: commit após 1–2, após 3–4, após 5–7.
 ## Bloco D — Deploy em produção (L)
 1. Criar contas: Neon (banco) **ou** usar o Postgres do Render; Render (API via `render.yaml`); Vercel (frontend, *Root Directory* = `frontend`, `VITE_API_URL`).
 2. Definir variáveis: `JWT_SECRET` forte, `CORS_ORIGINS`/`FRONTEND_URL` com o domínio da Vercel, `API_PUBLIC_URL` com o domínio do Render.
-3. Rodar `npm run db:seed:prod` uma vez (dados de demonstração) a partir do shell do Render ou localmente apontando para o banco de produção.
-4. Validar: HTTPS nos dois domínios, `GET /api/health`, login, recarregar `/cliente/historico` direto na URL (rewrite SPA), PDF do comprovante.
+3. Rodar `npm run db:seed:prod` localmente, apontando exclusivamente para a base de demonstração pela URL externa com TLS. O comando trunca a base escolhida. Siga `docs/DEPLOY.md`.
+4. Validar HTTPS nos dois domínios, prontidão do PostgreSQL em `GET /api/health`, login e CORS, recarga de `/cliente/historico` e PDF do comprovante.
 5. Escrever `docs/DEPLOY.md` com URLs, prints e passos; anotar o *cold start* do Render free (~50 s na primeira chamada) no roteiro de demonstração.
 6. Escrever `docs/SLA.md` (curto): disponibilidade esperada da hospedagem gratuita, tempo de resposta a incidentes durante a avaliação, responsáveis, plano de contingência.
 

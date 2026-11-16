@@ -136,7 +136,7 @@ export interface DetalheSolicitacao {
     valorTotal: number;
     versaoRegra: string;
   } | null;
-  cliente: ClientePublico;
+  cliente: Omit<ClientePublico, 'telefone'> & { telefone: string | null };
   interprete: InterpretePublico | null;
   ofertasEnviadas: number;
   atendimento: {
