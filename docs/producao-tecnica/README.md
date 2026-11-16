@@ -71,7 +71,9 @@ Pré-requisitos: Node.js 22, Python 3.10+ e Google Chrome ou Microsoft Edge. Par
    powershell -ExecutionPolicy Bypass -File docs/producao-tecnica/build/exportar_pdf.ps1
    ```
 
-   Se usar LibreOffice Writer, abra o DOCX e exporte o PDF para a mesma pasta em `Entregas/`. Confira se a edição exportada preserva as legendas, as tabelas e as páginas em paisagem.
+   Se usar LibreOffice Writer, abra o DOCX e exporte o PDF para a mesma pasta em `Entregas/`. Confira as legendas, tabelas e orientação das páginas na edição exportada.
+
+6. **Exportação pelo GitHub Actions.** Na aba **Actions**, abra **Gerar Produção Técnica** e execute o workflow na `main`. O campo `figma_url` recebe a URL pública do protótipo quando estiver disponível. O artefato `viamos-producao-tecnica` contém o DOCX e o PDF, e `viamos-producao-tecnica-revisao` guarda as páginas renderizadas durante sete dias. Depois da conferência, publique a edição em `Entregas/Produção Técnica/`.
 
 As imagens são reduzidas para 250 dpi no tamanho em que aparecem na página (diagramas em tons de cinza, capturas em
 256 cores) e ficam em cache em `build/tmp/`, que não é versionado.

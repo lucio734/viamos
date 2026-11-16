@@ -3,7 +3,7 @@
 - [Versão editável em Word](Viamos_Producao_Tecnica.docx)
 - [Versão em PDF](Viamos_Producao_Tecnica.pdf)
 
-Os arquivos acima correspondem à edição de 15/11. A próxima exportação incorpora a [captura de Ganhos e Repasses](../../docs/producao-tecnica/telas/25-ganhos.png), o [diagrama de processos do intérprete](../../docs/producao-tecnica/figuras/26-telas-interprete.png) e o [diagrama da ferramenta CASE](../../docs/producao-tecnica/figuras/27-ferramenta-case.png).
+A edição de 16/11 tem 116 páginas no PDF. Ela incorpora a [captura de Ganhos e Repasses](../../docs/producao-tecnica/telas/25-ganhos.png), o [diagrama de processos do intérprete](../../docs/producao-tecnica/figuras/26-telas-interprete.png) e o [diagrama da ferramenta CASE](../../docs/producao-tecnica/figuras/27-ferramenta-case.png). Os arquivos foram gerados do commit `c4c5e6d`. [Execução da exportação](https://github.com/lucio734/viamos/actions/runs/43915643181)
 
 | Seção | Conteúdo solicitado em `DOC.txt` |
 |---|---|
