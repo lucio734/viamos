@@ -1,0 +1,53 @@
+name: Gerar Produção Técnica
+
+on:
+  workflow_dispatch:
+    inputs:
+      figma_url:
+        description: URL de visualização do protótipo Figma (opcional)
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  exportar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      VIAMOS_FIGMA_URL: ${{ inputs.figma_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Instalar as ferramentas de exportação
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends libreoffice-writer fonts-liberation poppler-utils
+          python -m pip install python-docx openpyxl pillow
+      - name: Gerar o capítulo e renderizar as páginas
+        run: |
+          entrega='Entregas/Produção Técnica'
+          saida="$RUNNER_TEMP/producao-tecnica"
+          qa="$RUNNER_TEMP/producao-tecnica-qa"
+          mkdir -p "$saida" "$qa"
+          python docs/producao-tecnica/build/gerar_docx.py
+          cp "$entrega/Viamos_Producao_Tecnica.docx" "$saida/"
+          libreoffice -env:UserInstallation="file://$RUNNER_TEMP/viamos-lo" --headless \
+            --convert-to pdf:writer_pdf_Export --outdir "$saida" "$saida/Viamos_Producao_Tecnica.docx"
+          test -s "$saida/Viamos_Producao_Tecnica.pdf"
+          pdfinfo "$saida/Viamos_Producao_Tecnica.pdf"
+          pdftoppm -png -r 96 "$saida/Viamos_Producao_Tecnica.pdf" "$qa/pagina"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: viamos-producao-tecnica
+          path: ${{ runner.temp }}/producao-tecnica
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: viamos-producao-tecnica-revisao
+          path: ${{ runner.temp }}/producao-tecnica-qa
+          if-no-files-found: error
+          retention-days: 7
