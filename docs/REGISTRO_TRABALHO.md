@@ -3,6 +3,12 @@
 Documento de continuidade: o que foi **concluído e verificado**, o que está **pendente ou não testado**, quem fez
 (papel/agente), arquivos relevantes, decisões, riscos e próximos passos. Atualizar ao fim de cada bloco.
 
+## Organização das entregas em 16/11/2026
+
+Os índices em `Entregas/` e `docs/` apontam para o capítulo atual, o modelo e as entregas anteriores. O DOCX e o PDF de 15/11 foram movidos para `Entregas/Produção Técnica/`. As fontes e o gerador ficam em `docs/producao-tecnica/`. A organização foi conferida contra as cinco seções do `DOC.txt`, o modelo da disciplina e os itens #1 a #28 do Dossiê. Os links locais, a abertura dos pacotes e a verificação dos 34 diagramas foram conferidos.
+
+O Codex atualizou a ficha e a captura de ganhos, a descrição da hospedagem e as figuras `26-telas-interprete` e `27-ferramenta-case`. A captura foi conferida em viewport móvel com uma conta fictícia do banco local. As figuras foram renderizadas da fonte Mermaid e verificadas visualmente. A edição de 15/11 segue disponível para leitura. A nova exportação e a conferência do DOCX e do PDF precisam de um ambiente com conversor compatível. O link do protótipo Figma (P-01) e a decisão sobre o momento do comprovante (P-06) continuam pendentes.
+
 ## Retomada do desenvolvimento em 15/11/2026
 
 O Codex implementou e testou o detalhamento semanal dos ganhos (RF26, US22, B-029) e a proteção da redistribuição contra o fechamento concorrente da demanda (RF17/RF19/RF22, B-030). A referência foi a planilha `ENTREGA VIAMOS COMPLETA.xlsx`, além do briefing e das decisões D-09 e D-20. O painel usa datas de Brasília, distingue recebido e a receber por atendimento e mantém o saldo de repasse de todo o período. A API lê o painel com um snapshot único. A redistribuição revalida a demanda sob o mesmo bloqueio usado no aceite e cancelamento.

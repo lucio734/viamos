@@ -16,7 +16,7 @@ pagamento e emissão do **Comprovante de Acessibilidade Garantida**.
 | Backend (API REST, **arquitetura MVC**) | Node 22 + Express 5 + TypeScript + Zod + JWT | [`backend/`](backend) |
 | Banco de dados | PostgreSQL 16 + **Drizzle ORM** (migrações SQL versionadas + seed) | [`backend/src/models/schema.ts`](backend/src/models/schema.ts), [`backend/drizzle/`](backend/drizzle) |
 | Hospedagem prevista | Vercel (frontend) · Render (API) · Neon ou Render Postgres (banco) — todos com HTTPS | [`render.yaml`](render.yaml), [`frontend/vercel.json`](frontend/vercel.json) |
-| Documentação | Instruções para IAs, material do projeto, entregas e capítulo "Produção Técnica" | [`CLAUDE/`](CLAUDE), [`Contexto/`](Contexto), [`Entregas/`](Entregas), [`docs/`](docs) |
+| Documentação | Instruções para IAs, material do projeto, entregas e capítulo "Produção Técnica" | [`CLAUDE/`](CLAUDE), [`Contexto/`](Contexto), [Entregas](Entregas/README.md), [Documentação](docs/README.md) |
 
 ---
 

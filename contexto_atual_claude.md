@@ -25,7 +25,7 @@ git pull --ff-only origin main
 1. Leia [AGENTS.md](AGENTS.md) e o [registro da retomada](docs/REGISTRO_TRABALHO.md#retomada-em-15112026). A [matriz de verificações](docs/VERIFICACOES.md) e o [log de bugs](docs/BUGS.md) registram evidências e limites.
 2. Reproduza a corrida **B-031** entre criação da solicitação e mudança de elegibilidade. A distribuição, a lista, o detalhe e o aceite já compartilham a regra D-20. A janela pelo horário de início e a interpretação de grade vazia seguem para validação do grupo (P-05).
 3. Resolva com o grupo a divergência entre D-10 e a entrega de modelagem sobre o momento da emissão do PDF (P-06). D-01 e D-05 também seguem para validação do grupo.
-4. Para a entrega acadêmica, faltam consolidar a Produção Técnica, inserir o link do Figma e realizar o ensaio em dispositivo físico. As fontes Mermaid já refletem o código, e os PNGs `26-telas-interprete` e `27-ferramenta-case` aguardam nova renderização. No ensaio hospedado, verifique o login e o PDF com contas de teste. [Registro de trabalho](docs/REGISTRO_TRABALHO.md#retomada-do-desenvolvimento-em-15112026) · [Roteiro](docs/ROTEIRO_DEMONSTRACAO.md)
+4. O DOCX e o PDF de 15/11 estão no índice das entregas. Reexporte a Produção Técnica com os diagramas e a captura atualizados. O link do Figma segue pendente (P-01). No ensaio em aparelho físico, verifique o login, a leitura de QR com GPS e o download do comprovante. [Índice de entregas](Entregas/README.md) · [Registro de trabalho](docs/REGISTRO_TRABALHO.md#organização-das-entregas-em-16112026) · [Roteiro](docs/ROTEIRO_DEMONSTRACAO.md)
 
 ## Relatório histórico de 12/11/2026
 
