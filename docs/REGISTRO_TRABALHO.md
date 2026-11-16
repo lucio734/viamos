@@ -7,6 +7,8 @@ Documento de continuidade: o que foi **concluído e verificado**, o que está **
 
 Foram importados 14 quadros revisados pelo menu **Export → Figma** do Stitch. As 13 transições das jornadas do cliente e do intérprete foram percorridas no modo de apresentação. O link de visualização foi reaberto e as quatro capturas passaram a integrar a seção 1.3. [Modelagem do Produto](../Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/01%20Modelagem%20do%20Produto/README.md)
 
+O GitHub Actions gerou o DOCX e o PDF de 117 páginas. Foram conferidos o destino do link clicável nas duas versões, o texto e as quatro figuras da seção 1.3 nas páginas 19 e 20, além da integridade das páginas renderizadas. [Execução da exportação](https://github.com/lucio734/viamos/actions/runs/43969441373)
+
 O Render confirmou `4848335` como ativo, com a correção B-031 e as migrações aplicadas. A sonda HTTPS retornou 200 com banco conectado e o preflight de login retornou 204 para a origem da Vercel. [Guia de deploy](DEPLOY.md)
 
 ## Correção e revisão do protótipo em 16/11/2026
