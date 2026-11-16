@@ -8,4 +8,4 @@
 | Regras do aplicativo | [Decisões do MVP](DECISOES.md) e [correções](BUGS.md) |
 | Entrega | [Verificações](VERIFICACOES.md) |
 
-O [índice de entregas acadêmicas](../Entregas/README.md) reúne o modelo da disciplina e os materiais de requisitos, UML e modelagem. O capítulo segue o [roteiro da disciplina](../Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/DOC.txt).
+O [índice de entregas acadêmicas](../Entregas/README.md) reúne os materiais de requisitos, UML e modelagem.

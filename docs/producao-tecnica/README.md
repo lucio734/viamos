@@ -1,6 +1,6 @@
 # Produção Técnica — documento e como regerar
 
-Esta pasta guarda as fontes e o gerador do capítulo **Produção Técnica** do Víamos (itens #1 a #28 do checklist do Dossiê). As versões editável e em PDF ficam juntas no [índice do capítulo em Entregas](../../Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/README.md). O documento segue o formato de `Entregas/modelo_entrega.docx`: Arial, subseções
+Esta pasta guarda as fontes e o gerador do capítulo **Produção Técnica** do Víamos (itens #1 a #28 do checklist do Dossiê). As versões editável e em PDF ficam juntas no [índice do capítulo em Entregas](../../Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/README.md). O documento utiliza Arial, subseções
 "N.N Título." em negrito e itálico, figura com legenda "Figura NN: …" e linha "Fonte: …" logo abaixo, tabela com
 título "Tabela NN – …" acima e explicações numeradas (i), (ii), (iii).
 

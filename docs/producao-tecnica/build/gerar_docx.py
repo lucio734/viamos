@@ -1,5 +1,5 @@
 """
-Gera o documento "Produção Técnica" do Víamos (itens #1 a #28 do checklist) no formato de Entregas/modelo_entrega.docx.
+Gera o documento "Produção Técnica" do Víamos (itens #1 a #28 do checklist).
 
 Fontes de conteúdo (todas no repositório):
   - figuras geradas do código ............ docs/producao-tecnica/figuras/        (docs/diagramas, npm run figuras)
@@ -660,7 +660,7 @@ def diagramas(d, ctx):
 def main():
     ctx = dict(modelo=carregar_json('modelo.json'), extracao=carregar_json('extracao.json'), requisitos=carregar_requisitos())
     ctx['R'] = ctx['modelo']['regras']
-    d = Documento(RAIZ / 'Entregas' / 'modelo_entrega.docx')
+    d = Documento(ENTREGA / 'Viamos_Producao_Tecnica.docx')
     introducao(d, ctx)
     modelagem_produto(d, ctx)
     arquitetura(d, ctx)

@@ -1,19 +1,17 @@
-<p align="center">
-  <img src="docs/producao-tecnica/figuras/viamos-marca.png" alt="Símbolo do Víamos" width="88" />
-</p>
+<img src="docs/producao-tecnica/figuras/viamos-marca.png" alt="Símbolo do Víamos" width="88" />
 
-<h1 align="center">Víamos</h1>
+# Víamos
 
-<p align="center">Plataforma de intermediação de intérpretes de Libras</p>
+Plataforma de intermediação de intérpretes de Libras
+
+**[Acessar o aplicativo Víamos](https://viamos-eight.vercel.app/)**
 
 O Víamos conecta pessoas surdas a intérpretes de Libras para atendimentos presenciais. Permite solicitar e acompanhar um atendimento, combinar o encontro pela sala de mensagens e fazer check-in por QR Code. O pagamento é simulado e gera um comprovante verificável.
 
 **Integrantes:** Lúcio Vecchio, Gustavo Pires e Felipe Mathey.
 
-<p align="center">
-  <img src="docs/producao-tecnica/telas/09-hub-cliente.png" alt="Painel do cliente com o botão Solicitar intérprete agora" width="210" />
-  <img src="docs/producao-tecnica/telas/18-hub-interprete.png" alt="Painel do intérprete com disponibilidade e mapa de solicitações" width="210" />
-</p>
+<img src="docs/producao-tecnica/telas/09-hub-cliente.png" alt="Painel do cliente com o botão Solicitar intérprete agora" width="210" />
+<img src="docs/producao-tecnica/telas/18-hub-interprete.png" alt="Painel do intérprete com disponibilidade e mapa de solicitações" width="210" />
 
 ## Aplicativo hospedado
 
@@ -22,6 +20,8 @@ O Víamos conecta pessoas surdas a intérpretes de Libras para atendimentos pres
 | Frontend | Vercel · React, TypeScript e Vite | [Abrir o Víamos](https://viamos-eight.vercel.app/) |
 | API | Render Web Service · Node.js e Express | [Verificar status da API](https://viamos-api.onrender.com/api/health) |
 | Banco | Render PostgreSQL · Drizzle ORM | [Esquema](backend/src/models/schema.ts) e [migrações](backend/drizzle/) |
+
+**Endereço da API:** https://viamos-api.onrender.com · **Banco de dados:** PostgreSQL hospedado no Render.
 
 O frontend usa `VITE_API_URL=https://viamos-api.onrender.com` em produção. A API lê a conexão PostgreSQL de `DATABASE_URL` no Render. [Configuração de hospedagem](docs/DEPLOY.md)
 

@@ -1,5 +1,5 @@
 """
-Motor de formatação do documento "Produção Técnica" no padrão de Entregas/modelo_entrega.docx:
+Motor de formatação do documento "Produção Técnica":
 Arial; título de subseção em negrito e itálico 14 pt; texto justificado 11 pt; figura centralizada com a legenda
 "Figura NN: título" logo abaixo e "Fonte: ..." em 9 pt; tabela com o título "Tabela NN – título" acima (10 pt),
 estilo "Plain Table 2" e "Fonte: ..." abaixo. Diagramas largos vão para páginas em paisagem.
