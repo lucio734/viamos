@@ -218,6 +218,9 @@ export function AgendaInterprete() {
         }
       >
         <div className="flex flex-col gap-4">
+          <p className="text-sm text-on-surface-variant">
+            Use o horário de Brasília. A grade é comparada com o horário de início dos atendimentos.
+          </p>
           <div className="grid grid-cols-1 gap-3 rounded-xl border border-outline-variant bg-surface-container-low p-4 sm:grid-cols-4 sm:items-end">
             <Selecao
               rotulo="Dia da semana"
@@ -244,7 +247,7 @@ export function AgendaInterprete() {
 
           {faixas.length === 0 ? (
             <p className="py-4 text-center text-base text-on-surface-variant">
-              Nenhuma faixa de horário cadastrada. Adicione acima ou use o botão de preenchimento rápido.
+              Sem faixas cadastradas, as solicitações podem começar em qualquer horário, respeitando o raio e os atendimentos já agendados.
             </p>
           ) : (
             <ul className="divide-y divide-outline-variant/50 rounded-xl border border-outline-variant">

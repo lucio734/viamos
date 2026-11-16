@@ -3,6 +3,12 @@
 Documento de continuidade: o que foi **concluído e verificado**, o que está **pendente ou não testado**, quem fez
 (papel/agente), arquivos relevantes, decisões, riscos e próximos passos. Atualizar ao fim de cada bloco.
 
+## Regras do MVP confirmadas em 16/11/2026
+
+Lúcio confirmou os preços de referência, a janela de check-in de 30 minutos, a disponibilidade por horário de início e o comprovante após o pagamento simulado. A seção 4.3 e a seção 5.6 descrevem a regra atual e a diferença para a modelagem de 11/11. A agenda do intérprete informa a regra e o fuso de Brasília. O aviso de contas do seed passou a aparecer no login apenas no servidor de desenvolvimento. [Decisões](DECISOES.md)
+
+QA confirmou 63 testes com PostgreSQL local descartável, o DER e a sonda, o CORS e o login em modo de produção local. A API hospedada retornou HTTP 200 com banco conectado e a rota da Vercel retornou HTTP 200. O login fictício do roteiro retornou 401 na Vercel. O check-in em celular e o ensaio autenticado em produção continuam pendentes. [Roteiro de demonstração](ROTEIRO_DEMONSTRACAO.md)
+
 ## Prototipação e publicação no Render em 16/11/2026
 
 Foram importados 14 quadros revisados pelo menu **Export → Figma** do Stitch. As 13 transições das jornadas do cliente e do intérprete foram percorridas no modo de apresentação. O link de visualização foi reaberto e as quatro capturas passaram a integrar a seção 1.3. [Modelagem do Produto](../Entregas/Produ%C3%A7%C3%A3o%20T%C3%A9cnica/01%20Modelagem%20do%20Produto/README.md)

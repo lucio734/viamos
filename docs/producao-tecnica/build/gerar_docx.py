@@ -430,7 +430,7 @@ def processos(d, ctx):
         ['Cobrança e falha', 'Cliente, Víamos (gateway como pool externo)', '`pagamento.service`, `gateway.service`'],
         ['Cancelamento', 'Cliente, Víamos', '`solicitacao.service` (cancelamento com política)'],
     ], FONTE_IA, larguras_cm=[4.0, 4.4, 6.6], tamanho=8, primeira_coluna_italico=True)
-    d.paragrafo('Os seis processos BPMN têm implementação direta nos serviços, e as diferenças de detalhe (nova distribuição, serialização de cobranças) são refinamentos que preservam o comportamento modelado.')
+    d.paragrafo('Os seis processos BPMN têm implementação direta nos serviços. No BPMN histórico, o encerramento libera o comprovante. Na versão entregue, o encerramento abre a cobrança e o comprovante é emitido após a confirmação do pagamento simulado, conforme a decisão D-10 confirmada em 16/11.')
 
 
 def diagramas(d, ctx):
@@ -573,7 +573,7 @@ def diagramas(d, ctx):
         'P1 transforma dados cadastrais e certificados em contas, sessões e habilitação; o depósito D1 guarda o hash das senhas, nunca a senha em claro.',
         'P2 registra solicitações, o vínculo exclusivo e a agenda (D2), combinando habilitação (D1), agenda (D2) e reputação (D5) na seleção dos intérpretes.',
         'P3 transforma QR e posição em início validado e horários em duração real; P4 deriva o valor final e registra lançamentos sem duplicação; P5 produz histórico, comprovante e reputação; P6 coordena privacidade, auditoria e notificações.',
-        'Divergência registrada: o DFD P5 libera o comprovante na conclusão, independentemente do pagamento; a aplicação o emite após a confirmação do pagamento (decisão D-10). A escolha final está com o grupo (pendência P-06).',
+        'O DFD P5 histórico libera o comprovante no encerramento. Na versão entregue, o encerramento abre a cobrança e o comprovante é emitido após a confirmação do pagamento simulado (D-10, decisão confirmada em 16/11).',
     ])
     d.tabela('Processos do DFD, depósitos e implementação', ['Processo', 'Depósitos', 'Implementação'], [
         ['P1 Identidade, acesso e certificação', 'D1 Pessoas, acesso e certificações', '`auth`, `cadastro`, `backoffice`'],

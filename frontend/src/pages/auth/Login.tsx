@@ -74,9 +74,11 @@ export function Login() {
           Cadastre-se
         </Link>
       </p>
-      <p className="mt-6 text-center text-xs text-on-surface-variant">
-        Ambiente de demonstração — contas de teste em <code>backend/src/db/seed.ts</code>
-      </p>
+      {import.meta.env.DEV && (
+        <p className="mt-6 text-center text-xs text-on-surface-variant">
+          Ambiente local de desenvolvimento — contas de teste em <code>backend/src/db/seed.ts</code>
+        </p>
+      )}
     </main>
   );
 }
